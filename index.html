@@ -28,19 +28,19 @@
 <section data-type="chapter" id="architecture-3XKUb">
 <h2>Architecture</h2>
 
-<p>Acropolis is a distributed multi-resource manager, orchestration platform and data plane.</p>
+<p>Acropolis is a distributed multi-resource manager,&nbsp;orchestration platform and data plane.</p>
 
 <p>It is broken down into three main components:</p>
 
 <ul>
 	<li>Distributed Storage Fabric (DSF)
 	<ul>
-		<li>This is at the core and birth of the Nutanix platform and expands upon the Nutanix Distributed Filesystem (NDFS).  NDFS has now evolved from a distributed system pooling storage resources into a much larger and capable storage platform.</li>
+		<li>This is at the core and birth of the Nutanix platform and expands upon the Nutanix Distributed Filesystem (NDFS).&nbsp; NDFS has now evolved from a distributed system pooling storage resources into a much larger and capable storage platform.</li>
 	</ul>
 	</li>
 	<li>App Mobility Fabric (AMF)
 	<ul>
-		<li>Hypervisors abstracted the OS from hardware, and the AMF abstracts workloads (VMs, Storage, Containers, etc.) from the hypervisor.  This will provide the ability to dynamically move the workloads between hypervisors, clouds, as well as provide the ability for Nutanix nodes to change hypervisors.</li>
+		<li>Hypervisors abstracted the OS from hardware, and the AMF abstracts workloads (VMs, Storage, Containers, etc.) from the hypervisor.&nbsp; This will provide the ability to dynamically move the workloads between hypervisors, clouds, as well as provide the ability for Nutanix nodes to change hypervisors.</li>
 	</ul>
 	</li>
 	<li>Hypervisor
@@ -50,7 +50,7 @@
 	</li>
 </ul>
 
-<p>Building upon the distributed nature of everything Nutanix does, we’re expanding this into the virtualization and resource management space.  Acropolis is a back-end service that allows for workload and resource management, provisioning, and operations.  Its goal is to abstract the facilitating resource (e.g., hypervisor, on-premise, cloud, etc.) from the workloads running, while providing a single “platform” to operate. </p>
+<p>Building upon the distributed nature of everything Nutanix does, we’re expanding this into the virtualization and resource management space.&nbsp; Acropolis is a back-end service that allows for workload and resource management, provisioning, and operations.&nbsp; Its goal is to abstract the facilitating resource (e.g., hypervisor, on-premise, cloud, etc.) from the workloads running, while providing a single “platform” to operate.&nbsp;</p>
 
 <p>This gives workloads the ability to seamlessly move between hypervisors, cloud providers, and platforms.</p>
 
@@ -63,13 +63,13 @@
 <div data-type="note" id="supported-hypervisors-for-vm-management-3ZNsv"><h6>Note</h6>
 <h1>Supported Hypervisors for VM Management</h1>
 
-<p>Currently, the only fully supported hypervisor for VM management is Acropolis Hypervisor, however this may expand in the future.  The Volumes API and read-only operations are still supported on all.</p>
+<p>Currently, the only fully supported hypervisor for VM management is Acropolis Hypervisor, however this may expand in the future. &nbsp;The Volumes API and read-only operations are still supported on all.</p>
 </div>
 
 <section data-type="sect1" id="acropolis-services-mnRho">
 <h2>Acropolis Services</h2>
 
-<p>An Acropolis Slave runs on every CVM with an elected Acropolis Master which is responsible for task scheduling, execution, IPAM, etc.  Similar to other components which have a Master, if the Acropolis Master fails, a new one will be elected.</p>
+<p>An Acropolis Slave runs on every CVM with an elected Acropolis Master which is responsible for task scheduling, execution, IPAM, etc.&nbsp; Similar to other components which have a Master, if the Acropolis Master fails, a new one will be elected.</p>
 
 <p>The role breakdown for each can be seen below:</p>
 
@@ -83,7 +83,7 @@
 		<li>HA (for hypervisor)</li>
 	</ul>
 	</li>
-	<li> Acropolis Slave
+	<li>&nbsp;Acropolis Slave
 	<ul>
 		<li>Stat collection / publishing</li>
 		<li>VNC proxy (for hypervisor)</li>
@@ -93,7 +93,7 @@
 
 <p>Here we show a conceptual view of the Acropolis Master / Slave relationship:</p>
 
-<figure id="id-j0YsK"><img alt="" class="iimagesv2acrop_componentspng" src="imagesv2/acrop_components.png">
+<figure id="id-j0YsK"><img alt="" class="iimagesv2acrop_componentspng image" src="imagesv2/acrop_components.png">
 <figcaption><span class="label">Figure 8-2. </span>Acropolis Services</figcaption>
 </figure>
 </section>
@@ -103,10 +103,11 @@
 
 <p>For a video explanation you can watch the following video: <a href="https://youtu.be/OPYA5-V0yRo">LINK</a></p>
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//OPYA5-V0yRo"></iframe></div>
+
 <p>The Nutanix solution is a converged storage + compute solution which leverages local components and creates a distributed platform for virtualization, also known as a virtual computing platform. The solution is a bundled hardware + software appliance which houses 2 (6000/7000 series) or 4 nodes (1000/2000/3000/3050 series) in a 2U footprint.</p>
 
-<p>Each node runs an industry-standard hypervisor (ESXi, KVM, Hyper-V currently) and the Nutanix Controller VM (CVM).  The Nutanix CVM is what runs the Nutanix software and serves all of the I/O operations for the hypervisor and all VMs running on that host.  For the Nutanix units running VMware vSphere, the SCSI controller, which manages the SSD and HDD devices, is directly passed to the CVM leveraging VM-Direct Path (Intel VT-d).  In the case of Hyper-V, the storage devices are passed through to the CVM.</p>
+<p>Each node runs an industry-standard hypervisor (ESXi, KVM, Hyper-V currently) and the Nutanix Controller VM (CVM).&nbsp; The Nutanix CVM is what runs the Nutanix software and serves all of the I/O operations for the hypervisor and all VMs running on that host.&nbsp; For the Nutanix units running VMware vSphere, the SCSI controller, which manages the SSD and HDD devices, is directly passed to the CVM leveraging VM-Direct Path (Intel VT-d).&nbsp; In the case of Hyper-V, the storage devices are passed through to the CVM.</p>
 
 <p>The following figure provides an example of what a typical node logically looks like:</p>
 
@@ -118,11 +119,11 @@
 <section data-type="sect1" id="software-defined-BqpcA">
 <h2>Software-Defined</h2>
 
-<p>As mentioned above (likely numerous times), the Nutanix platform is a software-based solution which ships as a bundled software + hardware appliance.  The controller VM is where the vast majority of the Nutanix software and logic sits and was designed from the beginning to be an extensible and pluggable architecture. A key benefit to being software-defined and not relying upon any hardware offloads or constructs is around extensibility.  As with any product life cycle, advancements and new features will always be introduced. </p>
+<p>As mentioned above (likely numerous times), the Nutanix platform is a software-based solution which ships as a bundled software + hardware appliance.&nbsp; The controller VM is where the vast majority of the Nutanix software and logic sits and was designed from the beginning to be an extensible and pluggable architecture. A key benefit to being software-defined and not relying upon any hardware offloads or constructs is around extensibility.&nbsp; As with any product life cycle,&nbsp;advancements and new features will always be introduced.&nbsp;</p>
 
-<p>By not relying on any custom ASIC/FPGA or hardware capabilities, Nutanix can develop and deploy these new features through a simple software update.  This means that the deployment of a new feature (e.g., deduplication) can be deployed by upgrading the current version of the Nutanix software.  This also allows newer generation features to be deployed on legacy hardware models. For example, say you’re running a workload running an older version of Nutanix software on a prior generation hardware platform (e.g., 2400).  The running software version doesn’t provide deduplication capabilities which your workload could benefit greatly from.  To get these features, you perform a rolling upgrade of the Nutanix software version while the workload is running, and you now have deduplication.  It’s really that easy.</p>
+<p>By not relying on any custom ASIC/FPGA or hardware capabilities, Nutanix can develop and deploy these new features through a simple software update.&nbsp; This means that the deployment of a new feature (e.g., deduplication) can be deployed by upgrading the current version of the Nutanix software.&nbsp; This also allows newer generation features to be deployed on legacy hardware models. For example, say you’re running a workload running an older version of Nutanix software on a prior generation hardware platform (e.g., 2400).&nbsp; The running software version doesn’t provide deduplication capabilities which your workload could benefit greatly from.&nbsp; To get these features, you perform a rolling upgrade of the Nutanix software version while the workload is running, and you now have deduplication.&nbsp; It’s really that easy.</p>
 
-<p>Similar to features, the ability to create new “adapters” or interfaces into DSF is another key capability.  When the product first shipped, it solely supported iSCSI for I/O from the hypervisor, this has now grown to include NFS and SMB.  In the future, there is the ability to create new adapters for various workloads and hypervisors (HDFS, etc.).  And again, all of this can be deployed via a software update. This is contrary to most legacy infrastructures, where a hardware upgrade or software purchase is normally required to get the “latest and greatest” features.  With Nutanix, it’s different. Since all features are deployed in software, they can run on any hardware platform, any hypervisor, and be deployed through simple software upgrades.</p>
+<p>Similar to features, the ability to create new “adapters” or interfaces into DSF is another key capability.&nbsp; When the product first shipped, it solely supported iSCSI for I/O from the hypervisor, this has now grown to include NFS and SMB.&nbsp; In the future, there is the ability to create new adapters for various workloads and hypervisors (HDFS, etc.).&nbsp; And again, all of this can be deployed via a software update. This is contrary to most legacy infrastructures, where a hardware upgrade or software purchase is normally required to get the “latest and greatest” features.&nbsp; With Nutanix, it’s different. Since all features are deployed in software, they can run on any hardware platform, any hypervisor, and be deployed through simple software upgrades.</p>
 
 <p>The following figure shows a logical representation of what this software-defined controller framework looks like:</p>
 
@@ -134,7 +135,7 @@
 <section data-type="sect1" id="cluster-components-j0JFo">
 <h2>Cluster Components</h2>
 
-<p>For a visual explanation you can watch the following video: <a href="https://youtu.be/3v5RI_IbfV4" style="letter-spacing: 0.01em; line-height: 1.3em;">LINK </a></p>
+<p>For a visual explanation you can watch the following video:&nbsp;<a href="https://youtu.be/3v5RI_IbfV4" style="letter-spacing: 0.01em; line-height: 1.3em;">LINK&nbsp;</a></p>
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/3v5RI_IbfV4" width="560"></iframe></div>
 
@@ -148,70 +149,70 @@
 
 <ul>
 	<li>Key Role: Distributed metadata store</li>
-	<li>Description: Cassandra stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.  The Paxos algorithm is utilized to enforce strict consistency.  This service runs on every node in the cluster.  Cassandra is accessed via an interface called Medusa.</li>
+	<li>Description: Cassandra stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.&nbsp; The Paxos algorithm is utilized to enforce strict consistency.&nbsp; This service runs on every node in the cluster.&nbsp; Cassandra is accessed via an interface called Medusa.</li>
 </ul>
 
 <h3>Zookeeper</h3>
 
 <ul>
 	<li>Key Role: Cluster configuration manager</li>
-	<li>Description: Zeus stores all of the cluster configuration including hosts, IPs, state, etc. and is based upon Apache Zookeeper.  This service runs on three nodes in the cluster, one of which is elected as a leader.  The leader receives all requests and forwards them to its peers.  If the leader fails to respond, a new leader is automatically elected.   Zookeeper is accessed via an interface called Zeus.</li>
+	<li>Description: Zeus stores all of the cluster configuration including hosts, IPs, state, etc. and is based upon Apache Zookeeper.&nbsp; This service runs on three nodes in the cluster, one of which is elected as a leader.&nbsp; The leader receives all requests and forwards them to its peers.&nbsp; If the leader fails to respond, a new leader is automatically elected.&nbsp;&nbsp; Zookeeper is accessed via an interface called Zeus.</li>
 </ul>
 
 <h3>Stargate</h3>
 
 <ul>
 	<li>Key Role: Data I/O manager</li>
-	<li>Description: Stargate is responsible for all data management and I/O operations and is the main interface from the hypervisor (via NFS, iSCSI, or SMB).  This service runs on every node in the cluster in order to serve localized I/O.</li>
+	<li>Description: Stargate is responsible for all data management and I/O operations and is the main interface from the hypervisor (via NFS, iSCSI, or SMB).&nbsp; This service runs on every node in the cluster in order to serve localized I/O.</li>
 </ul>
 
 <h3>Curator</h3>
 
 <ul>
 	<li>Key Role: Map reduce cluster management and cleanup</li>
-	<li>Description: Curator is responsible for managing and distributing tasks throughout the cluster, including disk balancing, proactive scrubbing, and many more items.  Curator runs on every node and is controlled by an elected Curator Master who is responsible for the task and job delegation.  There are two scan types for Curator, a full scan which occurs around every 6 hours and a partial scan which occurs every hour.</li>
+	<li>Description: Curator is responsible for managing and distributing tasks throughout the cluster, including disk balancing, proactive scrubbing, and many more items.&nbsp; Curator runs on every node and is controlled by an elected Curator Master who is responsible for the task and job delegation.&nbsp; There are two scan types for Curator, a full scan which occurs around every 6 hours and a partial scan which occurs every hour.</li>
 </ul>
 
 <h3>Prism</h3>
 
 <ul>
 	<li>Key Role: UI and API</li>
-	<li>Description: Prism is the management gateway for component and administrators to configure and monitor the Nutanix cluster.  This includes Ncli, the HTML5 UI, and REST API.  Prism runs on every node in the cluster and uses an elected leader like all components in the cluster.</li>
+	<li>Description: Prism is the management gateway for component and administrators to configure and monitor the Nutanix cluster.&nbsp; This includes Ncli, the HTML5 UI, and REST API.&nbsp; Prism runs on every node in the cluster and uses an elected leader like all components in the cluster.</li>
 </ul>
 
 <h3>Genesis</h3>
 
 <ul>
 	<li>Key Role: Cluster component & service manager</li>
-	<li>Description:  Genesis is a process which runs on each node and is responsible for any services interactions (start/stop/etc.) as well as for the initial configuration.  Genesis is a process which runs independently of the cluster and does not require the cluster to be configured/running.  The only requirement for Genesis to be running is that Zookeeper is up and running.  The cluster_init and cluster_status pages are displayed by the Genesis process.</li>
+	<li>Description:&nbsp; Genesis is a process which runs on each node and is responsible for any services interactions (start/stop/etc.) as well as for the initial configuration.&nbsp; Genesis is a process which runs independently of the cluster and does not require the cluster to be configured/running.&nbsp; The only requirement for Genesis to be running is that Zookeeper is up and running.&nbsp; The cluster_init and cluster_status pages are displayed by the Genesis process.</li>
 </ul>
 
 <h3>Chronos</h3>
 
 <ul>
 	<li>Key Role: Job and task scheduler</li>
-	<li>Description: Chronos is responsible for taking the jobs and tasks resulting from a Curator scan and scheduling/throttling tasks among nodes.  Chronos runs on every node and is controlled by an elected Chronos Master that is responsible for the task and job delegation and runs on the same node as the Curator Master.</li>
+	<li>Description: Chronos is responsible for taking the jobs and tasks resulting from a Curator scan and scheduling/throttling tasks among nodes.&nbsp; Chronos runs on every node and is controlled by an elected Chronos Master that is responsible for the task and job delegation and runs on the same node as the Curator Master.</li>
 </ul>
 
 <h3>Cerebro</h3>
 
 <ul>
 	<li>Key Role: Replication/DR manager</li>
-	<li>Description: Cerebro is responsible for the replication and DR capabilities of DSF.  This includes the scheduling of snapshots, the replication to remote sites, and the site migration/failover.  Cerebro runs on every node in the Nutanix cluster and all nodes participate in replication to remote clusters/sites.</li>
+	<li>Description: Cerebro is responsible for the replication and DR capabilities of DSF.&nbsp; This includes the scheduling of snapshots, the replication to remote sites, and the site migration/failover.&nbsp; Cerebro runs on every node in the Nutanix cluster and all nodes participate in replication to remote clusters/sites.</li>
 </ul>
 
 <h3>Pithos</h3>
 
 <ul>
 	<li>Key Role: vDisk configuration manager</li>
-	<li>Description: Pithos is responsible for vDisk (DSF file) configuration data.  Pithos runs on every node and is built on top of Cassandra.</li>
+	<li>Description: Pithos is responsible for vDisk (DSF file) configuration data.&nbsp; Pithos runs on every node and is built on top of Cassandra.</li>
 </ul>
 </section>
 
 <section data-type="sect1" id="drive-breakdown-eg6tx">
 <h2>Drive Breakdown</h2>
 
-<p>In this section, I’ll cover how the various storage devices (SSD / HDD) are broken down, partitioned, and utilized by the Nutanix platform. NOTE: All of the capacities used are in Base2 Gibibyte (GiB) instead of the Base10 Gigabyte (GB).  Formatting of the drives with a filesystem and associated overheads has also been taken into account.</p>
+<p>In this section, I’ll cover how the various storage devices (SSD / HDD) are broken down, partitioned, and utilized by the Nutanix platform. NOTE: All of the capacities used are in Base2 Gibibyte (GiB) instead of the Base10 Gigabyte (GB).&nbsp; Formatting of the drives with a filesystem and associated overheads has also been taken into account.</p>
 
 <h3>SSD Devices</h3>
 
@@ -231,7 +232,7 @@
 <figcaption><span class="label">Figure 8-6. </span>SSD Drive Breakdown</figcaption>
 </figure>
 
-<p>NOTE: The sizing for OpLog is done dynamically as of release 4.0.1 which will allow the extent store portion to grow dynamically.  The values used are assuming a completely utilized OpLog.  Graphics and proportions aren’t drawn to scale.  When evaluating the Remaining GiB capacities, do so from the top down.  For example, the Remaining GiB to be used for the OpLog calculation would be after Nutanix Home and Cassandra have been subtracted from the formatted SSD capacity.</p>
+<p>NOTE: The sizing for OpLog is done dynamically as of release 4.0.1 which will allow the extent store portion to grow dynamically.&nbsp; The values used are assuming a completely utilized OpLog.&nbsp; Graphics and proportions aren’t drawn to scale.&nbsp; When evaluating the Remaining GiB capacities, do so from the top down.&nbsp; For example, the Remaining GiB to be used for the OpLog calculation would be after Nutanix Home and Cassandra have been subtracted from the formatted SSD capacity.</p>
 
 <p>Most models ship with 1 or 2 SSDs, however the same construct applies for models shipping with more SSD devices. For example, if we apply this to an example 3060 or 6060 node which has 2 x 400GB SSDs, this would give us 100GiB of OpLog, 40GiB of Content Cache, and ~440GiB of Extent Store SSD capacity per node.</p>
 
@@ -257,7 +258,7 @@
 <section data-type="chapter" id="distributed-storage-fabric-15YT8">
 <h2>Distributed Storage Fabric</h2>
 
-<p>Together, a group of Nutanix nodes forms a distributed platform called the Acropolis Distributed Storage Fabric (DSF).  DSF appears to the hypervisor like any centralized storage array, however all of the I/Os are handled locally to provide the highest performance.  More detail on how these nodes form a distributed system can be found in the next section.</p>
+<p>Together, a group of Nutanix nodes forms a distributed platform called the Acropolis Distributed Storage Fabric (DSF).&nbsp; DSF appears to the hypervisor like any centralized storage array, however all of the I/Os are handled locally to provide the highest performance.&nbsp; More detail on how these nodes form a distributed system can be found in the next section.</p>
 
 <p>The following figure shows an example of how these Nutanix nodes form DSF:</p>
 
@@ -274,21 +275,21 @@
 
 <ul>
 	<li>Key Role: Group of physical devices</li>
-	<li>Description: A storage pool is a group of physical storage devices including PCIe SSD, SSD, and HDD devices for the cluster.  The storage pool can span multiple Nutanix nodes and is expanded as the cluster scales.  In most configurations, only a single storage pool is leveraged.</li>
+	<li>Description: A storage pool is a group of physical storage devices including PCIe SSD, SSD, and HDD devices for the cluster.&nbsp; The storage pool can span multiple Nutanix nodes and is expanded as the cluster scales.&nbsp; In most configurations, only a single storage pool is leveraged.</li>
 </ul>
 
 <h3>Container</h3>
 
 <ul>
 	<li>Key Role: Group of VMs/files</li>
-	<li>Description: A container is a logical segmentation of the Storage Pool and contains a group of VM or files (vDisks).  Some configuration options (e.g., RF) are configured at the container level, however are applied at the individual VM/file level.  Containers typically have a 1 to 1 mapping with a datastore (in the case of NFS/SMB).</li>
+	<li>Description: A container is a logical segmentation of the Storage Pool and contains a group of VM or files (vDisks).&nbsp; Some configuration options (e.g., RF) are configured at the container level, however are applied at the individual VM/file level.&nbsp; Containers typically have a 1 to 1 mapping with a datastore (in the case of NFS/SMB).</li>
 </ul>
 
 <h3>vDisk</h3>
 
 <ul>
 	<li>Key Role: vDisk</li>
-	<li>Description: A vDisk is any file over 512KB on DSF including .vmdks and VM hard disks.  vDisks are composed of extents which are grouped and stored on disk as an extent group.</li>
+	<li>Description: A vDisk is any file over 512KB on DSF including .vmdks and VM hard disks.&nbsp; vDisks are composed of extents which are grouped and stored on disk as an extent group.</li>
 </ul>
 
 <p>The following figure shows how these map between DSF and the hypervisor:</p>
@@ -301,17 +302,17 @@
 
 <ul>
 	<li>Key Role: Logically contiguous data</li>
-	<li>Description: An extent is a 1MB piece of logically contiguous data which consists of n number of contiguous blocks (varies depending on guest OS block size).  Extents are written/read/modified on a sub-extent basis (aka slice) for granularity and efficiency.  An extent’s slice may be trimmed when moving into the cache depending on the amount of data being read/cached.</li>
+	<li>Description: An extent is a 1MB piece of logically contiguous data which consists of n number of contiguous blocks (varies depending on guest OS block size).&nbsp; Extents are written/read/modified on a sub-extent basis (aka slice) for granularity and efficiency.&nbsp; An extent’s slice may be trimmed when moving into the cache depending on the amount of data being read/cached.</li>
 </ul>
 
 <h3>Extent Group</h3>
 
 <ul>
 	<li>Key Role: Physically contiguous stored data</li>
-	<li>Description: An extent group is a 1MB or 4MB piece of physically contiguous stored data.  This data is stored as a file on the storage device owned by the CVM.  Extents are dynamically distributed among extent groups to provide data striping across nodes/disks to improve performance.  NOTE: as of 4.0, extent groups can now be either 1MB or 4MB depending on dedupe.</li>
+	<li>Description: An extent group is a 1MB or 4MB piece of physically contiguous stored data.&nbsp; This data is stored as a file on the storage device owned by the CVM.&nbsp; Extents are dynamically distributed among extent groups to provide data striping across nodes/disks to improve performance.&nbsp; NOTE: as of 4.0, extent groups can now be either 1MB or 4MB depending on dedupe.</li>
 </ul>
 
-<p>The following figure shows how these structs relate between the various file systems: </p>
+<p>The following figure shows how these structs relate between the various file systems:&nbsp;</p>
 
 <figure id="id-0zzCL"><img alt="" class="iimagesv2data_structure_2png" src="imagesv2/data_structure_2.png">
 <figcaption><span class="label">Figure 9-3. </span>Low-level Filesystem Breakdown</figcaption>
@@ -341,21 +342,21 @@
 
 <ul>
 	<li>Key Role: Persistent write buffer</li>
-	<li>Description: The OpLog is similar to a filesystem journal and is built to handle bursts of random writes, coalesce them, and then sequentially drain the data to the extent store.  Upon a write, the OpLog is synchronously replicated to another n number of CVM’s OpLog before the write is acknowledged for data availability purposes.  All CVM OpLogs partake in the replication and are dynamically chosen based upon load.  The OpLog is stored on the SSD tier on the CVM to provide extremely fast write I/O performance, especially for random I/O workloads.  For sequential workloads, the OpLog is bypassed and the writes go directly to the extent store.  If data is currently sitting in the OpLog and has not been drained, all read requests will be directly fulfilled from the OpLog until they have been drained, where they would then be served by the extent store/content cache.  For containers where fingerprinting (aka Dedupe) has been enabled, all write I/Os will be fingerprinted using a hashing scheme allowing them to be deduplicated based upon fingerprint in the content cache.</li>
+	<li>Description: The OpLog is similar to a filesystem journal and is built to handle bursts of random writes, coalesce them, and then sequentially drain the data to the extent store.&nbsp; Upon a write, the OpLog is synchronously replicated to another n number of CVM’s OpLog before the write is acknowledged for data availability purposes.&nbsp; All CVM OpLogs partake in the replication and are dynamically chosen based upon load.&nbsp; The OpLog is stored on the SSD tier on the CVM to provide extremely fast write I/O performance, especially for random I/O workloads.&nbsp; For sequential workloads, the OpLog is bypassed and the writes go directly to the extent store.&nbsp; If data is currently sitting in the OpLog and has not been drained, all read requests will be directly fulfilled from the OpLog until they have been drained, where they would then be served by the extent store/content cache.&nbsp; For containers where fingerprinting (aka Dedupe) has been enabled, all write I/Os will be fingerprinted using a hashing scheme allowing them to be deduplicated based upon fingerprint in the content cache.</li>
 </ul>
 
 <h3>Extent Store</h3>
 
 <ul>
 	<li>Key Role: Persistent data storage</li>
-	<li>Description: The Extent Store is the persistent bulk storage of DSF and spans SSD and HDD and is extensible to facilitate additional devices/tiers.  Data entering the extent store is either being A) drained from the OpLog or B) is sequential in nature and has bypassed the OpLog directly.  Nutanix ILM will determine tier placement dynamically based upon I/O patterns and will move data between tiers.</li>
+	<li>Description: The Extent Store is the persistent bulk storage of DSF and spans SSD and HDD and is extensible to facilitate additional devices/tiers.&nbsp; Data entering the extent store is either being A) drained from the OpLog or B) is sequential in nature and has bypassed the OpLog directly.&nbsp; Nutanix ILM will determine tier placement dynamically based upon I/O patterns and will move data between tiers.</li>
 </ul>
 
 <h3>Content Cache</h3>
 
 <ul>
 	<li>Key Role: Dynamic read cache</li>
-	<li>Description: The Content Cache (aka “Elastic Dedupe Engine”) is a deduplicated read cache which spans both the CVM’s memory and SSD.  Upon a read request of data not in the cache (or based upon a particular fingerprint), the data will be placed into the single-touch pool of the content cache which completely sits in memory, where it will use LRU until it is ejected from the cache.  Any subsequent read request will “move” (no data is actually moved, just cache metadata) the data into the memory portion of the multi-touch pool, which consists of both memory and SSD.  From here there are two LRU cycles, one for the in-memory piece upon which eviction will move the data to the SSD section of the multi-touch pool where a new LRU counter is assigned.  Any read request for data in the multi-touch pool will cause the data to go to the peak of the multi-touch pool where it will be given a new LRU counter.  Fingerprinting is configured at the container level and can be configured via the UI.  By default, fingerprinting is disabled.</li>
+	<li>Description: The Content Cache (aka “Elastic Dedupe Engine”) is a deduplicated read cache which spans both the CVM’s memory and SSD.&nbsp; Upon a read request of data not in the cache (or based upon a particular fingerprint), the data will be placed into the single-touch pool of the content cache which completely sits in memory, where it will use LRU until it is ejected from the cache.&nbsp; Any subsequent read request will “move” (no data is actually moved, just cache metadata) the data into the memory portion of the multi-touch pool, which consists of both memory and SSD.&nbsp; From here there are two LRU cycles, one for the in-memory piece upon which eviction will move the data to the SSD section of the multi-touch pool where a new LRU counter is assigned.&nbsp; Any read request for data in the multi-touch pool will cause the data to go to the peak of the multi-touch pool where it will be given a new LRU counter.&nbsp; Fingerprinting is configured at the container level and can be configured via the UI.&nbsp; By default, fingerprinting is disabled.</li>
 </ul>
 
 <p>The following figure shows a high-level overview of the Content Cache:</p>
@@ -364,11 +365,11 @@
 <figcaption><span class="label">Figure 9-6. </span>DSF Content Cache</figcaption>
 </figure>
 
-<h3>1.1.1.4      Extent Cache</h3>
+<h3>1.1.1.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Extent Cache</h3>
 
 <ul>
 	<li>Key Role: In-memory read cache</li>
-	<li>Description: The Extent Cache is an in-memory read cache that is completely in the CVM’s memory.  This will store non-fingerprinted extents for containers where fingerprinting and deduplication are disabled.  As of version 3.5, this is separate from the Content Cache, however these will be merging in a subsequent release.</li>
+	<li>Description: The Extent Cache is an in-memory read cache that is completely in the CVM’s memory.&nbsp; This will store non-fingerprinted extents for containers where fingerprinting and deduplication are disabled.&nbsp; As of version 3.5, this is separate from the Content Cache, however these will be merging in a subsequent release.</li>
 </ul>
 </section>
 
@@ -379,11 +380,11 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/OWhdo81yTpk" width="560"></iframe></div>
 
-<p>The Nutanix platform currently uses a resiliency factor, also known as a replication factor (RF), and checksum to ensure data redundancy and availability in the case of a node or disk failure or corruption.  As explained above, the OpLog acts as a staging area to absorb incoming writes onto a low-latency SSD tier.  Upon being written to the local OpLog, the data is synchronously replicated to another one or two Nutanix CVM’s OpLog (dependent on RF) before being acknowledged (Ack) as a successful write to the host.  This ensures that the data exists in at least two or three independent locations and is fault tolerant. NOTE: For RF3, a minimum of 5 nodes is required since metadata will be RF5. </p>
+<p>The Nutanix platform currently uses a resiliency factor, also known as a replication factor (RF), and checksum to ensure data redundancy and availability in the case of a node or disk failure or corruption.&nbsp; As explained above, the OpLog acts as a staging area to absorb incoming writes onto a low-latency SSD tier.&nbsp; Upon being written to the local OpLog, the data is synchronously replicated to another one or two Nutanix CVM’s OpLog (dependent on RF) before being acknowledged (Ack) as a successful write to the host.&nbsp; This ensures that the data exists in at least two or three independent locations and is fault tolerant. NOTE: For RF3, a minimum of 5 nodes is required since metadata will be RF5.&nbsp;</p>
 
-<p>Data RF is configured via Prism and is done at the container level. All nodes participate in OpLog replication to eliminate any “hot nodes”, ensuring linear performance at scale.  While the data is being written, a checksum is computed and stored as part of its metadata. Data is then asynchronously drained to the extent store where the RF is implicitly maintained.  In the case of a node or disk failure, the data is then re-replicated among all nodes in the cluster to maintain the RF.  Any time the data is read, the checksum is computed to ensure the data is valid.  In the event where the checksum and data don’t match, the replica of the data will be read and will replace the non-valid copy.</p>
+<p>Data RF is configured via Prism and is done at the container level. All nodes participate in OpLog replication to eliminate any “hot nodes”, ensuring linear performance at scale.&nbsp; While the data is being written, a checksum is computed and stored as part of its metadata. Data is then asynchronously drained to the extent store where the RF is implicitly maintained.&nbsp; In the case of a node or disk failure, the data is then re-replicated among all nodes in the cluster to maintain the RF.&nbsp; Any time the data is read, the checksum is computed to ensure the data is valid.&nbsp; In the event where the checksum and data don’t match, the replica of the data will be read and will replace the non-valid copy.</p>
 
-<p>The following figure shows an example of what this logically looks like: </p>
+<p>The following figure shows an example of what this logically looks like:&nbsp;</p>
 
 <figure id="id-GgYIn"><img alt="" class="iimagesv2data_protectionpng fse fs" src="imagesv2/data_protection.png">
 <figcaption><span class="label">Figure 9-7. </span>DSF Data Protection</figcaption>
@@ -397,7 +398,7 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/MlQczJhQI3U" width="560"></iframe></div>
 
-<p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.  In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as“strictly consistent”), it has to be scalable, and it has to perform at massive scale.  As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).  A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.  This ensures strict consistency for all data and metadata stored as part of the platform.</p>
+<p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.&nbsp; In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as“strictly consistent”), it has to be scalable, and it has to perform at massive scale.&nbsp; As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).&nbsp; A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.&nbsp; This ensures strict consistency for all data and metadata stored as part of the platform.</p>
 
 <p>The following figure shows an example of a metadata insert/update for a 4 node cluster:</p>
 
@@ -405,7 +406,7 @@
 <figcaption><span class="label">Figure 9-8. </span>Cassandra Ring Structure</figcaption>
 </figure>
 
-<p>Performance at scale is also another important struct for DSF metadata.  Contrary to traditional dual-controller or “master” models, each Nutanix node is responsible for a subset of the overall platform’s metadata.  This eliminates the traditional bottlenecks by allowing metadata to be served and manipulated by all nodes in the cluster.  A consistent hashing scheme is utilized to minimize the redistribution of keys during cluster size modifications (also known as “add/remove node”) When the cluster scales (e.g., from 4 to 8 nodes), the nodes are inserted throughout the ring between nodes for “block awareness” and reliability.</p>
+<p>Performance at scale is also another important struct for DSF metadata.&nbsp; Contrary to traditional dual-controller or “master” models, each Nutanix node is responsible for a subset of the overall platform’s metadata.&nbsp; This eliminates the traditional bottlenecks by allowing metadata to be served and manipulated by all nodes in the cluster.&nbsp; A consistent hashing scheme is utilized to minimize the redistribution of keys during cluster size modifications (also known as&nbsp;“add/remove node”) When the cluster scales (e.g., from 4 to 8 nodes), the nodes are inserted throughout the ring between nodes for “block awareness” and reliability.</p>
 
 <p>The following figure shows an example of the metadata “ring” and how it scales:</p>
 
@@ -413,7 +414,7 @@
 <figcaption><span class="label">Figure 9-9. </span>Cassandra Ring Scale Out</figcaption>
 </figure>
 
-<p> </p>
+<p>&nbsp;</p>
 </section>
 
 <section data-type="sect1" id="data-path-resiliency-ObaUQ">
@@ -423,11 +424,11 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/SJIb_mTdMPg" width="560"></iframe></div>
 
-<p>Reliability and resiliency are key, if not the most important concepts within DSF or any primary storage platform. </p>
+<p>Reliability and resiliency are key, if not the most important concepts within DSF or any primary storage platform.&nbsp;</p>
 
-<p>Contrary to traditional architectures which are built around the idea that hardware will be reliable, Nutanix takes a different approach: it expects hardware will eventually fail.  By doing so, the system is designed to handle these failures in an elegant and non-disruptive manner.</p>
+<p>Contrary to traditional architectures which are built around the idea that hardware will be reliable, Nutanix takes a different approach: it expects hardware will eventually fail.&nbsp; By doing so, the system is designed to handle these failures in an elegant and non-disruptive manner.</p>
 
-<p>NOTE: That doesn’t mean the hardware quality isn’t there, just a concept shift.  The Nutanix hardware and QA teams undergo an exhaustive qualification and vetting process.</p>
+<p>NOTE: That doesn’t mean the hardware quality isn’t there, just a concept shift.&nbsp; The Nutanix hardware and QA teams undergo an exhaustive qualification and vetting process.</p>
 
 <p><em>Potential levels of failure</em></p>
 
@@ -451,17 +452,17 @@
 	<li>Latency: <strong>No impact</strong></li>
 </ul>
 
-<p>In the event of a disk failure, a Curator scan (MapReduce Framework) will occur immediately.  It will scan the metadata (Cassandra) to find the data previously hosted on the failed disk and the nodes / disks hosting the replicas.</p>
+<p>In the event of a disk failure, a Curator scan (MapReduce Framework) will occur immediately. &nbsp;It will scan the metadata (Cassandra) to find the data previously hosted on the failed disk and the nodes / disks hosting the replicas.</p>
 
-<p>Once it has found that data that needs to be “re-replicated”, it will distribute the replication tasks to the nodes throughout the cluster. </p>
+<p>Once it has found that data that needs to be “re-replicated”, it will distribute the replication tasks to the nodes throughout the cluster.&nbsp;</p>
 
-<p>An important thing to highlight here is given how Nutanix distributes data and replicas across all nodes / CVMs / disks; all nodes / CVMs / disks will participate in the re-replication. </p>
+<p>An important thing to highlight here is given how Nutanix distributes data and replicas across all nodes / CVMs / disks; all nodes / CVMs / disks will participate in the re-replication.&nbsp;</p>
 
 <p>This substantially reduces the time required for re-protection, as the power of the full cluster can be utilized; the larger the cluster, the faster the re-protection.</p>
 
 <h3>CVM “Failure”</h3>
 
-<p>A CVM "failure” can be characterized as a CVM power action causing the CVM to be temporarily unavailable.  The system is designed to transparently handle these gracefully.  In the event of a failure, I/Os will be re-directed to other CVMs within the cluster.  The mechanism for this will vary by hypervisor. </p>
+<p>A CVM "failure” can be characterized as a CVM power action causing the CVM to be temporarily unavailable.&nbsp; The system is designed to transparently handle these gracefully.&nbsp; In the event of a failure, I/Os will be re-directed to other CVMs within the cluster.&nbsp; The mechanism for this will vary by hypervisor.&nbsp;</p>
 
 <p>The rolling upgrade process actually leverages this capability as it will upgrade one CVM at a time, iterating through the cluster.</p>
 
@@ -473,11 +474,11 @@
 	<li>Latency: <strong>Potentially higher given I/Os over the network</strong></li>
 </ul>
 
-<p>In the event of a CVM "failure” the I/O which was previously being served from the down CVM, will be forwarded to other CVMs throughout the cluster.  ESXi and Hyper-V handle this via a process called CVM Autopathing, which leverages HA.py (like “happy”), where it will modify the routes to forward traffic going to the internal address (192.168.5.2) to the external IP of other CVMs throughout the cluster.  This enables the datastore to remain intact, just the CVM responsible for serving the I/Os is remote.</p>
+<p>In the event of a CVM "failure” the I/O which was previously being served from the down CVM, will be forwarded to other CVMs throughout the cluster.&nbsp; ESXi and Hyper-V handle this via a process called CVM Autopathing, which leverages HA.py (like “happy”), where it will modify the routes to forward traffic going to the internal address (192.168.5.2) to the external IP of other CVMs throughout the cluster.&nbsp; This enables the datastore to remain intact, just the CVM responsible for serving the I/Os is remote.</p>
 
 <p>Once the local CVM comes back up and is stable, the route would be removed and the local CVM would take over all new I/Os.</p>
 
-<p>In the case of KVM, iSCSI multi-pathing is leveraged where the primary path is the local CVM and the two other paths would be remote.  In the event where the primary path fails, one of the other paths will become active.</p>
+<p>In the case of KVM, iSCSI multi-pathing is leveraged where the primary path is the local CVM and the two other paths would be remote.&nbsp; In the event where the primary path fails, one of the other paths will become active.</p>
 
 <p>Similar to Autopathing with ESXi and Hyper-V, when the local CVM comes back online, it’ll take over as the primary path.</p>
 
@@ -491,13 +492,13 @@
 	<li>Latency: <strong>No impact</strong></li>
 </ul>
 
-<p>In the event of a node failure, a VM HA event will occur restarting the VMs on other nodes throughout the virtualization cluster.  Once restarted, the VMs will continue to perform I/Os as usual which will be handled by their local CVMs.</p>
+<p>In the event of a node failure, a VM HA event will occur restarting the VMs on other nodes throughout the virtualization cluster.&nbsp; Once restarted, the VMs will continue to perform I/Os as usual which will be handled by their local CVMs.</p>
 
 <p>Similar to the case of a disk failure above, a Curator scan will find the data previously hosted on the node and its respective replicas.</p>
 
 <p>Similar to the disk failure scenario above, the same process will take place to re-protect the data, just for the full node (all associated disks).</p>
 
-<p>In the event where the node remains down for a prolonged period of time, the down CVM will be removed from the metadata ring.  It will be joined back into the ring after it has been up and stable for a duration of time.</p>
+<p>In the event where the node remains down for a prolonged period of time, the down CVM will be removed from the metadata ring.&nbsp; It will be joined back into the ring after it has been up and stable for a duration of time.</p>
 </section>
 
 <section data-type="sect1" id="elastic-dedupe-engine-Rn8sd">
@@ -507,9 +508,9 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/C-rp13cDpNw" width="560"></iframe></div>
 
-<p>The Elastic Dedupe Engine is a software-based feature of DSF which allows for data deduplication in the capacity (HDD) and performance (SSD/Memory) tiers.  Streams of data are fingerprinted during ingest using a SHA-1 hash at a 16K granularity.  This fingerprint is only done on data ingest and is then stored persistently as part of the written block’s metadata.  NOTE: Initially a 4K granularity was used for fingerprinting, however after testing 16K offered the best blend of deduplication with reduced metadata overhead.  Deduplicated data is pulled into the cache at a 4K granularity.</p>
+<p>The Elastic Dedupe Engine is a software-based feature of DSF which allows for data deduplication in the capacity (HDD) and performance (SSD/Memory) tiers.&nbsp; Streams of data are fingerprinted during ingest using a SHA-1 hash at a 16K granularity.&nbsp; This fingerprint is only done on data ingest and is then stored persistently as part of the written block’s metadata.&nbsp; NOTE: Initially a 4K granularity was used for fingerprinting, however after testing 16K offered the best blend of deduplication with reduced metadata overhead.&nbsp; Deduplicated data is pulled into the cache at a 4K granularity.</p>
 
-<p>Contrary to traditional approaches which utilize background scans requiring the data to be re-read, Nutanix performs the fingerprint in-line on ingest.  For duplicate data that can be deduplicated in the capacity tier, the data does not need to be scanned or re-read, essentially duplicate copies can be removed.</p>
+<p>Contrary to traditional approaches which utilize background scans requiring the data to be re-read, Nutanix performs the fingerprint in-line on ingest.&nbsp; For duplicate data that can be deduplicated in the capacity tier, the data does not need to be scanned or re-read, essentially duplicate copies can be removed.</p>
 
 <p>The following figure shows an example of how the Elastic Dedupe Engine scales and handles local VM I/O requests:</p>
 
@@ -517,7 +518,7 @@
 <figcaption><span class="label">Figure 9-10. </span>Elastic Dedupe Engine - Scale</figcaption>
 </figure>
 
-<p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.  Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.  In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).  As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Content Cache which is a multi-tier/pool cache.  Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.  To learn more about the Content Cache and pool structure, please refer to the ‘Content Cache’ sub-section in the I/O path overview.</p>
+<p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Content Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Content Cache and pool structure, please refer to the ‘Content Cache’ sub-section in the I/O path overview.</p>
 
 <p>The following figure shows an example of how the Elastic Dedupe Engine interacts with the DSF I/O path:</p>
 
@@ -532,7 +533,7 @@
 
 <p>Use performance tier deduplication on your base images (you can manually fingerprint them using vdisk_manipulator) to take advantage of the content cache.</p>
 
-<p>Use capacity tier deduplication for P2V / V2V, when using Hyper-V since ODX does a full data copy, or when doing cross-container clones (not usually recommended).</p>
+<p>Use capacity tier deduplication for P2V / V2V,&nbsp;when using Hyper-V since ODX does a full data copy, or when doing cross-container clones (not usually recommended).</p>
 </div>
 </section>
 
@@ -543,7 +544,7 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/ERDqOCzDcQY" width="560"></iframe></div>
 
-<p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.  Currently compression is one of the key features of the COE to perform data optimization. DSF provides both in-line and post-process flavors of compression to best suit the customer’s needs and type of data. </p>
+<p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.&nbsp; Currently compression is one of the key features of the COE to perform data optimization. DSF provides both in-line and post-process flavors of compression to best suit the customer’s needs and type of data.&nbsp;</p>
 
 <p>In-line compression will compress sequential streams of data or large I/O sizes in memory before it is written to disk, while post-process compression will initially write the data as normal (in an un-compressed state) and then leverage the Curator framework to compress the data cluster wide. When in-line compression is enabled but the I/Os are random in nature, the data will be written un-compressed in the OpLog, coalesced, and then compressed in memory before being written to the Extent Store. The Google Snappy compression library is leveraged which provides good compression ratios with minimal computational overhead and extremely fast compression / decompression rates.</p>
 
@@ -553,7 +554,7 @@
 <figcaption><span class="label">Figure 9-12. </span>Inline Compression I/O Path</figcaption>
 </figure>
 
-<p>For post-process compression, all new write I/O is written in an un-compressed state and follows the normal DSF I/O path.  After the compression delay (configurable) is met and the data has become cold (down-migrated to the HDD tier via ILM), the data is eligible to become compressed. Post-process compression uses the Curator MapReduce framework and all nodes will perform compression tasks.  Compression tasks will be throttled by Chronos.</p>
+<p>For post-process compression, all new write I/O is written in an un-compressed state and follows the normal DSF I/O path.&nbsp; After the compression delay (configurable) is met and the data has become cold (down-migrated to the HDD tier via ILM), the data is eligible to become compressed. Post-process compression uses the Curator MapReduce framework and all nodes will perform compression tasks.&nbsp; Compression tasks will be throttled by Chronos.</p>
 
 <p>The following figure shows an example of how post-process compression interacts with the DSF write I/O path:</p>
 
@@ -561,9 +562,9 @@
 <figcaption><span class="label">Figure 9-13. </span>Post-process Compression I/O Path</figcaption>
 </figure>
 
-<p> </p>
+<p>&nbsp;</p>
 
-<p>For read I/O, the data is first decompressed in memory and then the I/O is served.  For data that is heavily accessed, the data will become decompressed in the HDD tier and can then leverage ILM to move up to the SSD tier as well as be stored in the cache.</p>
+<p>For read I/O, the data is first decompressed in memory and then the I/O is served.&nbsp; For data that is heavily accessed, the data will become decompressed in the HDD tier and can then leverage ILM to move up to the SSD tier as well as be stored in the cache.</p>
 
 <p>The following figure shows an example of how decompression interacts with the DSF I/O path during read:</p>
 
@@ -583,19 +584,19 @@
 <section data-type="sect1" id="erasure-coding-qrLTo">
 <h2>Erasure Coding</h2>
 
-<p>The Nutanix platform relies on a replication factor (RF) for data protection and availability.  This method provides the highest degree of availability because it does not require reading from more than one storage location or data re-computation on failure.  However, this does come at the cost of storage resources as full copies are required. </p>
+<p>The Nutanix platform relies on a replication factor (RF) for data protection and availability.&nbsp; This method provides the highest degree of availability because it does not require reading from more than one storage location or data re-computation on failure.&nbsp; However, this does come at the cost of storage resources as full copies are required.&nbsp;</p>
 
 <p>To provide a balance between availability while reducing the amount of storage required, DSF provides the ability to encode data using erasure codes (EC).</p>
 
-<p>Similar to the concept of RAID (levels 4, 5, 6, etc.) where parity is calculated, EC encodes a strip of data blocks on different nodes and calculates parity.  In the event of a host and/or disk failure, the parity can be leveraged to calculate any missing data blocks (decoding).  In the case of DSF, the data block is an extent group and each data block must be on a different node and belong to a different vDisk.</p>
+<p>Similar to the concept of RAID (levels 4, 5, 6, etc.) where parity is calculated, EC encodes a strip of data blocks on different nodes and calculates parity.&nbsp; In the event of a host and/or disk failure, the parity can be leveraged to calculate any missing data blocks (decoding).&nbsp; In the case of DSF, the data block is an extent group and each data block must be on a different node and belong to a different vDisk.</p>
 
-<p>The number of data and parity blocks in a strip is configurable based upon the desired failures to tolerate.  The configuration is commonly referred to as <number of="" data="" blocks="">/<number of="" parity="" blocks="">.</number></number></p>
+<p>The number of data and parity blocks in a strip is configurable based upon the desired failures to tolerate.&nbsp; The configuration is commonly referred to as <number of="" data="" blocks="">/<number of="" parity="" blocks="">.</number></number></p>
 
-<p>For example, “RF2 like” availability (e.g., N+1) could consist of 3 or 4 data blocks and 1 parity block in a strip (e.g., 3/1 or 4/1).  “RF3 like” availability (e.g. N+2) could consist of 3 or 4 data blocks and 2 parity blocks in a strip (e.g. 3/2 or 4/2).</p>
+<p>For example, “RF2 like” availability (e.g., N+1) could consist of 3 or 4 data blocks and 1 parity block in a strip (e.g., 3/1 or 4/1).&nbsp; “RF3 like” availability (e.g. N+2) could consist of 3 or 4 data blocks and 2 parity blocks in a strip (e.g. 3/2 or 4/2).</p>
 
-<p>The expected overhead can be calculated as <# parity="" blocks=""> / <# parity="" blocks="" +="" #="" data="">.  For example, a 4/1 strip has a 20% overhead or 1.2X compared to the 2X of RF2.</#></#></p>
+<p>The expected overhead can be calculated as <# parity="" blocks=""> / <# parity="" blocks="" +="" #="" data="">.&nbsp; For example, a 4/1 strip has a 20% overhead or 1.2X compared to the 2X of RF2.</#></#></p>
 
-<p>The encoding is done post-process and leverages the Curator MapReduce framework for task distribution.  Since this is a post-process framework, the traditional write I/O path is unaffected.</p>
+<p>The encoding is done post-process and leverages the Curator MapReduce framework for task distribution.&nbsp; Since this is a post-process framework, the traditional write I/O path is unaffected.</p>
 
 <div data-type="note" id="pro-tip-zEnhd"><h6>Note</h6>
 <h1>Pro tip</h1>
@@ -611,7 +612,7 @@
 
 <p>In this scenario, we have a mix of both RF2 and RF3 data whose primary copies are local and replicas are distributed to other nodes throughout the cluster.</p>
 
-<p>When a Curator full scan runs, it will find eligible extent groups which are available to become encoded.  After the eligible candidates are found, the encoding tasks will be distributed and throttled via Chronos.</p>
+<p>When a Curator full scan runs, it will find eligible extent groups which are available to become encoded.&nbsp; After the eligible candidates are found, the encoding tasks will be distributed and throttled via Chronos.</p>
 
 <p>The following figure shows an example 4/1 and 3/2 strip:</p>
 
@@ -631,7 +632,7 @@
 <section data-type="sect1" id="storage-tiering-and-prioritization-rpKCD">
 <h2>Storage Tiering and Prioritization</h2>
 
-<p>The Disk Balancing section above talked about how storage capacity was pooled among all nodes in a Nutanix cluster and that ILM would be used to keep hot data local.  A similar concept applies to disk tiering, in which the cluster’s SSD and HDD tiers are cluster-wide and DSF ILM is responsible for triggering data movement events. A local node’s SSD tier is always the highest priority tier for all I/O generated by VMs running on that node, however all of the cluster’s SSD resources are made available to all nodes within the cluster.  The SSD tier will always offer the highest performance and is a very important thing to manage for hybrid arrays.</p>
+<p>The Disk Balancing section above talked about how storage capacity was pooled among all nodes in a Nutanix cluster and that ILM would be used to keep hot data local.&nbsp; A similar concept applies to disk tiering, in which the cluster’s SSD and HDD tiers are cluster-wide and DSF ILM is responsible for triggering data movement events. A local node’s SSD tier is always the highest priority tier for all I/O generated by VMs running on that node, however all of the cluster’s SSD resources are made available to all nodes within the cluster.&nbsp; The SSD tier will always offer the highest performance and is a very important thing to manage for hybrid arrays.</p>
 
 <p>The tier prioritization can be classified at a high-level by the following:</p>
 
@@ -639,7 +640,7 @@
 <figcaption><span class="label">Figure 9-18. </span>DSF Tier Prioritization</figcaption>
 </figure>
 
-<p>Specific types of resources (e.g. SSD, HDD, etc.) are pooled together and form a cluster wide storage tier.  This means that any node within the cluster can leverage the full tier capacity, regardless if it is local or not.</p>
+<p>Specific types of resources (e.g. SSD, HDD, etc.) are pooled together and form a cluster wide storage tier.&nbsp; This means that any node within the cluster can leverage the full tier capacity, regardless if it is local or not.</p>
 
 <p>The following figure shows a high level example of what this pooled tiering looks like:</p>
 
@@ -647,13 +648,13 @@
 <figcaption><span class="label">Figure 9-19. </span>DSF Cluster-wide Tiering</figcaption>
 </figure>
 
-<p>A common question is what happens when a local node’s SSD becomes full?  As mentioned in the Disk Balancing section, a key concept is trying to keep uniform utilization of devices within disk tiers.  In the case where a local node’s SSD utilization is high, disk balancing will kick in to move the coldest data on the local SSDs to the other SSDs throughout the cluster.  This will free up space on the local SSD to allow the local node to write to SSD locally instead of going over the network.  A key point to mention is that all CVMs and SSDs are used for this remote I/O to eliminate any potential bottlenecks and remediate some of the hit by performing I/O over the network.</p>
+<p>A common question is what happens when a local node’s SSD becomes full?&nbsp; As mentioned in the Disk Balancing section, a key concept is trying to keep uniform utilization of devices within disk tiers.&nbsp; In the case where a local node’s SSD utilization is high, disk balancing will kick in to move the coldest data on the local SSDs to the other SSDs throughout the cluster.&nbsp; This will free up space on the local SSD to allow the local node to write to SSD locally instead of going over the network.&nbsp; A key point to mention is that all CVMs and SSDs are used for this remote I/O to eliminate any potential bottlenecks and remediate some of the hit by performing I/O over the network.</p>
 
 <figure id="id-vbqt9"><img alt="" class="iimagesv2tiering_3png" src="imagesv2/tiering_3.png">
 <figcaption><span class="label">Figure 9-20. </span>DSF Cluster-wide Tier Balancing</figcaption>
 </figure>
 
-<p>The other case is when the overall tier utilization breaches a specific threshold [curator_tier_usage_ilm_threshold_percent (Default=75)] where DSF ILM will kick in and as part of a Curator job will down-migrate data from the SSD tier to the HDD tier.  This will bring utilization within the threshold mentioned above or free up space by the following amount [curator_tier_free_up_percent_by_ilm (Default=15)], whichever is greater. The data for down-migration is chosen using last access time. In the case where the SSD tier utilization is 95%, 20% of the data in the SSD tier will be moved to the HDD tier (95% –> 75%). </p>
+<p>The other case is when the overall tier utilization breaches a specific threshold [curator_tier_usage_ilm_threshold_percent (Default=75)] where DSF ILM will kick in and as part of a Curator job will down-migrate data from the SSD tier to the HDD tier.&nbsp; This will bring utilization within the threshold mentioned above or free up space by the following amount [curator_tier_free_up_percent_by_ilm (Default=15)], whichever is greater. The data for down-migration is chosen using last access time. In the case where the SSD tier utilization is 95%, 20% of the data in the SSD tier will be moved to the HDD tier (95% –> 75%).&nbsp;</p>
 
 <p>However, if the utilization was 80%, only 15% of the data would be moved to the HDD tier using the minimum tier free up amount.</p>
 
@@ -671,7 +672,7 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/atbkgrmpVNo" width="560"></iframe></div>
 
-<p>DSF is designed to be a very dynamic platform which can react to various workloads as well as allow heterogeneous node types: compute heavy (3050, etc.) and storage heavy (60X0, etc.) to be mixed in a single cluster.  Ensuring uniform distribution of data is an important item when mixing nodes with larger storage capacities. DSF has a native feature, called disk balancing, which is used to ensure uniform distribution of data throughout the cluster.  Disk balancing works on a node’s utilization of its local storage capacity and is integrated with DSF ILM.  Its goal is to keep utilization uniform among nodes once the utilization has breached a certain threshold.</p>
+<p>DSF is designed to be a very dynamic platform which can react to various workloads as well as allow heterogeneous node types: compute heavy (3050, etc.) and storage heavy (60X0, etc.) to be mixed in a single cluster.&nbsp; Ensuring uniform distribution of data is an important item when mixing nodes with larger storage capacities. DSF has a native feature, called disk balancing, which is used to ensure uniform distribution of data throughout the cluster.&nbsp; Disk balancing works on a node’s utilization of its local storage capacity and is integrated with DSF ILM.&nbsp; Its goal is to keep utilization uniform among nodes once the utilization has breached a certain threshold.</p>
 
 <p>The following figure shows an example of a mixed cluster (3050 + 6050) in an “unbalanced” state:</p>
 
@@ -679,7 +680,7 @@
 <figcaption><span class="label">Figure 9-22. </span>Disk Balancing - Unbalanced State</figcaption>
 </figure>
 
-<p>Disk balancing leverages the DSF Curator framework and is run as a scheduled process as well as when a threshold has been breached (e.g., local node capacity utilization > n %).  In the case where the data is not balanced, Curator will determine which data needs to be moved and will distribute the tasks to nodes in the cluster. In the case where the node types are homogeneous (e.g., 3050), utilization should be fairly uniform. However, if there are certain VMs running on a node which are writing much more data than others, there can become a skew in the per node capacity utilization.  In this case, disk balancing would run and move the coldest data on that node to other nodes in the cluster. In the case where the node types are heterogeneous (e.g., 3050 + 6020/50/70), or where a node may be used in a “storage only” mode (not running any VMs), there will likely be a requirement to move data.</p>
+<p>Disk balancing leverages the DSF Curator framework and is run as a scheduled process as well as when a threshold has been breached (e.g., local node capacity utilization > n %).&nbsp; In the case where the data is not balanced, Curator will determine which data needs to be moved and will distribute the tasks to nodes in the cluster. In the case where the node types are homogeneous (e.g., 3050), utilization should be fairly uniform. However, if there are certain VMs running on a node which are writing much more data than others, there can become a skew in the per node capacity utilization.&nbsp; In this case, disk balancing would run and move the coldest data on that node to other nodes in the cluster. In the case where the node types are heterogeneous (e.g., 3050 + 6020/50/70), or where a node may be used in a “storage only” mode (not running any VMs), there will likely be a requirement to move data.</p>
 
 <p>The following figure shows an example the mixed cluster after disk balancing has been run in a “balanced” state:</p>
 
@@ -687,7 +688,7 @@
 <figcaption><span class="label">Figure 9-23. </span>Disk Balancing - Balanced State</figcaption>
 </figure>
 
-<p>In some scenarios, customers might run some nodes in a “storage-only” state where only the CVM will run on the node whose primary purpose is bulk storage capacity.  In this case, the full node's memory can be added to the CVM to provide a much larger read cache.</p>
+<p>In some scenarios, customers might run some nodes in a “storage-only” state where only the CVM will run on the node whose primary purpose is bulk storage capacity.&nbsp; In this case, the full node's memory can be added to the CVM to provide a much larger read cache.</p>
 
 <p>The following figure shows an example of how a storage only node would look in a mixed cluster with disk balancing moving data to it from the active VM nodes:</p>
 
@@ -703,9 +704,9 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/LDaNY9AJDn8" width="560"></iframe></div>
 
-<p>Availability Domains (aka node/block/rack awareness) is a key struct for distributed systems to abide by for determining component and data placement.  DSF is currently node and block aware, however this will increase to rack aware as cluster sizes grow.  Nutanix refers to a “block” as the chassis which contains either one, two, or four server “nodes”. NOTE: A minimum of 3 blocks must be utilized for block awareness to be activated, otherwise node awareness will be defaulted to. </p>
+<p>Availability Domains (aka node/block/rack awareness) is a key struct for distributed systems to abide by for determining component and data placement.&nbsp; DSF is currently node and block aware, however this will increase to rack aware as cluster sizes grow.&nbsp; Nutanix refers to a “block” as the chassis which contains either one, two, or four server “nodes”. NOTE: A minimum of 3 blocks must be utilized for block awareness to be activated, otherwise node awareness will be defaulted to.&nbsp;</p>
 
-<p>It is recommended to utilized uniformly populated blocks to ensure block awareness is enabled.  Common scenarios and the awareness level utilized can be found at the bottom of this section.  The 3-block requirement is due to ensure quorum. For example, a 3450 would be a block which holds 4 nodes.  The reason for distributing roles or data across blocks is to ensure if a block fails or needs maintenance the system can continue to run without interruption.  NOTE: Within a block, the redundant PSU and fans are the only shared components Awareness can be broken into a few key focus areas:</p>
+<p>It is recommended to utilized uniformly populated blocks to ensure block awareness is enabled.&nbsp; Common scenarios and the awareness level utilized can be found at the bottom of this section.&nbsp; The 3-block requirement is due to ensure quorum. For example, a 3450 would be a block which holds 4 nodes.&nbsp; The reason for distributing roles or data across blocks is to ensure if a block fails or needs maintenance the system can continue to run without interruption.&nbsp; NOTE: Within a block, the redundant PSU and fans are the only shared components Awareness can be broken into a few key focus areas:</p>
 
 <ul>
 	<li>Data (The VM data)</li>
@@ -715,7 +716,7 @@
 
 <h3>Data</h3>
 
-<p>With DSF, data replicas will be written to other blocks in the cluster to ensure that in the case of a block failure or planned downtime, the data remains available.  This is true for both RF2 and RF3 scenarios, as well as in the case of a block failure. An easy comparison would be “node awareness”, where a replica would need to be replicated to another node which will provide protection in the case of a node failure.  Block awareness further enhances this by providing data availability assurances in the case of block outages.</p>
+<p>With DSF, data replicas will be written to other blocks in the cluster to ensure that in the case of a block failure or planned downtime, the data remains available.&nbsp; This is true for both RF2 and RF3 scenarios, as well as in the case of a block failure. An easy comparison would be “node awareness”, where a replica would need to be replicated to another node which will provide protection in the case of a node failure.&nbsp; Block awareness further enhances this by providing data availability assurances in the case of block outages.</p>
 
 <p>The following figure shows how the replica placement would work in a 3-block deployment:</p>
 
@@ -731,7 +732,7 @@
 
 <h3>Metadata</h3>
 
-<p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.  Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
+<p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
 
 <p>The following figure shows an example of the Cassandra ring for a 12-node cluster:</p>
 
@@ -739,7 +740,7 @@
 <figcaption><span class="label">Figure 9-27. </span>12 Node Cassandra Ring</figcaption>
 </figure>
 
-<p>Cassandra peer replication iterates through nodes in a clockwise manner throughout the ring.  With block awareness, the peers are distributed among the blocks to ensure no two peers are on the same block.</p>
+<p>Cassandra peer replication iterates through nodes in a clockwise manner throughout the ring.&nbsp; With block awareness, the peers are distributed among the blocks to ensure no two peers are on the same block.</p>
 
 <p>The following figure shows an example node layout translating the ring above into the block based layout:</p>
 
@@ -755,11 +756,11 @@
 <figcaption><span class="label">Figure 9-29. </span>Full Cassandra Node Block Aware Placement</figcaption>
 </figure>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <h3>Configuration Data</h3>
 
-<p>Nutanix leverages Zookeeper to store essential configuration data for the cluster.  This role is also distributed in a block-aware manner to ensure availability in the case of a block failure.</p>
+<p>Nutanix leverages Zookeeper to store essential configuration data for the cluster.&nbsp; This role is also distributed in a block-aware manner to ensure availability in the case of a block failure.</p>
 
 <p>The following figure shows an example layout showing 3 Zookeeper nodes distributed in a block-aware manner:</p>
 
@@ -785,7 +786,7 @@
 	<li>3+ blocks not uniformly populated
 	<ul>
 		<li>If SSD <strong>or</strong> HDD tier variance between blocks is > max variance –> <strong>NODE</strong> awareness</li>
-		<li>If SSD and HDD tier variance between blocks is < max variance  –> <strong>BLOCK</strong> + NODE awareness</li>
+		<li>If SSD and HDD tier variance between blocks is < max variance&nbsp; –> <strong>BLOCK</strong> + NODE awareness</li>
 	</ul>
 	</li>
 </ul>
@@ -804,9 +805,9 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/uK5wWR44UYE" width="560"></iframe></div>
 
-<p>DSF provides native support for offloaded snapshots and clones which can be leveraged via VAAI, ODX, ncli, REST, Prism, etc.  Both the snapshots and clones leverage the redirect-on-write algorithm which is the most effective and efficient. As explained in the Data Structure section above, a virtual machine consists of files (vmdk/vhdx) which are vDisks on the Nutanix platform. </p>
+<p>DSF provides native support for offloaded snapshots and clones which can be leveraged via VAAI, ODX, ncli, REST, Prism, etc.&nbsp; Both the snapshots and clones leverage the redirect-on-write algorithm which is the most effective and efficient. As explained in the Data Structure section above, a virtual machine consists of files (vmdk/vhdx) which are vDisks on the Nutanix platform.&nbsp;</p>
 
-<p>A vDisk is composed of extents which are logically contiguous chunks of data, which are stored within extent groups which are physically contiguous data stored as files on the storage devices. When a snapshot or clone is taken, the base vDisk is marked immutable and another vDisk is created as read/write.  At this point, both vDisks have the same block map, which is a metadata mapping of the vDisk to its corresponding extents. Contrary to traditional approaches which require traversal of the snapshot chain (which can add read latency), each vDisk has its own block map.  This eliminates any of the overhead normally seen by large snapshot chain depths and allows you to take continuous snapshots without any performance impact.</p>
+<p>A vDisk is composed of extents which are logically contiguous chunks of data, which are stored within extent groups which are physically contiguous data stored as files on the storage devices. When a snapshot or clone is taken, the base vDisk is marked immutable and another vDisk is created as read/write.&nbsp; At this point, both vDisks have the same block map, which is a metadata mapping of the vDisk to its corresponding extents. Contrary to traditional approaches which require traversal of the snapshot chain (which can add read latency), each vDisk has its own block map.&nbsp; This eliminates any of the overhead normally seen by large snapshot chain depths and allows you to take continuous snapshots without any performance impact.</p>
 
 <p>The following figure shows an example of how this works when a snapshot is taken (NOTE: I need to give some credit to NTAP as a base for these diagrams, as I thought their representation was the clearest):</p>
 
@@ -820,7 +821,7 @@
 <figcaption><span class="label">Figure 9-33. </span>Multi-snap Block Map & New Write</figcaption>
 </figure>
 
-<p>The same methods are used for both snapshots and/or clones of a VM or vDisk(s).  When a VM or vDisk is cloned, the current block map is locked and the clones are created.  These updates are metadata only, so no I/O actually takes place.  The same method applies for clones of clones; essentially the previously cloned VM acts as the “Base vDisk” and upon cloning, that block map is locked and two “clones” are created: one for the VM being cloned and another for the new clone. </p>
+<p>The same methods are used for both snapshots and/or clones of a VM or vDisk(s).&nbsp; When a VM or vDisk is cloned, the current block map is locked and the clones are created.&nbsp; These updates are metadata only, so no I/O actually takes place.&nbsp; The same method applies for clones of clones; essentially the previously cloned VM acts as the “Base vDisk” and upon cloning, that block map is locked and two “clones” are created: one for the VM being cloned and another for the new clone.&nbsp;</p>
 
 <p>They both inherit the prior block map and any new writes/updates would take place on their individual block maps.</p>
 
@@ -828,7 +829,7 @@
 <figcaption><span class="label">Figure 9-34. </span>Multi-Clone Block Maps</figcaption>
 </figure>
 
-<p>As mentioned previously, each VM/vDisk has its own individual block map.  So in the above example, all of the clones from the base VM would now own their block map and any write/update would occur there. </p>
+<p>As mentioned previously, each VM/vDisk has its own individual block map.&nbsp; So in the above example, all of the clones from the base VM would now own their block map and any write/update would occur there.&nbsp;</p>
 
 <p>The following figure shows an example of what this looks like:</p>
 
@@ -846,7 +847,7 @@
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/AoKwKI7CXIM" width="560"></iframe></div>
 
-<p>Nutanix provides native DR and replication capabilities, which build upon the same features explained in the Snapshots & Clones section.  Cerebro is the component responsible for managing the DR and replication in DSF.  Cerebro runs on every node and a Cerebro master is elected (similar to NFS master) and is responsible for managing replication tasks.  In the event the CVM acting as Cerebro master fails, another is elected and assumes the role.  The Cerebro page can be found on <CVM IP="">:2020. The DR function can be broken down into a few key focus areas:</CVM></p>
+<p>Nutanix provides native DR and replication capabilities, which build upon the same features explained in the Snapshots & Clones section.&nbsp; Cerebro is the component responsible for managing the DR and replication in DSF.&nbsp; Cerebro runs on every node and a Cerebro master is elected (similar to NFS master) and is responsible for managing replication tasks.&nbsp; In the event the CVM acting as Cerebro master fails, another is elected and assumes the role.&nbsp; The Cerebro page can be found on <CVM IP="">:2020. The DR function can be broken down into a few key focus areas:</CVM></p>
 
 <ul>
 	<li>Replication Topologies</li>
@@ -857,7 +858,7 @@
 
 <h3>Replication Topologies</h3>
 
-<p>Traditionally, there are a few key replication topologies: Site to site, hub and spoke, and full and/or partial mesh.  Contrary to traditional solutions which only allow for site to site or hub and spoke, Nutanix provides a fully mesh or flexible many-to-many model.</p>
+<p>Traditionally, there are a few key replication topologies: Site to site, hub and spoke, and full and/or partial mesh.&nbsp; Contrary to traditional solutions which only allow for site to site or hub and spoke, Nutanix provides a fully mesh or flexible many-to-many model.</p>
 
 <figure id="id-J9kf5"><img alt="" class="iimagesv2dr_1png" src="imagesv2/dr_1.png">
 <figcaption><span class="label">Figure 9-36. </span>Example Replication Topologies</figcaption>
@@ -880,28 +881,28 @@
 <div data-type="note" id="pro-tip-680Fg"><h6>Note</h6>
 <h1>Pro tip</h1>
 
-<p>Ensure the target site has ample capacity (compute/storage) to handle a full site failure.  In certain cases replication/DR between racks within a single site can also make sense.</p>
+<p>Ensure the target site has ample capacity (compute/storage) to handle a full site failure.&nbsp; In certain cases replication/DR between racks within a single site can also make sense.</p>
 </div>
 
 <h4>Protection Domain (PD)</h4>
 
 <ul>
 	<li>Key Role: Macro group of VMs and/or files to protect</li>
-	<li>Description: A group of VMs and/or files to be replicated together on a desired schedule.  A PD can protect a full container or you can select individual VMs and/or files</li>
+	<li>Description: A group of VMs and/or files to be replicated together on a desired schedule.&nbsp; A PD can protect a full container or you can select individual VMs and/or files</li>
 	<li>(e.g.,</li>
 </ul>
 
 <div data-type="note" id="pro-tip-kgbcq"><h6>Note</h6>
 <h1>Pro tip</h1>
 
-<p>Create multiple PDs for various services tiers driven by a desired RPO/RTO.  For file distribution (e.g. golden images, ISOs, etc.) you can create a PD with the files to replication.</p>
+<p>Create multiple PDs for various services tiers driven by a desired RPO/RTO.&nbsp; For file distribution (e.g. golden images, ISOs, etc.) you can create a PD with the files to replication.</p>
 </div>
 
 <h4>Consistency Group (CG)</h4>
 
 <ul>
 	<li>Key Role: Subset of VMs/files in PD to be crash-consistent</li>
-	<li>Description: VMs and/or files which are part of a Protection Domain which need to be snapshotted in a crash-consistent manner.  This ensures that when VMs/files are recovered, they come up in a consistent state.  A protection domain can have multiple consistency groups.</li>
+	<li>Description: VMs and/or files which are part of a Protection Domain which need to be snapshotted in a crash-consistent manner.&nbsp; This ensures that when VMs/files are recovered, they come up in a consistent state.&nbsp; A protection domain can have multiple consistency groups.</li>
 	<li>Group-dependent(e.g.,</li>
 </ul>
 
@@ -928,7 +929,7 @@
 
 <ul>
 	<li>Key Role: Number of local and remote snapshots to keep</li>
-	<li>Description: The retention policy defines the number of local and remote snapshots to retain.  NOTE: A remote site must be configured for a remote retention/replication policy to be configured.</li>
+	<li>Description: The retention policy defines the number of local and remote snapshots to retain.&nbsp; NOTE: A remote site must be configured for a remote retention/replication policy to be configured.</li>
 	<li>VM/file.</li>
 </ul>
 
@@ -948,7 +949,7 @@
 
 <h3>Replication Lifecycle</h3>
 
-<p>Nutanix replication leverages the Cerebro service mentioned above.  The Cerebro service is broken into a “Cerebro Master”, which is a dynamically elected CVM, and Cerebro Slaves, which run on every CVM.  In the event where the CVM acting as the “Cerebro Master” fails, a new “Master” is elected.</p>
+<p>Nutanix replication leverages the Cerebro service mentioned above.&nbsp; The Cerebro service is broken into a “Cerebro Master”, which is a dynamically elected CVM, and Cerebro Slaves, which run on every CVM.&nbsp; In the event where the CVM acting as the “Cerebro Master” fails, a new “Master” is elected.</p>
 
 <p>The Cerebro Master is responsible for managing task delegation to the local Cerebro Slaves as well as coordinating with remote Cerebro Master(s) when remote replication is occurring.</p>
 
@@ -988,7 +989,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Global Deduplication</h3>
 
-<p>As explained in the Elastic Deduplication Engine section above, DSF has the ability to deduplicate data by just updating metadata pointers. The same concept is applied to the DR and replication feature.  Before sending data over the wire, DSF will query the remote site and check whether or not the fingerprint(s) already exist on the target (meaning the data already exists).  If so, no data will be shipped over the wire and only a metadata update will occur. For data which doesn’t exist on the target, the data will be compressed and sent to the target site.  At this point, the data exists on both sites is usable for deduplication.</p>
+<p>As explained in the Elastic Deduplication Engine section above, DSF has the ability to deduplicate data by just updating metadata pointers. The same concept is applied to the DR and replication feature.&nbsp; Before sending data over the wire, DSF will query the remote site and check whether or not the fingerprint(s) already exist on the target (meaning the data already exists).&nbsp; If so, no data will be shipped over the wire and only a metadata update will occur. For data which doesn’t exist on the target, the data will be compressed and sent to the target site.&nbsp; At this point, the data exists on both sites is usable for deduplication.</p>
 
 <p>The following figure shows an example three site deployment where each site contains one of more protection domains (PD):</p>
 
@@ -1006,11 +1007,11 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="cloud-connect-MVqTQ">
 <h2>Cloud Connect</h2>
 
-<p>Building upon the native DR / replication capabilities of DSF, Cloud Connect extends this capability into cloud providers (currently Amazon Web Services, or AWS).  NOTE: This feature is currently limited to just backup / replication.</p>
+<p>Building upon the native DR / replication capabilities of DSF, Cloud Connect extends this capability into cloud providers (currently Amazon Web Services, or AWS).&nbsp; NOTE: This feature is currently limited to just backup / replication.</p>
 
-<p>Very similar to creating a remote site to be used for native DR / replication, a “cloud remote site” is just created.  When a new cloud remote site is created, Nutanix will automatically spin up an instance in EC2 (currently m1.xlarge) to be used as the endpoint.</p>
+<p>Very similar to creating a remote site to be used for native DR / replication, a “cloud remote site” is just created.&nbsp; When a new cloud remote site is created, Nutanix will automatically spin up an instance in EC2 (currently m1.xlarge) to be used as the endpoint.</p>
 
-<p>The Amazon Machine Image (AMI) running in AWS is based upon the same NOS code-base leveraged for locally running clusters.  This means that all of the native replication capabilities (e.g., global deduplication, delta based replications, etc.) can be leveraged.</p>
+<p>The Amazon Machine Image (AMI) running in AWS is based upon the same NOS code-base leveraged for locally running clusters.&nbsp; This means that all of the native replication capabilities (e.g., global deduplication, delta based replications, etc.) can be leveraged.</p>
 
 <p>In the case where multiple Nutanix clusters are leveraging Cloud Connect, they can either A) share the same AMI instance running in the region, or B) spin up a new instance.</p>
 
@@ -1026,7 +1027,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 9-43. </span>Cloud Connect Multi-region</figcaption>
 </figure>
 
-<p>The same replication / retention policies are leveraged for data replicated using Cloud Connect.  As data / snapshots become stale, or expire, the Nutanix CVM in AWS will clean up data as necessary.</p>
+<p>The same replication / retention policies are leveraged for data replicated using Cloud Connect.&nbsp; As data / snapshots become stale, or expire, the Nutanix CVM in AWS will clean up data as necessary.</p>
 
 <p>If replication isn’t frequently occurring (e.g., daily or weekly), the platform can be configured to power up the AWS CVM(s) prior to a scheduled replication and down after a replication has completed.</p>
 
@@ -1040,7 +1041,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="metro-availability-AY6FZ">
 <h2>Metro Availability</h2>
 
-<p>Nutanix provides native “stretch clustering” capabilities which allow for a compute and storage cluster to span multiple physical sites.  In these deployments, the compute cluster spans two locations and has access to a shared pool of storage.</p>
+<p>Nutanix provides native “stretch clustering” capabilities which allow for a compute and storage cluster to span multiple physical sites.&nbsp; In these deployments, the compute cluster spans two locations and has access to a shared pool of storage.</p>
 
 <p>This expands the VM HA domain from a single site to between two sites providing a near 0 RTO and a RPO of 0.</p>
 
@@ -1060,7 +1061,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 9-46. </span>Metro Availability - Site Failure</figcaption>
 </figure>
 
-<p>In the event where there is a link failure between the two sites, each cluster will operate independently.  Once the link comes back up, the sites will be re-synchronized and synchronous replication will start occurring.</p>
+<p>In the event where there is a link failure between the two sites, each cluster will operate independently.&nbsp; Once the link comes back up, the sites will be re-synchronized and synchronous replication will start occurring.</p>
 
 <p>The following figure shows an example link failure:</p>
 
@@ -1076,7 +1077,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>The Acropolis Volumes API exposes back-end DSF storage to external consumers (guest OS, physical hosts, containers, etc.) via iSCSI (today).</p>
 
-<p>This allows any operating system to access DSF and leverage its storage capabilities.  In this deployment scenario, the OS is talking directly to Nutanix bypassing any hypervisor. </p>
+<p>This allows any operating system to access DSF and leverage its storage capabilities.&nbsp; In this deployment scenario, the OS is talking directly to Nutanix bypassing any hypervisor.&nbsp;</p>
 
 <p>Core use-cases for the Volumes API:</p>
 
@@ -1140,7 +1141,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 9-48. </span>Volume API - Example</figcaption>
 </figure>
 
-<p>In Windows deployments, iSCSI multi-pathing can be configured leveraging the Windows MPIO feature.  It is recommended to leverage the ‘Failover only’ policy (default) to ensure vDisk ownership doesn’t change.</p>
+<p>In Windows deployments, iSCSI multi-pathing can be configured leveraging the Windows MPIO feature.&nbsp; It is recommended to leverage the ‘Failover only’ policy (default) to ensure vDisk ownership doesn’t change.</p>
 
 <figure id="id-A9ZHk"><img alt="" class="iimagesv2volapi_2png" src="imagesv2/volapi_2.png">
 <figcaption><span class="label">Figure 9-49. </span>MPIO Example - Normal State</figcaption>
@@ -1166,7 +1167,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 9-52. </span>RAID / LVM Example - Single-path</figcaption>
 </figure>
 
-<p>In the event where the local CVM is under heavy utilization, it is possible to have active paths to other CVMs.  This will balance the I/O load across multiple CVMs, however will take a hit by having to traverse the network for the primary I/O:</p>
+<p>In the event where the local CVM is under heavy utilization, it is possible to have active paths to other CVMs.&nbsp; This will balance the I/O load across multiple CVMs, however will take a hit by having to traverse the network for the primary I/O:</p>
 
 <figure id="id-DbOs9"><img alt="" class="iimagesv2volapi_6png" src="imagesv2/volapi_6.png">
 <figcaption><span class="label">Figure 9-53. </span>RAID / LVM Example - Multi-path</figcaption>
@@ -1180,7 +1181,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Bz37Eu_TgxY" width="560"></iframe></div>
 
-<p>The Nutanix platform does not leverage any backplane for inter-node communication and only relies on a standard 10GbE network.  All storage I/O for VMs running on a Nutanix node is handled by the hypervisor on a dedicated private network.  The I/O request will be handled by the hypervisor, which will then forward the request to the private IP on the local CVM.  The CVM will then perform the remote replication with other Nutanix nodes using its external IP over the public 10GbE network. For all read requests, these will be served completely locally in most cases and never touch the 10GbE network. This means that the only traffic touching the public 10GbE network will be DSF remote replication traffic and VM network I/O.  There will, however, be cases where the CVM will forward requests to other CVMs in the cluster in the case of a CVM being down or data being remote.  Also, cluster-wide tasks, such as disk balancing, will temporarily generate I/O on the 10GbE network.</p>
+<p>The Nutanix platform does not leverage any backplane for inter-node communication and only relies on a standard 10GbE network.&nbsp; All storage I/O for VMs running on a Nutanix node is handled by the hypervisor on a dedicated private network.&nbsp; The I/O request will be handled by the hypervisor, which will then forward the request to the private IP on the local CVM.&nbsp; The CVM will then perform the remote replication with other Nutanix nodes using its external IP over the public 10GbE network. For all read requests, these will be served completely locally in most cases and never touch the 10GbE network. This means that the only traffic touching the public 10GbE network will be DSF remote replication traffic and VM network I/O.&nbsp; There will, however, be cases where the CVM will forward requests to other CVMs in the cluster in the case of a CVM being down or data being remote.&nbsp; Also, cluster-wide tasks, such as disk balancing, will temporarily generate I/O on the 10GbE network.</p>
 
 <p>The following figure shows an example of how the VM’s I/O path interacts with the private and public 10GbE network:</p>
 
@@ -1188,7 +1189,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 9-54. </span>DSF Networking</figcaption>
 </figure>
 
-<p> </p>
+<p>&nbsp;</p>
 </section>
 
 <section data-type="sect1" id="data-locality-v1xtZ">
@@ -1198,7 +1199,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/ocLD5nBbUTU" width="560"></iframe></div>
 
-<p>Being a converged (compute+storage) platform, I/O and data locality are critical to cluster and VM performance with Nutanix.  As explained above in the I/O path, all read/write IOs are served by the local Controller VM (CVM) which is on each hypervisor adjacent to normal VMs.  A VM’s data is served locally from the CVM and sits on local disks under the CVM’s control.  When a VM is moved from one hypervisor node to another (or during a HA event), the newly migrated VM’s data will be served by the now local CVM. When reading old data (stored on the now remote node/CVM), the I/O will be forwarded by the local CVM to the remote CVM.  All write I/Os will occur locally right away.  DSF will detect the I/Os are occurring from a different node and will migrate the data locally in the background, allowing for all read I/Os to now be served locally.  The data will only be migrated on a read as to not flood the network.</p>
+<p>Being a converged (compute+storage) platform, I/O and data locality are critical to cluster and VM performance with Nutanix.&nbsp; As explained above in the I/O path, all read/write IOs are served by the local Controller VM (CVM) which is on each hypervisor adjacent to normal VMs.&nbsp; A VM’s data is served locally from the CVM and sits on local disks under the CVM’s control.&nbsp; When a VM is moved from one hypervisor node to another (or during a HA event), the newly migrated VM’s data will be served by the now local CVM. When reading old data (stored on the now remote node/CVM), the I/O will be forwarded by the local CVM to the remote CVM.&nbsp; All write I/Os will occur locally right away.&nbsp; DSF will detect the I/Os are occurring from a different node and will migrate the data locally in the background, allowing for all read I/Os to now be served locally.&nbsp; The data will only be migrated on a read as to not flood the network.</p>
 
 <p>The following figure shows an example of how data will “follow” the VM as it moves between hypervisor nodes:</p>
 
@@ -1214,9 +1215,9 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/oqfFDMYQFJg" width="560"></iframe></div>
 
-<p>The Acropolis Distributed Storage Fabric has a feature called ‘Shadow Clones’, which allows for distributed caching of particular vDisks or VM data which is in a ‘multi-reader’ scenario.  A great example of this is during a VDI deployment many ‘linked clones’ will be forwarding read requests to a central master or ‘Base VM’.  In the case of VMware View, this is called the replica disk and is read by all linked clones, and in XenDesktop, this is called the MCS Master VM.  This will also work in any scenario which may be a multi-reader scenario (e.g., deployment servers, repositories, etc.). Data or I/O locality is critical for the highest possible VM performance and a key struct of DSF. </p>
+<p>The Acropolis Distributed Storage Fabric has a feature called ‘Shadow Clones’, which allows for distributed caching of particular vDisks or VM data which is in a ‘multi-reader’ scenario.&nbsp; A great example of this is during a VDI deployment many ‘linked clones’ will be forwarding read requests to a central master or ‘Base VM’.&nbsp; In the case of VMware View, this is called the replica disk and is read by all linked clones, and in XenDesktop, this is called the MCS Master VM.&nbsp; This will also work in any scenario which may be a multi-reader scenario (e.g., deployment servers, repositories, etc.). Data or I/O locality is critical for the highest possible VM performance and a key struct of DSF.&nbsp;</p>
 
-<p>With Shadow Clones, DSF will monitor vDisk access trends similar to what it does for data locality.  However, in the case there are requests occurring from more than two remote CVMs (as well as the local CVM), and all of the requests are read I/O, the vDisk will be marked as immutable.  Once the disk has been marked as immutable, the vDisk can then be cached locally by each CVM making read requests to it (aka Shadow Clones of the base vDisk). This will allow VMs on each node to read the Base VM’s vDisk locally. In the case of VDI, this means the replica disk can be cached by each node and all read requests for the base will be served locally.  NOTE:  The data will only be migrated on a read as to not flood the network and allow for efficient cache utilization.  In the case where the Base VM is modified, the Shadow Clones will be dropped and the process will start over.  Shadow clones are enabled by default (as of 4.0.2) and can be enabled/disabled using the following NCLI command: ncli cluster edit-params enable-shadow-clones=<true false="">.</true></p>
+<p>With Shadow Clones, DSF will monitor vDisk access trends similar to what it does for data locality.&nbsp; However, in the case there are requests occurring from more than two remote CVMs (as well as the local CVM), and all of the requests are read I/O, the vDisk will be marked as immutable.&nbsp; Once the disk has been marked as immutable, the vDisk can then be cached locally by each CVM making read requests to it (aka Shadow Clones of the base vDisk). This will allow VMs on each node to read the Base VM’s vDisk locally. In the case of VDI, this means the replica disk can be cached by each node and all read requests for the base will be served locally.&nbsp; NOTE:&nbsp; The data will only be migrated on a read as to not flood the network and allow for efficient cache utilization.&nbsp; In the case where the Base VM is modified, the Shadow Clones will be dropped and the process will start over.&nbsp; Shadow clones are enabled by default (as of 4.0.2) and can be enabled/disabled using the following NCLI command: ncli cluster edit-params enable-shadow-clones=<true false="">.</true></p>
 
 <p>The following figure shows an example of how Shadow Clones work and allow for distributed caching:</p>
 
@@ -1228,13 +1229,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="storage-layers-and-monitoring-XnQUb">
 <h2>Storage Layers and Monitoring</h2>
 
-<p>The Nutanix platform monitors storage at multiple layers throughout the stack, ranging from the VM/Guest OS all the way down to the physical disk devices.  Knowing the various tiers and how these relate is important whenever monitoring the solution and allows you to get full visibility of how the ops relate. The following figure shows the various layers of where operations are monitored and the relative granularity which are explained below:</p>
+<p>The Nutanix platform monitors storage at multiple layers throughout the stack, ranging from the VM/Guest OS all the way down to the physical disk devices.&nbsp; Knowing the various tiers and how these relate is important whenever monitoring the solution and allows you to get full visibility of how the ops relate. The following figure shows the various layers of where operations are monitored and the relative granularity which are explained below:</p>
 
 <figure id="id-KY0tA"><img alt="" class="iimagesv2storage_layerspng" src="imagesv2/storage_layers.png">
 <figcaption><span class="label">Figure 9-57. </span>Storage Layers</figcaption>
 </figure>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <h3>Virtual Machine Layer</h3>
 
@@ -1248,7 +1249,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <ul>
 	<li>Key Role: Metrics reported by the Hypervisor(s)</li>
-	<li>Description: Hypervisor level metrics are pulled directly from the hypervisor and represent the most accurate metrics the hypervisor(s) are seeing.  This data can be viewed for one of more hypervisor node(s) or the aggregate cluster.  This layer will provide the most accurate data in terms of what performance the platform is seeing and should be leveraged in most cases.  In certain scenarios the hypervisor may combine or split operations coming from VMs which can show the difference in metrics reported by the VM and hypervisor.  These numbers will also include cache hits served by the Nutanix CVMs.</li>
+	<li>Description: Hypervisor level metrics are pulled directly from the hypervisor and represent the most accurate metrics the hypervisor(s) are seeing.&nbsp; This data can be viewed for one of more hypervisor node(s) or the aggregate cluster.&nbsp; This layer will provide the most accurate data in terms of what performance the platform is seeing and should be leveraged in most cases.&nbsp; In certain scenarios the hypervisor may combine or split operations coming from VMs which can show the difference in metrics reported by the VM and hypervisor.&nbsp; These numbers will also include cache hits served by the Nutanix CVMs.</li>
 	<li>When to use: Most common cases as this will provide the most detailed and valuable metrics.</li>
 </ul>
 
@@ -1256,7 +1257,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <ul>
 	<li>Key Role: Metrics reported by the Nutanix Controller(s)</li>
-	<li>Description: Controller level metrics are pulled directly from the Nutanix Controller VMs (e.g., Stargate 2009 page) and represent what the Nutanix front-end is seeing from NFS/SMB/iSCSI or any back-end operations (e.g., ILM, disk balancing, etc.).  This data can be viewed for one of more Controller VM(s) or the aggregate cluster.  The metrics seen by the Controller Layer should normally match those seen by the hypervisor layer, however will include any backend operations (e.g., ILM, disk balancing). These numbers will also include cache hits served by memory.  In certain cases, metrics like (IOPS), might not match as the NFS / SMB / iSCSI client might split a large IO into multiple smaller IOPS.  However, metrics like bandwidth should match.</li>
+	<li>Description: Controller level metrics are pulled directly from the Nutanix Controller VMs (e.g.,&nbsp;Stargate 2009 page) and represent what the Nutanix front-end is seeing from NFS/SMB/iSCSI or any back-end operations (e.g., ILM, disk balancing, etc.).&nbsp; This data can be viewed for one of more Controller VM(s) or the aggregate cluster.&nbsp; The metrics seen by the Controller Layer should normally match those seen by the hypervisor layer, however will include any backend operations (e.g., ILM, disk balancing). These numbers will also include cache hits served by memory.&nbsp; In certain cases, metrics like (IOPS), might not match as the NFS / SMB / iSCSI client might split a large IO into multiple smaller IOPS.&nbsp; However, metrics like bandwidth should match.</li>
 	<li>When to use: Similar to the hypervisor layer, can be used to show how much backend operation is taking place.</li>
 </ul>
 
@@ -1264,7 +1265,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <ul>
 	<li>Key Role: Metrics reported by the Disk Device(s)</li>
-	<li>Description: Disk level metrics are pulled directly from the physical disk devices (via the CVM) and represent what the back-end is seeing.  This includes data hitting the OpLog or Extent Store where an I/O is performed on the disk.  This data can be viewed for one of more disk(s), the disk(s) for a particular node, or the aggregate disks in the cluster.  In common cases, it is expected that the disk ops should match the number of incoming writes as well as reads not served from the memory portion of the cache.  Any reads being served by the memory portion of the cache will not be counted here as the op is not hitting the disk device.</li>
+	<li>Description: Disk level metrics are pulled directly from the physical disk devices (via the CVM) and represent what the back-end is seeing.&nbsp; This includes data hitting the OpLog or Extent Store where an I/O is performed on the disk.&nbsp; This data can be viewed for one of more disk(s), the disk(s) for a particular node, or the aggregate disks in the cluster.&nbsp; In common cases, it is expected that the disk ops should match the number of incoming writes as well as reads not served from the memory portion of the cache.&nbsp; Any reads being served by the memory portion of the cache will not be counted here as the op is not hitting the disk device.</li>
 	<li>When to use: When looking to see how many ops are served from cache or hitting the disksm</li>
 </ul>
 </section>
@@ -1282,13 +1283,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="node-architecture-VnasA">
 <h2>Node Architecture</h2>
 
-<p>In Acropolis Hypervisor deployments, the Controller VM (CVM) runs as a VM and disks are presented using PCI passthrough.  This allows the full PCI controller (and attached devices) to be passed through directly to the CVM and bypass the hypervisor.  Acropolis Hypervisor is based upon CentOS KVM.</p>
+<p>In Acropolis Hypervisor deployments, the Controller VM (CVM) runs as a VM and disks are presented using PCI passthrough.&nbsp; This allows the full PCI controller (and attached devices) to be passed through directly to the CVM and bypass the hypervisor.&nbsp; Acropolis Hypervisor is based upon CentOS KVM.</p>
 
 <figure id="id-l8whw"><img alt="" class="iimagesv2acrop_nodepng" src="imagesv2/acrop_node.png">
 <figcaption><span class="label">Figure 11-1. </span>Acropolis Hypervisor Node</figcaption>
 </figure>
 
-<p>The Acropolis Hypervisor is built upon the CentOS KVM foundation and extends its base functionality to include features like HA, live migration, etc. </p>
+<p>The Acropolis Hypervisor is built upon the CentOS KVM foundation and extends its base functionality to include features like HA, live migration, etc.&nbsp;</p>
 
 <p>Acropolis Hypervisor is validated as part of the Microsoft Server Virtualization Validation Program and is validated to run Microsoft OS and applications.</p>
 </section>
@@ -1306,12 +1307,12 @@ This should only be used for non-production scenarios and the cluster IPs should
 	</li>
 	<li>Libvirtd
 	<ul>
-		<li>An API, daemon and management tool for managing KVM and QEMU.  Communication between Acropolis and KVM / QEMU occurs through libvirtd.</li>
+		<li>An API, daemon and management tool for managing KVM and QEMU.&nbsp; Communication between Acropolis and KVM / QEMU occurs through libvirtd.</li>
 	</ul>
 	</li>
 	<li>Qemu-kvm
 	<ul>
-		<li>A machine emulator and virtualizer that runs in userspace for every Virtual Machine (domain).  In the Acropolis Hypervisor it is used for hardware-assisted virtualization and VMs run as HVMs.</li>
+		<li>A machine emulator and virtualizer that runs in userspace for every Virtual Machine (domain).&nbsp; In the Acropolis Hypervisor it is used for hardware-assisted virtualization and VMs run as HVMs.</li>
 	</ul>
 	</li>
 </ul>
@@ -1322,7 +1323,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 11-2. </span>KVM Component Relationship</figcaption>
 </figure>
 
-<p>Communication between Acropolis and KVM occurs via Libvirt. </p>
+<p>Communication between Acropolis and KVM occurs via Libvirt.&nbsp;</p>
 </section>
 
 <section data-type="sect1" id="configuration-maximums-and-scalability-Znni4">
@@ -1342,7 +1343,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="networking-6dOFr">
 <h2>Networking</h2>
 
-<p>Acropolis Hypervisor leverages Open vSwitch (OVS) for all VM networking.  VM networking is configured through Prism / ACLI and each VM nic is connected into a tap interface.</p>
+<p>Acropolis Hypervisor leverages Open vSwitch (OVS) for all VM networking.&nbsp; VM networking is configured through Prism / ACLI and each VM nic is connected into a tap interface.</p>
 
 <p>The following figure shows a conceptual diagram of the OVS architecture:</p>
 
@@ -1359,19 +1360,19 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>On each KVM host there is a iSCSI redirector daemon running which checks Stargate health throughout the cluster using NOP OUT commands.</p>
 
-<p>QEMU is configured with the iSCSI redirector as the iSCSI target portal.  Upon a login request, the redirector will perform and iSCSI login redirect to a healthy Stargate (preferably the local one).</p>
+<p>QEMU is configured with the iSCSI redirector as the iSCSI target portal.&nbsp; Upon a login request, the redirector will perform and iSCSI login redirect to a healthy Stargate (preferably the local one).</p>
 
 <figure id="id-5BOhB"><img alt="" class="iimagesv2iscsi_mp_1png" src="imagesv2/iscsi_mp_1.png">
 <figcaption><span class="label">Figure 11-4. </span>iSCSI Multi-pathing - Normal State</figcaption>
 </figure>
 
-<p>In the event where the active Stargate goes down (thus failing to respond to the NOP OUT command), the iSCSI redirector will mark the local Stargate as unhealthy.  When QEMU retries the iSCSI login, the redirector will redirect the login to another healthy Stargate.</p>
+<p>In the event where the active Stargate goes down (thus failing to respond to the NOP OUT command), the iSCSI redirector will mark the local Stargate as unhealthy.&nbsp; When QEMU retries the iSCSI login, the redirector will redirect the login to another healthy Stargate.</p>
 
 <figure id="id-dBgcD"><img alt="" class="iimagesv2iscsi_mp_2png" src="imagesv2/iscsi_mp_2.png">
 <figcaption><span class="label">Figure 11-5. </span>iSCSI Multi-pathing - Local CVM Down</figcaption>
 </figure>
 
-<p>Once the local Stargate comes back up (and begins responding to the NOP OUT commands), the iSCSI redirector will perform a TCP kill to kill all connections to remote Stargates.  QEMU will then attempt an iSCSI login again and will be redirected to the local Stargate.</p>
+<p>Once the local Stargate comes back up (and begins responding to the NOP OUT commands), the iSCSI redirector will perform a TCP kill to kill all connections to remote Stargates.&nbsp; QEMU will then attempt an iSCSI login again and will be redirected to the local Stargate.</p>
 
 <figure id="id-wArsR"><img alt="" class="iimagesv2iscsi_mp_3png" src="imagesv2/iscsi_mp_3.png">
 <figcaption><span class="label">Figure 11-6. </span>iSCSI Multi-pathing - Local CVM Back Up</figcaption>
@@ -1381,7 +1382,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect2" id="ip-address-management-RYNud">
 <h3>IP Address Management</h3>
 
-<p>The Acropolis IP address management (IPAM) solution provides the ability to establish a DHCP scope and assign addresses to VMs.  This leverages VXLAN and OpenFlow rules to intercept the DHCP request and respond with a DHCP response.</p>
+<p>The Acropolis IP address management (IPAM) solution provides the ability to establish a DHCP scope and assign addresses to VMs.&nbsp; This leverages VXLAN and OpenFlow rules to intercept the DHCP request and respond with a DHCP response.</p>
 
 <p>Here we show an example DHCP request using the Nutanix IPAM solution where the Acropolis Master is running locally:</p>
 
@@ -1389,7 +1390,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 11-7. </span>IPAM - Local Acropolis Master</figcaption>
 </figure>
 
-<p>If the Acropolis Master is running remotely, the same VXLAN tunnel will be leveraged to handle the request over the network. </p>
+<p>If the Acropolis Master is running remotely, the same VXLAN tunnel will be leveraged to handle the request over the network.&nbsp;</p>
 
 <figure id="id-rEAsP"><img alt="" class="iimagesv2acrop_ipam_2png" src="imagesv2/acrop_ipam_2.png">
 <figcaption><span class="label">Figure 11-8. </span>IPAM - Remote Acropolis Master</figcaption>
@@ -1580,7 +1581,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p># Launch top and look for %st (bold below)</p>
 
-<p>Cpu(s):  0.0%us, 0.0%sy,  0.0%ni, 96.4%id,  0.0%wa,  0.0%hi,  0.1%si,  <strong>0.0%st</strong></p>
+<p>Cpu(s):&nbsp; 0.0%us, 0.0%sy,&nbsp; 0.0%ni, 96.4%id,&nbsp; 0.0%wa,&nbsp; 0.0%hi,&nbsp; 0.1%si,&nbsp; <strong>0.0%st</strong></p>
 
 <h3>Monitor VM network resource stats</h3>
 
@@ -1602,11 +1603,11 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="important-pages-5DQS0">
 <h2>Important Pages</h2>
 
-<p>These are advanced Nutanix pages besides the standard user interface that allow you to monitor detailed stats and metrics.  The URLs are formatted in the following way: http://<Nutanix CVM="" IP="" DNS="">:<Port path="" (mentioned="" below)="">  Example: http://MyCVM-A:2009  NOTE: if you’re on a different subnet IPtables will need to be disabled on the CVM to access the pages.</Port></Nutanix></p>
+<p>These are advanced Nutanix pages besides the standard user interface that allow you to monitor detailed stats and metrics.&nbsp; The URLs are formatted in the following way: http://<Nutanix CVM="" IP="" DNS="">:<Port path="" (mentioned="" below)="">&nbsp; Example: http://MyCVM-A:2009&nbsp; NOTE: if you’re on a different subnet IPtables will need to be disabled on the CVM to access the pages.</Port></Nutanix></p>
 
 <h3>2009 Page</h3>
 
-<p>This is a Stargate page used to monitor the back end storage system and should only be used by advanced users.  I’ll have a post that explains the 2009 pages and things to look for.</p>
+<p>This is a Stargate page used to monitor the back end storage system and should only be used by advanced users.&nbsp; I’ll have a post that explains the 2009 pages and things to look for.</p>
 
 <h3>2009/latency Page</h3>
 
@@ -1638,7 +1639,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>2020 Page</h3>
 
-<p> This is the Cerebro page which monitors the protection domains, replication status and DR.</p>
+<p>&nbsp;This is the Cerebro page which monitors the protection domains, replication status and DR.</p>
 
 <h3>2020/h/traces Page</h3>
 
@@ -1650,15 +1651,15 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>2030/sched Page</h3>
 
-<p>This is an Acropolis page used to show information about VM and resource scheduling used for placement decisions.  This page shows the available host resources and VMs running on each host.</p>
+<p>This is an Acropolis page used to show information about VM and resource scheduling used for placement decisions.&nbsp; This page shows the available host resources and VMs running on each host.</p>
 
 <h3>2030/tasks Page</h3>
 
-<p>This is an Acropolis page used to show information about Acropolis tasks and their state.  You can click on the task UUID to get detailed JSON about the task.</p>
+<p>This is an Acropolis page used to show information about Acropolis tasks and their state.&nbsp; You can click on the task UUID to get detailed JSON about the task.</p>
 
 <h3>2030/vms Page</h3>
 
-<p>This is an Acropolis page used to show information about Acropolis VMs and details about them.  You can click on the VM Name to connect to the console.</p>
+<p>This is an Acropolis page used to show information about Acropolis VMs and details about them.&nbsp; You can click on the VM Name to connect to the console.</p>
 </section>
 
 <section data-type="sect1" id="cluster-commands-RepHd">
@@ -1714,7 +1715,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p># Start stopped services</p>
 
-<p>cluster start  #NOTE: This will start all stopped services</p>
+<p>cluster start&nbsp; #NOTE: This will start all stopped services</p>
 
 <h3>Start cluster service from CLI</h3>
 
@@ -1722,13 +1723,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p># Start stopped services</p>
 
-<p>cluster start  #NOTE: This will start all stopped services</p>
+<p>cluster start&nbsp; #NOTE: This will start all stopped services</p>
 
 <p># OR</p>
 
 <p># Start single service</p>
 
-<p>Start single service: cluster start  <Service Name=""></Service></p>
+<p>Start single service: cluster start&nbsp; <Service Name=""></Service></p>
 
 <h3>Restart local service from CLI</h3>
 
@@ -1778,7 +1779,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Check for Shadow Clones</h3>
 
-<p># Description: Displays the shadow clones in the following format:  name#id@svm_id</p>
+<p># Description: Displays the shadow clones in the following format:&nbsp; name#id@svm_id</p>
 
 <p>vdisk_config_printer | grep '#'</p>
 
@@ -1808,7 +1809,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Find NOS version</h3>
 
-<p># Description: Find the NOS  version (NOTE: can also be done using NCLI)</p>
+<p># Description: Find the NOS&nbsp; version (NOTE: can also be done using NCLI)</p>
 
 <p>allssh “cat /etc/nutanix/release_version”</p>
 
@@ -1820,7 +1821,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Manually fingerprint vDisk(s)</h3>
 
-<p># Description: Create fingerprints for a particular vDisk (For dedupe)  NOTE: dedupe must be enabled on the container</p>
+<p># Description: Create fingerprints for a particular vDisk (For dedupe)&nbsp; NOTE: dedupe must be enabled on the container</p>
 
 <p>vdisk_manipulator –vdisk_id=<vDisk ID=""> --operation=add_fingerprints</vDisk></p>
 
@@ -1836,7 +1837,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>~/cluster/bin/cluster -u <NEW_NODE_IP> upgrade_node</NEW_NODE_IP></p>
 
-<h3> List files (vDisk) on DSF</h3>
+<h3>&nbsp;List files (vDisk) on DSF</h3>
 
 <p># Description: List files and associated information for vDisks stored on DSF</p>
 
@@ -1870,7 +1871,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Run Nutanix Cluster Check (NCC)</h3>
 
-<p># Description: Runs the Nutanix Cluster Check (NCC) health script to test for potential issues and cluster health.  This is a great first step when troubleshooting any cluster issues.</p>
+<p># Description: Runs the Nutanix Cluster Check (NCC) health script to test for potential issues and cluster health.&nbsp; This is a great first step when troubleshooting any cluster issues.</p>
 
 <p># Make sure NCC is installed (steps above)</p>
 
@@ -1882,7 +1883,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="metrics-and-thresholds-1zvh8">
 <h2>Metrics and Thresholds</h2>
 
-<p>The following section will cover specific metrics and thresholds on the Nutanix back end.  More updates to these coming shortly!</p>
+<p>The following section will cover specific metrics and thresholds on the Nutanix back end.&nbsp; More updates to these coming shortly!</p>
 </section>
 
 <section data-type="sect1" id="gflags-RXjId">
@@ -1922,12 +1923,12 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Using the 2009 Page (Stargate)</h3>
 
-<p>In most cases Prism should be able to give you all of the information and data points you require.  However, in certain scenarios, or if you want some more detailed data you can leverage the Stargate aka 2009 page.  The 2009 page can be viewed by navigating to <CVM IP="">:2009.</CVM></p>
+<p>In most cases Prism should be able to give you all of the information and data points you require. &nbsp;However,&nbsp;in certain scenarios, or if you want some more detailed data you can leverage the Stargate aka 2009 page. &nbsp;The 2009 page can be viewed by navigating to <CVM IP="">:2009.</CVM></p>
 
 <div data-type="note" id="accessing-back-end-pages-G4lfZ"><h6>Note</h6>
 <h1>Accessing back-end pages</h1>
 
-<p>If you're on a different network segment (L2 subnet) you'll need to add a rule in IP tables to access any of the back-end pages.</p>
+<p>If you're on a different network segment (L2 subnet)&nbsp;you'll need to add a rule in IP tables to access any of the back-end pages.</p>
 </div>
 
 <p>At the top of the page is the overview details which show various details about the cluster:</p>
@@ -1962,7 +1963,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>The next section is the 'Cluster State' which shows details on the various Stargates in the cluster and their disk usages.</p>
 
-<p>The figure shows the Stargates and disk utilization (available/total):</p>
+<p>The figure shows the Stargates and disk utilization&nbsp;(available/total):</p>
 
 <figure id="id-bzOck"><img alt="" class="iimagesv22009pagesstargate_diskutilpng" src="imagesv2/2009Pages/stargate_diskUtil.png">
 <figcaption><span class="label">Figure 12-4. </span>2009 Page - Cluster State - Disk Usage</figcaption>
@@ -1992,7 +1993,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Using the 2009/vdisk_stats Page</h3>
 
-<p>The 2009 vdisk_stats page is a detailed page which provides even further data points per vDisk.  This page includes details and a histogram of items like randomness, latency histograms, I/O sizes and working set details.</p>
+<p>The 2009 vdisk_stats page is a detailed page which provides even further data points per vDisk. &nbsp;This page includes details and a histogram of items like randomness, latency histograms, I/O sizes and working set details.</p>
 
 <p>You can navigate to the vdisk_stats page by clicking on the 'vDisk Id' in the left hand column.</p>
 
@@ -2002,7 +2003,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 12-6. </span>2009 Page - Hosted vDisks</figcaption>
 </figure>
 
-<p>This will bring you to the vdisk_stats page which will give you the detailed vDisk stats.  NOTE: Theses values are real-time and can be updated by refreshing the page.</p>
+<p>This will bring you to the vdisk_stats page which will give you the detailed vDisk stats. &nbsp;NOTE: Theses values are real-time and can be updated by refreshing the page.</p>
 
 <p>The first key area is the 'Ops and Randomness' section which will show a breakdown of whether the I/O patterns are random or sequential in nature.</p>
 
@@ -2012,7 +2013,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 12-7. </span>2009 Page - vDisk Stats - Ops and Randomness</figcaption>
 </figure>
 
-<p>The next area shows a histogram of the frontend read and write I/O latency (aka the latency the VM / OS sees).</p>
+<p>The next area shows a histogram of the frontend read and write I/O latency&nbsp;(aka the latency the VM / OS sees).</p>
 
 <p>The figure shows the 'Frontend Read Latency' histogram:</p>
 
@@ -2034,13 +2035,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 12-10. </span>2009 Page - vDisk Stats - Read I/O Size</figcaption>
 </figure>
 
-<p>The figure shows the 'Write Size Distribution' histogram:</p>
+<p>The figure shows the 'Write Size Distribution'&nbsp;histogram:</p>
 
 <figure id="id-bZOck"><img alt="" class="iimagesv22009pagesstargate_writesizepng" src="imagesv2/2009Pages/stargate_writeSize.png">
 <figcaption><span class="label">Figure 12-11. </span>2009 Page - vDisk Stats - Write I/O Size</figcaption>
 </figure>
 
-<p>The next key area is the 'Working Set Size' section which provides insight on working set sizes for the last 2 minutes and 1 hour.  This is broken down for both read and write I/O.</p>
+<p>The next key area is the 'Working Set Size' section which provides insight on working set sizes for the last 2 minutes and 1 hour. &nbsp;This is broken down for both read and write I/O.</p>
 
 <p>The figure shows the 'Working Set Sizes' table:</p>
 
@@ -2059,7 +2060,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <div data-type="note" id="pro-tip-o6DC4"><h6>Note</h6>
 <h1>Pro tip</h1>
 
-<p>If you're seeing high read latency take a look at the read source for the vDisk and take a look where the I/Os are being served from.  In most cases high latency could be caused by reads coming from HDD (Estore HDD).</p>
+<p>If you're seeing high read latency take a look at the read source for the vDisk and take a look where the I/Os are being served from. &nbsp;In most cases high latency could be caused by reads coming from HDD (Estore HDD).</p>
 </div>
 
 <p>The 'Write Destination' section will show where the new write I/O are coming in to.</p>
@@ -2073,10 +2074,10 @@ This should only be used for non-production scenarios and the cluster IPs should
 <div data-type="note" id="pro-tip-DajIj"><h6>Note</h6>
 <h1>Pro tip</h1>
 
-<p>Random or smaller I/Os (<64K) will="" be="" written="" to="" the="" Oplog.=""  Larger="" or="" sequential="" I="" Os="" bypass="" Oplog="" and="" directly="" Extent="" Store="" (Estore).<="" p="">
+<p>Random or smaller I/Os (<64K) will="" be="" written="" to="" the="" Oplog.="" &nbsp;Larger="" or="" sequential="" I="" Os="" bypass="" Oplog="" and="" directly="" Extent="" Store="" (Estore).<="" p="">
 </64K)></p></div>
 
-<p>Another interesting data point is what data is being up-migrated from HDD to SSD via ILM.  The 'Extent Group Up-Migration' table shows data that has been up-migrated in the last 300, 3,600 and 86,400 seconds.</p>
+<p>Another interesting data point is what data is being up-migrated from HDD to SSD via ILM. &nbsp;The 'Extent Group Up-Migration' table shows data that has been up-migrated in the last 300, 3,600 and 86,400 seconds.</p>
 
 <p>The figure shows the 'Extent Group Up-Migration' table:</p>
 
@@ -2086,13 +2087,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h3>Using the 2010 Page (Curator)</h3>
 
-<p>The 2010 page is a detailed page for monitoring the Curator MapReduce framework.  This page provides details on jobs, scans, and associated tasks. </p>
+<p>The 2010 page is a detailed page for monitoring the Curator MapReduce framework. &nbsp;This page provides details on jobs, scans, and associated tasks.&nbsp;</p>
 
-<p>You can navigate to the Curator page by navigating to http://<CVM IP="">:2010.  NOTE: if you're not on the Curator Master click on the IP hyperlink after 'Curator Master: '.  </CVM></p>
+<p>You can navigate to the Curator page by navigating to http://<CVM IP="">:2010. &nbsp;NOTE: if you're not on the Curator Master click on the IP hyperlink after 'Curator Master: '. &nbsp;</CVM></p>
 
 <p>The top of the page will show various details about the Curator Master including uptime, build version, etc.</p>
 
-<p>The next section is the 'Curator Nodes' table which shows various details about the nodes in the cluster, the roles, and health status.  These will be the nodes Curator leverages for the distributed processing and delegation of tasks.</p>
+<p>The next section is the 'Curator Nodes' table which shows various details about the nodes in the cluster, the roles, and health status. &nbsp;These will be the nodes Curator leverages for the distributed processing and delegation of tasks.</p>
 
 <p>The figure shows the 'Curator Nodes' table:</p>
 
@@ -2100,9 +2101,9 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 12-16. </span>2010 Page - Curator Nodes</figcaption>
 </figure>
 
-<p>The next section is the 'Curator Jobs' table which shows the completed or currently running jobs.  </p>
+<p>The next section is the 'Curator Jobs' table which shows the completed or currently running jobs. &nbsp;</p>
 
-<p>There are two main types of jobs which include a partial scan which is eligible to run every 60 minutes and a full scan which is eligible to run every 6 hours.  NOTE: the timing will be variable based upon utilization and other activities.</p>
+<p>There are two main types of jobs which include a partial scan which is eligible to run every 60 minutes and a full scan which is eligible to run every 6 hours. &nbsp;NOTE: the timing will be variable based upon utilization and other activities.</p>
 
 <p><span style="letter-spacing: 0.01em; line-height: 1.3em;">These scans will run on their periodic schedules however can also be triggered by certain cluster events.</span></p>
 
@@ -2151,17 +2152,17 @@ This should only be used for non-production scenarios and the cluster IPs should
 		<tr>
 			<th scope="row">Deduplication</th>
 			<td>X</td>
-			<td> </td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<th scope="row">Erasure Coding</th>
 			<td>X</td>
-			<td> </td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<th scope="row">Garbage Cleanup</th>
 			<td>X</td>
-			<td> </td>
+			<td>&nbsp;</td>
 		</tr>
 	</tbody>
 </table>
@@ -2184,7 +2185,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 12-19. </span>2010 Page - Curator Job - Tasks</figcaption>
 </figure>
 
-<p>The next section is the 'MapReduce Jobs' table which shows the actual MapReduce jobs started by each Curator job.  Partial scans will have a single MapReduce Job, full scans will have four MapReduce Jobs.</p>
+<p>The next section is the 'MapReduce Jobs' table which shows the actual MapReduce jobs started by each Curator job. &nbsp;Partial scans will have a single MapReduce Job, full scans will have four MapReduce Jobs.</p>
 
 <p>The figure shows the 'MapReduce Jobs' table:</p>
 
@@ -2192,7 +2193,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 12-20. </span>2010 Page - MapReduce Jobs</figcaption>
 </figure>
 
-<p>Clicking on the 'Job id' will bring you to the MapReduce job details page which displays the tasks status, various counters and details about the MapReduce job.</p>
+<p>Clicking on the 'Job id' will bring you to the MapReduce job details page which displays the tasks status,&nbsp;various counters and details about the MapReduce job.</p>
 
 <p>The figure shows a sample of some of the job counters:</p>
 
@@ -2202,7 +2203,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>The next section on the main page is the 'Queued Curator Jobs' and 'Last Successful Curator Scans' section. These tables show when the periodic scans are eligible to run and the last successful scan's details.</p>
 
-<p>The figure shows the 'Queued Curator Jobs' and 'Last Successful Curator Scans' section:</p>
+<p>The figure shows the&nbsp;'Queued Curator Jobs' and 'Last Successful Curator Scans' section:</p>
 
 <figure id="id-YRKCn"><img alt="" class="iimagesv22010pagescurator_queue_lastsuccessful2png" src="imagesv2/2010Pages/curator_queue_lastsuccessful2.png">
 <figcaption><span class="label">Figure 12-22. </span>2010 Page - Queued and Successful Scans</figcaption>
