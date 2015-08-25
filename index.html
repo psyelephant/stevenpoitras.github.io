@@ -103,8 +103,7 @@
 
 <p>For a video explanation you can watch the following video: <a href="https://youtu.be/OPYA5-V0yRo">LINK</a></p>
 
-<div><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/OPYA5-V0yRo" width="560"></iframe></div>
-
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
 <p>The Nutanix solution is a converged storage + compute solution which leverages local components and creates a distributed platform for virtualization, also known as a virtual computing platform. The solution is a bundled hardware + software appliance which houses 2 (6000/7000 series) or 4 nodes (1000/2000/3000/3050 series) in a 2U footprint.</p>
 
 <p>Each node runs an industry-standard hypervisor (ESXi, KVM, Hyper-V currently) and the Nutanix Controller VM (CVM).  The Nutanix CVM is what runs the Nutanix software and serves all of the I/O operations for the hypervisor and all VMs running on that host.  For the Nutanix units running VMware vSphere, the SCSI controller, which manages the SSD and HDD devices, is directly passed to the CVM leveraging VM-Direct Path (Intel VT-d).  In the case of Hyper-V, the storage devices are passed through to the CVM.</p>
