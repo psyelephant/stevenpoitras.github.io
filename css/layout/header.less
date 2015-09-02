@@ -1,0 +1,1191 @@
+/*********************************************************/
+/*
+/* This is the header css. It also included the mustach
+/* picker & Menu
+/*
+/*********************************************************/
+
+@iconwidth_xxs: 24px;
+@iconwidth_xs: 34px;
+@iconwidth_s: 44px;
+@iconwidth_l: 63px;
+
+header{
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  overflow-x: hidden;
+  top: -85px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  i{
+    font-style: normal;
+  }
+  
+  
+  &.in{
+    top: 0px;
+    .transition( all 0.6s ease );
+  }
+  &.out{
+    top: -85px;
+    .transition( all 0.6s ease );
+  }
+  
+  @media only screen and (min-width : 600px){
+    &.in{
+      top: 0px;
+    }
+    &.out{
+      top: -104px;
+    }
+  }
+  
+  /*
+  
+  @media only screen and (min-width : 960px){
+    &.in{
+      margin-top: 0;
+    }
+    &.out{
+      margin-top: 0px;
+    }
+  }
+  
+  */
+  
+  .left-controler{
+
+    display: block;
+    width: 90px;
+    height: 44px;
+    float: left;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    
+    .logo_icon{
+      margin-left: 20px;
+      width: @iconwidth_xxs;
+      height: @iconwidth_xxs;
+      overflow: hidden;
+      line-height: 24px;
+      text-align: center;
+      float: left;
+      
+      #mustache_on_logo{
+        width: 8*@iconwidth_xxs;
+        height: @iconwidth_xxs;
+        margin-left: -@iconwidth_xxs*0px;
+        .transition( margin-left 0.3s ease );
+        
+        &.m_1{  margin-left: -@iconwidth_xxs*0px;  }
+        &.m_2{  margin-left: -@iconwidth_xxs*1px;  }
+        &.m_3{  margin-left: -@iconwidth_xxs*2px;  }
+        &.m_4{  margin-left: -@iconwidth_xxs*3px;  }
+        &.m_5{  margin-left: -@iconwidth_xxs*4px;  }
+        &.m_6{  margin-left: -@iconwidth_xxs*5px;  }
+        &.m_7{  margin-left: -@iconwidth_xxs*6px;  }
+        &.m_8{  margin-left: -@iconwidth_xxs*7px;  }
+        
+              
+        a{
+          width: @iconwidth_xxs;
+          height: @iconwidth_xxs;
+          display: block;
+          color: #222;
+          font-size: 20px;        
+          font-weight: normal;
+          float: left;
+          text-decoration: none;
+          .transition( color 0.3s ease );
+          
+          &:hover{
+            text-decoration: none;
+            //-webkit-animation: bounce 0.3s ease 2;
+            
+          }
+        }
+      }  
+    }
+
+    @media screen and (min-width: 500px) {
+
+      .logo_icon{
+        width: @iconwidth_xs;
+        height: @iconwidth_xs;
+        #mustache_on_logo{
+          width: 8*@iconwidth_xs;
+          height: @iconwidth_xs;
+          margin-left: -@iconwidth_xs*0px;
+          
+          &.m_1{  margin-left: -@iconwidth_xs*0px;  }
+          &.m_2{  margin-left: -@iconwidth_xs*1px;  }
+          &.m_3{  margin-left: -@iconwidth_xs*2px;  }
+          &.m_4{  margin-left: -@iconwidth_xs*3px;  }
+          &.m_5{  margin-left: -@iconwidth_xs*4px;  }
+          &.m_6{  margin-left: -@iconwidth_xs*5px;  }
+          &.m_7{  margin-left: -@iconwidth_xs*6px;  }
+          &.m_8{  margin-left: -@iconwidth_xs*7px;  }
+          
+                
+          a{
+            width: @iconwidth_xs;
+            height: @iconwidth_xs;
+            font-size: 24px;
+           }
+        } 
+      }
+    }
+
+    /*
+    @media screen and (min-width: 1200px) {
+      margin-bottom: 39px;
+      padding-top: 25px;
+      .logo_icon{
+        margin-left: 30px;
+      }
+
+    }
+    */
+
+
+    .arrow{
+      font-size: 6px;
+      float: left;
+      margin-left: 0px;
+      margin-top: 4px;
+      @media screen and (min-width: 500px) {
+        margin-left: 3px;
+        margin-top: 6px;
+        font-size: 8px;
+      }
+      line-height: 21px;
+      width: 20px;
+      text-align: center;
+      .transition( color 0.3s ease );
+      a{
+        color: #393939;
+        text-decoration: none;
+        .transition( all 0.3s ease );
+        display: block;
+        &:hover{
+          .animation( wiggle, 0.4s, 0, ease );
+        }
+      }
+    }
+  }
+
+  .mixed-menu{
+    float: right;
+    margin-top: 14px;
+    margin-right: 15px;
+    @media screen and (min-width: 500px) {
+      margin-top: 9px;
+    }
+    //@media screen and (min-width: 1200px) {
+      //margin-top: 20px;
+      //margin-right: 20px;
+    //}
+    li{
+      float: left;
+      padding-right: 0.8em;
+      a{
+        font-size: 0.875em;
+        @media screen and (min-width: 500px) {
+          font-size: 0.761904em;
+        }
+        text-decoration: none;
+        font-family: @freightSansStack;
+        font-weight: 500;
+        display: inline-block;
+        position: relative;
+        &::after {
+          margin-top: 29px;
+          position: absolute;
+          left: 0;
+          width: 0%;
+          height: 2px;
+          background: #393939;
+          content: '';
+          opacity: 0;
+          .transition(width 0.3s, opacity 0.2s, transform 0.3s);
+        }
+        &:hover{
+          text-decoration: none;
+        }
+        &:hover::after, &:focus::after {
+          opacity: 1;
+          width: 100%;
+          text-decoration: none;
+        }
+      }
+
+      &.social{
+        font-size: 0.8125em;
+        margin-right: 0em;
+        display: none;
+        @media only screen and (min-width : 460px){
+          display: inherit;
+        }
+        a{
+          .transform(translateY(2px));
+          display: inline-block;
+          &:hover{
+            text-decoration: none;
+          }
+          &::after {
+            display: none;
+          }
+        }
+        &.twitter{
+          margin-left: 0.4em;
+          display: inherit;
+          font-size: 0.875em;
+        }
+        &.linkedin{
+          font-size: 0.875em;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width : 960px){
+    background: none;
+    border: none;
+    box-shadow: none;
+
+
+    //this activates the hover on the stache arrow
+    .left-controler{
+      .arrow{
+        a{
+          opacity: 0;
+          .translate(-10px,0px);
+        }
+        &:before{        
+        }
+      }
+      &:hover{
+        a{
+          opacity: 1;
+          .translate(0px,0);
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes wiggle {
+  0% {
+    .rotate(15deg);
+  }
+  25% {
+    .rotate(-15deg);
+  }
+  50%{
+    .rotate(10deg);
+  }
+  75% {
+    .rotate(-8deg);
+  }
+  100%{
+    .rotate(0deg);
+  }
+}
+
+@-webkit-keyframes menu_one {
+  0% {
+    width: 13px;
+  }
+  33% {
+    width: 17px;
+  }
+  66%{
+    width: 11px;
+  }
+  100%{
+    width: 13px;
+  }
+}
+
+.header-menu-icon{
+  //background: #222;
+  //border-radius: 200px;
+  float: right;
+  line-height: @iconwidth_xs;
+  margin-right: 10px;
+  margin-top: 10px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  
+  i{
+    margin-top: -@iconwidth_xs + 9px;
+    position: absolute;
+    left: 0px;
+    font-size: 18px;
+    color: #222;
+    margin-left: 7px;
+    
+    .transform( scale( 0 ));
+  }
+  
+  a{
+    padding-top: 7px;
+      span{
+      .transition( background 0.3s ease );
+      &.text{
+        float: left;
+        padding-right: 30px;
+        margin-left: -38px;
+        font-family: @subheadFont;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-weight: 500;
+        margin-top: -1px;
+        .transition( all 0.3s ease );
+      }
+      &.one,
+      &.two,
+      &.three,
+      &.four{
+        opacity: 1;
+        width: 13px;
+        height: 2px;
+        background: #222;
+        display: block;
+        margin-top: 8px;
+        margin-left: 9px;
+      }
+      &.one{
+        opacity: 0.5;
+      }
+      &.two{
+        width: 10px;
+        margin-top: 2px;
+      }
+      &.three{
+        width: 15px;
+        margin-top: 2px;
+      }
+      &.four{
+        width: 8px;
+        margin-top: 2px;
+      }
+    }
+    
+    &:hover{
+      span{
+        &.text{
+          opacity: 0.5;
+        }
+        &.one{
+          .animation( menu_one, 0.4s, 0, ease );
+        }
+      }
+      i{
+        .transform( scale( 1 ));
+      }
+    }
+  }
+  
+  
+
+    
+  @media only screen and (min-width : 960px){
+    margin-right: 20px;
+  }
+
+  @media only screen and (min-width : 1320px){
+      margin-right: 30px;
+      margin-top: 20px; 
+  }
+}
+
+
+
+header.black{
+  box-shadow: 0 1px 0 rgba( 0,0,0,0.08);
+  background: rgba( 255,255,255,0.97);
+
+  @media only screen and (min-width : 960px){
+    .left-controler{
+      .logo_icon{
+        #mustache_on_logo{
+          a{
+            color: #393939;  
+          }
+        }
+      }
+      .arrow{
+        a{
+          color: #393939;
+        }
+      }
+    }
+    .mixed-menu{
+      li{
+        a{
+          color: #393939;
+        }
+        &.social{
+          a{
+            color: #666;
+            &:hover{
+              color: #0fb7b7;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+header.transparent{
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+header.white{
+  .left-controler{
+    .logo_icon{
+      #mustache_on_logo{
+        a{
+          color: #fff;  
+        }
+      }
+    }
+    .arrow{
+      a{
+        color: #fff;
+      }
+    }
+  }
+  .mixed-menu{
+    li{
+      a{
+        color: #fff;
+        &::after {
+          background: #fff;
+        }
+      }
+      &.social{
+        a{
+          color: rgba(255,255,255,0.7);
+          &:hover{
+            color: rgba(255,255,255,1);
+          }
+        }
+      }
+    }
+  }
+}
+
+.mustachepickerpage{
+  background: #36536c;
+  position: fixed;
+  z-index: 99;
+  height: 100%;
+  width: 100%;
+  margin-left: -100%;
+  overflow: hidden;
+
+  a{
+    text-decoration: none;
+  }
+  
+  &.init{
+    .transition( margin 0.2s ease );
+        
+  }
+  
+  .logo_icon{
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 200px;
+    width: @iconwidth_xs;
+    height: @iconwidth_xs;
+    overflow: hidden;
+    line-height: 26px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    float: left;
+    
+    #mustache_on_menu{
+      width: 8*@iconwidth_xs;
+      height: @iconwidth_xs;
+      margin-left: -63*0px;
+      .transition( margin-left 0.2s ease );
+      
+      &.m_1{  margin-left: -@iconwidth_xs*0px;  }
+      &.m_2{  margin-left: -@iconwidth_xs*1px;  }
+      &.m_3{  margin-left: -@iconwidth_xs*2px;  }
+      &.m_4{  margin-left: -@iconwidth_xs*3px;  }
+      &.m_5{  margin-left: -@iconwidth_xs*4px;  }
+      &.m_6{  margin-left: -@iconwidth_xs*5px;  }
+      &.m_7{  margin-left: -@iconwidth_xs*6px;  }
+      &.m_8{  margin-left: -@iconwidth_xs*7px;  }
+            
+      a{
+        width: @iconwidth_xs;
+        height: @iconwidth_xs;
+        display: block;
+        color: #36536c;
+        font-size: 18px;
+        font-weight: normal;
+        float: left;
+        &:hover{
+          text-decoration: none;
+        }
+      }  
+    }
+  }
+  
+  .logo_icon_list{
+    div{
+      width: 611/2px;
+      position: absolute;
+      left: 50%;
+      margin-left: -611/4px;
+      top: 50%;
+      margin-top: -160px;
+      a{
+        font-size: 128px;
+        font-size: 128px;
+        display: block;
+        height: 64px;
+        float: left;
+        width: 128px;
+        overflow: hidden;
+        line-height: 10px;
+        color: #294054;
+        opacity: 1;
+        .transition( color 0.3s ease );
+        margin-right: 12px;
+        margin-left: 12px;
+        margin-bottom: 40px;
+        &:hover{
+          color: #fff;
+          text-decoration: none;
+        }
+        
+        &.selected{
+          color: #fff;
+        }      
+      }
+    } 
+  }
+  
+  .logotext{
+    float: left;
+    width: 100%;
+    z-index: 1;
+    margin-top: -42px;
+    margin-left: 55px;
+    line-height: 15px;
+    font-family: @subheadFont;
+    font-size: 12px;
+    color: #fff;
+    height: 0px;
+    span{
+      color: #23384a;
+      font-family: @baseFont;
+      font-style: italic;
+      font-weight: 400;
+      display: block;
+    }
+  }
+  
+  .close_btn{
+    background: #fff;
+    border-radius: 200px;
+    width: @iconwidth_xs;
+    height: @iconwidth_xs;
+    float: right;
+    line-height: @iconwidth_xs;
+    margin-right: 10px;
+    margin-top: -@iconwidth_xs + -10px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    
+    
+    -webkit-transition: -webkit-transform 0.3s ease;
+    -moz-transition: -moz-transform 0.3s ease;
+    -o-transition: -o-transform 0.3s ease;
+    
+    &:hover{
+      .transform( rotate(-90deg) );
+    }
+    
+    a{
+      color: #294054;
+      width: @iconwidth_xs;
+      height: @iconwidth_xs;
+      display: block;
+      font-size: 18px;
+      font-size: 15px;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+ 
+ 
+  @media only screen and (min-width : 960px){
+    .logo_icon{
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+    
+    .logo_icon_list{
+      div{
+        width: 611px;
+        left: 50%;
+        margin-left: -611/2px;
+        margin-top: -90px;
+      }
+    }
+    
+    .logotext{
+      margin-top: -42px;
+      font-size: 12px;
+      margin-left: 65px;
+    }
+    
+    .close_btn{
+      margin-right: 20px;
+      margin-top: -@iconwidth_xs + -10px;
+      
+    }
+  }
+ 
+  @media only screen and (min-width : 1024px){
+    .logo_icon{
+      margin-left: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: @iconwidth_s;
+      height: @iconwidth_s;
+      line-height: 32px;
+      text-align: center;
+      
+      #mustache_on_menu{
+        width: 8*@iconwidth_s;
+        height: @iconwidth_s;
+        margin-left: -@iconwidth_s*0px;
+        .transition( margin-left 0.3s ease );
+        
+        &.m_1{  margin-left: -@iconwidth_s*0px;  }
+        &.m_2{  margin-left: -@iconwidth_s*1px;  }
+        &.m_3{  margin-left: -@iconwidth_s*2px;  }
+        &.m_4{  margin-left: -@iconwidth_s*3px;  }
+        &.m_5{  margin-left: -@iconwidth_s*4px;  }
+        &.m_6{  margin-left: -@iconwidth_s*5px;  }
+        &.m_7{  margin-left: -@iconwidth_s*6px;  }
+        &.m_8{  margin-left: -@iconwidth_s*7px;  }
+        
+        a{
+          width: @iconwidth_s;
+          height: @iconwidth_s;
+          font-size: 24px;
+        }
+      } 
+    }
+    
+    .logo_icon_list{
+      div{
+        width: 611px;
+        left: 50%;
+        margin-left: -611/2px;
+        margin-top: -90px;
+      }
+    }
+    
+    .logotext{
+      margin-top: -65px;
+      font-size: 18px;
+      line-height: 22px;
+      margin-left: 75px;
+    }
+    
+    .close_btn{
+      width: @iconwidth_s;
+      height: @iconwidth_s;
+      line-height: @iconwidth_s;
+      margin-right: 20px;
+      margin-top: -@iconwidth_s + -20px;
+      
+      a{
+        width: @iconwidth_s;
+        height: @iconwidth_s;
+        font-size: 18px;
+      }
+    }
+    
+    
+  }//end media queries
+  
+  
+  @media only screen and (min-width : 1320px){
+    .logo_icon{
+      margin-left: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: @iconwidth_l;
+      height: @iconwidth_l;
+      line-height: 50px;
+      text-align: center;
+      
+      #mustache_on_menu{
+        width: 8*@iconwidth_l;
+        height: @iconwidth_l;
+        margin-left: -@iconwidth_l*0px;
+        .transition( margin-left 0.3s ease );
+        
+        &.m_1{  margin-left: -@iconwidth_l*0px;  }
+        &.m_2{  margin-left: -@iconwidth_l*1px;  }
+        &.m_3{  margin-left: -@iconwidth_l*2px;  }
+        &.m_4{  margin-left: -@iconwidth_l*3px;  }
+        &.m_5{  margin-left: -@iconwidth_l*4px;  }
+        &.m_6{  margin-left: -@iconwidth_l*5px;  }
+        &.m_7{  margin-left: -@iconwidth_l*6px;  }
+        &.m_8{  margin-left: -@iconwidth_l*7px;  }
+        
+        a{
+          width: @iconwidth_l;
+          height: @iconwidth_l;
+          font-size: 32px;
+        }
+      } 
+    }
+    
+    .logo_icon_list{
+      div{
+        width: 611px;
+        left: 50%;
+        margin-left: -611/2px;
+        margin-top: -90px;
+      }
+    }
+    
+    .logotext{
+      text-align: left;
+      margin-left: 105px;
+      margin-top: -80px;
+      font-size: 24px;
+      line-height: 26px;
+    }
+    
+    .close_btn{
+      width: @iconwidth_l;
+      height: @iconwidth_l;
+      line-height: @iconwidth_l;
+      margin-right: 20px;
+      margin-top: -97px;
+      
+      a{
+        width: @iconwidth_l;
+        height: @iconwidth_l;
+        font-size: 24px;
+      }
+    }
+  }//end media queries
+  
+  
+  
+  @media only screen and (min-width : 1420px){  
+    .logo_icon{
+      margin-left: 25px;
+      margin-top: 25px; 
+    }
+    .close_btn{
+      margin-right: 25px;
+      margin-top: -92px; 
+    }
+    .logotext{
+      margin-left: 110px;
+    }
+  }
+  
+  @media only screen and (min-width : 1520px){
+   .logo_icon{
+     margin-left: 30px;
+     margin-top: 30px; 
+   }
+   .close_btn{
+     margin-right: 30px;
+     margin-top: -87px; 
+   }
+   .logotext{
+     margin-left: 115px;
+   }
+  }
+  
+  @media only screen and (min-width : 1620px){
+    .logo_icon{
+      margin-left: 40px;
+      margin-top: 40px; 
+    }
+    .close_btn{
+      margin-right: 40px;
+      margin-top: -72px; 
+    }
+    .logotext{
+      margin-left: 125px;
+    }
+  }
+  
+ }//end mustachepickerpage
+
+.menu{
+  background: #222;
+  position: fixed;
+  z-index: 99;
+  height: 100%;
+  width: 260px;
+  //margin-right: -260px;
+  .translate( 280px, 0);
+  right: 0;
+  top: 0;
+  margin-top: 0;
+  .transition( all 0.2s ease-in );
+  
+
+  @media only screen and (min-width : 1320px){
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  a{
+    text-decoration: none;
+  }
+  
+  
+
+  .menu_container{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .close_btn{
+    a{
+      i{
+        color: #fff;
+        text-transform: lowercase;
+        font-size: 10px;
+        line-height: 10px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-weight: normal;
+        z-index: 100;
+        .rotate(0deg);
+        .transition( all 0.3s ease );
+
+        @media only screen and (min-width : 1320px){ 
+          top: 30px;
+          right: 30px;
+        }
+
+      }
+      &:hover{
+        i{
+          .rotate(90deg);
+        }
+      }
+    }
+  }
+  
+
+  ul{
+    list-style: none;
+    position: relative;
+    z-index: 3;
+    margin-left: 0px;
+    text-align: left;
+
+    li{
+      height: 32px;
+      line-height: 32px;
+      &.title{
+        font-size: 14px;
+        height: 24px;
+        line-height: 32px;        
+        font-weight: normal;
+        color: #666;
+        font-style: italic;
+      }
+    }
+    
+    a{
+      font-family: @subheadFont;
+      color: #fff;
+      font-weight: 300;
+      text-transform: none;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      line-height: 32px;
+      position: relative;
+    	display: inline-block; 
+      
+      &:hover{
+        text-decoration: none;
+      }
+      
+      &::after {
+        margin-top: -5px;
+      	position: absolute;
+      	top: 100%;
+      	left: 0;
+      	width: 100%;
+      	height: 1px;
+      	background: #fff;
+      	content: '';
+      	opacity: 0;
+      	-webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+      	-moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+      	transition: height 0.3s, opacity 0.3s, transform 0.3s;
+      	-webkit-transform: translateY(-10px);
+      	-moz-transform: translateY(-10px);
+      	transform: translateY(-10px);
+      }
+      
+      &:hover::after, &:focus::after {
+      	height: 1px;
+      	opacity: 1;
+      	text-decoration: none;
+      	-webkit-transform: translateY(0px);
+      	-moz-transform: translateY(0px);
+      	transform: translateY(0px);
+      }
+      
+      &.last{
+        color: #b14444;
+        
+        &::after {
+          background: #b14444;
+        }
+        
+      }
+      
+    }
+  }
+  
+  
+  .navigation_menu{
+    margin-top: 10px;
+  }
+  .social_menu{
+    margin-top: 20px;
+  }
+
+  /*
+  @media only screen and (min-width : 660px){
+    &:after{
+      content: '';
+      width: 50%;
+      height: 100%;
+      right: 0;
+      background: rgba( 0,0,0,0.02 );
+      position: absolute;
+      top: 0;
+      z-index: 2; 
+    }
+    .container{
+      left: 50%;
+      margin-left: -240px;
+      margin-top: -145px;
+    }
+    .navigation_menu, .social_menu{
+      margin: 0;
+      float: left;
+      width: 320px;
+    }
+    
+    .title{
+      padding-bottom: 20px;
+      font-size: 16px;      
+    }
+    
+    ul{
+      a{
+        font-size: 28px;
+        font-size: 22px;
+        line-height: 36px;
+      }
+    }
+  }
+  
+  @media only screen and (min-width : 960px){
+     
+    .close_btn{
+      margin-right: 20px;
+      margin-top: 20px;
+    }
+    
+    .container{
+      margin-left: -330px;
+      margin-top: -210px;
+    }
+    .navigation_menu, .social_menu{
+      margin: 0;
+      float: left;
+      width: 460px;
+    }
+    
+    ul{
+      a{
+        font-size: 32px;
+        line-height: 52px;
+        
+        &::after {
+          margin-top: -8px;
+        }
+        
+        &:hover::after, &:focus::after {
+          height: 4px;
+        }
+      }
+    }
+    
+  }//end media queries
+  
+  @media only screen and (min-width : 1024px){
+   
+    .close_btn{
+      width: @iconwidth_s;
+      height: @iconwidth_s;
+      line-height: @iconwidth_s;
+      margin-right: 20px;
+      margin-top: 20px;
+      
+      a{
+        width: @iconwidth_s;
+        height: @iconwidth_s;
+        font-size: 18px;
+      }
+    }
+    
+    .container{
+      margin-left: -370px;
+      margin-top: -220px;
+    }
+    .navigation_menu, .social_menu{
+      width: 500px;
+    }
+    
+    ul{
+      a{
+        line-height: 56px;
+      }
+    }
+    
+  }//end media queries
+  
+  
+  @media only screen and (min-width : 1320px){
+   
+    .close_btn{
+      width: @iconwidth_l;
+      height: @iconwidth_l;
+      line-height: @iconwidth_l;
+      margin-right: 20px;
+      margin-top: 20px;
+      
+      a{
+        width: @iconwidth_l;
+        height: @iconwidth_l;
+        font-size: 24px;
+      }
+    }
+    
+    
+    .container{
+      margin-left: -440px;
+      margin-top: -240px;
+    }
+    .navigation_menu, .social_menu{
+      width: 650px;
+    }
+    
+    ul{
+      a{
+        line-height: 64px;
+      }
+    }
+    
+    
+  }//end media queries
+  
+  
+  @media only screen and (min-width : 1420px){  
+    .close_btn{
+      margin-right: 25px;
+      margin-top: 25px; 
+    }
+  }
+  
+  @media only screen and (min-width : 1520px){
+   .close_btn{
+     margin-right: 30px;
+     margin-top: 30px; 
+   }
+  }
+  
+  @media only screen and (min-width : 1620px){
+      .close_btn{
+        margin-right: 40px;
+        margin-top: 40px; 
+      }  
+  }
+
+  */
+  
+  
+  
+}//end menu
+
+.menuopen{
+  overflow: hidden;
+  padding: 0;
+  margin: 0px;
+  .mustachepickerpage{
+     margin-left: 0%;
+  }
+  #main, #main-2, header{
+    margin-left: 100%;
+  }
+}
+
+.menuopen_2{
+  overflow: hidden;
+  padding: 0;
+  margin: 0px;
+  .menu{
+     .translate( 0 , 0);
+     .transition( all 0.2s ease-out );
+  }
+  header{
+    opacity: 0;
+    z-index: -1;
+    }
+
+  #main, #main-2{
+    //margin-left: -260px;
+    overflow: hidden;
+    .thaslidingcontent{
+      //.translate( -260px, 0 );
+      //.transition( all 0.2s ease-in );
+    }
+  }
+}
