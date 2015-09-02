@@ -281,7 +281,7 @@ figure img {
   max-height: 500px;
 }
 .codetext {
-  font-family: monaco;
+  font-family: monaco, Courier New, monospace;
   font-size: 0.75em;
   background: #000;
   color: #08c811;
@@ -399,7 +399,7 @@ blockquote{
 }
 /* Foundation v2.1.4 http://foundation.zurb.com */
 /* Artfully masterminded by ZURB  */
-/* -------------------------------------------------- 
+/* --------------------------------------------------
    Table of Contents
 -----------------------------------------------------
 :: Shared Styles

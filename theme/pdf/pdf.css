@@ -1,1 +1,19 @@
-/* Add your custom CSS styles for the PDF here */
+ /* @import url("../../css/nutanixbible.css"); */
+ .codetext {
+   font-family: monaco, Courier New, monospace;
+   font-size: 0.75em;
+   /* background: #000;
+   color: #08c811; */
+   padding: 10px;
+ }
+ .codedescription {
+   font-size: 0.75em;
+ }
+ .page-title .ornament {
+   width: 80px;
+   margin-top: 4em;
+   margin-bottom: 5em;
+ }
+ .page-title .biblesvg {
+   width: 220px;
+ }
