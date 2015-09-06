@@ -2219,15 +2219,15 @@ storage, compute and virtualization platform.
 
 <p>The Nutanix platform is composed of the following high-level components:</p>
 
-<figure id="id-PWdHn"><img alt="" class="iimagesv2cluster_componentspng" src="imagesv2/cluster_components.png">
+<figure id="id-PWdHn"><img alt="" class="iimagesv2cluster_componentspng" src="imagesv2/cluster_components2.png">
 <figcaption><span class="label">Figure 9-5. </span>Cluster Components</figcaption>
 </figure>
 
-<h3>Cassandra</h3>
+<h3>Medusa Store</h3>
 
 <ul>
 	<li>Key Role: Distributed metadata store</li>
-	<li>Description: Cassandra stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.&nbsp; The Paxos algorithm is utilized to enforce strict consistency.&nbsp; This service runs on every node in the cluster.&nbsp; Cassandra is accessed via an interface called Medusa.</li>
+	<li>Description: Medusa Store stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.&nbsp; The Paxos algorithm is utilized to enforce strict consistency.&nbsp; This service runs on every node in the cluster.&nbsp; The Medusa Store is accessed via an interface called Medusa.</li>
 </ul>
 
 <h3>Zookeeper</h3>
@@ -2283,7 +2283,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Key Role: vDisk configuration manager</li>
-	<li>Description: Pithos is responsible for vDisk (DSF file) configuration data.&nbsp; Pithos runs on every node and is built on top of Cassandra.</li>
+	<li>Description: Pithos is responsible for vDisk (DSF file) configuration data.&nbsp; Pithos runs on every node and is built on top of Medusa Store.</li>
 </ul>
 </section>
 
@@ -2298,7 +2298,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Nutanix Home (CVM core)</li>
-	<li>Cassandra (metadata storage)</li>
+	<li>Medusa Store (metadata storage)</li>
 	<li>OpLog (persistent write buffer)</li>
 	<li>Content Cache (SSD cache)</li>
 	<li>Extent Store (persistent storage)</li>
@@ -2310,7 +2310,7 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 9-6. </span>SSD Drive Breakdown</figcaption>
 </figure>
 
-<p>NOTE: The sizing for OpLog is done dynamically as of release 4.0.1 which will allow the extent store portion to grow dynamically.&nbsp; The values used are assuming a completely utilized OpLog.&nbsp; Graphics and proportions aren’t drawn to scale.&nbsp; When evaluating the Remaining GiB capacities, do so from the top down.&nbsp; For example, the Remaining GiB to be used for the OpLog calculation would be after Nutanix Home and Cassandra have been subtracted from the formatted SSD capacity.</p>
+<p>NOTE: The sizing for OpLog is done dynamically as of release 4.0.1 which will allow the extent store portion to grow dynamically.&nbsp; The values used are assuming a completely utilized OpLog.&nbsp; Graphics and proportions aren’t drawn to scale.&nbsp; When evaluating the Remaining GiB capacities, do so from the top down.&nbsp; For example, the Remaining GiB to be used for the OpLog calculation would be after Nutanix Home and Medusa Store have been subtracted from the formatted SSD capacity.</p>
 
 <p>Most models ship with 1 or 2 SSDs, however the same construct applies for models shipping with more SSD devices. For example, if we apply this to an example 3060 or 6060 node which has 2 x 400GB SSDs, this would give us 100GiB of OpLog, 40GiB of Content Cache, and ~440GiB of Extent Store SSD capacity per node.</p>
 
@@ -2481,7 +2481,7 @@ storage, compute and virtualization platform.
 <p>The following figure shows an example of a metadata insert/update for a 4 node cluster:</p>
 
 <figure id="id-MqXtr"><img alt="" class="iimagesv2metadata_1png" src="imagesv2/metadata_1.png">
-<figcaption><span class="label">Figure 10-8. </span>Cassandra Ring Structure</figcaption>
+<figcaption><span class="label">Figure 10-8. </span>Medusa Store Ring Structure</figcaption>
 </figure>
 
 <p>Performance at scale is also another important struct for DSF metadata.&nbsp; Contrary to traditional dual-controller or “master” models, each Nutanix node is responsible for a subset of the overall platform’s metadata.&nbsp; This eliminates the traditional bottlenecks by allowing metadata to be served and manipulated by all nodes in the cluster.&nbsp; A consistent hashing scheme is utilized to minimize the redistribution of keys during cluster size modifications (also known as&nbsp;“add/remove node”) When the cluster scales (e.g., from 4 to 8 nodes), the nodes are inserted throughout the ring between nodes for “block awareness” and reliability.</p>
@@ -2489,7 +2489,7 @@ storage, compute and virtualization platform.
 <p>The following figure shows an example of the metadata “ring” and how it scales:</p>
 
 <figure class="large" id="id-OWpfg"><img alt="" class="iimagesv2metadata_2png" src="imagesv2/metadata_2.png">
-<figcaption><span class="label">Figure 10-9. </span>Cassandra Ring Scale Out</figcaption>
+<figcaption><span class="label">Figure 10-9. </span>Medusa Store Scale Out</figcaption>
 </figure>
 
 <p>&nbsp;</p>
@@ -2530,7 +2530,7 @@ storage, compute and virtualization platform.
 	<li>Latency: <strong>No impact</strong></li>
 </ul>
 
-<p>In the event of a disk failure, a Curator scan (MapReduce Framework) will occur immediately. &nbsp;It will scan the metadata (Cassandra) to find the data previously hosted on the failed disk and the nodes / disks hosting the replicas.</p>
+<p>In the event of a disk failure, a Curator scan (MapReduce Framework) will occur immediately. &nbsp;It will scan the metadata (Medusa Store) to find the data previously hosted on the failed disk and the nodes / disks hosting the replicas.</p>
 
 <p>Once it has found that data that needs to be “re-replicated”, it will distribute the replication tasks to the nodes throughout the cluster.&nbsp;</p>
 
@@ -2837,7 +2837,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Data (The VM data)</li>
-	<li>Metadata (Cassandra)</li>
+	<li>Metadata (Medusa Store)</li>
 	<li>Configuration Data (Zookeeper)</li>
 </ul>
 
@@ -2861,18 +2861,18 @@ storage, compute and virtualization platform.
 
 <p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
 
-<p>The following figure shows an example of the Cassandra ring for a 12-node cluster:</p>
+<p>The following figure shows an example of the Medusa Store's ring for a 12-node cluster:</p>
 
 <figure id="id-WnxHo"><img alt="" class="iimagesv2avail_dom_3png fse fs image" src="imagesv2/avail_dom_3.png" style="width: 50%; height: 50%">
-<figcaption><span class="label">Figure 10-27. </span>12 Node Cassandra Ring</figcaption>
+<figcaption><span class="label">Figure 10-27. </span>12 Node Medusa Store Ring</figcaption>
 </figure>
 
-<p>Cassandra peer replication iterates through nodes in a clockwise manner throughout the ring.&nbsp; With block awareness, the peers are distributed among the blocks to ensure no two peers are on the same block.</p>
+<p>Medusa Store peer replication iterates through nodes in a clockwise manner throughout the ring.&nbsp; With block awareness, the peers are distributed among the blocks to ensure no two peers are on the same block.</p>
 
 <p>The following figure shows an example node layout translating the ring above into the block based layout:</p>
 
 <figure id="id-wrvfX"><img alt="" class="iimagesv2avail_dom_4png" src="imagesv2/avail_dom_4.png">
-<figcaption><span class="label">Figure 10-28. </span>Cassandra Node Block Aware Placement</figcaption>
+<figcaption><span class="label">Figure 10-28. </span>Medusa Store Node Block Aware Placement</figcaption>
 </figure>
 
 <p>With this block-aware nature, in the event of a block failure there will still be at least two copies of the data (with Metadata RF3 – In larger clusters RF5 can be leveraged).</p>
@@ -2880,7 +2880,7 @@ storage, compute and virtualization platform.
 <p>The following figure shows an example of all of the nodes replication topology to form the ring (yes – it’s a little busy):</p>
 
 <figure id="id-aOQid"><img alt="" class="iimagesv2avail_dom_5png" src="imagesv2/avail_dom_5.png">
-<figcaption><span class="label">Figure 10-29. </span>Full Cassandra Node Block Aware Placement</figcaption>
+<figcaption><span class="label">Figure 10-29. </span>Full Medusa Store Node Block Aware Placement</figcaption>
 </figure>
 
 <p>&nbsp;</p>
