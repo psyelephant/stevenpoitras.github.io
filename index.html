@@ -196,8 +196,6 @@
         </li>
     <li><a href="index.html">Part III. Book of Acropolis</a>
             <ol>
-    <li><a href="index.html#supported-hypervisors-for-vm-management-75GHP">Supported Hypervisors for VM Management</a>
-            <ol>
     <li><a href="index.html#acropolis-services-LeJh2">Acropolis Services</a>
             <ol>
 </ol>
@@ -216,8 +214,6 @@
         </li>
     <li><a href="index.html#drive-breakdown-Qpau4">Drive Breakdown</a>
             <ol>
-</ol>
-        </li>
 </ol>
         </li>
     <li><a href="index.html#distributed-storage-fabric-zWkUQ">Distributed Storage Fabric</a>
@@ -2086,7 +2082,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <figcaption><span class="label">Figure 8-2. </span>OpenStack - SVM Load Balancing</figcaption>
 </figure>
 
-<p>Nutanix integrates with the OpenStack platform at the API level. &nbsp;</p>
+<p>Nutanix integrates with the OpenStack platform at the API level.</p>
 
 <p>We take the OpenStack APIs and translate them into native Acropolis API calls. &nbsp;This OpenStack driver runs in Acropolis Services VM (SVM) and is what handles the calls from the OpenStack Controller.</p>
 
@@ -2227,7 +2223,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Key Role: Distributed metadata store</li>
-	<li>Description: Cassandra stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.&nbsp; The Paxos algorithm is utilized to enforce strict consistency.&nbsp; This service runs on every node in the cluster.&nbsp; Cassandra is accessed via an interface called Medusa.</li>
+	<li>Description: Cassandra stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.&nbsp; The Paxos algorithm is utilized to enforce strict consistency.&nbsp; This service runs on every node in the cluster.&nbsp; The Cassandra is accessed via an interface called Medusa.</li>
 </ul>
 
 <h3>Zookeeper</h3>
@@ -2489,7 +2485,7 @@ storage, compute and virtualization platform.
 <p>The following figure shows an example of the metadata “ring” and how it scales:</p>
 
 <figure class="large" id="id-OWpfg"><img alt="" class="iimagesv2metadata_2png" src="imagesv2/metadata_2.png">
-<figcaption><span class="label">Figure 10-9. </span>Cassandra Ring Scale Out</figcaption>
+<figcaption><span class="label">Figure 10-9. </span>Cassandra Scale Out</figcaption>
 </figure>
 
 <p>&nbsp;</p>
@@ -2861,7 +2857,7 @@ storage, compute and virtualization platform.
 
 <p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
 
-<p>The following figure shows an example of the Cassandra ring for a 12-node cluster:</p>
+<p>The following figure shows an example of the Cassandra's ring for a 12-node cluster:</p>
 
 <figure id="id-WnxHo"><img alt="" class="iimagesv2avail_dom_3png fse fs image" src="imagesv2/avail_dom_3.png" style="width: 50%; height: 50%">
 <figcaption><span class="label">Figure 10-27. </span>12 Node Cassandra Ring</figcaption>
