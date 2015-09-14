@@ -120,22 +120,22 @@
     <a href="index.html#book-of-web-scale-NYIQSn">Book of Web-Scale</a>
             <ol>
   <li data-type="sect1">
-    <a href="index.html#hyper-convergence-BNIDidSn">Hyper-Convergence</a>
+    <a href="index.html#hyper-convergence-ONIRcvSY">Hyper-Convergence</a>
             <ol>
 </ol>
       </li>
   <li data-type="sect1">
-    <a href="index.html#software-defined-intelligence-ONIRcvSY">Software-Defined Intelligence</a>
+    <a href="index.html#software-defined-intelligence-nrIRIWSn">Software-Defined Intelligence</a>
             <ol>
 </ol>
       </li>
   <li data-type="sect1">
-    <a href="index.html#distributed-autonomous-systems-nrIRIWSn">Distributed Autonomous Systems</a>
+    <a href="index.html#distributed-autonomous-systems-b1IeU4Sb">Distributed Autonomous Systems</a>
             <ol>
 </ol>
       </li>
   <li data-type="sect1">
-    <a href="index.html#incremental-and-linear-scale-out-b1IeU4Sb">Incremental and linear scale out</a>
+    <a href="index.html#incremental-and-linear-scale-out-rkIZhxSN">Incremental and linear scale out</a>
             <ol>
 </ol>
       </li>
@@ -232,30 +232,30 @@
     <a href="index.html">Book of Acropolis</a>
             <ol>
   <li data-type="chapter">
-    <a href="index.html#supported-hypervisors-for-vm-management-NYI5ul">Supported Hypervisors for VM Management</a>
+    <a href="index.html#architecture-NYI5ul">Architecture</a>
             <ol>
   <li data-type="sect1">
-    <a href="index.html#acropolis-services-4aIyfMug">Acropolis Services</a>
-            <ol>
-</ol>
-      </li>
-  <li data-type="sect1">
-    <a href="index.html#converged-platform-BNIDiAuZ">Converged Platform</a>
+    <a href="index.html#acropolis-services-BNIDiAuZ">Acropolis Services</a>
             <ol>
 </ol>
       </li>
   <li data-type="sect1">
-    <a href="index.html#software-defined-ONIRcmuA">Software-Defined</a>
+    <a href="index.html#converged-platform-ONIRcmuA">Converged Platform</a>
             <ol>
 </ol>
       </li>
   <li data-type="sect1">
-    <a href="index.html#cluster-components-nrIRIyux">Cluster Components</a>
+    <a href="index.html#software-defined-nrIRIyux">Software-Defined</a>
             <ol>
 </ol>
       </li>
   <li data-type="sect1">
-    <a href="index.html#drive-breakdown-b1IeUMu5">Drive Breakdown</a>
+    <a href="index.html#cluster-components-b1IeUMu5">Cluster Components</a>
+            <ol>
+</ol>
+      </li>
+  <li data-type="sect1">
+    <a href="index.html#drive-breakdown-rkIZh9uO">Drive Breakdown</a>
             <ol>
 </ol>
       </li>
@@ -1004,6 +1004,10 @@
 <section data-type="chapter" id="book-of-web-scale-NYIQSn">
 <h1>Book of Web-Scale</h1>
 
+<p class="definition"><strong>Web-Scale - /web ' skãl/ - noun - computing architecture</strong>
+<br>
+a new architectural approach to infrastructure and computing pioneered by Google, Microsoft and Facebook.</p>
+
 <p>This section will present some of the core concepts behind “Web-scale” infrastructure and why we leverage them. Before I get started, I just wanted to clearly state the Web-scale doesn’t mean you need to be “web-scale” (e.g. Google, Facebook, or Microsoft).&nbsp; These constructs are applicable and beneficial at any scale (3-nodes or thousands of nodes).</p>
 
 <p>Historical challenges included:</p>
@@ -1032,7 +1036,7 @@
 
 <p>The following sections will provide a technical perspective on what they actually mean.</p>
 
-<section data-type="sect1" id="hyper-convergence-BNIDidSn">
+<section data-type="sect1" id="hyper-convergence-ONIRcvSY">
 <h1>Hyper-Convergence</h1>
 
 <p>There are differing opinions on what hyper-convergence actually is.&nbsp; It also varies based on the scope of components (e.g. virtualization, networking, etc.). However, the core concept comes down to the following: natively combining two or more components into a single unit. ‘Natively’ is the key word here. In order to be the most effective, the components must be natively integrated and not just bundled together. In the case of Nutanix, we natively converge compute + storage to form a single node used in our appliance.&nbsp; For others, this might be converging storage with the network, etc. What it really means:</p>
@@ -1050,7 +1054,7 @@
 </ul>
 </section>
 
-<section data-type="sect1" id="software-defined-intelligence-ONIRcvSY">
+<section data-type="sect1" id="software-defined-intelligence-nrIRIWSn">
 <h1>Software-Defined Intelligence</h1>
 
 <p>Software-defined intelligence is taking the core logic from normally proprietary or specialized hardware (e.g. ASIC / FPGA) and doing it in software on commodity hardware. For Nutanix, we take the traditional storage logic (e.g. RAID, deduplication, compression, etc.) and put that into software that runs in each of the Nutanix CVMs on standard x86 hardware. What it really means:</p>
@@ -1068,7 +1072,7 @@
 </ul>
 </section>
 
-<section data-type="sect1" id="distributed-autonomous-systems-nrIRIWSn">
+<section data-type="sect1" id="distributed-autonomous-systems-b1IeU4Sb">
 <h1>Distributed Autonomous Systems</h1>
 
 <p>Distributed autonomous systems involve moving away from the traditional concept of having a single unit responsible for doing something and distributing that role among all nodes within the cluster.&nbsp; You can think of this as creating a purely distributed system. Traditionally, vendors have assumed that hardware will be reliable, which, in most cases can be true.&nbsp; However, core to distributed systems is the idea that hardware will eventually fail and handling that fault in an elegant and non-disruptive way is key.</p>
@@ -1089,7 +1093,7 @@
 </ul>
 </section>
 
-<section data-type="sect1" id="incremental-and-linear-scale-out-b1IeU4Sb">
+<section data-type="sect1" id="incremental-and-linear-scale-out-rkIZhxSN">
 <h1>Incremental and linear scale out</h1>
 
 <p>Incremental and linear scale out relates to the ability to start with a certain set of resources and as needed scale them out while linearly increasing the performance of the system.&nbsp; All of the constructs mentioned above are critical enablers in making this a reality. For example, traditionally you’d have 3-layers of components for running virtual workloads: servers, storage, and network – all of which are scaled independently.&nbsp; As an example, when you scale out the number of servers you’re not scaling out your storage performance. With a hyper-converged platform like Nutanix, when you scale out with new node(s) you’re scaling out:</p>
@@ -2211,7 +2215,8 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 storage, compute and virtualization platform.
 </p>
 
-<section data-type="chapter" id="supported-hypervisors-for-vm-management-NYI5ul">
+<section data-type="chapter" id="architecture-NYI5ul">
+<h1>Architecture</h1>
 <p>Acropolis is a distributed multi-resource manager,&nbsp;orchestration platform and data plane.</p>
 
 <p>It is broken down into three main components:</p>
@@ -2240,17 +2245,17 @@ storage, compute and virtualization platform.
 
 <p>The figure highlights an image illustrating the conceptual nature of Acropolis at various layers:</p>
 
-<figure id="id-ZptZFxu3"><img alt="" class="iimagesv2arch_acropolispng" src="imagesv2/arch_acropolis.png">
+<figure id="id-d0tvtNuD"><img alt="" class="iimagesv2arch_acropolispng" src="imagesv2/arch_acropolis.png">
 <figcaption><span class="label">Figure 9-1. </span>High-level Acropolis Architecture</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="supported-hypervisors-for-vm-management-z5iptEuR"><h6>Note</h6>
+<div data-type="note" class="note" id="supported-hypervisors-for-vm-management-8Mirfxuk"><h6>Note</h6>
 <h1>Supported Hypervisors for VM Management</h1>
 
 <p>Currently, the only fully supported hypervisor for VM management is Acropolis Hypervisor, however this may expand in the future. &nbsp;The Volumes API and read-only operations are still supported on all.</p>
 </div>
 
-<section data-type="sect1" id="acropolis-services-4aIyfMug">
+<section data-type="sect1" id="acropolis-services-BNIDiAuZ">
 <h1>Acropolis Services</h1>
 
 <p>An Acropolis Slave runs on every CVM with an elected Acropolis Master which is responsible for task scheduling, execution, IPAM, etc.&nbsp; Similar to other components which have a Master, if the Acropolis Master fails, a new one will be elected.</p>
@@ -2277,12 +2282,12 @@ storage, compute and virtualization platform.
 
 <p>Here we show a conceptual view of the Acropolis Master / Slave relationship:</p>
 
-<figure id="id-A0tOHafXux"><img alt="" class="iimagesv2acrop_componentspng image" src="imagesv2/acrop_components.png">
+<figure id="id-DktkHGijuw"><img alt="" class="iimagesv2acrop_componentspng image" src="imagesv2/acrop_components.png">
 <figcaption><span class="label">Figure 9-2. </span>Acropolis Services</figcaption>
 </figure>
 </section>
 
-<section data-type="sect1" id="converged-platform-BNIDiAuZ">
+<section data-type="sect1" id="converged-platform-ONIRcmuA">
 <h1>Converged Platform</h1>
 
 <p>For a video explanation you can watch the following video: <a href="https://youtu.be/OPYA5-V0yRo">LINK</a></p>
@@ -2295,12 +2300,12 @@ storage, compute and virtualization platform.
 
 <p>The following figure provides an example of what a typical node logically looks like:</p>
 
-<figure id="id-k1tAFNiZu3"><img alt="" class="iimagesv2converged_platformpng" src="imagesv2/converged_platform.png">
+<figure id="id-GRtVF5czu1"><img alt="" class="iimagesv2converged_platformpng" src="imagesv2/converged_platform.png">
 <figcaption><span class="label">Figure 9-3. </span>Converged Platform</figcaption>
 </figure>
 </section>
 
-<section data-type="sect1" id="software-defined-ONIRcmuA">
+<section data-type="sect1" id="software-defined-nrIRIyux">
 <h1>Software-Defined</h1>
 
 <p>As mentioned above (likely numerous times), the Nutanix platform is a software-based solution which ships as a bundled software + hardware appliance.&nbsp; The controller VM is where the vast majority of the Nutanix software and logic sits and was designed from the beginning to be an extensible and pluggable architecture. A key benefit to being software-defined and not relying upon any hardware offloads or constructs is around extensibility.&nbsp; As with any product life cycle,&nbsp;advancements and new features will always be introduced.&nbsp;</p>
@@ -2311,12 +2316,12 @@ storage, compute and virtualization platform.
 
 <p>The following figure shows a logical representation of what this software-defined controller framework looks like:</p>
 
-<figure id="id-k1tjHecZu3"><img alt="" class="iimagesv2software_defined_controllerpng" src="imagesv2/software_defined_controller.png">
+<figure id="id-GRtnH4Izu1"><img alt="" class="iimagesv2software_defined_controllerpng" src="imagesv2/software_defined_controller.png">
 <figcaption><span class="label">Figure 9-4. </span>Software-Defined Controller Framework</figcaption>
 </figure>
 </section>
 
-<section data-type="sect1" id="cluster-components-nrIRIyux">
+<section data-type="sect1" id="cluster-components-b1IeUMu5">
 <h1>Cluster Components</h1>
 
 <p>For a visual explanation you can watch the following video:&nbsp;<a href="https://youtu.be/3v5RI_IbfV4">LINK</a></p>
@@ -2325,7 +2330,7 @@ storage, compute and virtualization platform.
 
 <p>The Nutanix platform is composed of the following high-level components:</p>
 
-<figure id="id-k1tVSmIZu3"><img alt="" class="iimagesv2cluster_componentspng" src="imagesv2/cluster_components.png">
+<figure id="id-GRtkSgUzu1"><img alt="" class="iimagesv2cluster_componentspng" src="imagesv2/cluster_components.png">
 <figcaption><span class="label">Figure 9-5. </span>Cluster Components</figcaption>
 </figure>
 
@@ -2393,7 +2398,7 @@ storage, compute and virtualization platform.
 </ul>
 </section>
 
-<section data-type="sect1" id="drive-breakdown-b1IeUMu5">
+<section data-type="sect1" id="drive-breakdown-rkIZh9uO">
 <h1>Drive Breakdown</h1>
 
 <p>In this section, I’ll cover how the various storage devices (SSD / HDD) are broken down, partitioned, and utilized by the Nutanix platform. NOTE: All of the capacities used are in Base2 Gibibyte (GiB) instead of the Base10 Gigabyte (GB).&nbsp; Formatting of the drives with a filesystem and associated overheads has also been taken into account.</p>
@@ -2412,7 +2417,7 @@ storage, compute and virtualization platform.
 
 <p>The following figure shows an example of the storage breakdown for a Nutanix node’s SSD(s):</p>
 
-<figure id="id-RBtVFkUVu1"><img alt="" class="iimagesv2drive_ssdpng" src="imagesv2/drive_ssd.png">
+<figure id="id-1ntnFGhwuQ"><img alt="" class="iimagesv2drive_ssdpng" src="imagesv2/drive_ssd.png">
 <figcaption><span class="label">Figure 9-6. </span>SSD Drive Breakdown</figcaption>
 </figure>
 
@@ -2429,7 +2434,7 @@ storage, compute and virtualization platform.
 	<li>Extent Store (persistent storage)</li>
 </ul>
 
-<figure id="id-lNtAUJUkue"><img alt="" class="iimagesv2drive_hddpng" src="imagesv2/drive_hdd.png">
+<figure id="id-MltqUBhxu1"><img alt="" class="iimagesv2drive_hddpng" src="imagesv2/drive_hdd.png">
 <figcaption><span class="label">Figure 9-7. </span>HDD Drive Breakdown</figcaption>
 </figure>
 
