@@ -1004,9 +1004,9 @@
 <section data-type="chapter" id="book-of-web-scale-NYIQSn">
 <h1>Book of Web-Scale</h1>
 
-<p class="definition"><strong>Web-Scale - /web ' skãl/ - noun - computing architecture</strong>
+<p class="definition"><strong>web·scale - /web ' skãl/ - noun - computing architecture</strong>
 <br>
-a new architectural approach to infrastructure and computing pioneered by Google, Microsoft and Facebook.</p>
+a new architectural approach to infrastructure and computing.</p>
 
 <p>This section will present some of the core concepts behind “Web-scale” infrastructure and why we leverage them. Before I get started, I just wanted to clearly state the Web-scale doesn’t mean you need to be “web-scale” (e.g. Google, Facebook, or Microsoft).&nbsp; These constructs are applicable and beneficial at any scale (3-nodes or thousands of nodes).</p>
 
@@ -2125,7 +2125,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
   <tr>
     <td>Nova</td>
     <td>Compute</td>
-    <td>X</td>
+    <td></td>
     <td>X</td>
     <td></td>
     <td></td>
@@ -2141,7 +2141,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
   <tr>
     <td>Cinder</td>
     <td>Block storage</td>
-    <td>X</td>
+    <td></td>
     <td>X</td>
     <td></td>
     <td></td>
@@ -2157,7 +2157,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
   <tr>
     <td>Neutron</td>
     <td>Networking</td>
-    <td>X</td>
+    <td></td>
     <td>X</td>
     <td></td>
     <td></td>
@@ -2196,13 +2196,12 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <figcaption><span class="label">Figure 8-2. </span>OpenStack - SVM Load Balancing</figcaption>
 </figure>
 
-<p>Nutanix integrates with the OpenStack platform at the API level.</p>
+<p>For environments spanning multiple sites the OpenStack Controller will talk to multiple Acropolis SVMs across sites.</p>
 
-<p>We take the OpenStack APIs and translate them into native Acropolis API calls. &nbsp;This OpenStack driver runs in Acropolis Services VM (SVM) and is what handles the calls from the OpenStack Controller.</p>
-
-<p>The figure shows how the OpenStack components map to the OpenStack + Nutanix solution:</p>
-
-<p>&nbsp;</p>
+<p>The figure shows an example of the deployment across multiple sites:</p>
+<figure id="id-1ntas0sVFP"><img alt="" src="imagesv2/openstack_siteha.png">
+<figcaption><span class="label">Figure 8-3. </span>OpenStack - Multi-Site</figcaption>
+</figure>
 </section>
 </section>
 </div>
@@ -2292,7 +2291,7 @@ storage, compute and virtualization platform.
 
 <p>For a video explanation you can watch the following video: <a href="https://youtu.be/OPYA5-V0yRo">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//OPYA5-V0yRo"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//OPYA5-V0yRo"></iframe></div>
 
 <p>The Nutanix solution is a converged storage + compute solution which leverages local components and creates a distributed platform for virtualization, also known as a virtual computing platform. The solution is a bundled hardware + software appliance which houses 2 (6000/7000 series) or 4 nodes (1000/2000/3000/3050 series) in a 2U footprint.</p>
 
@@ -2326,7 +2325,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation you can watch the following video:&nbsp;<a href="https://youtu.be/3v5RI_IbfV4">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//3v5RI_IbfV4"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//3v5RI_IbfV4"></iframe></div>
 
 <p>The Nutanix platform is composed of the following high-level components:</p>
 
@@ -2519,7 +2518,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/SULqVPVXefY">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//SULqVPVXefY"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//SULqVPVXefY"></iframe></div>
 
 <p>The Nutanix I/O path is composed of the following high-level components:</p>
 
@@ -2567,7 +2566,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/OWhdo81yTpk">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//OWhdo81yTpk"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//OWhdo81yTpk"></iframe></div>
 
 <p>The Nutanix platform currently uses a resiliency factor, also known as a replication factor (RF), and checksum to ensure data redundancy and availability in the case of a node or disk failure or corruption.&nbsp; As explained above, the OpLog acts as a staging area to absorb incoming writes onto a low-latency SSD tier.&nbsp; Upon being written to the local OpLog, the data is synchronously replicated to another one or two Nutanix CVM’s OpLog (dependent on RF) before being acknowledged (Ack) as a successful write to the host.&nbsp; This ensures that the data exists in at least two or three independent locations and is fault tolerant. NOTE: For RF3, a minimum of 5 nodes is required since metadata will be RF5.&nbsp;</p>
 
@@ -2585,7 +2584,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/MlQczJhQI3U">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//MlQczJhQI3U"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//MlQczJhQI3U"></iframe></div>
 
 <p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.&nbsp; In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as“strictly consistent”), it has to be scalable, and it has to perform at massive scale.&nbsp; As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).&nbsp; A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.&nbsp; This ensures strict consistency for all data and metadata stored as part of the platform.</p>
 
@@ -2611,7 +2610,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/SJIb_mTdMPg">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//SJIb_mTdMPg"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//SJIb_mTdMPg"></iframe></div>
 
 <p>Reliability and resiliency are key, if not the most important concepts within DSF or any primary storage platform.&nbsp;</p>
 
@@ -2695,7 +2694,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/C-rp13cDpNw">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//C-rp13cDpNw"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//C-rp13cDpNw"></iframe></div>
 
 <p>The Elastic Dedupe Engine is a software-based feature of DSF which allows for data deduplication in the capacity (HDD) and performance (SSD/Memory) tiers.&nbsp; Streams of data are fingerprinted during ingest using a SHA-1 hash at a 16K granularity.&nbsp; This fingerprint is only done on data ingest and is then stored persistently as part of the written block’s metadata.&nbsp; NOTE: Initially a 4K granularity was used for fingerprinting, however after testing 16K offered the best blend of deduplication with reduced metadata overhead.&nbsp; Deduplicated data is pulled into the cache at a 4K granularity.</p>
 
@@ -2731,7 +2730,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/ERDqOCzDcQY">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ERDqOCzDcQY"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ERDqOCzDcQY"></iframe></div>
 
 <p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.&nbsp; Currently compression is one of the key features of the COE to perform data optimization. DSF provides both in-line and post-process flavors of compression to best suit the customer’s needs and type of data.&nbsp;</p>
 
@@ -2908,7 +2907,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/atbkgrmpVNo">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//atbkgrmpVNo"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//atbkgrmpVNo"></iframe></div>
 
 <p>DSF is designed to be a very dynamic platform which can react to various workloads as well as allow heterogeneous node types: compute heavy (3050, etc.) and storage heavy (60X0, etc.) to be mixed in a single cluster.&nbsp; Ensuring uniform distribution of data is an important item when mixing nodes with larger storage capacities. DSF has a native feature, called disk balancing, which is used to ensure uniform distribution of data throughout the cluster.&nbsp; Disk balancing works on a node’s utilization of its local storage capacity and is integrated with DSF ILM.&nbsp; Its goal is to keep utilization uniform among nodes once the utilization has breached a certain threshold.</p>
 
@@ -2940,7 +2939,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/LDaNY9AJDn8">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//LDaNY9AJDn8"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//LDaNY9AJDn8"></iframe></div>
 
 <p>Availability Domains (aka node/block/rack awareness) is a key struct for distributed systems to abide by for determining component and data placement.&nbsp; DSF is currently node and block aware, however this will increase to rack aware as cluster sizes grow.&nbsp; Nutanix refers to a “block” as the chassis which contains either one, two, or four server “nodes”. NOTE: A minimum of 3 blocks must be utilized for block awareness to be activated, otherwise node awareness will be defaulted to.&nbsp;</p>
 
@@ -3041,7 +3040,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/uK5wWR44UYE">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//uK5wWR44UYE"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//uK5wWR44UYE"></iframe></div>
 
 <p>DSF provides native support for offloaded snapshots and clones which can be leveraged via VAAI, ODX, ncli, REST, Prism, etc.&nbsp; Both the snapshots and clones leverage the redirect-on-write algorithm which is the most effective and efficient. As explained in the Data Structure section above, a virtual machine consists of files (vmdk/vhdx) which are vDisks on the Nutanix platform.&nbsp;</p>
 
@@ -3083,7 +3082,7 @@ storage, compute and virtualization platform.
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/AoKwKI7CXIM">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//AoKwKI7CXIM"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//AoKwKI7CXIM"></iframe></div>
 
 <p>Nutanix provides native DR and replication capabilities, which build upon the same features explained in the Snapshots &amp; Clones section.&nbsp; Cerebro is the component responsible for managing the DR and replication in DSF.&nbsp; Cerebro runs on every node and a Cerebro master is elected (similar to NFS master) and is responsible for managing replication tasks.&nbsp; In the event the CVM acting as Cerebro master fails, another is elected and assumes the role.&nbsp; The Cerebro page can be found on &lt;CVM IP&gt;:2020. The DR function can be broken down into a few key focus areas:</p>
 
@@ -3417,7 +3416,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/Bz37Eu_TgxY">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//Bz37Eu_TgxY"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//Bz37Eu_TgxY"></iframe></div>
 
 <p>The Nutanix platform does not leverage any backplane for inter-node communication and only relies on a standard 10GbE network.&nbsp; All storage I/O for VMs running on a Nutanix node is handled by the hypervisor on a dedicated private network.&nbsp; The I/O request will be handled by the hypervisor, which will then forward the request to the private IP on the local CVM.&nbsp; The CVM will then perform the remote replication with other Nutanix nodes using its external IP over the public 10GbE network. For all read requests, these will be served completely locally in most cases and never touch the 10GbE network. This means that the only traffic touching the public 10GbE network will be DSF remote replication traffic and VM network I/O.&nbsp; There will, however, be cases where the CVM will forward requests to other CVMs in the cluster in the case of a CVM being down or data being remote.&nbsp; Also, cluster-wide tasks, such as disk balancing, will temporarily generate I/O on the 10GbE network.</p>
 
@@ -3435,7 +3434,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/ocLD5nBbUTU">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ocLD5nBbUTU"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ocLD5nBbUTU"></iframe></div>
 
 <p>Being a converged (compute+storage) platform, I/O and data locality are critical to cluster and VM performance with Nutanix.&nbsp; As explained above in the I/O path, all read/write IOs are served by the local Controller VM (CVM) which is on each hypervisor adjacent to normal VMs.&nbsp; A VM’s data is served locally from the CVM and sits on local disks under the CVM’s control.&nbsp; When a VM is moved from one hypervisor node to another (or during a HA event), the newly migrated VM’s data will be served by the now local CVM. When reading old data (stored on the now remote node/CVM), the I/O will be forwarded by the local CVM to the remote CVM.&nbsp; All write I/Os will occur locally right away.&nbsp; DSF will detect the I/Os are occurring from a different node and will migrate the data locally in the background, allowing for all read I/Os to now be served locally.&nbsp; The data will only be migrated on a read as to not flood the network.</p>
 
@@ -3451,7 +3450,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/oqfFDMYQFJg">LINK</a></p>
 
-<div class="embed-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//oqfFDMYQFJg"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//oqfFDMYQFJg"></iframe></div>
 
 <p>The Acropolis Distributed Storage Fabric has a feature called ‘Shadow Clones’, which allows for distributed caching of particular vDisks or VM data which is in a ‘multi-reader’ scenario.&nbsp; A great example of this is during a VDI deployment many ‘linked clones’ will be forwarding read requests to a central master or ‘Base VM’.&nbsp; In the case of VMware View, this is called the replica disk and is read by all linked clones, and in XenDesktop, this is called the MCS Master VM.&nbsp; This will also work in any scenario which may be a multi-reader scenario (e.g., deployment servers, repositories, etc.). Data or I/O locality is critical for the highest possible VM performance and a key struct of DSF.&nbsp;</p>
 
