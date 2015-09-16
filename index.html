@@ -222,6 +222,12 @@
   <li data-type="sect1">
     <a href="index.html#openstack-lkImslF5">OpenStack</a>
             <ol>
+  <li data-type="sect2">
+    <a href="index.html#openstack-components-WnINIXsMFQ">OpenStack Components</a>
+  </li>
+  <li data-type="sect2">
+    <a href="index.html#design-and-deployment-vlI5UGsBFE">Design and Deployment</a>
+  </li>
 </ol>
       </li>
 </ol>
@@ -372,7 +378,7 @@
 </ol>
       </li>
   <li data-type="chapter">
-    <a href="index.html#hypervisor-PgIzH9">Hypervisor</a>
+    <a href="index.html#acropolis-hypervisor-PgIzH9">Acropolis Hypervisor</a>
             <ol>
   <li data-type="sect1">
     <a href="index.html#node-architecture-lkIms8H1">Node Architecture</a>
@@ -2081,25 +2087,39 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <p>The OpenStack and Nutanix solution is composed of two main components</p>
 
 <ul>
-	<li>OpenStack Controller
+	<li>OpenStack Controller (OSC)
 		<ul>
 			<li>An existing, or newly provisioned VM or host hosting the OpenStack UI and OpenStack services.  Handles all OpenStack API calls</li>
 		</ul>
 	</li>
 	<li>Acropolis Services VM (SVM)
 		<ul>
-			<li>A helper VM which is responsible to taking OpenStack RPCs from the OpenStack Controller and translating them into native Acropolis API calls</li>
+			<li>A helper VM which is responsible to taking OpenStack RPCs from the OpenStack Controller and translates them into native Acropolis API calls</li>
 		</ul>
 	</li>
 </ul>
 
-<p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis Services VM (SVM). &nbsp;The SVM(s) have an OpenStack Driver which takes the OpenStack API calls and translates them into native Acropolis API calls.</p>
+<p>The OpenStack Controller can be an existing VM / host, or deployed as part of the OpenStack on Nutanix solution.  The Acropolis SVM is a helper VM which is deployed as part of the Nutanix OpenStack solution.</p>
 
-<p>The table shows the components and role mapping:</p>
+<p>The client communicates with the OpenStack Controller using their expected methods (Web UI / HTTP or API) and the OpenStack controller communicates with the Acropolis SVM which translates the requests into native Acropolis REST API calls using the OpenStack Driver.</p>
+
+<p>The figure shows a high-level overview of the communication:</p>
+
+<figure id="id-xbtrtzs3FQ"><img alt="" src="imagesv2/openstack_overview.png">
+<figcaption><span class="label">Figure 8-1. </span>OpenStack + Acropolis Services VM</figcaption>
+</figure>
+
+<div data-type="note" class="note" id="supported-openstack-controllers-DjirfYsNFr"><h6>Note</h6>
+<h1>Supported OpenStack Controllers</h1>
+
+<p>The current solution (as of 4.5.1) requires an OpenStack Controller on version K or later.</p>
+</div>
+
+<p>The table shows a high-level conceptual role mapping:</p>
 
 <table>
   <tr>
-    <th>Component</th>
+    <th>Item</th>
     <th>Role</th>
     <th>OpenStack Controller</th>
     <th>Acropolis SVM</th>
@@ -2107,64 +2127,64 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
     <th>External Source</th>
   </tr>
   <tr>
-    <td>Keystone</td>
-    <td>Identity service</td>
+    <td>Tenant Dashboard</td>
+    <td>User interface and API</td>
     <td>X</td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Horizon</td>
-    <td>Dashboard and UI</td>
+    <td>Orchestration</td>
+    <td>Object CRUD and lifecycle management</td>
     <td>X</td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Nova</td>
-    <td>Compute</td>
+    <td>Quotas</td>
+    <td>Resource controls and limits</td>
+    <td>X</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Users, Groups and Roles</td>
+    <td>Role based access control (RBAC)</td>
+    <td>X</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>SSO</td>
+    <td>Single-sign on</td>
+    <td>X</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Platform Integration</td>
+    <td>OpenStack to Nutanix integration</td>
     <td></td>
     <td>X</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>Swift</td>
-    <td>Object storage</td>
+    <td>Infrastructure Services</td>
+    <td>Target infrastructure (compute, storage, network)</td>
+    <td></td>
+    <td></td>
     <td>X</td>
     <td>X</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Cinder</td>
-    <td>Block storage</td>
-    <td></td>
-    <td>X</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Glance</td>
-    <td>Image service</td>
-    <td>X</td>
-    <td>X</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Neutron</td>
-    <td>Networking</td>
-    <td></td>
-    <td>X</td>
-    <td></td>
-    <td></td>
   </tr>
   <tr>
     <td>Image Repo</td>
-    <td>Image repository</td>
+    <td>Repository for source images</td>
     <td></td>
     <td></td>
     <td>X</td>
@@ -2172,7 +2192,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
   </tr>
   <tr>
     <td>Image Cache</td>
-    <td>Image cache</td>
+    <td>Local cache for external images</td>
     <td></td>
     <td></td>
     <td>X</td>
@@ -2180,28 +2200,149 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
   </tr>
 </table>
 
-<p>The figure shows a high-level overview of the communication:</p>
+<section data-type="sect2" id="openstack-components-WnINIXsMFQ">
+<h2>OpenStack Components</h2>
 
-<figure id="id-0OtVfbsbFW"><img alt="" class="iimagesv2openstack_commarch2png" src="imagesv2/openstack_commarch3.png">
-<figcaption><span class="label">Figure 8-1. </span>OpenStack + Nutanix API Communication</figcaption>
+<p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these funcitons will be hosted by the OpenStack Controller and some will be hosted by the Acropolis SVM.</p>
+
+<p>The table shows the core OpenStack components and role mapping:</p>
+
+<table>
+  <tr>
+    <th>Component</th>
+    <th>Role</th>
+    <th>OpenStack Controller</th>
+    <th>Acropolis SVM</th>
+  </tr>
+  <tr>
+    <td>Keystone</td>
+    <td>Identity service</td>
+    <td>X</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Horizon</td>
+    <td>Dashboard and UI</td>
+    <td>X</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Nova</td>
+    <td>Compute</td>
+    <td></td>
+    <td>X</td>
+  </tr>
+  <tr>
+    <td>Swift</td>
+    <td>Object storage</td>
+    <td>X</td>
+    <td>X</td>
+  </tr>
+  <tr>
+    <td>Cinder</td>
+    <td>Block storage</td>
+    <td></td>
+    <td>X</td>
+  </tr>
+  <tr>
+    <td>Glance</td>
+    <td>Image service</td>
+    <td>X</td>
+    <td>X</td>
+  </tr>
+  <tr>
+    <td>Neutron</td>
+    <td>Networking</td>
+    <td></td>
+    <td>X</td>
+  </tr>
+</table>
+
+<p>The figure shows a more detailed view of the OpenStack components and communication:</p>
+
+<figure id="id-NMtnHMIas8Fn"><img alt="" class="iimagesv2openstack_commarch2png" src="imagesv2/openstack_commarch3.png">
+<figcaption><span class="label">Figure 8-2. </span>OpenStack + Nutanix API Communication</figcaption>
 </figure>
 
-<p>The OpenStack Controller can be an existing VM / host, or deployed as part of the OpenStack on Nutanix solution.</p>
+<p>
+	In the following sections we will go through some of the main OpenStack components and how they are integrated into the Nutanix platform.
+</p>
 
-<p>For larger deployment it is recommended to have multiple Acropolis SVMs connected to the OpenStack Controller abstracted by a load balancer. &nbsp;This allows for HA and of the SVMs as well as distribution of transactions. &nbsp;The SVM(s) don't contain any state information allowing them to be scaled.</p>
+<section data-type="sect3" id="nova-qeIpt1IEsQF2">
+<h3>Nova</h3>
+<p>
+	Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Nutanix cluster will act a a single "hypervisor host" eligible for scheduling OpenStack instances.  These requests will be forwarded to the Acropolis scheduler which will determine optimal host placement and where the instance will be powered-on.  The Acropolis SVM runs the Nova-compute service.
+</p>
+</section>
+
+<section data-type="sect3" id="swift-gnI4fAI5sPFZ">
+<h3>Swift</h3>
+<p>
+	Swift in an object store used to store and retrieve files.  This is currently only leveraged for backup / restore of snapshots and images.
+</p>
+</section>
+
+<section data-type="sect3" id="cinder-EqIkinImsoF3">
+<h3>Cinder</h3>
+<p>
+	Cinder is OpenStack's volume component for exposing iSCSI targets.  Cinder leverages the Acropolis Volumes API in the Nutanix solution.  These volumes are attached to the instance(s) directly as block devies (as compared to in-guest).
+</p>
+</section>
+
+<section data-type="sect3" id="glance-image-repo-aOIbcXIGsWFq">
+<h3>Glance / Image Repo</h3>
+<p>
+	Glance is the image store for OpenStack and shows the available images for provisioning.  Images can include ISOs, disks, and snapshots.
+</p>
+<p>
+	The Image Repo is the repository storing available images published by Glance.  These can be located within the Nutanix environment or by an external source.  When the images are hosted on the Nutanix platform, they will be published to the OpenStack controller via Glance on the SVM.  In cases where the Image Repo exists only on an external source, Glance will be hosted by the OpenStack Controller and the Image Cache will be leveraged on the Nutanix Cluster(s).
+</p>
+<p>
+	 Glance is enabled on a per-cluster basis and will always exist with the Image Repo.  When Glance is enabled on multiple clusters the Image Repo will span those clusters and images created via the OpenStack Portal will be propogated to all clusters running Glance.  Those clusters not hosting Glance will cache the images locally using the Image Cache.
+</p>
+
+<div data-type="note" class="note" id="pro-tip-nXiZSNcwIBsBF1"><h6>Note</h6>
+<h1>Pro tip</h1>
+
+<p>For larger deployments the Image Repo should run on at least two Nutanix clusters per site.  This will provide Image Repo HA in the case of a cluster outage and ensure the images will always be available when not in the Image Cache.</p>
+</div>
+
+<p>
+	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Nutanix cluster(s).  In this case the Image Cache will be leveraged on the target Nutanix cluster(s) to cache the image locally for any subsequent provisioning requsts for the image.
+</p>
+</section>
+
+<section data-type="sect3" id="neutron-pGIXI0InsZFd">
+<h3>Neutron</h3>
+<p>
+	Neutron is the networking component of OpenStack and responsible for network configuration.  The Acropolis SVM allows network CRUD operations to be performed by the OpenStack portal and will then make the required changes in Acropolis.
+
+	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will recieve a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN.
+
+	Currently only Local and VLAN network types are supported.
+</p>
+</section>
+
+<p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis Services VM (SVM). The SVM(s) have an OpenStack Driver which is responsible for translating the OpenStack API calls into native Acropolis API calls.</p>
+</section>
+<section data-type="sect2" id="design-and-deployment-vlI5UGsBFE">
+<h2>Design and Deployment</h2>
+
+<p>For larger deployments it is recommended to have multiple Acropolis SVMs connected to the OpenStack Controller abstracted by a load balancer. This allows for HA and of the SVMs as well as distribution of transactions. The SVM(s) don't contain any state information allowing them to be scaled.</p>
 
 <p>The figure shows an example of scaling SVMs for a single site:</p>
 
-<figure id="id-GRtGUxswF9"><img alt="" class="iimagesv2openstack_svmhapng" src="imagesv2/openstack_svmha.png">
-<figcaption><span class="label">Figure 8-2. </span>OpenStack - SVM Load Balancing</figcaption>
+<figure id="id-1nt4T4UYsQFa"><img alt="" class="iimagesv2openstack_svmhapng" src="imagesv2/openstack_svmha.png">
+<figcaption><span class="label">Figure 8-3. </span>OpenStack - SVM Load Balancing</figcaption>
 </figure>
 
 <p>For environments spanning multiple sites the OpenStack Controller will talk to multiple Acropolis SVMs across sites.</p>
 
 <p>The figure shows an example of the deployment across multiple sites:</p>
-<figure id="id-1ntas0sVFP"><img alt="" src="imagesv2/openstack_siteha.png">
-<figcaption><span class="label">Figure 8-3. </span>OpenStack - Multi-Site</figcaption>
+<figure id="id-3rteFwUOsbFk"><img alt="" src="imagesv2/openstack_siteha.png">
+<figcaption><span class="label">Figure 8-4. </span>OpenStack - Multi-Site</figcaption>
 </figure>
+</section>
 </section>
 </section>
 </div>
@@ -2544,7 +2685,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Key Role: Dynamic read cache</li>
-	<li>Description: The Content Cache (aka “Elastic Dedupe Engine”) is a deduplicated read cache which spans both the CVM’s memory and SSD.&nbsp; Upon a read request of data not in the cache (or based upon a particular fingerprint), the data will be placed into the single-touch pool of the content cache which completely sits in memory, where it will use LRU until it is ejected from the cache.&nbsp; Any subsequent read request will “move” (no data is actually moved, just cache metadata) the data into the memory portion of the multi-touch pool, which consists of both memory and SSD.&nbsp; From here there are two LRU cycles, one for the in-memory piece upon which eviction will move the data to the SSD section of the multi-touch pool where a new LRU counter is assigned.&nbsp; Any read request for data in the multi-touch pool will cause the data to go to the peak of the multi-touch pool where it will be given a new LRU counter.&nbsp; Fingerprinting is configured at the container level and can be configured via the UI.&nbsp; By default, fingerprinting is disabled.</li>
+	<li>Description: The Content Cache is a deduplicated read cache which spans both the CVM’s memory and SSD.&nbsp; Upon a read request of data not in the cache (or based upon a particular fingerprint), the data will be placed into the single-touch pool of the Content Cache which completely sits in memory, where it will use LRU until it is evicted from the cache.&nbsp; Any subsequent read request will “move” (no data is actually moved, just cache metadata) the data into the memory portion of the multi-touch pool, which consists of both memory and SSD.&nbsp; From here there are two LRU cycles, one for the in-memory piece upon which eviction will move the data to the SSD section of the multi-touch pool where a new LRU counter is assigned.&nbsp; Any read request for data in the multi-touch pool will cause the data to go to the peak of the multi-touch pool where it will be given a new LRU counter.</li>
 </ul>
 
 <p>The following figure shows a high-level overview of the Content Cache:</p>
@@ -2553,7 +2694,13 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 10-6. </span>DSF Content Cache</figcaption>
 </figure>
 
-<h2>1.1.1.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Extent Cache</h2>
+<div data-type="note" class="note" id="cache-granularity-and-logic-21igh5H0T3"><h6>Note</h6>
+<h1>Cache Granularity and Logic</h1>
+
+<p>Data is brought into the cache at a 4K granularity and all caching is done real-time (e.g. no delay or batch process data to pull data into the cache).</p>
+</div>
+
+<h2>Extent Cache</h2>
 
 <ul>
 	<li>Key Role: In-memory read cache</li>
@@ -2722,6 +2869,8 @@ storage, compute and virtualization platform.
 <p>Use performance tier deduplication on your base images (you can manually fingerprint them using vdisk_manipulator) to take advantage of the content cache.</p>
 
 <p>Use capacity tier deduplication for P2V / V2V,&nbsp;when using Hyper-V since ODX does a full data copy, or when doing cross-container clones (not usually recommended).</p>
+
+<p>In most other cases compression will yield the highest capacity savings and should be used instead.</p>
 </div>
 </section>
 
@@ -2793,43 +2942,43 @@ storage, compute and virtualization platform.
 <table>
   <tr>
     <th></th>
-    <th colspan="2">FT1 (RF2 equiv.)</th>
-    <th colspan="2">FT2 (RF3 equiv.)</th>
+    <th colspan="2"><center>FT1 (RF2 equiv.)</center></th>
+    <th colspan="2"><center>FT2 (RF3 equiv.)</center></th>
   </tr>
   <tr>
     <td>Cluster Size<br>(nodes)</td>
     <td>EC Strip Size<br>(data/parity blocks)</td>
-    <td>EC Overhead<br>(vs. 2)</td>
+    <td>EC Overhead<br>(vs. 2X of RF2)</td>
     <td>EC Strip Size<br>(data/parity)</td>
-    <td>EC Overhead<br>(vs. 3)</td>
+    <td>EC Overhead<br>(vs. 3X of RF3)</td>
   </tr>
   <tr>
     <td>4</td>
     <td>2/1</td>
-    <td>1.5</td>
+    <td>1.5X</td>
     <td>N/A</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td>5</td>
     <td>3/1</td>
-    <td>1.33</td>
+    <td>1.33X</td>
     <td>N/A</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td>6</td>
     <td>4/1</td>
-    <td>1.25</td>
+    <td>1.25X</td>
     <td>N/A</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td>7+</td>
     <td>4/1</td>
-    <td>1.25</td>
+    <td>1.25X</td>
     <td>4/2</td>
-    <td>1.5</td>
+    <td>1.5X</td>
   </tr>
 </table>
 
@@ -2864,6 +3013,12 @@ storage, compute and virtualization platform.
 <figure id="id-b8tQFyIyTp"><img alt="" class="iimagesv2ec_3png" src="imagesv2/ec_3.png">
 <figcaption><span class="label">Figure 10-17. </span>DSF Encoded Strip - Post-savings</figcaption>
 </figure>
+
+<div data-type="note" class="note" id="pro-tip-W1iYtqIRT2"><h6>Note</h6>
+<h1>Pro tip</h1>
+
+<p>Erasure Coding pairs perfectly with inline compression which will add to the storage savings.  I leverage inline compression + EC in my environments.</p>
+</div>
 </section>
 
 <section data-type="sect1" id="storage-tiering-and-prioritization-rkIqUgTO">
@@ -3443,6 +3598,15 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figure class="large" id="id-J2trH1t9T9"><img alt="" class="iimagesv2data_locality2png" src="imagesv2/data_locality2.png">
 <figcaption><span class="label">Figure 10-55. </span>Data Locality</figcaption>
 </figure>
+
+<div data-type="note" class="note" id="thresholds-for-data-migration-Oxi4FOtjTJ"><h6>Note</h6>
+<h1>Thresholds for Data Migration</h1>
+
+<p>Data locality is a real-time operation and an extent group will be migrated when the following occurs:
+"3 touches within a 10 minute window where multiple reads every 10 second sampling count as a single touch".
+</p>
+</div>
+
 </section>
 
 <section data-type="sect1" id="shadow-clones-gnIEf8T1">
@@ -3505,6 +3669,12 @@ This should only be used for non-production scenarios and the cluster IPs should
 	<li>Description: Disk level metrics are pulled directly from the physical disk devices (via the CVM) and represent what the back-end is seeing.&nbsp; This includes data hitting the OpLog or Extent Store where an I/O is performed on the disk.&nbsp; This data can be viewed for one of more disk(s), the disk(s) for a particular node, or the aggregate disks in the cluster.&nbsp; In common cases, it is expected that the disk ops should match the number of incoming writes as well as reads not served from the memory portion of the cache.&nbsp; Any reads being served by the memory portion of the cache will not be counted here as the op is not hitting the disk device.</li>
 	<li>When to use: When looking to see how many ops are served from cache or hitting the disksm</li>
 </ul>
+
+<div data-type="note" class="note" id="metric-and-stat-retention-yGiRUBioTz"><h6>Note</h6>
+<h1>Metric and Stat Retention</h1>
+
+<p>Metrics and time series data is stored locally for 90 days in Prism Element.  For Prism Central and Insights, data can be stored indefinitely (assuming capacity is available).</p>
+</div>
 </section>
 </section>
 
@@ -3514,8 +3684,8 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>More coming soon!</p>
 </section>
 
-<section data-type="chapter" id="hypervisor-PgIzH9">
-<h1>Hypervisor</h1>
+<section data-type="chapter" id="acropolis-hypervisor-PgIzH9">
+<h1>Acropolis Hypervisor</h1>
 
 <section data-type="sect1" id="node-architecture-lkIms8H1">
 <h1>Node Architecture</h1>
@@ -4426,7 +4596,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'MapReduce Jobs' table:</p>
 
-<figure id="id-A0tvWfGHJFx"><img alt="" class="iimagesv22010pagescurator_mrjobs2png" src="imagesv2/2010Pages/curator_mrjobs2.png">
+<figure class="large" id="id-A0tvWfGHJFx"><img alt="" class="iimagesv22010pagescurator_mrjobs2png" src="imagesv2/2010Pages/curator_mrjobs2.png">
 <figcaption><span class="label">Figure 13-20. </span>2010 Page - MapReduce Jobs</figcaption>
 </figure>
 
@@ -4442,7 +4612,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the&nbsp;'Queued Curator Jobs' and 'Last Successful Curator Scans' section:</p>
 
-<figure id="id-1ntR3sVHVFQ"><img alt="" class="iimagesv22010pagescurator_queue_lastsuccessful2png" src="imagesv2/2010Pages/curator_queue_lastsuccessful2.png">
+<figure class="large" id="id-1ntR3sVHVFQ"><img alt="" class="iimagesv22010pagescurator_queue_lastsuccessful2png" src="imagesv2/2010Pages/curator_queue_lastsuccessful2.png">
 <figcaption><span class="label">Figure 13-22. </span>2010 Page - Queued and Successful Scans</figcaption>
 </figure>
 </section>
@@ -4525,7 +4695,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The following figure shows a graphical representation of how this looks for a failed CVM:</p>
 
-<figure id="id-zmtMFEuPuR"><img alt="" class="iimagesv2esx_hapy_2png" src="imagesv2/esx_hapy_2.png">
+<figure class="large" id="id-zmtMFEuPuR"><img alt="" class="iimagesv2esx_hapy_2png" src="imagesv2/esx_hapy_2.png">
 <figcaption><span class="label">Figure 15-2. </span>ESXi Host Networking - Local CVM Down</figcaption>
 </figure>
 </section>
