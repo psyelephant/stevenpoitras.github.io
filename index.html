@@ -223,7 +223,7 @@
     <a href="index.html#openstack-lkImslF5">OpenStack</a>
             <ol>
   <li data-type="sect2">
-    <a href="index.html#openstack-components-WnINIXsMFQ">OpenStack Components</a>
+    <a href="index.html#components-and-integration-WnINIXsMFQ">Components and Integration</a>
   </li>
   <li data-type="sect2">
     <a href="index.html#design-and-deployment-vlI5UGsBFE">Design and Deployment</a>
@@ -597,7 +597,7 @@
 <h1>Foreword</h1>
 
 
-<figure class="dheeraj" id="id-wntQsz">
+<figure class="small" id="id-wntQsz">
   <img align="middle" alt="" class="iimagesv2dheeraj_pandeyjpg" src="imagesv2/Dheeraj_Pandey.jpg">
 <figcaption><span class="label">Figure 1-1. </span>Dheeraj Pandey, CEO, Nutanix</figcaption>
 </figure>
@@ -1184,13 +1184,13 @@ one-click management and interface for datacenter operations.</p>
 <ul>
 	<li>Prism Central (PC)
 	<ul>
-		<li>Multi-cluster manager responsible for managing multiple Nutanix clusters to provide a single, centralized management interface. &nbsp;Prism Central is an optional software appliance (VM) which can be deployed in addition to the Nutanix cluster (can run on it).</li>
+		<li>Multi-cluster manager responsible for managing multiple Acropolis clusters to provide a single, centralized management interface. &nbsp;Prism Central is an optional software appliance (VM) which can be deployed in addition to the Acropolis cluster (can run on it).</li>
 		<li>1-to-many cluster manager</li>
 	</ul>
 	</li>
 	<li>Prism Element (PE)
 	<ul>
-		<li>Localized cluster manager responsible for local cluster management and operations. &nbsp;Every Nutanix cluster has Prism Element built-in.</li>
+		<li>Localized cluster manager responsible for local cluster management and operations. &nbsp;Every Acropolis cluster has Prism Element built-in.</li>
 		<li>1-to-1 cluster manager</li>
 	</ul>
 	</li>
@@ -1982,7 +1982,7 @@ $myArray | %{
 
 <p class="codetext">Get-Command | Where-Object{$_.PSSnapin.Name -eq "NutanixCmdletsPSSnapin"}</p>
 
-<h2>Connect to a Nutanix Cluster</h2>
+<h2>Connect to a Acropolis cluster</h2>
 
 <p class="codetext">Connect-NutanixCluster -Server $server -UserName "myuser" -Password "myuser" -AcceptInvalidSSLCerts</p>
 
@@ -2089,12 +2089,12 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <ul>
 	<li>OpenStack Controller (OSC)
 		<ul>
-			<li>An existing, or newly provisioned VM or host hosting the OpenStack UI and OpenStack services.  Handles all OpenStack API calls</li>
+			<li>An existing, or newly provisioned VM or host hosting the OpenStack UI and OpenStack services.  Handles all OpenStack API calls.</li>
 		</ul>
 	</li>
 	<li>Acropolis Services VM (SVM)
 		<ul>
-			<li>A helper VM which is responsible to taking OpenStack RPCs from the OpenStack Controller and translates them into native Acropolis API calls</li>
+			<li>A helper VM which is responsible to taking OpenStack RPCs from the OpenStack Controller and translates them into native Acropolis API calls.</li>
 		</ul>
 	</li>
 </ul>
@@ -2123,7 +2123,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
     <th>Role</th>
     <th>OpenStack Controller</th>
     <th>Acropolis SVM</th>
-    <th>Nutanix Cluster</th>
+    <th>Acropolis cluster</th>
     <th>External Source</th>
   </tr>
   <tr>
@@ -2200,8 +2200,8 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
   </tr>
 </table>
 
-<section data-type="sect2" id="openstack-components-WnINIXsMFQ">
-<h2>OpenStack Components</h2>
+<section data-type="sect2" id="components-and-integration-WnINIXsMFQ">
+<h2>Components and Integration</h2>
 
 <p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these funcitons will be hosted by the OpenStack Controller and some will be hosted by the Acropolis SVM.</p>
 
@@ -2256,6 +2256,12 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
     <td></td>
     <td>X</td>
   </tr>
+	<tr>
+    <td>Others</td>
+    <td>All other components</td>
+    <td>X</td>
+    <td></td>
+  </tr>
 </table>
 
 <p>The figure shows a more detailed view of the OpenStack components and communication:</p>
@@ -2271,8 +2277,43 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect3" id="nova-qeIpt1IEsQF2">
 <h3>Nova</h3>
 <p>
-	Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Nutanix cluster will act a a single "hypervisor host" eligible for scheduling OpenStack instances.  These requests will be forwarded to the Acropolis scheduler which will determine optimal host placement and where the instance will be powered-on.  The Acropolis SVM runs the Nova-compute service.
+	Nova is the compute engine and scheduler for the OpenStack platform.  The OpenStack Controller will run the majority of the Nova services and each Acropolis SVM runs the Nova-compute service.
 </p>
+
+<p>
+	You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'System Information'-&gt;'Compute Services'.
+</p>
+
+<p>The figure shows the Nova services, host and state:</p>
+
+<figure id="id-Q4t5SdtwInsQFX"><img alt="" src="imagesv2/openstack_nova_services.png">
+<figcaption><span class="label">Figure 8-3. </span>OpenStack Nova Services</figcaption>
+</figure>
+
+<p>
+	Each Acropolis Services VM acts as a compute host and every Acropolis cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host (i.e. Acropolis SVM) to place the instances based upon the selected availability zone.  These requests will be sent to the selected Acropolis SVM which will forward the request to the target host's (i.e. Acropolis cluster) Acropolis scheduler.  The Acropolis scheduler will then determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.
+</p>
+
+<p>
+	You can view the compute and hypevisor hosts using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'Hypervisors'.
+</p>
+
+<p>The figure shows the Acropolis SVM as the compute host:</p>
+
+<figure id="id-OQtdf0t9IAs9FV"><img alt="" src="imagesv2/openstack_nova_computehost.png">
+<figcaption><span class="label">Figure 8-4. </span>OpenStack Compute Host</figcaption>
+</figure>
+
+<p>The figure shows the Acropolis cluster as the hypervisor host:</p>
+
+<figure id="id-b8tXcZtYI1sJFA"><img alt="" src="imagesv2/openstack_nova_hypervisorhost.png">
+<figcaption><span class="label">Figure 8-5. </span>OpenStack Hypervisor Host</figcaption>
+</figure>
+
+<p>
+	As you can see from the previous image the full cluster resources are seen in a single hypervisor host.
+</p>
+
 </section>
 
 <section data-type="sect3" id="swift-gnI4fAI5sPFZ">
@@ -2287,6 +2328,17 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <p>
 	Cinder is OpenStack's volume component for exposing iSCSI targets.  Cinder leverages the Acropolis Volumes API in the Nutanix solution.  These volumes are attached to the instance(s) directly as block devies (as compared to in-guest).
 </p>
+
+<p>
+	You can view the Cinder services using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'System Information'-&gt;'Block Storage Services'.
+</p>
+
+<p>The figure shows the Cinder services, host and state:</p>
+
+<figure id="id-4mt2SPiRI4sYFo"><img alt="" src="imagesv2/openstack_cinder_services.png">
+<figcaption><span class="label">Figure 8-6. </span>OpenStack Cinder Services</figcaption>
+</figure>
+
 </section>
 
 <section data-type="sect3" id="glance-image-repo-aOIbcXIGsWFq">
@@ -2295,7 +2347,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 	Glance is the image store for OpenStack and shows the available images for provisioning.  Images can include ISOs, disks, and snapshots.
 </p>
 <p>
-	The Image Repo is the repository storing available images published by Glance.  These can be located within the Nutanix environment or by an external source.  When the images are hosted on the Nutanix platform, they will be published to the OpenStack controller via Glance on the SVM.  In cases where the Image Repo exists only on an external source, Glance will be hosted by the OpenStack Controller and the Image Cache will be leveraged on the Nutanix Cluster(s).
+	The Image Repo is the repository storing available images published by Glance.  These can be located within the Nutanix environment or by an external source.  When the images are hosted on the Nutanix platform, they will be published to the OpenStack controller via Glance on the SVM.  In cases where the Image Repo exists only on an external source, Glance will be hosted by the OpenStack Controller and the Image Cache will be leveraged on the Acropolis cluster(s).
 </p>
 <p>
 	 Glance is enabled on a per-cluster basis and will always exist with the Image Repo.  When Glance is enabled on multiple clusters the Image Repo will span those clusters and images created via the OpenStack Portal will be propogated to all clusters running Glance.  Those clusters not hosting Glance will cache the images locally using the Image Cache.
@@ -2304,11 +2356,11 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <div data-type="note" class="note" id="pro-tip-nXiZSNcwIBsBF1"><h6>Note</h6>
 <h1>Pro tip</h1>
 
-<p>For larger deployments the Image Repo should run on at least two Nutanix clusters per site.  This will provide Image Repo HA in the case of a cluster outage and ensure the images will always be available when not in the Image Cache.</p>
+<p>For larger deployments the Image Repo should run on at least two Acropolis clusters per site.  This will provide Image Repo HA in the case of a cluster outage and ensure the images will always be available when not in the Image Cache.</p>
 </div>
 
 <p>
-	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Nutanix cluster(s).  In this case the Image Cache will be leveraged on the target Nutanix cluster(s) to cache the image locally for any subsequent provisioning requsts for the image.
+	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Acropolis cluster(s).  In this case the Image Cache will be leveraged on the target Acropolis cluster(s) to cache the image locally for any subsequent provisioning requsts for the image.
 </p>
 </section>
 
@@ -2316,32 +2368,131 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <h3>Neutron</h3>
 <p>
 	Neutron is the networking component of OpenStack and responsible for network configuration.  The Acropolis SVM allows network CRUD operations to be performed by the OpenStack portal and will then make the required changes in Acropolis.
-
-	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will recieve a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN.
-
-	Currently only Local and VLAN network types are supported.
 </p>
-</section>
 
-<p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis Services VM (SVM). The SVM(s) have an OpenStack Driver which is responsible for translating the OpenStack API calls into native Acropolis API calls.</p>
+<p>
+	You can view the Neutron services using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'System Information'-&gt;'Network Agents'.
+</p>
+
+<p>The figure shows the Neutron services, host and state:</p>
+
+<figure id="id-OQtlSyI9IAs9FV"><img alt="" src="imagesv2/openstack_neutron_services.png">
+<figcaption><span class="label">Figure 8-7. </span>OpenStack Neutron Services</figcaption>
+</figure>
+<p>
+	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will recieve a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN as usual with Acropolis Hypervisor.
+</p>
+
+<div data-type="note" class="note" id="supported-network-types-mEiBFnIQI1sMFj"><h6>Note</h6>
+<h1>Supported Network Types</h1>
+
+<p>Currently only Local and VLAN network types are supported.</p>
+</div>
+
+</section>
 </section>
 <section data-type="sect2" id="design-and-deployment-vlI5UGsBFE">
 <h2>Design and Deployment</h2>
+
+<section data-type="sect3" id="topology-and-site-design-jrIvsEUVsaFG">
+<h3>Topology and Site Design</h3>
+<p>
+	For large scale cloud deployments it is important to leverage a delivery topology that will be distributed and meet the requirements of the end-users while providing flexibility and locality.
+</p>
+
+<p>
+	OpenStack leverages the following high-level constructs which are defined below:
+</p>
+
+<ul>
+	<li>
+		Region
+		<ul>
+			<li>
+				A geographic landmass or area where multiple Availability Zones (sites) are located.  These can include regions like US-Northwest or US-West.
+			</li>
+		</ul>
+	</li>
+	<li>
+		Availability Zone (AZ)
+		<ul>
+			<li>
+				A specific site or datacenter location where cloud services are hosted.  These can include sites like US-Northwest-1 or US-West-1.
+			</li>
+		</ul>
+	</li>
+	<li>
+		Host Aggregate
+		<ul>
+			<li>
+				A group of compute hosts, can be a row, aisle or equivalent to the site / AZ.
+			</li>
+		</ul>
+	</li>
+	<li>
+		Compute Host
+		<ul>
+			<li>
+				An Acropolis Services VM which is running the nova-compute service.
+			</li>
+		</ul>
+	</li>
+	<li>
+		Hypervisor Host
+		<ul>
+			<li>
+				An Acropolis cluster (seen as a single host).
+			</li>
+		</ul>
+	</li>
+</ul>
+
+<p>
+	The figure shows the high-level relationship of the constructs:
+</p>
+
+<figure id="id-3rtxHksdU4sqFm"><img alt="" src="imagesv2/openstack_regions.png">
+<figcaption><span class="label">Figure 8-8. </span>OpenStack - Deployment Layout</figcaption>
+</figure>
+
+<p>
+	The figure shows an example application of the constructs:
+</p>
+
+<figure id="id-lNtJtesWUEsnFZ"><img alt="" src="imagesv2/openstack_regions_example.png">
+<figcaption><span class="label">Figure 8-9. </span>OpenStack - Deployment Layout - Example</figcaption>
+</figure>
+
+<p>
+	You can view and manage hosts, host aggregates and availability zones using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'Host Aggregates'.
+</p>
+
+<p>The figure shows the host aggregates, availability zones and hosts:</p>
+
+<figure id="id-J2t5cNsOUNs5FG"><img alt="" src="imagesv2/openstack_hostagg_az.png">
+<figcaption><span class="label">Figure 8-10. </span>OpenStack Host Aggregates and Availability Zones</figcaption>
+</figure>
+
+</section>
+
+<section data-type="sect3" id="services-design-and-scaling-yAIzuJU1szFM">
+<h3>Services Design and Scaling</h3>
 
 <p>For larger deployments it is recommended to have multiple Acropolis SVMs connected to the OpenStack Controller abstracted by a load balancer. This allows for HA and of the SVMs as well as distribution of transactions. The SVM(s) don't contain any state information allowing them to be scaled.</p>
 
 <p>The figure shows an example of scaling SVMs for a single site:</p>
 
-<figure id="id-1nt4T4UYsQFa"><img alt="" class="iimagesv2openstack_svmhapng" src="imagesv2/openstack_svmha.png">
-<figcaption><span class="label">Figure 8-3. </span>OpenStack - SVM Load Balancing</figcaption>
+<figure id="id-2btlTzuRUysbFj"><img alt="" class="iimagesv2openstack_svmhapng" src="imagesv2/openstack_svmha.png">
+<figcaption><span class="label">Figure 8-11. </span>OpenStack - SVM Load Balancing</figcaption>
 </figure>
 
 <p>For environments spanning multiple sites the OpenStack Controller will talk to multiple Acropolis SVMs across sites.</p>
 
 <p>The figure shows an example of the deployment across multiple sites:</p>
-<figure id="id-3rteFwUOsbFk"><img alt="" src="imagesv2/openstack_siteha.png">
-<figcaption><span class="label">Figure 8-4. </span>OpenStack - Multi-Site</figcaption>
+<figure id="id-lNtnFEuWUEsnFZ"><img alt="" src="imagesv2/openstack_siteha.png">
+<figcaption><span class="label">Figure 8-12. </span>OpenStack - Multi-Site</figcaption>
 </figure>
+</section>
 </section>
 </section>
 </section>
