@@ -2503,7 +2503,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <p>
 	First we will import the provided Acropolis Services VM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
 </p>
-<p>To copy the file SCP the disk image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
+<p>To copy the file SCP the image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
 <p class="codetext">image.create &lt;IMAGE_NAME&gt; clone_from_vmdisk=&lt;IMAGE_PATH&gt; container=&lt;CONTAINER_NAME&gt;</p>
 <p>
 	To import the disk image using Images API, run the following command:
@@ -2532,12 +2532,35 @@ vm.on &lt;VM_NAME&gt;</p>
 <p>
 	First we will get the Keystone service ids for Glance and Neutron by running the following commands on the OpenStack Controller:
 </p>
-
 <p class="codetext">source keystonerc_admin <br>
 	keystone service-list
 </p>
 <p>
-	We will then create the two endpoints for Glance and Neutron:
+	The output should look similar to the following:
+</p>
+<p class="codetext">
++----------------------------------+------------+-----------------+---------------------------------+ <br>
+|                id                |    name    |       type      |           description           | <br>
++----------------------------------+------------+-----------------+---------------------------------+ <br>
+| e95f5c6a56dc4d93b016dbad0b72351e | ceilometer |     metering    |    Openstack Metering Service   | <br>
+| 09f82d2cacc64e6082755fe15f35dbcc |   cinder   |      volume     |          Cinder Service         | <br>
+| f169a9e6a5744b4f8f88897a4bd2b16a |  cinderv2  |     volumev2    |        Cinder Service v2        | <br>
+| 9e539e8dee264dd9a086677427434982 |   glance   |      image      |     OpenStack Image Service     | <br>
+| e0d6cc81400642e092c3290e82a3b607 |    heat    |  orchestration  | Openstack Orchestration Service | <br>
+| 9082586f93eb4ac3be59b880a163c2b8 |  keystone  |     identity    |    OpenStack Identity Service   | <br>
+| f4c4266142c742a78b330f8bafe5e49e |  neutron   |     network     |    Neutron Networking Service   | <br>
+| df0cc41a9de2490a8ae403f4b026adab |    nova    |     compute     |    Openstack Compute Service    | <br>
+| 829d9667fd194102898e489503f6bbad |  nova_ec2  |       ec2       |           EC2 Service           | <br>
+| b00d961b5b0c4ebbb9bdc742ff6570bf |   novav3   |    computev3    |   Openstack Compute Service v3  | <br>
+| 717c7602de9d44eba95e821a9a4aaf26 |   sahara   | data-processing |      Sahara Data Processing     | <br>
+| 23b80e6d3fd84c62943d3602e3f6cdc7 |   swift    |   object-store  |  Openstack Object-Store Service | <br>
+| 6284a3da6d9243e98d3e923e46122109 |  swift_s3  |        s3       |       Openstack S3 Service      | <br>
+| f3f5eae89c1e4e57be222505637dfb36 |   trove    |     database    |      Trove Database Service     | <br>
++----------------------------------+------------+-----------------+---------------------------------+ <br>
+</p>
+
+<p>
+	We will then create the two endpoints for Glance and Neutron using the services ids gathered previously:
 </p>
 <p class="codetext">
 	# Add Keystone endpoint for Glance <br>
