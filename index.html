@@ -34,15 +34,14 @@
       ga('send', 'pageview');
 
     </script>
-	
-	 <!-- Google Tag Manager -->
-      <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TR9PVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TR9PVL');</script>
-      <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TR9PVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TR9PVL');</script>
+    <!-- End Google Tag Manager -->
 <link rel="stylesheet" type="text/css" href="css/nutanixbible.css">
   </head>
   <body data-type="book">
@@ -607,7 +606,7 @@
 
 
 <figure class="small" id="id-wntQsz">
-  <img align="middle" alt="" class="iimagesv2dheeraj_pandeyjpg" src="imagesv2/Dheeraj_Pandey.jpg" style="width:50%">
+  <img align="middle" alt="" class="iimagesv2dheeraj_pandeyjpg" src="imagesv2/Dheeraj_Pandey.jpg" style="width:60%">
 <figcaption><span class="label">Figure 1-1. </span>Dheeraj Pandey, CEO, Nutanix</figcaption>
 </figure>
 
@@ -2101,21 +2100,21 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 			<li>An existing, or newly provisioned VM or host hosting the OpenStack UI, API and services.  Handles all OpenStack API calls.</li>
 		</ul>
 	</li>
-	<li>Acropolis Services VM (SVM)
+	<li>Acropolis OpenStack Services VM (OVM)
 		<ul>
 			<li>VM with Acropolis drivers that is responsible to taking OpenStack RPCs from the OpenStack Controller and translates them into native Acropolis API calls.</li>
 		</ul>
 	</li>
 </ul>
 
-<p>The OpenStack Controller can be an existing VM / host, or deployed as part of the OpenStack on Nutanix solution.  The Acropolis SVM is a helper VM which is deployed as part of the Nutanix OpenStack solution.</p>
+<p>The OpenStack Controller can be an existing VM / host, or deployed as part of the OpenStack on Nutanix solution.  The Acropolis OVM is a helper VM which is deployed as part of the Nutanix OpenStack solution.</p>
 
-<p>The client communicates with the OpenStack Controller using their expected methods (Web UI / HTTP, SDK, CLI or API) and the OpenStack controller communicates with the Acropolis SVM which translates the requests into native Acropolis REST API calls using the OpenStack Driver.</p>
+<p>The client communicates with the OpenStack Controller using their expected methods (Web UI / HTTP, SDK, CLI or API) and the OpenStack controller communicates with the Acropolis OVM which translates the requests into native Acropolis REST API calls using the OpenStack Driver.</p>
 
 <p>The figure shows a high-level overview of the communication:</p>
 
-<figure id="id-xbtrtzs3FQ"><img alt="" src="imagesv2/openstack_overview.png">
-<figcaption><span class="label">Figure 8-1. </span>OpenStack + Acropolis Services VM</figcaption>
+<figure id="id-xbtrtzs3FQ"><img alt="" src="imagesv2/openstack_overview2.png">
+<figcaption><span class="label">Figure 8-1. </span>OpenStack + Acropolis OVM</figcaption>
 </figure>
 
 <div data-type="note" class="note" id="supported-openstack-controllers-DjirfYsNFr"><h6>Note</h6>
@@ -2131,7 +2130,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
     <th>Item</th>
     <th>Role</th>
     <th>OpenStack Controller</th>
-    <th>Acropolis SVM</th>
+    <th>Acropolis OVM</th>
     <th>Acropolis Cluster</th>
   </tr>
   <tr>
@@ -2188,7 +2187,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect2" id="openstack-components-WnINIXsMFQ">
 <h2>OpenStack Components</h2>
 
-<p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these funcitons will be hosted by the OpenStack Controller and some will be hosted by the Acropolis SVM.</p>
+<p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these funcitons will be hosted by the OpenStack Controller and some will be hosted by the Acropolis OVM.</p>
 
 <p>The table shows the core OpenStack components and role mapping:</p>
 
@@ -2197,7 +2196,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
     <th>Component</th>
     <th>Role</th>
     <th>OpenStack Controller</th>
-    <th>Acropolis SVM</th>
+    <th>Acropolis OVM</th>
   </tr>
   <tr>
     <td>Keystone</td>
@@ -2251,7 +2250,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p>The figure shows a more detailed view of the OpenStack components and communication:</p>
 
-<figure id="id-NMtnHMIas8Fn"><img alt="" class="iimagesv2openstack_commarch2png" src="imagesv2/openstack_commarch3.png">
+<figure id="id-NMtnHMIas8Fn"><img alt="" class="iimagesv2openstack_commarch2png" src="imagesv2/openstack_commarch4.png">
 <figcaption><span class="label">Figure 8-2. </span>OpenStack + Nutanix API Communication</figcaption>
 </figure>
 
@@ -2262,7 +2261,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect3" id="nova-qeIpt1IEsQF2">
 <h3>Nova</h3>
 <p>
-	Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis Services VM acts as a compute host and every Nutanix cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis SVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis SVM runs the Nova-compute service.
+	Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis OVM acts as a compute host and every Nutanix cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis OVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis OVM runs the Nova-compute service.
 </p>
 </section>
 
@@ -2286,7 +2285,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 	Glance is the image store for OpenStack and shows the available images for provisioning.  Images can include ISOs, disks, and snapshots.
 </p>
 <p>
-	The Image Repo is the repository storing available images published by Glance.  These can be located within the Nutanix environment or by an external source.  When the images are hosted on the Nutanix platform, they will be published to the OpenStack controller via Glance on the SVM.  In cases where the Image Repo exists only on an external source, Glance will be hosted by the OpenStack Controller and the Image Cache will be leveraged on the Nutanix Cluster(s).
+	The Image Repo is the repository storing available images published by Glance.  These can be located within the Nutanix environment or by an external source.  When the images are hosted on the Nutanix platform, they will be published to the OpenStack controller via Glance on the OVM.  In cases where the Image Repo exists only on an external source, Glance will be hosted by the OpenStack Controller and the Image Cache will be leveraged on the Nutanix Cluster(s).
 </p>
 <p>
 	 Glance is enabled on a per-cluster basis and will always exist with the Image Repo.  When Glance is enabled on multiple clusters the Image Repo will span those clusters and images created via the OpenStack Portal will be propogated to all clusters running Glance.  Those clusters not hosting Glance will cache the images locally using the Image Cache.
@@ -2306,7 +2305,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect3" id="neutron-pGIXI0InsZFd">
 <h3>Neutron</h3>
 <p>
-	Neutron is the networking component of OpenStack and responsible for network configuration.  The Acropolis SVM allows network CRUD operations to be performed by the OpenStack portal and will then make the required changes in Acropolis.
+	Neutron is the networking component of OpenStack and responsible for network configuration.  The Acropolis OVM allows network CRUD operations to be performed by the OpenStack portal and will then make the required changes in Acropolis.
 
 	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will recieve a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN.
 
@@ -2314,7 +2313,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 </p>
 </section>
 
-<p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis Services VM (SVM). The SVM(s) have an OpenStack Driver which is responsible for translating the OpenStack API calls into native Acropolis API calls.</p>
+<p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis OVM. The OVM(s) have an OpenStack Driver which is responsible for translating the OpenStack API calls into native Acropolis API calls.</p>
 </section>
 <section data-type="sect2" id="design-and-deployment-vlI5UGsBFE">
 <h2>Design and Deployment</h2>
@@ -2356,7 +2355,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 		Compute Host
 		<ul>
 			<li>
-				An Acropolis Services VM which is running the nova-compute service.
+				An Acropolis OVM which is running the nova-compute service.
 			</li>
 		</ul>
 	</li>
@@ -2386,18 +2385,18 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <figcaption><span class="label">Figure 8-4. </span>OpenStack - Deployment Layout - Example</figcaption>
 </figure>
 
-<p>For larger deployments it is recommended to have multiple Acropolis SVMs connected to the OpenStack Controller abstracted by a load balancer. This allows for HA and of the SVMs as well as distribution of transactions. The SVM(s) don't contain any state information allowing them to be scaled.</p>
+<p>For larger deployments it is recommended to have multiple Acropolis OVMs connected to the OpenStack Controller abstracted by a load balancer. This allows for HA and of the OVMs as well as distribution of transactions. The OVM(s) don't contain any state information allowing them to be scaled.</p>
 
-<p>The figure shows an example of scaling SVMs for a single site:</p>
+<p>The figure shows an example of scaling OVMs for a single site:</p>
 
-<figure id="id-Q4tOcvUlsXF5"><img alt="" class="iimagesv2openstack_svmhapng" src="imagesv2/openstack_svmha.png">
-<figcaption><span class="label">Figure 8-5. </span>OpenStack - SVM Load Balancing</figcaption>
+<figure id="id-Q4tOcvUlsXF5"><img alt="" src="imagesv2/openstack_svmha2.png">
+<figcaption><span class="label">Figure 8-5. </span>OpenStack - OVM Load Balancing</figcaption>
 </figure>
 
-<p>For environments spanning multiple sites the OpenStack Controller will talk to multiple Acropolis SVMs across sites.</p>
+<p>For environments spanning multiple sites the OpenStack Controller will talk to multiple Acropolis OVMs across sites.</p>
 
 <p>The figure shows an example of the deployment across multiple sites:</p>
-<figure id="id-BAtOh5UosvFy"><img alt="" src="imagesv2/openstack_siteha.png">
+<figure id="id-BAtOh5UosvFy"><img alt="" src="imagesv2/openstack_siteha2.png">
 <figcaption><span class="label">Figure 8-6. </span>OpenStack - Multi-Site</figcaption>
 </figure>
 </section>
