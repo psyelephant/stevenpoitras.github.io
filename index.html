@@ -34,6 +34,7 @@
       ga('send', 'pageview');
 
     </script>
+    <link rel="stylesheet" type="text/css" href="theme/html/html.css">
 <link rel="stylesheet" type="text/css" href="css/nutanixbible.css">
   </head>
   <body data-type="book">
@@ -2286,7 +2287,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p>The figure shows the Nova services, host and state:</p>
 
-<figure id="id-Q4t5SdtwInsQFX"><img alt="" src="imagesv2/openstack_nova_services.png">
+<figure class="large" id="id-Q4t5SdtwInsQFX"><img alt="" src="imagesv2/openstack_nova_services.png">
 <figcaption><span class="label">Figure 8-3. </span>OpenStack Nova Services</figcaption>
 </figure>
 
@@ -2306,7 +2307,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p>The figure shows the Acropolis cluster as the hypervisor host:</p>
 
-<figure id="id-b8tXcZtYI1sJFA"><img alt="" src="imagesv2/openstack_nova_hypervisorhost.png">
+<figure class="large" id="id-b8tXcZtYI1sJFA"><img alt="" src="imagesv2/openstack_nova_hypervisorhost.png">
 <figcaption><span class="label">Figure 8-5. </span>OpenStack Hypervisor Host</figcaption>
 </figure>
 
@@ -2335,7 +2336,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p>The figure shows the Cinder services, host and state:</p>
 
-<figure id="id-4mt2SPiRI4sYFo"><img alt="" src="imagesv2/openstack_cinder_services.png">
+<figure class="large" id="id-4mt2SPiRI4sYFo"><img alt="" src="imagesv2/openstack_cinder_services.png">
 <figcaption><span class="label">Figure 8-6. </span>OpenStack Cinder Services</figcaption>
 </figure>
 
@@ -2376,7 +2377,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p>The figure shows the Neutron services, host and state:</p>
 
-<figure id="id-OQtlSyI9IAs9FV"><img alt="" src="imagesv2/openstack_neutron_services.png">
+<figure class="large" id="id-OQtlSyI9IAs9FV"><img alt="" src="imagesv2/openstack_neutron_services.png">
 <figcaption><span class="label">Figure 8-7. </span>OpenStack Neutron Services</figcaption>
 </figure>
 <p>
@@ -2469,7 +2470,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p>The figure shows the host aggregates, availability zones and hosts:</p>
 
-<figure id="id-J2t5cNsOUNs5FG"><img alt="" src="imagesv2/openstack_hostagg_az.png">
+<figure class="large" id="id-J2t5cNsOUNs5FG"><img alt="" src="imagesv2/openstack_hostagg_az.png">
 <figcaption><span class="label">Figure 8-10. </span>OpenStack Host Aggregates and Availability Zones</figcaption>
 </figure>
 
@@ -2492,6 +2493,196 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <figure id="id-lNtnFEuWUEsnFZ"><img alt="" src="imagesv2/openstack_siteha.png">
 <figcaption><span class="label">Figure 8-12. </span>OpenStack - Multi-Site</figcaption>
 </figure>
+</section>
+
+<section data-type="sect3" id="deployment-eqIjToUJslFN">
+<h3>Deployment</h3>
+<h4>Acropolis Services VM</h4>
+<p>
+	The Acropolis Services VM can be deployed using the following steps:
+</p>
+<ol>
+  <li>Import Services VM disk image to Acropolis cluster
+		<ul>
+			<li>
+				Copy Services VM disk image to Acropolis Cluster
+				<p>SCP image to any CVM IP on port 2222</p>
+				<p class="codetext">image.create &lt;IMAGE_NAME&gt; clone_from_vmdisk=&lt;IMAGE_PATH&gt; container=&lt;CONTAINER_NAME&gt;</p>
+			</li>
+			<li>
+				OR Import disk image using Images API
+				<p class="codetext">image.create &lt;IMAGE_NAME&gt; source_url=&lt;SOURCE_URL&gt; container=&lt;CONTAINER_NAME&gt;</p>
+			</li>
+		</ul>
+	</li>
+  <li>Create Acropolis VM for Services VM</li>
+		<p class="codetext">vm.create &lt;VM_NAME&gt; num_vcpus=2 memory=16G<br>
+		vm.disk_create &lt;VM_NAME&gt; clone_from_image=&lt;IMAGE_NAME&gt;<br>
+		vm.nic_create &lt;VM_NAME&gt; network=&lt;NETWORK_NAME&gt;</p>
+  <li>SSH to Service VM using provided credentials</li>
+  <li>Register local OpenStack driver service
+		<p class="codetext">acc --add=service --name=&lt;ASVM_NAME&gt; --ip=&lt;ASVM_IP&gt; --username=root --password=admin</p>
+	</li>
+  <li>Register OpenStack Controller</li>
+		<p class="codetext">acc --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=admin --password=admin</p>
+  <li>Register Acropolis Cluster(s)</li>
+		<p class="codetext">acc --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081</p>
+		<li>
+			Add Keystone endpoint for glance
+			<ol>
+				<li>
+					Get Glance service id
+					<p class="codetext">
+						keystone service-list
+					</p>
+				</li>
+				<li>
+					Add serice endpoint for Glance
+					<p class="codetext">
+						keystone endpoint-create \ <br>
+					  --service-id=&lt;GLANCE_SERVICE_ID&gt; \ <br>
+					  --publicurl=http://&lt;ASVM_IP&gt;:9292 \ <br>
+					  --internalurl=http://&lt;ASVM_IP&gt;:9292 \ <br>
+					  --region=&lt;REGION_NAME&gt; \ <br>
+					  --adminurl=http://&lt;ASVM_IP&gt;:9292
+					</p>
+				</li>
+			</ol>
+		</li>
+		<li>
+			Add Keystone endpoint for Neutron
+			<ol>
+				<li>
+					Get Neutron service id
+					<p class="codetext">
+						keystone service-list
+					</p>
+				</li>
+				<li>
+					Add serice endpoint for Neutron
+					<p class="codetext">
+						keystone endpoint-create \ <br>
+					  --service-id=&lt;GLANCE_SERVICE_ID&gt; \ <br>
+					  --publicurl=http://&lt;ASVM_IP&gt;:9696 \ <br>
+					  --internalurl=http://&lt;ASVM_IP&gt;:9696 \ <br>
+					  --region=&lt;REGION_NAME&gt; \ <br>
+					  --adminurl=http://&lt;ASVM_IP&gt;:9696
+					</p>
+				</li>
+			</ol>
+		</li>
+		<li>
+			Edit nova.conf with new Services VM IP of Glance host
+		</li>
+		<li>
+			Edit cinder.conf with Services VM IP of Glance host
+		</li>
+		<li>
+			Restart Nova services
+		</li>
+		<li>
+			Restart Cinder services
+		</li>
+</ol>
+
+</section>
+
+<section data-type="sect2" id="troubleshooting-andamp-advanced-administration-wrInSYUosQFE">
+<h2>Troubleshooting &amp; Advanced Administration</h2>
+
+<section data-type="sect3" id="key-log-locations-YWIgsWSjUnsmF8">
+<h3>Key log locations</h3>
+<table>
+  <tr>
+    <th>Component</th>
+    <th>Key Log Location(s)</th>
+  </tr>
+  <tr>
+    <td>Keystone</td>
+    <td>/var/log/keystone/keystone.log</td>
+  </tr>
+  <tr>
+    <td>Horizon</td>
+    <td>/var/log/horizon/horizon.log</td>
+  </tr>
+  <tr>
+    <td>Nova</td>
+    <td>/var/log/nova/nova-api.log<br>/var/log/nova/nova-scheduler.log<br>/var/log/nova/nove-compute.log*</td>
+  </tr>
+  <tr>
+    <td>Swift</td>
+    <td>/var/log/swift/swift.log</td>
+  </tr>
+  <tr>
+    <td>Cinder</td>
+    <td>/var/log/cinder/api.log<br>/var/log/cinder/scheduler.log<br>/var/log/cinder/volume.log</td>
+  </tr>
+  <tr>
+    <td>Glance</td>
+    <td>/var/log/glance/api.log<br>/var/log/glance/registry.log</td>
+  </tr>
+  <tr>
+    <td>Neutron</td>
+    <td>/var/log/neutron/server.log<br>/var/log/neutron/dhcp-agent.log*<br>/var/log/neutron/l3-agent.log*<br>/var/log/neutron/metadata-agent.log*<br>/var/log/neutron/openvswitch-agent.log*</td>
+  </tr>
+</table>
+<p>
+	Logs marked with * are on the Acropolis SVM only.
+</p>
+
+</section>
+
+<section data-type="sect3" id="command-reference-qeIQuASaU8sBFA">
+<h3>Command Reference</h3>
+
+<p>Load Keystone source (perform before running other commands)</p>
+
+<p class="codetext">source keystonerc_admin</p>
+
+<p>List Keystone services</p>
+
+<p class="codetext">keystone service-list</p>
+
+<p>List Keystone endpoints</p>
+
+<p class="codetext">keystone endpoint-list</p>
+
+<p>Create Keystone endpoint</p>
+
+<p class="codetext">
+	keystone endpoint-create \ <br>
+  --service-id=&lt;SERVICE_ID&gt; \ <br>
+  --publicurl=http://&lt;IP:PORT&gt; \ <br>
+  --internalurl=http://&lt;IP:PORT&gt; \ <br>
+  --region=&lt;REGION_NAME&gt; \ <br>
+  --adminurl=http://&lt;IP:PORT&gt; <br>
+</p>
+
+<p>List Nova instances</p>
+
+<p class="codetext">nova list</p>
+
+<p>Show instance details</p>
+
+<p class="codetext">nova show &lt;INSTANCE_NAME&gt;</p>
+
+<p>List Nova hypersivor hosts</p>
+
+<p class="codetext">nova hypervisor-list</p>
+
+<p>Show hyprevisor host details</p>
+
+<p class="codetext">nova hypervisor-show &lt;HOST_ID&gt;</p>
+
+<p>List Glance images</p>
+
+<p class="codetext">glance image-list</p>
+
+<p>Show Glance image details</p>
+
+<p class="codetext">glance image-show &lt;IMAGE_ID&gt;</p>
+
+</section>
 </section>
 </section>
 </section>
