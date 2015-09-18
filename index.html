@@ -2503,7 +2503,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <p>
 	First we will import the provided Acropolis Services VM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
 </p>
-<p>To copy the file SCP image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
+<p>To copy the file SCP the disk image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
 <p class="codetext">image.create &lt;IMAGE_NAME&gt; clone_from_vmdisk=&lt;IMAGE_PATH&gt; container=&lt;CONTAINER_NAME&gt;</p>
 <p>
 	To import the disk image using Images API, run the following command:
@@ -2537,11 +2537,10 @@ vm.on &lt;VM_NAME&gt;</p>
 	keystone service-list
 </p>
 <p>
-	We will then create the two endpoints:
+	We will then create the two endpoints for Glance and Neutron:
 </p>
-Add serice endpoint for Glance
 <p class="codetext">
-	# Add serice endpoint for Glance <br>
+	# Add Keystone endpoint for Glance <br>
 	keystone endpoint-create \ <br>
 	--service-id=&lt;GLANCE_SERVICE_ID&gt; \ <br>
 	--publicurl=http://&lt;ASVM_IP&gt;:9292 \ <br>
