@@ -2509,7 +2509,7 @@ vm.on &lt;VM_NAME&gt;</p>
 	Next we'll configure the Services VM by running the following commands:
 </p>
 <p class="codetext"># Register OpenStack Driver service <br>
-	acc --add=service --name=&lt;ASVM_NAME&gt; --ip=&lt;ASVM_IP&gt; --username=root --password=admin</p>
+	acc --add=service --name=&lt;OVM_NAME&gt; --ip=&lt;OVM_IP&gt; --username=root --password=admin</p>
 
 <p class="codetext"># Register OpenStack Controller <br>
 	acc --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=admin --password=admin</p>
@@ -2556,20 +2556,20 @@ vm.on &lt;VM_NAME&gt;</p>
 	# Add Keystone endpoint for Glance <br>
 	keystone endpoint-create \ <br>
 	--service-id=&lt;GLANCE_SERVICE_ID&gt; \ <br>
-	--publicurl=http://&lt;ASVM_IP&gt;:9292 \ <br>
-	--internalurl=http://&lt;ASVM_IP&gt;:9292 \ <br>
+	--publicurl=http://&lt;OVM_IP&gt;:9292 \ <br>
+	--internalurl=http://&lt;OVM_IP&gt;:9292 \ <br>
 	--region=&lt;REGION_NAME&gt; \ <br>
-	--adminurl=http://&lt;ASVM_IP&gt;:9292
+	--adminurl=http://&lt;OVM_IP&gt;:9292
 </p>
 
 <p class="codetext">
 	# Add Keystone endpoint for Neutron <br>
 	keystone endpoint-create \ <br>
 	--service-id=&lt;NEUTRON_SERVICE_ID&gt; \ <br>
-	--publicurl=http://&lt;ASVM_IP&gt;:9696 \ <br>
-	--internalurl=http://&lt;ASVM_IP&gt;:9696 \ <br>
+	--publicurl=http://&lt;OVM_IP&gt;:9696 \ <br>
+	--internalurl=http://&lt;OVM_IP&gt;:9696 \ <br>
 	--region=&lt;REGION_NAME&gt; \ <br>
-	--adminurl=http://&lt;ASVM_IP&gt;:9696
+	--adminurl=http://&lt;OVM_IP&gt;:9696
 </p>
 <p>
 	After the endpoints have been created we will update the Nova and Cinder configuration files with new Services VM IP of Glance host.</p>
@@ -2580,7 +2580,7 @@ vm.on &lt;VM_NAME&gt;</p>
 	[glance] <br>
 	... <br>
   # Default glance hostname or IP address (string value) <br>
-  host=&lt;ASVM_IP&gt; <br>
+  host=&lt;OVM_IP&gt; <br>
   <br>
   # Default glance port (integer value) <br>
   port=9292 <br>
@@ -2588,14 +2588,14 @@ vm.on &lt;VM_NAME&gt;</p>
   # A list of the glance api servers available to nova. Prefix <br>
   # with https:// for ssl-based glance api servers. <br>
   # ([hostname|ip]:port) (list value) <br>
-  api_servers=&lt;ASVM_IP&gt;:9292
+  api_servers=&lt;OVM_IP&gt;:9292
 </p>
 <p>
 	Next we will edit Cinder.conf which is located at /etc/cinder/cinder.conf and edit the following items:
 </p>
 <p class="codetext">
 	# Default glance host name or IP (string value) <br>
-  glance_host=&lt;ASVM_IP&gt; <br>
+  glance_host=&lt;OVM_IP&gt; <br>
   # Default glance port (integer value) <br>
   glance_port=9292 <br>
   # A list of the glance API servers available to cinder <br>
