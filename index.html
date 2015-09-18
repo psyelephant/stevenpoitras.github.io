@@ -2501,7 +2501,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 	The Acropolis Services VM can be deployed using the following steps:
 </p>
 <p>
-	First we will import the provided Acropolis Services VM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.
+	First we will import the provided Acropolis Services VM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
 </p>
 <p>To copy the file SCP image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
 <p class="codetext">image.create &lt;IMAGE_NAME&gt; clone_from_vmdisk=&lt;IMAGE_PATH&gt; container=&lt;CONTAINER_NAME&gt;</p>
@@ -2527,10 +2527,10 @@ vm.on &lt;VM_NAME&gt;</p>
 <p class="codetext">#Register Acropolis Cluster(s) <br>
 	acc --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081</p>
 <p>
-	Now that the Services VM has been configured, we'll configure the OpenStack Controller to know about the Glance endpoints.
+	Now that the Services VM has been configured, we'll configure the OpenStack Controller to know about the Glance and Neutron endpoints.
 </p>
 <p>
-	First we will get the Keystone service ids for Glance and Neutron but running the following commands on the OpenStack Controller:
+	First we will get the Keystone service ids for Glance and Neutron by running the following commands on the OpenStack Controller:
 </p>
 
 <p class="codetext">source keystonerc_admin <br>
@@ -2553,16 +2553,66 @@ Add serice endpoint for Glance
 <p class="codetext">
 	# Add Keystone endpoint for Neutron <br>
 	keystone endpoint-create \ <br>
-	--service-id=&lt;GLANCE_SERVICE_ID&gt; \ <br>
+	--service-id=&lt;NEUTRON_SERVICE_ID&gt; \ <br>
 	--publicurl=http://&lt;ASVM_IP&gt;:9696 \ <br>
 	--internalurl=http://&lt;ASVM_IP&gt;:9696 \ <br>
 	--region=&lt;REGION_NAME&gt; \ <br>
 	--adminurl=http://&lt;ASVM_IP&gt;:9696
 </p>
 <p>
-	After the endpoints have been created we will update the Nova and Cinder configuration files with new Services VM IP of Glance host.  The files are located at /etc/nova/nova.conf and /etc/cinder/cinder.conf</p>
+	After the endpoints have been created we will update the Nova and Cinder configuration files with new Services VM IP of Glance host.</p>
 <p>
-	After the files have been edited we will restart the Nova and Cinder services to take the new configuration settings.
+	First we will edit Nova.conf which is located at /etc/nova/nova.conf and edit the following lines:
+</p>
+<p class="codetext">
+	[glance] <br>
+	... <br>
+  # Default glance hostname or IP address (string value) <br>
+  host=&lt;ASVM_IP&gt; <br>
+  <br>
+  # Default glance port (integer value) <br>
+  port=9292 <br>
+	... <br>
+  # A list of the glance api servers available to nova. Prefix <br>
+  # with https:// for ssl-based glance api servers. <br>
+  # ([hostname|ip]:port) (list value) <br>
+  api_servers=&lt;ASVM_IP&gt;:9292
+</p>
+<p>
+	Next we will edit Cinder.conf which is located at /etc/cinder/cinder.conf and edit the following items:
+</p>
+<p class="codetext">
+	# Default glance host name or IP (string value) <br>
+  glance_host=&lt;ASVM_IP&gt; <br>
+  # Default glance port (integer value) <br>
+  glance_port=9292 <br>
+  # A list of the glance API servers available to cinder <br>
+  # ([hostname|ip]:port) (list value) <br>
+  glance_api_servers=$glance_host:$glance_port <br>
+</p>
+<p>
+	After the files have been edited we will restart the Nova and Cinder services to take the new configuration settings.  The services can be restarted with the following commands below or by running the scripts which are available for download.
+</p>
+
+<p class="codetext">
+	# Restart Nova services<br>
+	service openstack-nova-api restart<br>
+	service openstack-nova-consoleauth restart<br>
+	service openstack-nova-scheduler restart<br>
+	service openstack-nova-conductor restart<br>
+	service openstack-nova-cert restart<br>
+	service openstack-nova-novncproxy restart<br>
+	<br>
+	# OR you can also use the script which can be downloaded as part of the helper tools:<br>
+	~/openstack/commands/nova-restart <br>
+	<br>
+	# Restart Cinder <br>
+	service openstack-cinder-api restart<br>
+	service openstack-cinder-scheduler restart<br>
+	service openstack-cinder-backup restart <br>
+	<br>
+	# OR you can also use the script which can be downloaded as part of the helper tools:<br>
+	~/openstack/commands/cinder-restart
 </p>
 
 </section>
