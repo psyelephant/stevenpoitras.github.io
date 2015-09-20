@@ -2270,7 +2270,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect3" id="nova-qeIpt1IEsQF2">
 <h3>Nova</h3>
 <p>
-Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis Services VM acts as a compute host and every Acropolis Cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis SVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis SVM runs the Nova-compute service.
+Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis Services VM acts as a compute host and every Acropolis Cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis OVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis OVM runs the Nova-compute service.
 </p>
 
 <p>
@@ -2284,14 +2284,14 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </figure>
 
 <p>
-	Each Acropolis Services VM acts as a compute host and every Acropolis cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host (i.e. Acropolis SVM) to place the instances based upon the selected availability zone.  These requests will be sent to the selected Acropolis SVM which will forward the request to the target host's (i.e. Acropolis cluster) Acropolis scheduler.  The Acropolis scheduler will then determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.
+	Each Acropolis Services VM acts as a compute host and every Acropolis cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host (i.e. Acropolis OVM) to place the instances based upon the selected availability zone.  These requests will be sent to the selected Acropolis OVM which will forward the request to the target host's (i.e. Acropolis cluster) Acropolis scheduler.  The Acropolis scheduler will then determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.
 </p>
 
 <p>
 	You can view the compute and hypevisor hosts using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'Hypervisors'.
 </p>
 
-<p>The figure shows the Acropolis SVM as the compute host:</p>
+<p>The figure shows the Acropolis OVM as the compute host:</p>
 
 <figure id="id-OQtdf0t9IAs9FV"><img alt="" src="imagesv2/openstack_nova_computehost.png">
 <figcaption><span class="label">Figure 8-4. </span>OpenStack Compute Host</figcaption>
@@ -2669,7 +2669,7 @@ vm.on &lt;VM_NAME&gt;</p>
   </tr>
 </table>
 <p>
-	Logs marked with * are on the Acropolis SVM only.
+	Logs marked with * are on the Acropolis OVM only.
 </p>
 
 </section>
