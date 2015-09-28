@@ -637,7 +637,7 @@
 
 <p>&nbsp;</p>
 
-<figure id="id-aztlFk"><img align="middle" alt="" class="iimagesv2stujpg" src="imagesv2/Stu.jpg" style="width:50%">
+<figure id="id-aztlFk"><img align="middle" alt="" class="iimagesv2stujpg" src="imagesv2/Stu.jpg" style="width:45%">
 <figcaption><span class="label">Figure 1-2. </span>
 <p>Stuart Miniman, Principal Research Contributor, Wikibon</p>
 </figcaption>
@@ -655,7 +655,7 @@
 
 <h2>Introduction</h2>
 
-<figure id="id-ZptOIk"><img align="middle" alt="" class="iimagesv2209855_10100371454234638_4947938_ojpg" src="imagesv2/poitras_pic.jpg" style="width:50%">
+<figure id="id-ZptOIk"><img align="middle" alt="" src="imagesv2/poitras_pic.jpg" style="width:50%">
 <figcaption><span class="label">Figure 1-3. </span>Steven Poitras, Principal Solutions Architect, Nutanix</figcaption>
 </figure>
 
@@ -2270,7 +2270,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect3" id="nova-qeIpt1IEsQF2">
 <h3>Nova</h3>
 <p>
-Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis Services VM acts as a compute host and every Acropolis Cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis OVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis OVM runs the Nova-compute service.
+Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis OVM acts as a compute host and every Acropolis Cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis OVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis OVM runs the Nova-compute service.
 </p>
 
 <p>
@@ -2284,7 +2284,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </figure>
 
 <p>
-	Each Acropolis Services VM acts as a compute host and every Acropolis cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host (i.e. Acropolis OVM) to place the instances based upon the selected availability zone.  These requests will be sent to the selected Acropolis OVM which will forward the request to the target host's (i.e. Acropolis cluster) Acropolis scheduler.  The Acropolis scheduler will then determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.
+	Each Acropolis OVM acts as a compute host and every Acropolis cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host (i.e. Acropolis OVM) to place the instances based upon the selected availability zone.  These requests will be sent to the selected Acropolis OVM which will forward the request to the target host's (i.e. Acropolis cluster) Acropolis scheduler.  The Acropolis scheduler will then determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.
 </p>
 
 <p>
@@ -2486,12 +2486,12 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </section>
 <section data-type="sect3" id="deployment-yAIrCjsdFx">
 <h3>Deployment</h3>
-<h4>Acropolis Services VM</h4>
+<h4>Acropolis OVM</h4>
 <p>
-	The Acropolis Services VM can be deployed using the following steps:
+	The Acropolis OVM can be deployed using the following steps:
 </p>
 <p>
-	First we will import the provided Acropolis Services VM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
+	First we will import the provided Acropolis OVM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
 </p>
 <p>To copy the file SCP the image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
 <p class="codetext">image.create &lt;IMAGE_NAME&gt; clone_from_vmdisk=&lt;IMAGE_PATH&gt; container=&lt;CONTAINER_NAME&gt;</p>
@@ -2499,14 +2499,14 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	To import the disk image using Images API, run the following command:
 </p>
 <p class="codetext">image.create &lt;IMAGE_NAME&gt; source_url=&lt;SOURCE_URL&gt; container=&lt;CONTAINER_NAME&gt;</p>
-<p>Next create the Acropolis VM for the Services VM by running the following ACLI commands on any CVM:</p>
+<p>Next create the Acropolis VM for the OVM by running the following ACLI commands on any CVM:</p>
 <p class="codetext">vm.create &lt;VM_NAME&gt; num_vcpus=2 memory=16G<br>
 vm.disk_create &lt;VM_NAME&gt; clone_from_image=&lt;IMAGE_NAME&gt;<br>
 vm.nic_create &lt;VM_NAME&gt; network=&lt;NETWORK_NAME&gt;<br>
 vm.on &lt;VM_NAME&gt;</p>
 <p>Once the VM has been created and powered on SSH to Service VM using the provided credentials</p>
 <p>
-	Next we'll configure the Services VM by running the following commands:
+	Next we'll configure the OVM by running the following commands:
 </p>
 <p class="codetext"># Register OpenStack Driver service <br>
 	acc --add=service --name=&lt;OVM_NAME&gt; --ip=&lt;OVM_IP&gt; --username=root --password=admin</p>
@@ -2517,7 +2517,7 @@ vm.on &lt;VM_NAME&gt;</p>
 <p class="codetext">#Register Acropolis Cluster(s) <br>
 	acc --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081</p>
 <p>
-	Now that the Services VM has been configured, we'll configure the OpenStack Controller to know about the Glance and Neutron endpoints.
+	Now that the OVM has been configured, we'll configure the OpenStack Controller to know about the Glance and Neutron endpoints.
 </p>
 <p>
 	First we will get the Keystone service ids for Glance and Neutron by running the following commands on the OpenStack Controller:
@@ -2572,7 +2572,7 @@ vm.on &lt;VM_NAME&gt;</p>
 	--adminurl=http://&lt;OVM_IP&gt;:9696
 </p>
 <p>
-	After the endpoints have been created we will update the Nova and Cinder configuration files with new Services VM IP of Glance host.</p>
+	After the endpoints have been created we will update the Nova and Cinder configuration files with new Acropolis OVM IP of Glance host.</p>
 <p>
 	First we will edit Nova.conf which is located at /etc/nova/nova.conf and edit the following lines:
 </p>
@@ -3505,13 +3505,34 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 10-26. </span>Block Failure Replica Placement</figcaption>
 </figure>
 
+<div data-type="note" class="note" id="data-awareness-conditions-BWiXUZCJTv"><h6>Note</h6>
+	<h1>Data Awareness Conditions</h1>
+<p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
+
+<ul>
+	<li>&lt; 3 blocks: <strong>NODE</strong> awareness</li>
+	<li>3+ blocks uniformly populated: <strong>BLOCK + NODE</strong> awareness</li>
+	<li>3+ blocks not uniformly populated
+	<ul>
+		<li>If SSD <strong>or</strong> HDD tier variance between blocks is &gt; max variance: <strong>NODE (pre 4.5) or BEST EFFORT BLOCK (post 4.5)</strong> awareness</li>
+		<li>If SSD and HDD tier variance between blocks is &lt; max variance: <strong>BLOCK + NODE</strong> awareness</li>
+	</ul>
+	</li>
+</ul>
+
+<p>Max tier variance is calculated as: 100 / (RF+1)</p>
+<ul>
+	<li>E.g., 33% for RF2 or 25% for RF3</li>
+</ul>
+</div>
+
 <h2>Metadata</h2>
 
 <p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
 
 <p>The following figure shows an example of the Cassandra's ring for a 12-node cluster:</p>
 
-<figure id="id-OQtosBCjTJ"><img alt="" class="iimagesv2avail_dom_3png fse fs image" src="imagesv2/avail_dom_3.png" style="width: 50%; height: 50%">
+<figure id="id-n3tDuwC1TN"><img alt="" class="iimagesv2avail_dom_3png fse fs image" src="imagesv2/avail_dom_3.png" style="width: 50%; height: 50%">
 <figcaption><span class="label">Figure 10-27. </span>12 Node Cassandra Ring</figcaption>
 </figure>
 
@@ -3519,7 +3540,7 @@ storage, compute and virtualization platform.
 
 <p>The following figure shows an example node layout translating the ring above into the block based layout:</p>
 
-<figure id="id-rQtVSNCoTD"><img alt="" class="iimagesv2avail_dom_4png" src="imagesv2/avail_dom_4.png">
+<figure id="id-m2tmHdCoTN"><img alt="" class="iimagesv2avail_dom_4png" src="imagesv2/avail_dom_4.png">
 <figcaption><span class="label">Figure 10-28. </span>Cassandra Node Block Aware Placement</figcaption>
 </figure>
 
@@ -3527,11 +3548,73 @@ storage, compute and virtualization platform.
 
 <p>The following figure shows an example of all of the nodes replication topology to form the ring (yes – it’s a little busy):</p>
 
-<figure id="id-vOt8tXC5Tx"><img alt="" class="iimagesv2avail_dom_5png" src="imagesv2/avail_dom_5.png">
+<figure id="id-jRtRfmCeTa"><img alt="" class="iimagesv2avail_dom_5png" src="imagesv2/avail_dom_5.png">
 <figcaption><span class="label">Figure 10-29. </span>Full Cassandra Node Block Aware Placement</figcaption>
 </figure>
 
-<p>&nbsp;</p>
+<div data-type="note" class="note" id="metadata-awareness-conditions-wDioinCwTQ"><h6>Note</h6>
+	<h1>Metadata Awareness Conditions</h1>
+<p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
+
+<ul>
+	<li>FT1 (Data RF2 / Metadata RF3) will be block aware if:
+		<ul>
+			<li>
+				&gt; 3 blocks
+			</li>
+			<li>Let X be the number of nodes in the block with max nodes. Then, the remaining blocks should have at least 2X nodes.
+				<ul>
+					<li>
+						Example: 4 blocks with 2,3,4,2 nodes per block respectively.
+						<ul>
+							<li>
+								The max node block has 4 nodes which means the other 3 blocks should have 2x4 (8) nodes.  In this case it <strong>WOULD NOT</strong> be block aware as the remaining blocks only have 7 nodes.
+							</li>
+						</ul>
+					</li>
+					<br>
+					<li>
+						Example: 4 blocks with 3,3,4,3 nodes per block respectively.
+						<ul>
+							<li>
+								The max node block has 4 nodes which means the other 3 blocks should have 2x4==8 nodes.  In this case it <strong>WOULD</strong> be block aware as the remaining blocks have 9 nodes which is above our minimum.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>FT2 (Data RF3 / Metadata RF5) will be block aware if:
+		<ul>
+			<li>
+				&gt; 5 blocks
+			</li>
+			<li>Let X be the number of nodes in the block with max nodes. Then, the remaining blocks should have at least 4X nodes.
+				<ul>
+					<li>
+						Example: 6 blocks with 2,3,4,2,3,3 nodes per block respectively.
+						<ul>
+							<li>
+							The max node block has 4 nodes which means the other 3 blocks should have 4x4==16 nodes.  In this case it <strong>WOULD NOT</strong> be block aware as the remaining blocks only have 13 nodes.
+							</li>
+						</ul>
+						</li>
+					<br>
+					<li>
+						Example: 6 blocks with 2,4,4,4,4,4 nodes per block respectively.
+						<ul>
+							<li>
+								The max node block has 4 nodes which means the other 3 blocks should have 4x4==16 nodes.  In this case it <strong>WOULD</strong> be block aware as the remaining blocks have  18 nodes which is above our minimum.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
 
 <h2>Configuration Data</h2>
 
@@ -3539,13 +3622,13 @@ storage, compute and virtualization platform.
 
 <p>The following figure shows an example layout showing 3 Zookeeper nodes distributed in a block-aware manner:</p>
 
-<figure id="id-Yat3UeCqTR"><img alt="" class="iimagesv2avail_dom_6png" src="imagesv2/avail_dom_6.png">
+<figure id="id-qMtEh2CyTQ"><img alt="" class="iimagesv2avail_dom_6png" src="imagesv2/avail_dom_6.png">
 <figcaption><span class="label">Figure 10-30. </span>Zookeeper Block Aware Placement</figcaption>
 </figure>
 
 <p>In the event of a block outage, meaning one of the Zookeeper nodes will be gone, the Zookeeper role would be transferred to another node in the cluster as shown below:</p>
 
-<figure id="id-gktVC0CoTP"><img alt="" class="iimagesv2avail_dom_7png" src="imagesv2/avail_dom_7.png">
+<figure id="id-EGt4soCoTo"><img alt="" class="iimagesv2avail_dom_7png" src="imagesv2/avail_dom_7.png">
 <figcaption><span class="label">Figure 10-31. </span>Zookeeper Placement Block Failure</figcaption>
 </figure>
 
@@ -3553,24 +3636,6 @@ storage, compute and virtualization platform.
 
 <p>NOTE: Prior to 4.5, this migration was not automatic and must be done manually.</p>
 
-<p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
-
-<ul>
-	<li>&lt; 3 blocks –&gt; <strong>NODE</strong> awareness</li>
-	<li>3+ blocks uniformly populated –&gt; <strong>BLOCK + NODE</strong> awareness</li>
-	<li>3+ blocks not uniformly populated
-	<ul>
-		<li>If SSD <strong>or</strong> HDD tier variance between blocks is &gt; max variance –&gt; <strong>NODE</strong> awareness</li>
-		<li>If SSD and HDD tier variance between blocks is &lt; max variance&nbsp; –&gt; <strong>BLOCK</strong> + NODE awareness</li>
-	</ul>
-	</li>
-</ul>
-
-<p>NOTE: max tier variance is calculated as: 100 / (RF+1)</p>
-
-<ul>
-	<li>E.g., 33% for RF2 or 25% for RF3</li>
-</ul>
 </section>
 
 <section data-type="sect1" id="snapshots-and-clones-vlInsNTB">
@@ -4114,6 +4179,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>Communication between Acropolis and KVM occurs via Libvirt.&nbsp;</p>
+
+<div data-type="note" class="note" id="processor-generation-compatability-AmibF4u9Hx"><h6>Note</h6>
+<h1>Processor Generation Compatability</h1>
+
+<p>Similar to VMware's Enhanced vMotion Capability (EVC) which allows VMs to move between different processor generations; Acropolis Hypervisor will determine the lowest processor generation in the cluster and constrain all QEMU domains to that level.  This allows mixing of processor generations within an AHV cluster and ensures the ability to live migrate between hosts.</p>
+</div>
+
 </section>
 
 <section data-type="sect1" id="configuration-maximums-and-scalability-QMImTwHQ">
@@ -4484,6 +4556,14 @@ Cat /var/log/iscsi_redirector</p>
 <p>Check status</p>
 
 <p class="codetext">upgrade_status</p>
+
+<h2>Node(s) upgrade</h2>
+
+<p class="codedescription">Description: Perform upgrade of specified node(s) to current clusters version</p>
+
+<p>From any CVM running the desired version run the following command:</p>
+
+<p class="codetext">cluster -u &lt;NODE_IP(s)&gt; upgrade_node</p>
 
 <h2>Hypervisor upgrade status</h2>
 
