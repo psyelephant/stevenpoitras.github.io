@@ -2285,8 +2285,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 	In the following sections we will go through some of the main OpenStack components and how they are integrated into the Nutanix platform.
 </p>
 
-<section data-type="sect3" id="nova-gnI3tAI5sXtZ">
-<h3>Nova</h3>
+<h2>Nova</h2>
 <p>
 Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis OVM acts as a compute host and every Acropolis Cluster will act as a single hypervisor host eligible for scheduling OpenStack instances.  The Nova scheduler decides which compute host to place the instances based upon the selected availability zone.  These requests will be sent to the Acropolis OVM which will forward it to the target host's Acropolis scheduler which will determine optimal node placement within the cluster.  Individual nodes within a cluster are not exposed to OpenStack.  The Acropolis OVM runs the Nova-compute service.
 </p>
@@ -2297,7 +2296,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 
  <p>The figure shows the Nova services, host and state:</p>
 
-<figure class="large" id="id-J2tbSJtdINsNtG"><img alt="" src="imagesv2/openstack_nova_services.png">
+<figure class="large" id="id-J2tNIjI8sAty"><img alt="" src="imagesv2/openstack_nova_services.png">
 <figcaption><span class="label">Figure 9-3. </span>OpenStack Nova Services</figcaption>
 </figure>
 
@@ -2311,13 +2310,13 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 
 <p>The figure shows the Acropolis OVM as the compute host:</p>
 
-<figure id="id-n3tefmtwIBsNt1"><img alt="" src="imagesv2/openstack_nova_computehost.png">
+<figure id="id-n3tOsPIos3te"><img alt="" src="imagesv2/openstack_nova_computehost.png">
 <figcaption><span class="label">Figure 9-4. </span>OpenStack Compute Host</figcaption>
 </figure>
 
 <p>The figure shows the Acropolis cluster as the hypervisor host:</p>
 
-<figure class="large" id="id-rQtAcAtBIOsjtE"><img alt="" src="imagesv2/openstack_nova_hypervisorhost.png">
+<figure class="large" id="id-rQtPT2I9sqtD"><img alt="" src="imagesv2/openstack_nova_hypervisorhost.png">
 <figcaption><span class="label">Figure 9-5. </span>OpenStack Hypervisor Host</figcaption>
 </figure>
 
@@ -2325,17 +2324,12 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	As you can see from the previous image the full cluster resources are seen in a single hypervisor host.
 </p>
 
-</section>
-
-<section data-type="sect3" id="swift-EqIVfnImszt3">
-<h3>Swift</h3>
+<h2>Swift</h2>
 <p>
 	Swift in an object store used to store and retrieve files.  This is currently only leveraged for backup / restore of snapshots and images.
 </p>
-</section>
 
-<section data-type="sect3" id="cinder-aOIviXIGsytq">
-<h3>Cinder</h3>
+<h2>Cinder</h2>
 <p>
 	Cinder is OpenStack's volume component for exposing iSCSI targets.  Cinder leverages the Acropolis Volumes API in the Nutanix solution.  These volumes are attached to the instance(s) directly as block devies (as compared to in-guest).
 </p>
@@ -2346,14 +2340,11 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 
 <p>The figure shows the Cinder services, host and state:</p>
 
-<figure class="large" id="id-BAt0SoiBIZsWtz"><img alt="" src="imagesv2/openstack_cinder_services.png">
+<figure class="large" id="id-YatRIzIDs3tG"><img alt="" src="imagesv2/openstack_cinder_services.png">
 <figcaption><span class="label">Figure 9-6. </span>OpenStack Cinder Services</figcaption>
 </figure>
 
-</section>
-
-<section data-type="sect3" id="glance-image-repo-pGI9c0InsMtd">
-<h3>Glance / Image Repo</h3>
+<h2>Glance / Image Repo</h2>
 <p>
 	Glance is the image store for OpenStack and shows the available images for provisioning.  Images can include ISOs, disks, and snapshots.
 </p>
@@ -2364,7 +2355,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	 Glance is enabled on a per-cluster basis and will always exist with the Image Repo.  When Glance is enabled on multiple clusters the Image Repo will span those clusters and images created via the OpenStack Portal will be propogated to all clusters running Glance.  Those clusters not hosting Glance will cache the images locally using the Image Cache.
 </p>
 
-<div data-type="note" class="note" id="pro-tip-bOiNSvcYI1satA"><h6>Note</h6>
+<div data-type="note" class="note" id="pro-tip-oZibumIWs2tJ"><h6>Note</h6>
 <h1>Pro tip</h1>
 
 <p>For larger deployments Glance should run on at least two Acropolis Clusters per site.  This will provide Image Repo HA in the case of a cluster outage and ensure the images will always be available when not in the Image Cache.</p>
@@ -2373,10 +2364,8 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <p>
 	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Acropolis Cluster(s).  In this case the Image Cache will be leveraged on the target Acropolis Cluster(s) to cache the image locally for any subsequent provisioning requsts for the image.
 </p>
-</section>
 
-<section data-type="sect3" id="neutron-9ZIJIQIDsXtM">
-<h3>Neutron</h3>
+<h2>Neutron</h2>
 <p>
 	Neutron is the networking component of OpenStack and responsible for network configuration.  The Acropolis OVM allows network CRUD operations to be performed by the OpenStack portal and will then make the required changes in Acropolis.
 </p>
@@ -2387,19 +2376,18 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 
 <p>The figure shows the Neutron services, host and state:</p>
 
-<figure class="large" id="id-n3tZSPIwIBsNt1"><img alt="" src="imagesv2/openstack_neutron_services.png">		+	Currently only Local and VLAN network types are supported.
+<figure class="large" id="id-VrtXf2INsZtD"><img alt="" src="imagesv2/openstack_neutron_services.png">		+	Currently only Local and VLAN network types are supported.
 <figcaption><span class="label">Figure 9-7. </span>OpenStack Neutron Services</figcaption>
 </figure>
 <p>
 	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will recieve a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN as usual with Acropolis Hypervisor.
  </p>
 
-<div data-type="note" class="note" id="supported-network-types-W1igFqIXIesDtk"><h6>Note</h6>
+<div data-type="note" class="note" id="supported-network-types-05iAcpIrsEtB"><h6>Note</h6>
 <h1>Supported Network Types</h1>
 
 <p>Currently only Local and VLAN network types are supported.</p>
 </div>
-</section>
 
 <p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis OVM. The OVM(s) have an OpenStack Driver which is responsible for translating the OpenStack API calls into native Acropolis API calls.</p>
 </section>
@@ -2482,7 +2470,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </figure>
 
 <section data-type="sect3" id="services-design-and-scaling-okI9IMUWs2tJ">
-<h3>Services Design and Scaling</h3>
+<h2>Services Design and Scaling</h2>
 
 <p>For larger deployments it is recommended to have multiple Acropolis OVMs connected to the OpenStack Controller abstracted by a load balancer. This allows for HA and of the OVMs as well as distribution of transactions. The OVM(s) don't contain any state information allowing them to be scaled.</p>
 
@@ -2499,9 +2487,8 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <figcaption><span class="label">Figure 9-12. </span>OpenStack - Multi-Site</figcaption>
 </figure>
 </section>
-<section data-type="sect3" id="deployment-XnIYUyUVset0">
-<h3>Deployment</h3>
-<h4>Acropolis OVM</h4>
+<h2>Deployment</h2>
+<h3>Acropolis OVM</h3>
 <p>
 	The Acropolis OVM can be deployed using the following steps:
 </p>
@@ -2642,13 +2629,12 @@ vm.on &lt;VM_NAME&gt;</p>
 	~/openstack/commands/cinder-restart
 </p>
 </section>
-</section>
 
 <section data-type="sect2" id="troubleshooting-andamp-advanced-administration-yAIkhjswtx">
 <h2>Troubleshooting &amp; Advanced Administration</h2>
 
 <section data-type="sect3" id="key-log-locations-eqIlsmhJsJtN">
-<h3>Key log locations</h3>
+<h2>Key log locations</h2>
 <table>
   <tr>
     <th>Component</th>
@@ -2690,7 +2676,7 @@ vm.on &lt;VM_NAME&gt;</p>
 </section>
 
 <section data-type="sect3" id="command-reference-wrIWughosjtE">
-<h3>Command Reference</h3>
+<h2>Command Reference</h2>
 
 <p>Load Keystone source (perform before running other commands)</p>
 
