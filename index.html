@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="The Nutanix Bible - NutanixBible.com">
+    <meta property="og:title" content="The Nutanix Bible - StevenPoitras.com">
     <meta property="og:description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance.">
-    <meta property="og:url" content="http://NutanixBible.com">
-    <meta property="og:site_name" content="NutanixBible.com">
+    <meta property="og:url" content="http://theNutanixBible.com">
+    <meta property="og:site_name" content="StevenPoitras.com">
     <meta property="og:image" content="assets/Bible.svg">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="http://theNutanixBible.com">
     <meta name="twitter:description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance.">
-    <meta name="twitter:title" content="The Nutanix Bible - NutanixBible.com">
+    <meta name="twitter:title" content="The Nutanix Bible - StevenPoitras.com">
     <meta name="twitter:site" content="@StevenPoitras">
-    <meta name="twitter:domain" content="NutanixBible.com">
+    <meta name="twitter:domain" content="TheNutanixBible.com">
     <meta name="twitter:image:src" content="assets/Bible.svg">
     <meta name="twitter:creator" content="@StevenPoitras">
 
@@ -1531,7 +1531,86 @@ one-click management and interface for datacenter operations.</p>
 <section data-type="sect1" id="cluster-expansion-add-node-QMI5SwHj">
 <h1>Cluster Expansion (add node)</h1>
 
-<p>Coming soon!</p>
+<p>
+	The ability to dynamically scale the Acropolis cluster is core to its functionality.  To scale an Acropolis cluster, rack / stack / cable the nodes and power them on.  Once the nodes are powered up they will be discoverable by the current cluster using mDNS.
+</p>
+
+<p>
+	The figure shows an example 7 node cluster with 1 node which has been discovered:
+</p>
+
+<figure id="id-zmt9TOSxHM"><img alt="" src="imagesv2/Prism/addnode/expand_1.png">
+<figcaption><span class="label">Figure 7-14. </span>Add Node - Discovery</figcaption>
+</figure>
+
+<p>
+	Multiple nodes can be discovered and added to the cluster concurrently.
+</p>
+
+<p>
+	Once the nodes have been discovered you can begin the expansion by clicking 'Expand Cluster' on the upper right hand corner of the 'Hardware' page:
+</p>
+
+<figure id="id-0Ot0FaS9HW"><img alt="" src="imagesv2/Prism/addnode/expand_2a.png">
+<figcaption><span class="label">Figure 7-15. </span>Hardware Page - Expand Cluster</figcaption>
+</figure>
+
+<p>
+	You can also being the cluster expansion process from any page by clicking on the gear icon:
+</p>
+
+<figure id="id-DktrfgSnHr"><img alt="" src="imagesv2/Prism/addnode/expand_2b.png">
+<figcaption><span class="label">Figure 7-16. </span>Gear Menu - Expand Cluster</figcaption>
+</figure>
+
+<p>
+	This launches the expand cluster menu where you can select the node(s) to add and specify IP addresses for the components:
+</p>
+
+<figure id="id-GRtMcVSbH9"><img alt="" src="imagesv2/Prism/addnode/expand_3.png">
+<figcaption><span class="label">Figure 7-17. </span>Expand Cluster - Host Selection</figcaption>
+</figure>
+
+<p>
+	After the hosts have been selected you'll be prompted to upgrade a hypervisor image which will be used to image the nodes being added:
+</p>
+
+<figure id="id-RBtnU4SWHR"><img alt="" src="imagesv2/Prism/addnode/expand_4.png">
+<figcaption><span class="label">Figure 7-18. </span>Expand Cluster - Host Configuration</figcaption>
+</figure>
+
+<p>
+	After the upload is completed you can click on 'Expand Cluster' to being the imaging and expansion process:
+</p>
+
+<figure id="id-NMtbCnSnHl"><img alt="" src="imagesv2/Prism/addnode/expand_5.png">
+<figcaption><span class="label">Figure 7-19. </span>Expand Cluster - Execution</figcaption>
+</figure>
+
+<p>
+	The job will then be submitted and the corresponding task item will appear:
+</p>
+
+<figure id="id-3rtEuXSeHB"><img alt="" src="imagesv2/Prism/addnode/expand_6.png">
+<figcaption><span class="label">Figure 7-20. </span>Expand Cluster - Execution</figcaption>
+</figure>
+
+<p>
+	Detailed tasks status can be viewed by expanding the task(s):
+</p>
+
+<figure id="id-lNtDSzS5HV"><img alt="" src="imagesv2/Prism/addnode/expand_7.png">
+<figcaption><span class="label">Figure 7-21. </span>Expand Cluster - Execution</figcaption>
+</figure>
+
+<p>
+	After the imaging and add node process has been completed you'll see the updated cluster size and resources:
+</p>
+
+<figure id="id-Q4t9FESjHm"><img alt="" src="imagesv2/Prism/addnode/expand_9.png">
+<figcaption><span class="label">Figure 7-22. </span>Expand Cluster - Execution</figcaption>
+</figure>
+
 </section>
 
 <section data-type="sect1" id="capacity-planning-J5IrHVHl">
@@ -1540,13 +1619,13 @@ one-click management and interface for datacenter operations.</p>
 <p>To get detailed capacity planning details you can click on a specific cluster under the 'cluster runway' section in Prism Central to get more details:</p>
 
 <figure class="large" id="id-zmt8uyHxHM"><img alt="" class="iimagesv2prismpc_capplannerpng" src="imagesv2/Prism/pc_capplanner.png">
-<figcaption><span class="label">Figure 7-14. </span>Prism Central - Capacity Planning</figcaption>
+<figcaption><span class="label">Figure 7-23. </span>Prism Central - Capacity Planning</figcaption>
 </figure>
 
 <p>This view provides detailed information on cluster runway and identifies the most constrained resource (limiting resource). &nbsp;You can also get detailed information on what the top consumers are as well as some potential options to clean up additional capacity or ideal node types for cluster expansion.</p>
 
 <figure id="id-xbtOSXHqHQ"><img alt="" class="iimagesv2prismpc_recommendationpng" src="imagesv2/Prism/pc_recommendation.png">
-<figcaption><span class="label">Figure 7-15. </span>Prism Central - Capacity Planning - Recommendations</figcaption>
+<figcaption><span class="label">Figure 7-24. </span>Prism Central - Capacity Planning - Recommendations</figcaption>
 </figure>
 </section>
 
