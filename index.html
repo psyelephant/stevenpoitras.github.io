@@ -6,8 +6,7 @@
     <meta name="description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="nutanix, nutanix bible,nutanix architecture, prism, acropolis, webscale">
-    <meta name="robots" content="index, follow"
-    <meta property="og:locale" content="en_US">
+    <meta name="robots" content="index, follow" <meta="" property="og:locale">
     <meta property="og:type" content="article">
     <meta property="og:title" content="The Nutanix Bible - NutanixBible.com">
     <meta property="og:description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance.">
@@ -426,6 +425,9 @@
   </li>
   <li data-type="sect2">
     <a href="index.html#ip-address-management-ONIyujHgHJ">IP Address Management</a>
+  </li>
+  <li data-type="sect2">
+    <a href="index.html#vm-high-availability-ha-nrIkT2HrHN">VM High Availability (HA)</a>
   </li>
 </ol>
       </li>
@@ -2190,7 +2192,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <h1>Integrations</h1>
 
 <section data-type="sect1" id="openstack-M2IosAtq">
-<h1>OpenStack - beta!</h1>
+<h1>OpenStack</h1>
 
 <p><a href="https://www.openstack.org/">OpenStack </a>is an open source platform for managing and building clouds. &nbsp;It is primarily broken into the front-end (dashboard and API) and infrastructure services (compute, storage, etc.).</p>
 
@@ -2561,10 +2563,14 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <figcaption><span class="label">Figure 9-11. </span>OpenStack - OVM Load Balancing</figcaption>
 </figure>
 
+<p>
+	One method to achieve this for the OVM(s) is using Keepalived and HAproxy.
+</p>
+
 <p>For environments spanning multiple sites the OpenStack Controller will talk to multiple Acropolis OVMs across sites.</p>
 
 <p>The figure shows an example of the deployment across multiple sites:</p>
-<figure id="id-m2tBFnI8U1sytj"><img alt="" src="imagesv2/openstack_siteha2.png">
+<figure id="id-WmtatqIzUesDtk"><img alt="" src="imagesv2/openstack_siteha2.png">
 <figcaption><span class="label">Figure 9-12. </span>OpenStack - Multi-Site</figcaption>
 </figure>
 </section>
@@ -2753,6 +2759,12 @@ vm.on &lt;VM_NAME&gt;</p>
 <p>
 	Logs marked with * are on the Acropolis OVM only.
 </p>
+
+<div data-type="note" class="note" id="pro-tip-l9ioTesBhEsBtZ"><h6>Note</h6>
+<h1>Pro tip</h1>
+
+<p>Check NTP if a service is seen as state 'down' in OpenStack Manager (Admin UI or CLI) eventhough the service is running in the OVM.  Many services have a requirement for time to be in sync between the OpenStack Controller and Acropolis OVM.</p>
+</div>
 
 </section>
 
@@ -4367,6 +4379,178 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>Traditional DHCP / IPAM solutions can also be leveraged in an ‘unmanaged’ network scenario.</p>
 </section>
+
+<section data-type="sect2" id="vm-high-availability-ha-nrIkT2HrHN">
+<h2>VM High Availability (HA)</h2>
+<p>
+	Acropolis hypervisor VM HA is a feature built to ensure VM availability in the event of a host or block outage.  In the event of a host failure the VMs previously running on that host will be restarted on other healthy nodes throughout the cluster.
+</p>
+
+<div data-type="note" class="note" id="best-effort-ha-by-default-kpiyuqT5HXHG"><h6>Note</h6>
+<h1>Best effort HA by default</h1>
+<p>
+	By default any AHV cluster will have best effort HA for VMs.  In this mode, when a host becomes unavailable, the previously running VMs will be restarted on the remaining healthy hosts if possible.  Since this is best effort (meaning resources aren't reserved) the ability to restart all VMs will be dependent on available AHV resources.
+</p>
+</div>
+
+<p>
+	There are two main types of resource reservations for HA:
+</p>
+
+<ul>
+	<li>
+		Reserve Hosts
+		<ul>
+			<li>
+				Reserve X number of hosts where X is the number of host failures to tolerate (e.g. 1, 2, etc.)
+			</li>
+			<li>
+				This is the default when all hosts with the same amount of RAM
+			</li>
+		</ul>
+	</li>
+	<li>
+		Reserve Segments
+		<ul>
+			<li>
+				Reserve Y resources across N hosts in the cluster.  This will be a function of the cluster FT level, the size of the running VMs and the number of nodes in the cluster.
+			</li>
+			<li>
+				This is the default when some hosts have different amounts of RAM
+			</li>
+		</ul>
+	</li>
+</ul>
+
+<div data-type="note" class="note" id="pro-tip-RDiqH9TWHRHG"><h6>Note</h6>
+<h1>Pro tip</h1>
+<p>
+	Use reserve hosts when:
+</p>
+<ul>
+	<li>
+		You have homogenous clusters (all hosts <strong>DO</strong> have the same amount of RAM)
+	</li>
+	<li>
+		Consolidation ratio is higher priority than performance
+	</li>
+</ul>
+<p>
+	Use reserve segments when:
+</p>
+<ul>
+	<li>
+		You have heterogeneous clusters (all hosts <strong>DO NOT</strong> have the same amount of RAM)
+	</li>
+	<li>
+		Performance is higher priority than consolidation ratio
+	</li>
+</ul>
+</div>
+
+<p>
+	I'll cover both reservation options in the following sections.
+</p>
+
+<h3>Reserve Hosts</h3>
+
+<p>
+	  By default the number of failures to tolerate will be the same as the cluster FT level (i.e. 1 for FT1 aka RF2, 2 for FT2 aka RF3, etc.).  It is possible to override this via acli.
+</p>
+
+<div data-type="note" class="note" id="pro-tip-3NiQidTeHBHq"><h6>Note</h6>
+<h1>Pro tip</h1>
+<p>
+	You can override or manually set the number of reserved failover hosts with the following ACLI command:
+</p>
+<p class="codetext">acli ha.update num_reserved_hosts=&lt;NUM_RESERVED&gt;</p>
+</div>
+
+<p>
+	The figure shows an example scenario with a reserved host:
+</p>
+
+<figure id="id-3rtXIdTeHBHq"><img alt="" src="imagesv2/ha_reservedhost1.png">
+<figcaption><span class="label">Figure 13-9. </span>HA - Reserved Host</figcaption>
+</figure>
+
+<p>
+	In the event of a host failure VM(s) will be restarted on the reserved host(s):
+</p>
+
+<figure id="id-lNtGhxT5HVHn"><img alt="" src="imagesv2/ha_reservedhost2.png">
+<figcaption><span class="label">Figure 13-10. </span>HA - Reserved Host - Fail Over</figcaption>
+</figure>
+
+<p>
+	If the failed host comes back the VM(s) will be live migrated back to the original host to minimize any data movement for data locality:
+</p>
+
+<figure id="id-Q4tVszTjHmHQ"><img alt="" src="imagesv2/ha_reservedhost3.png">
+<figcaption><span class="label">Figure 13-11. </span>HA - Reserved Host - Fail Back</figcaption>
+</figure>
+
+<h3>Reserve Segments</h3>
+<p>
+	Reserve segments distributes the resource reservation across all hosts in a cluster.  In this scenario, each host will share a portion of the reservation for HA.  This ensures the overall cluster has enough failover capacity to restart VM(s) in the event of a host failure.
+</p>
+<p>
+	The figure shows an example scenario with reserved segments:
+</p>
+
+<figure id="id-OQtBHMTgH8H9"><img alt="" src="imagesv2/ha_reservedsegment1.png">
+<figcaption><span class="label">Figure 13-12. </span>HA - Reserved Segment</figcaption>
+</figure>
+
+<p>
+	In the event of a host failure VM(s) will be restarted throughout the cluster on the remaining healthy hosts:
+</p>
+
+<figure id="id-b8tMt5TBHbHJ"><img alt="" src="imagesv2/ha_reservedsegment2.png">
+<figcaption><span class="label">Figure 13-13. </span>HA - Reserved Segment - Fail Over</figcaption>
+</figure>
+
+<p>
+	The system will automatically calculate the per host reservation, however to gain some insight on how this is calculated i've added some detail around this.
+</p>
+
+<p>
+	When calculating the segment based reservation there are a few key constructs.  The first is the segment size which will be equal to the memory footprint of the largest VM.  Multiple VMs can fit into a single segment.
+</p>
+
+<p>
+	When using a segment based reservation there are a few key constructs that come in to play:
+</p>
+
+<ul>
+	<li>
+		Segment size = Largest running VM's memory (GB)
+	</li>
+	<li>
+		Most loaded host = Host running VMs with most memory (GB)
+	</li>
+	<li>
+		Conservation overhead = 1.5 - 2
+	</li>
+</ul>
+
+<p>
+	Based upon these inputs you can calculate the expected number of reserved segments:
+</p>
+
+<ul>
+	<li>
+		Reserved segments = (Most loaded host / Segment size) x Conservation overhead
+	</li>
+</ul>
+
+<div data-type="note" class="note" id="pro-tip-Y2iOCoTwHjHm"><h6>Note</h6>
+<h1>Pro tip</h1>
+
+<p>Keep your hosts balanced when using segment based reservation.  This will give the highest utilization and ensure not too many segments are reserved.</p>
+</div>
+
+</section>
 </section>
 
 <section data-type="sect1" id="administration-BNIyFRHZ">
@@ -4386,31 +4570,33 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h2>Enable 10GbE links only on OVS</h2>
 
- <p class="codedescription">Description: Enable 10g only on bond0</p>
+<p class="codedescription">Description: Enable 10g only on bond0 for local host</p>
 
-<p class="codetext">manage_ovs --interfaces 10g update_uplinks
-<br>
-allssh “source /etc/profile &gt; /dev/null 2&gt;&amp;1; manage_ovs --interfaces 10g update_uplinks”</p>
+<p class="codetext">manage_ovs --interfaces 10g update_uplinks</p>
+<p class="codedescription">Description: Show ovs uplinks for full cluster</p>
+<p>
+allssh “manage_ovs --interfaces 10g update_uplinks”
+</p>
 
 <h2>Show OVS uplinks</h2>
 
- <p class="codedescription">Description: Show ovs uplinks</p>
+ <p class="codedescription">Description: Show ovs uplinks for local host</p>
 
 <p class="codetext">manage_ovs show_uplinks</p>
 
  <p class="codedescription">Description: Show ovs uplinks for full cluster</p>
 
-<p class="codetext">allssh “source /etc/profile &gt; /dev/null 2&gt;&amp;1; manage_ovs show_uplinks”</p>
+<p class="codetext">allssh “manage_ovs show_uplinks”</p>
 
 <h2>Show OVS interfaces</h2>
 
- <p class="codedescription">Description: Show ovs interfaces</p>
+ <p class="codedescription">Description: Show ovs interfaces for local host</p>
 
 <p class="codetext">manage_ovs show_interfaces</p>
 
 <p>Show interfaces for full cluster</p>
 
-<p class="codetext">allssh “source /etc/profile &gt; /dev/null 2&gt;&amp;1; manage_ovs show_interfaces”</p>
+<p class="codetext">allssh “manage_ovs show_interfaces”</p>
 
 <h2>Show OVS switch information</h2>
 
