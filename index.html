@@ -606,7 +606,7 @@
 </ol>
       </li>
   <li data-type="afterword">
-    <a href="index.html#afterword-622I2">Afterword</a>
+   <a href="index.html#afterword-622I2">Afterword</a>
             <ol>
 </ol>
       </li>
@@ -4507,9 +4507,11 @@ This should only be used for non-production scenarios and the cluster IPs should
 	Reserve segments distributes the resource reservation across all hosts in a cluster.  In this scenario, each host will share a portion of the reservation for HA.  This ensures the overall cluster has enough failover capacity to restart VM(s) in the event of a host failure.
 </p>
 
-<p>
-		Nutanix leverages a bin packing methodology for a segment based resources reservation.  With this multiple VM(s) can be "packed" into a single "bin" aka segment.
-</p>
+<div data-type="note" class="note" id="pro-tip-mEiEtPTrHdHM"><h6>Note</h6>
+<h1>Pro tip</h1>
+
+<p>Keep your hosts balanced when using segment based reservation.  This will give the highest utilization and ensure not too many segments are reserved.</p>
+</div>
 
 <p>
 	The figure shows an example scenario with reserved segments:
@@ -4527,12 +4529,18 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 13-14. </span>HA - Reserved Segment - Fail Over</figcaption>
 </figure>
 
+<div data-type="note" class="note" id="reserved-segments-calculation-eriXUNTQH1H8"><h6>Note</h6>
+<h1>Reserved segment(s) calculation</h1>
 <p>
-	The system will automatically calculate the per host reservation, however to gain some insight on how this is calculated I've added some detail around this.
+	The system will automatically calculate the total number of reserved segments and per host reservation.  To gain some insight on how this is calculated some details on the calculation can be found in the following text.
 </p>
 
 <p>
-	When calculating the segment based reservation there are a few key constructs.  The first is the segment size which will be equal to the memory footprint of the largest VM.  Multiple VMs can fit into a single segment.
+	Acropolis HA uses fixed size segments to reserve enough space for successful VM restart in case of host failure.  The segment size corresponds to largest VM in the system.  The distinctive feature of Acropolis HA is the ability to pack multiple smaller VMs into a single fixed size segment.  In a cluster with VMs of varying size, a single segment can accommodate multiple VMs, thus reducing fragmentation inherent to any fixed size segment scheme.
+</p>
+
+<p>
+	The most efficient placement of VMs (least number of segments reserved) is defined as bin-packing problem, a well known problem in computer science.  The optimal solution is NP-hard (exponential), but heuristic solutions can come close to optimal for the common case.  Nutanix will continue improving its placement algorithms.  We expect to have 0.25 extra overhead for the common case in future versions. Today, the fragmentation overhead varies between 0.5 and 1 giving a total overhead of 1.5-2 per configured host failure.
 </p>
 
 <p>
@@ -4547,7 +4555,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 		Most loaded host = Host running VMs with most memory (GB)
 	</li>
 	<li>
-		Fragmentation = 1.5 - 2
+		Fragmentation overhead = 0.5 - 1
 	</li>
 </ul>
 
@@ -4557,14 +4565,9 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <ul>
 	<li>
-		Reserved segments = (Most loaded host / Segment size) x Fragmentation
+		Reserved segments = (Most loaded host / Segment size) x (1 + Fragmentation overhead)
 	</li>
 </ul>
-
-<div data-type="note" class="note" id="pro-tip-aBi0SkT9HAHZ"><h6>Note</h6>
-<h1>Pro tip</h1>
-
-<p>Keep your hosts balanced when using segment based reservation.  This will give the highest utilization and ensure not too many segments are reserved.</p>
 </div>
 
 </section>
