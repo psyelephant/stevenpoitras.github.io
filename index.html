@@ -4399,9 +4399,9 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="best-effort-ha-by-default-RDiqH9TWHRHG"><h6>Note</h6>
-<h1>Best effort HA by default</h1>
+<h1>Default VM restart policy</h1>
 <p>
-	By default any AHV cluster will have best effort HA for VMs.  In this mode, when a host becomes unavailable, the previously running VMs will be restarted on the remaining healthy hosts if possible.  Since this is best effort (meaning resources aren't reserved) the ability to restart all VMs will be dependent on available AHV resources.
+	By default any AHV cluster will do its best to restart VM(s) in the event of a host failure.  In this mode, when a host becomes unavailable, the previously running VMs will be restarted on the remaining healthy hosts if possible.  Since this is best effort (meaning resources aren't reserved) the ability to restart all VMs will be dependent on available AHV resources.
 </p>
 </div>
 
