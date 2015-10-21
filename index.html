@@ -4597,7 +4597,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p class="codetext">manage_ovs --interfaces 10g update_uplinks</p>
 <p class="codedescription">Description: Show ovs uplinks for full cluster</p>
 <p>
-allssh “manage_ovs --interfaces 10g update_uplinks”
+allssh "manage_ovs --interfaces 10g update_uplinks"
 </p>
 
 <h2>Show OVS uplinks</h2>
@@ -4608,7 +4608,7 @@ allssh “manage_ovs --interfaces 10g update_uplinks”
 
  <p class="codedescription">Description: Show ovs uplinks for full cluster</p>
 
-<p class="codetext">allssh “manage_ovs show_uplinks”</p>
+<p class="codetext">allssh "manage_ovs show_uplinks"</p>
 
 <h2>Show OVS interfaces</h2>
 
@@ -4618,7 +4618,7 @@ allssh “manage_ovs --interfaces 10g update_uplinks”
 
 <p>Show interfaces for full cluster</p>
 
-<p class="codetext">allssh “manage_ovs show_interfaces”</p>
+<p class="codetext">allssh "manage_ovs show_interfaces"</p>
 
 <h2>Show OVS switch information</h2>
 
@@ -4972,7 +4972,7 @@ sudo service iptables restart</p>
 
 <p class="codedescription">Description: Reset the Latency Page (&lt;CVM IP&gt;:2009/latency) counters</p>
 
-<p class="codetext">allssh “ wget $i:2009/latency/reset”</p>
+<p class="codetext">allssh "wget $i:2009/latency/reset"</p>
 
 <h2>Find Number of vDisks</h2>
 
@@ -4984,25 +4984,25 @@ sudo service iptables restart</p>
 
 <p class="codedescription">Description: Starts a Curator full scan from the CLI</p>
 
-<p class="codetext">allssh “ wget -O - "http://$i:2010/master/api/client/StartCuratorTasks?task_type=2"; “</p>
+<p class="codetext">allssh "wget -O - "http://$i:2010/master/api/client/StartCuratorTasks?task_type=2";" </p>
 
 <h2>Compact ring</h2>
 
 <p class="codedescription">Description: Compact the metadata ring</p>
 
-<p class="codetext">allssh “nodetool -h localhost compact”</p>
+<p class="codetext">allssh "nodetool -h localhost compact"</p>
 
 <h2>Find NOS version</h2>
 
 <p class="codedescription">Description: Find the NOS&nbsp; version (NOTE: can also be done using NCLI)</p>
 
-<p class="codetext">allssh “cat /etc/nutanix/release_version”</p>
+<p class="codetext">allssh "cat /etc/nutanix/release_version"</p>
 
 <h2>Find CVM version</h2>
 
 <p class="codedescription">Description: Find the CVM image version</p>
 
-<p class="codetext">allssh “cat /etc/nutanix/svm-version”</p>
+<p class="codetext">allssh "cat /etc/nutanix/svm-version"</p>
 
 <h2>Manually fingerprint vDisk(s)</h2>
 
@@ -5014,7 +5014,7 @@ sudo service iptables restart</p>
 
 <p class="codedescription">Description: Echos the factory_config.jscon for all nodes in the cluster</p>
 
-<p class="codetext">allssh “cat /etc/nutanix/factory_config.json”</p>
+<p class="codetext">allssh "cat /etc/nutanix/factory_config.json"</p>
 
 <h2>Upgrade a single Nutanix node’s NOS version</h2>
 
@@ -5084,7 +5084,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p class="codedescription">Description: Find Acropolis logs for the cluster</p>
 
-<p class="codetext">allssh “cat ~/data/logs/Acropolis.log”</p>
+<p class="codetext">allssh "cat ~/data/logs/Acropolis.log"</p>
 
 <h2>Find cluster error logs</h2>
 
@@ -5501,11 +5501,11 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <br>
 # Perform upgrade</p>
 
-<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i “esxcli software vib install -d /vmfs/volumes/&lt;Datastore Name&gt;/&lt;Offline bundle name&gt;”;done</p>
+<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i "esxcli software vib install -d /vmfs/volumes/&lt;Datastore Name&gt;/&lt;Offline bundle name&gt;;done</p>
 
 <p># Example</p>
 
-<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i “esxcli software vib install -d /vmfs/volumes/NTNX-upgrade/update-from-esxi5.1-5.1_update01.zip”;done</p>
+<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i "esxcli software vib install -d /vmfs/volumes/NTNX-upgrade/update-from-esxi5.1-5.1_update01.zip";done</p>
 
 <p>Performing a rolling reboot of ESXi hosts: For PowerCLI on automated hosts reboots</p>
 
@@ -5676,7 +5676,7 @@ Invoke-Command -ComputerName&nbsp; $targetServers {
 
 <p class="codedescription">Description: Display the available number of VMQ offloads for a particular host</p>
 
-<p class="codetext">gwmi –Namespace “root\virtualization\v2” –Class Msvm_VirtualEthernetSwitch | select elementname, MaxVMQOffloads</p>
+<p class="codetext">gwmi –Namespace "root\virtualization\v2" –Class Msvm_VirtualEthernetSwitch | select elementname, MaxVMQOffloads</p>
 
 <h2>Disable VMQ for VMs matching a specific prefix</h2>
 
@@ -5728,7 +5728,7 @@ Get-VM | Where {$_.Name -match $vmPrefix} | Stop-VM</p>
 
 <p class="codedescription">Description: Check Winsh and WinRM connectivity / status by performing a sample query which should return the computer system object not an error</p>
 
-<p class="codetext">allssh “'source /etc/profile &gt; /dev/null 2&gt;&amp;1; winsh "get-wmiobject win32_computersystem"'; done</p>
+<p class="codetext">allssh "winsh "get-wmiobject win32_computersystem"</p>
 </section>
 
 <section data-type="sect1" id="metrics-and-thresholds-QMImTzTx">
