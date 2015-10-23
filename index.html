@@ -7,21 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="nutanix, nutanix bible,nutanix architecture, prism, acropolis, webscale">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Steven Poitras">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="article">
     <meta property="og:title" content="The Nutanix Bible - NutanixBible.com">
     <meta property="og:description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance.">
     <meta property="og:url" content="http://NutanixBible.com">
     <meta property="og:site_name" content="NutanixBible.com">
-    <meta property="og:image" content="assets/Bible.png?999">
+    <meta property="og:image" content="assets/Bible.svg">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="http://NutanixBible.com">
     <meta name="twitter:description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance.">
     <meta name="twitter:title" content="The Nutanix Bible - NutanixBible.com">
     <meta name="twitter:site" content="@StevenPoitras">
     <meta name="twitter:domain" content="NutanixBible.com">
-    <meta name="twitter:image:src" content="assets/Bible.png?999">
+    <meta name="twitter:image:src" content="assets/Bible.svg">
     <meta name="twitter:creator" content="@StevenPoitras">
 
     <!--<link rel="stylesheet" type="text/css" href="css/nutanixbible.css">-->
@@ -608,7 +607,7 @@
 </ol>
       </li>
   <li data-type="afterword">
-   <a href="index.html#afterword-622I2">Afterword</a>
+    <a href="index.html#afterword-622I2">Afterword</a>
             <ol>
 </ol>
       </li>
@@ -2578,8 +2577,12 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </section>
 <h2>Deployment</h2>
 <h3>Acropolis OVM</h3>
+
 <p>
-	The Acropolis OVM can be deployed using the following steps:
+	The Acropolis OVM can be deployed on any platform as long as it has network connectivity to the OpenStack Controller and Nutanix Cluster(s).
+</p>
+<p>
+	The Acropolis OVM can be deployed on a Nutanix AHV cluster using the following steps:
 </p>
 <p>
 	First we will import the provided Acropolis OVM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
@@ -2600,13 +2603,36 @@ vm.on &lt;VM_NAME&gt;</p>
 	Next we'll configure the OVM by running the following commands:
 </p>
 <p class="codetext"># Register OpenStack Driver service <br>
-	ovmctl --add=service --name=&lt;OVM_NAME&gt; --ip=&lt;OVM_IP&gt; --username=root --password=admin</p>
+	ovmctl --add=service --name=&lt;OVM_NAME&gt; --ip=&lt;OVM_IP&gt; --username=root --password=admin
+</p>
 
-<p class="codetext"># Register OpenStack Controller <br>
-	ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=admin --password=admin</p>
+<p class="codetext">
+# Register OpenStack Controller <br>
+ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=&lt;OS_CONTROLLER_USERNAME&gt; --password=&lt;OS_CONTROLLER_PASSWORD&gt;<br>
+       <span style="margin-left:2em">[--auth_strategy=&lt;&gt; --auth_region=&lt;&gt; --auth_tenant=&lt;&gt; --auth_password=&lt;&gt;</span><br>
+       <span style="margin-left:2em">--db_nova=&lt;&gt; --db_cinder=&lt;&gt; --db_glance=&lt;&gt; --db_neutron=&lt;&gt;</span><br>
+       <span style="margin-left:2em">--db_nova_password=&lt;NOVA_DB_PASSWORD&gt; --db_cinder_password=&lt;CINDER_DB_PASSWORD&gt; --db_glance_password=&lt;GLANCE_DB_PASSWORD&gt; --db_neutron_password=&lt;NEUTRON_DB_PASSWORD&gt;</span><br>
+       <span style="margin-left:2em">--rpc_backend=&lt;&gt; --rpc_username=&lt;&gt; --rpc_password=&lt;&gt;]</span><br>
+			 <br>
+ The following values are used as defaults:<br>
+      <span style="margin-left:2em">Authentication: auth_strategy = keystone, auth_region = RegionOne</span><br>
+      <span style="margin-left:4em">auth_tenant = services, auth_password = admin</span><br>
+      <span style="margin-left:2em">Database:        db_{nova,cinder,glance,neutron} = mysql, db_{nova,cinder,glance,neutron}_password = admin</span><br>
+      <span style="margin-left:2em">RPC:            rpc_backend = rabbit, rpc_username = guest, rpc_password = guest</span>
+</p>
 
-<p class="codetext">#Register Acropolis Cluster(s) <br>
-	ovmctl --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081</p>
+<p class="codetext">
+# Register Acropolis Cluster(s) <br>
+ovmctl --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081<br>
+    <span style="margin-left:2em">[--num_vcpus_per_core=&lt;&gt;</span><br>
+    <span style="margin-left:2em">--container_name=&lt;&gt;</span><br>
+    <span style="margin-left:2em">--image_cache=&lt;enable|disable&gt; --image_cache_url=&lt;&gt;]</span><br>
+		<br>
+The following values are used as defaults: <br>
+    <span style="margin-left:2em">Number of VCPUs per core = 4</span><br>
+    <span style="margin-left:2em">Container name = default</span><br>
+    <span style="margin-left:2em">Image cache = disabled, Image cache URL = None</span><br>
+</p>
 <p>
 	Now that the OVM has been configured, we'll configure the OpenStack Controller to know about the Glance and Neutron endpoints.
 </p>
@@ -3212,7 +3238,7 @@ storage, compute and virtualization platform.
 
 <div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//MlQczJhQI3U"></iframe></div>
 
-<p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.&nbsp; In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as“strictly consistent”), it has to be scalable, and it has to perform at massive scale.&nbsp; As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).&nbsp; A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.&nbsp; This ensures strict consistency for all data and metadata stored as part of the platform.</p>
+<p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.&nbsp; In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as “strictly consistent”), it has to be scalable, and it has to perform at massive scale.&nbsp; As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).&nbsp; A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.&nbsp; This ensures strict consistency for all data and metadata stored as part of the platform.</p>
 
 <p>The following figure shows an example of a metadata insert/update for a 4 node cluster:</p>
 
@@ -3444,7 +3470,7 @@ storage, compute and virtualization platform.
 
 <p>In this scenario, we have a mix of both RF2 and RF3 data whose primary copies are local and replicas are distributed to other nodes throughout the cluster.</p>
 
-<p>When a Curator full scan runs, it will find eligible extent groups which are available to become encoded.&nbsp; After the eligible candidates are found, the encoding tasks will be distributed and throttled via Chronos.</p>
+<p>When a Curator full scan runs, it will find eligible extent groups which are available to become encoded.  Eligible extent groups must be "write-cold" meaning they haven't been written to for &gt; 1 hour. After the eligible candidates are found, the encoding tasks will be distributed and throttled via Chronos.</p>
 
 <p>The following figure shows an example 4/1 and 3/2 strip:</p>
 
@@ -4302,7 +4328,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>Communication between Acropolis and KVM occurs via Libvirt.&nbsp;</p>
 
 <div data-type="note" class="note" id="processor-generation-compatability-AmibF4u9Hx"><h6>Note</h6>
-<h1>Processor Generation Compatability</h1>
+<h1>Processor generation compatability</h1>
 
 <p>Similar to VMware's Enhanced vMotion Capability (EVC) which allows VMs to move between different processor generations; Acropolis Hypervisor will determine the lowest processor generation in the cluster and constrain all QEMU domains to that level.  This allows mixing of processor generations within an AHV cluster and ensures the ability to live migrate between hosts.</p>
 </div>
@@ -4400,7 +4426,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 	In the event the Acropolis Master becomes partitioned, isolated or fails a new Acropolis Master will be elected on the healthy portion of the cluster.  If a cluster becomes partitioned (e.g X nodes can't talk to the other Y nodes) the side with quorum will remain up and VM(s) will be restarted on those hosts.
 </p>
 
-<div data-type="note" class="note" id="best-effort-ha-by-default-RDiqH9TWHRHG"><h6>Note</h6>
+<div data-type="note" class="note" id="default-vm-restart-policy-RDiqH9TWHRHG"><h6>Note</h6>
 <h1>Default VM restart policy</h1>
 <p>
 	By default any AHV cluster will do its best to restart VM(s) in the event of a host failure.  In this mode, when a host becomes unavailable, the previously running VMs will be restarted on the remaining healthy hosts if possible.  Since this is best effort (meaning resources aren't reserved) the ability to restart all VMs will be dependent on available AHV resources.
@@ -4984,7 +5010,7 @@ sudo service iptables restart</p>
 
 <p class="codedescription">Description: Starts a Curator full scan from the CLI</p>
 
-<p class="codetext">allssh "wget -O - "http://$i:2010/master/api/client/StartCuratorTasks?task_type=2";" </p>
+<p class="codetext">allssh "wget -O - "http://$i:2010/master/api/client/StartCuratorTasks?task_type=2";"</p>
 
 <h2>Compact ring</h2>
 
@@ -5501,7 +5527,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <br>
 # Perform upgrade</p>
 
-<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i "esxcli software vib install -d /vmfs/volumes/&lt;Datastore Name&gt;/&lt;Offline bundle name&gt;;done</p>
+<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i "esxcli software vib install -d /vmfs/volumes/&lt;Datastore Name&gt;/&lt;Offline bundle name&gt;";done</p>
 
 <p># Example</p>
 
