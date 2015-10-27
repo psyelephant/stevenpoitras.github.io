@@ -494,6 +494,15 @@
   <li data-type="sect1">
     <a href="index.html#troubleshooting-andamp-advanced-administration-BNI4HzFZ">Troubleshooting &amp; Advanced Administration</a>
             <ol>
+  <li data-type="sect2">
+    <a href="index.html#using-the-2009-page-stargate-gnIoCmH1FP">Using the 2009 Page (Stargate)</a>
+  </li>
+  <li data-type="sect2">
+    <a href="index.html#using-the-2009vdisk_stats-page-EqIdsRHzFo">Using the 2009/vdisk_stats Page</a>
+  </li>
+  <li data-type="sect2">
+    <a href="index.html#using-the-2010-page-curator-aOIJu5HnFW">Using the 2010 Page (Curator)</a>
+  </li>
 </ol>
       </li>
 </ol>
@@ -628,7 +637,7 @@
 
 
 <figure class="small" id="id-wntQsz">
-  <img alt="Dheeraj Pandey" class="iimagesv2dheeraj_pandeyjpg" src="imagesv2/Dheeraj_Pandey.jpg" style="width:60%; max-width:218px; horizontal-align:middle">
+<img alt="Dheeraj Pandey" class="iimagesv2dheeraj_pandeyjpg" src="imagesv2/Dheeraj_Pandey.jpg" style="width:60%; max-width:218px; horizontal-align:middle">
 <figcaption><span class="label">Figure 1-1. </span>Dheeraj Pandey, CEO, Nutanix</figcaption>
 </figure>
 
@@ -668,7 +677,8 @@
 
 <h2>Introduction</h2>
 
-<figure id="id-ZptOIk"><img alt="Steven Poitras" src="imagesv2/poitras_pic.jpg" style="width:80%; max-width:500px; horizontal-align:middle">
+figure id="id-ZptOIk"><img alt="Steven Poitras" src="imagesv2/poitras_pic.jpg" style="width:80%; max-width:500px; horizontal-align:middle">
+
 <figcaption><span class="label">Figure 1-3. </span>Steven Poitras, Principal Solutions Architect, Nutanix</figcaption>
 </figure>
 
@@ -2473,7 +2483,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <figcaption><span class="label">Figure 9-7. </span>OpenStack Neutron Services</figcaption>
 </figure>
 <p>
-	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will recieve a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN as usual with Acropolis Hypervisor.
+	Neutron will assign IP addresses to instances when they are booted.  In this case Acropolis will receive a desired IP address for the VM which will be allocated.  When the VM performs a DHCP request the Acropolis Master will respond to the DHCP request on a private VXLAN as usual with Acropolis Hypervisor.
  </p>
 
 <div data-type="note" class="note" id="supported-network-types-05iAcpIrsEtB"><h6>Note</h6>
@@ -2606,7 +2616,8 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <p class="codetext">vm.create &lt;VM_NAME&gt; num_vcpus=2 memory=16G<br>
 vm.disk_create &lt;VM_NAME&gt; clone_from_image=&lt;IMAGE_NAME&gt;<br>
 vm.nic_create &lt;VM_NAME&gt; network=&lt;NETWORK_NAME&gt;<br>
-vm.on &lt;VM_NAME&gt;</p>
+vm.on &lt;VM_NAME&gt;
+</p>
 
 <p>Once the VM(s) have been created and powered on, SSH to the OVM(s) using the provided credentials.</p>
 
@@ -2630,7 +2641,7 @@ vm.on &lt;VM_NAME&gt;</p>
 	Next we'll configure the OVM(s) by running the following commands (must be run on every OVM):
 </p>
 
-<p class="codetext"># Enter OVM Shell (if not already)<br>
+<p class="codetext"># Enter OVM Shell (if not already) <br>
 	ovmctl
 </p>
 
@@ -2641,8 +2652,9 @@ vm.on &lt;VM_NAME&gt;</p>
 <p class="codetext">
 # Register OpenStack Controller <br>
 # Items in '[]' are optional <br>
-ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=&lt;OS_CONTROLLER_USERNAME&gt; --password=&lt;OS_CONTROLLER_PASSWORD&gt; [--auth_strategy=&lt;&gt; --auth_region=&lt;&gt; --auth_tenant=&lt;&gt; --auth_password=&lt;&gt; --db_nova=&lt;&gt; --db_cinder=&lt;&gt; --db_glance=&lt;&gt; --db_neutron=&lt;&gt; --db_nova_password=&lt;NOVA_DB_PASSWORD&gt; --db_cinder_password=&lt;CINDER_DB_PASSWORD&gt; --db_glance_password=&lt;GLANCE_DB_PASSWORD&gt; --db_neutron_password=&lt;NEUTRON_DB_PASSWORD&gt; --rpc_backend=&lt;&gt; --rpc_username=&lt;&gt; --rpc_password=&lt;&gt;] <br>
-			 <br>
+ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=&lt;OS_CONTROLLER_USERNAME&gt; --password=&lt;OS_CONTROLLER_PASSWORD&gt; [--auth_strategy=&lt;&gt; --auth_region=&lt;&gt; --auth_tenant=&lt;&gt; --auth_password=&lt;&gt; --db_nova=&lt;&gt; --db_cinder=&lt;&gt; --db_glance=&lt;&gt; --db_neutron=&lt;&gt; --db_nova_password=&lt;NOVA_DB_PASSWORD&gt; --db_cinder_password=&lt;CINDER_DB_PASSWORD&gt; --db_glance_password=&lt;GLANCE_DB_PASSWORD&gt; --db_neutron_password=&lt;NEUTRON_DB_PASSWORD&gt; --rpc_backend=&lt;&gt; --rpc_username=&lt;&gt; --rpc_password=&lt;&gt;]
+			<br>
+			<br>
  The following values are used as defaults:<br>
       <span style="margin-left:2em">Authentication: auth_strategy = keystone, auth_region = RegionOne</span><br>
       <span style="margin-left:4em">auth_tenant = services, auth_password = admin</span><br>
@@ -2653,7 +2665,8 @@ ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER
 <p class="codetext">
 # Register Acropolis Cluster(s) (run for each cluster to add) <br>
 # Items in '[]' are optional <br>
-ovmctl --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081 [--num_vcpus_per_core=&lt;&gt; --container_name=&lt;&gt; --image_cache=&lt;enable|disable&gt; --image_cache_url=&lt;&gt;]<br>
+ovmctl --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081 [--num_vcpus_per_core=&lt;&gt; --container_name=&lt;&gt; --image_cache=&lt;enable|disable&gt; --image_cache_url=&lt;&gt;]
+		<br>
 		<br>
 The following values are used as defaults: <br>
     <span style="margin-left:2em">Number of VCPUs per core = 4</span><br>
@@ -5157,11 +5170,12 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p class="codetext">allssh "cat ~/data/logs/Stargate.FATAL"</p>
 
+<section data-type="sect2" id="using-the-2009-page-stargate-gnIoCmH1FP">
 <h2>Using the 2009 Page (Stargate)</h2>
 
 <p>In most cases Prism should be able to give you all of the information and data points you require. &nbsp;However,&nbsp;in certain scenarios, or if you want some more detailed data you can leverage the Stargate aka 2009 page. &nbsp;The 2009 page can be viewed by navigating to &lt;CVM IP&gt;:2009.</p>
 
-<div data-type="note" class="note" id="accessing-back-end-pages-JZiDuVHwF9"><h6>Note</h6>
+<div data-type="note" class="note" id="accessing-back-end-pages-JZiaukClH9F5"><h6>Note</h6>
 <h1>Accessing back-end pages</h1>
 
 <p>If you're on a different network segment (L2 subnet)&nbsp;you'll need to add a rule in IP tables to access any of the back-end pages.</p>
@@ -5169,7 +5183,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>At the top of the page is the overview details which show various details about the cluster:</p>
 
-<figure id="id-J2tOSVHwF9"><img alt="2009 Page - Stargate Overview" class="iimagesv22009pagesstargate_overview2png" src="imagesv2/2009Pages/stargate_overview2.png">
+<figure id="id-J2tbSkClH9F5"><img alt="2009 Page - Stargate Overview" class="iimagesv22009pagesstargate_overview2png" src="imagesv2/2009Pages/stargate_overview2.png">
 <figcaption><span class="label">Figure 14-1. </span>2009 Page - Stargate Overview</figcaption>
 </figure>
 
@@ -5177,7 +5191,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the queues portion of the overview section:</p>
 
-<figure id="id-OQtNtjHAFJ"><img alt="2009 Page - Stargate Overview - Queues" class="iimagesv22009pagesstargate_io_queuespng" src="imagesv2/2009Pages/stargate_io_queues.png">
+<figure id="id-OQtPtBCgHJF9"><img alt="2009 Page - Stargate Overview - Queues" class="iimagesv22009pagesstargate_io_queuespng" src="imagesv2/2009Pages/stargate_io_queues.png">
 <figcaption><span class="label">Figure 14-2. </span>2009 Page - Stargate Overview - Queues</figcaption>
 </figure>
 
@@ -5185,11 +5199,11 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the content cache portion of the overview section:</p>
 
-<figure id="id-rQtecyHOFD"><img alt="2009 Page - Stargate Overview - Content Cache" class="iimagesv22009pagesstargate_contentcache2png" src="imagesv2/2009Pages/stargate_contentCache2.png">
+<figure id="id-rQtAcNCJHDF9"><img alt="2009 Page - Stargate Overview - Content Cache" class="iimagesv22009pagesstargate_contentcache2png" src="imagesv2/2009Pages/stargate_contentCache2.png">
 <figcaption><span class="label">Figure 14-3. </span>2009 Page - Stargate Overview - Content Cache</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="pro-tip-vAi4IVHBFx"><h6>Note</h6>
+<div data-type="note" class="note" id="pro-tip-vAiPIXC9HxF5"><h6>Note</h6>
 <h1>Pro tip</h1>
 
 <p>In ideal cases the hit rates should be above 80-90%+ if the workload is read heavy for the best possible read performance.</p>
@@ -5201,7 +5215,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the Stargates and disk utilization&nbsp;(available/total):</p>
 
-<figure class="large" id="id-yrtOsOHdFz"><img alt="2009 Page - Cluster State - Disk Usage" class="iimagesv22009pagesstargate_diskutilpng" src="imagesv2/2009Pages/stargate_diskUtil.png">
+<figure class="large" id="id-yrtysdCvHzFk"><img alt="2009 Page - Cluster State - Disk Usage" class="iimagesv22009pagesstargate_diskutilpng" src="imagesv2/2009Pages/stargate_diskUtil.png">
 <figcaption><span class="label">Figure 14-4. </span>2009 Page - Cluster State - Disk Usage</figcaption>
 </figure>
 
@@ -5209,11 +5223,11 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the vDisks and various I/O details:</p>
 
-<figure class="large" id="id-YatjSgHZFR"><img alt="2009 Page - NFS Slave - vDisk Stats" class="iimagesv22009pagesstargate_vdiskstatpng" src="imagesv2/2009Pages/stargate_vdiskStat.png">
+<figure class="large" id="id-YatzSeCwHRFm"><img alt="2009 Page - NFS Slave - vDisk Stats" class="iimagesv22009pagesstargate_vdiskstatpng" src="imagesv2/2009Pages/stargate_vdiskStat.png">
 <figcaption><span class="label">Figure 14-5. </span>2009 Page - NFS Slave - vDisk Stats</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="pro-tip-EaiEHRHzFo"><h6>Note</h6>
+<div data-type="note" class="note" id="pro-tip-EaigHoCDHoFE"><h6>Note</h6>
 <h1>Pro tip</h1>
 
 <p>When looking at any potential performance issues I always look at the following:</p>
@@ -5226,7 +5240,8 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>For more specific details the vdisk_stats page holds a plethora of information.</p>
 </div>
-
+</section>
+<section data-type="sect2" id="using-the-2009vdisk_stats-page-EqIdsRHzFo">
 <h2>Using the 2009/vdisk_stats Page</h2>
 
 <p>The 2009 vdisk_stats page is a detailed page which provides even further data points per vDisk. &nbsp;This page includes details and a histogram of items like randomness, latency histograms, I/O sizes and working set details.</p>
@@ -5235,7 +5250,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the section and hyperlinked vDisk Id:</p>
 
-<figure class="large" id="id-9otwcaHQF3"><img alt="2009 Page - Hosted vDisks" class="iimagesv22009pagesstargate_hostedvdiskbriefpng" src="imagesv2/2009Pages/stargate_hostedVdiskBrief.png">
+<figure class="large" id="id-4mt2S0seHkFY"><img alt="2009 Page - Hosted vDisks" class="iimagesv22009pagesstargate_hostedvdiskbriefpng" src="imagesv2/2009Pages/stargate_hostedVdiskBrief.png">
 <figcaption><span class="label">Figure 14-6. </span>2009 Page - Hosted vDisks</figcaption>
 </figure>
 
@@ -5245,7 +5260,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Ops and Randomness' section:</p>
 
-<figure id="id-d0tDC4HDFW"><img alt="2009 Page - vDisk Stats - Ops and Randomness" class="iimagesv22009pagesstargate_opsrandomnesspng" src="imagesv2/2009Pages/stargate_opsRandomness.png">
+<figure id="id-b8tRf2sBHpFJ"><img alt="2009 Page - vDisk Stats - Ops and Randomness" class="iimagesv22009pagesstargate_opsrandomnesspng" src="imagesv2/2009Pages/stargate_opsRandomness.png">
 <figcaption><span class="label">Figure 14-7. </span>2009 Page - vDisk Stats - Ops and Randomness</figcaption>
 </figure>
 
@@ -5253,13 +5268,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Frontend Read Latency' histogram:</p>
 
-<figure class="large" id="id-89tmmT2HkFZ"><img alt="2009 Page - vDisk Stats - Frontend Read Latency" class="iimagesv22009pagesstargate_readlat_fepng" src="imagesv2/2009Pages/stargate_readLat_FE.png">
+<figure class="large" id="id-WmtNI9sGH2Fm"><img alt="2009 Page - vDisk Stats - Frontend Read Latency" class="iimagesv22009pagesstargate_readlat_fepng" src="imagesv2/2009Pages/stargate_readLat_FE.png">
 <figcaption><span class="label">Figure 14-8. </span>2009 Page - vDisk Stats - Frontend Read Latency</figcaption>
 </figure>
 
 <p>The figure shows the 'Frontend Write Latency' histogram:</p>
 
-<figure class="large" id="id-0OtvzHOHbFJ"><img alt="2009 Page - vDisk Stats - Frontend Write Latency" class="iimagesv22009pagesstargate_writelat_fepng" src="imagesv2/2009Pages/stargate_writeLat_FE.png">
+<figure class="large" id="id-jRtph0smHaFr"><img alt="2009 Page - vDisk Stats - Frontend Write Latency" class="iimagesv22009pagesstargate_writelat_fepng" src="imagesv2/2009Pages/stargate_writeLat_FE.png">
 <figcaption><span class="label">Figure 14-9. </span>2009 Page - vDisk Stats - Frontend Write Latency</figcaption>
 </figure>
 
@@ -5267,13 +5282,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Read Size Distribution' histogram:</p>
 
-<figure class="large" id="id-k1t8AfaH4F3"><img alt="2009 Page - vDisk Stats - Read I/O Size" class="iimagesv22009pagesstargate_readsizepng" src="imagesv2/2009Pages/stargate_readSize.png">
+<figure class="large" id="id-wntMupsQHQF1"><img alt="2009 Page - vDisk Stats - Read I/O Size" class="iimagesv22009pagesstargate_readsizepng" src="imagesv2/2009Pages/stargate_readSize.png">
 <figcaption><span class="label">Figure 14-10. </span>2009 Page - vDisk Stats - Read I/O Size</figcaption>
 </figure>
 
 <p>The figure shows the 'Write Size Distribution'&nbsp;histogram:</p>
 
-<figure class="large" id="id-5WtXlc2HgFp"><img alt="2009 Page - vDisk Stats - Write I/O Size" class="iimagesv22009pagesstargate_writesizepng" src="imagesv2/2009Pages/stargate_writeSize.png">
+<figure class="large" id="id-qMt9Sys5HQFB"><img alt="2009 Page - vDisk Stats - Write I/O Size" class="iimagesv22009pagesstargate_writesizepng" src="imagesv2/2009Pages/stargate_writeSize.png">
 <figcaption><span class="label">Figure 14-11. </span>2009 Page - vDisk Stats - Write I/O Size</figcaption>
 </figure>
 
@@ -5281,7 +5296,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Working Set Sizes' table:</p>
 
-<figure id="id-NMtMZh0HdF8"><img alt="2009 Page - vDisk Stats - Working Set" class="iimagesv22009pagesstargate_workingsetpng" src="imagesv2/2009Pages/stargate_workingSet.png">
+<figure id="id-aztmtms9HWFZ"><img alt="2009 Page - vDisk Stats - Working Set" class="iimagesv22009pagesstargate_workingsetpng" src="imagesv2/2009Pages/stargate_workingSet.png">
 <figcaption><span class="label">Figure 14-12. </span>2009 Page - vDisk Stats - Working Set</figcaption>
 </figure>
 
@@ -5289,11 +5304,11 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Read Source' details:</p>
 
-<figure id="id-PJtyju1HlF1"><img alt="2009 Page - vDisk Stats - Read Source" class="iimagesv22009pagesstargate_readsourcepng" src="imagesv2/2009Pages/stargate_readSource.png">
+<figure id="id-oPtmcRsRH3Fm"><img alt="2009 Page - vDisk Stats - Read Source" class="iimagesv22009pagesstargate_readsourcepng" src="imagesv2/2009Pages/stargate_readSource.png">
 <figcaption><span class="label">Figure 14-13. </span>2009 Page - vDisk Stats - Read Source</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="pro-tip-QAibVTwHQFX"><h6>Note</h6>
+<div data-type="note" class="note" id="pro-tip-dbi8IEsnHWF4"><h6>Note</h6>
 <h1>Pro tip</h1>
 
 <p>If you're seeing high read latency take a look at the read source for the vDisk and take a look where the I/Os are being served from. &nbsp;In most cases high latency could be caused by reads coming from HDD (Estore HDD).</p>
@@ -5303,11 +5318,11 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Write Destination' table:</p>
 
-<figure id="id-J2tgOFVHwF9"><img alt="2009 Page - vDisk Stats - Write Destination" class="iimagesv22009pagesstargate_writedestpng" src="imagesv2/2009Pages/stargate_writeDest.png">
+<figure id="id-Vrt9CNs5HzFk"><img alt="2009 Page - vDisk Stats - Write Destination" class="iimagesv22009pagesstargate_writedestpng" src="imagesv2/2009Pages/stargate_writeDest.png">
 <figcaption><span class="label">Figure 14-14. </span>2009 Page - vDisk Stats - Write Destination</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="pro-tip-Oxi5BijHAFJ"><h6>Note</h6>
+<div data-type="note" class="note" id="pro-tip-xkiVsosqHzF5"><h6>Note</h6>
 <h1>Pro tip</h1>
 
 <p>Random or smaller I/Os (&lt;64K) will be written to the Oplog. &nbsp;Larger or sequential I/Os will bypass the Oplog and be directly written to the Extent Store (Estore).</p>
@@ -5317,10 +5332,11 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Extent Group Up-Migration' table:</p>
 
-<figure id="id-n3tmyc2HxFN"><img alt="2009 Page - vDisk Stats - Extent Group Up-Migration" class="iimagesv22009pagesstargate_egroupilmpng" src="imagesv2/2009Pages/stargate_eGroupILM.png">
+<figure id="id-0Ot9SZs9HJF3"><img alt="2009 Page - vDisk Stats - Extent Group Up-Migration" class="iimagesv22009pagesstargate_egroupilmpng" src="imagesv2/2009Pages/stargate_eGroupILM.png">
 <figcaption><span class="label">Figure 14-15. </span>2009 Page - vDisk Stats - Extent Group Up-Migration</figcaption>
 </figure>
-
+</section>
+<section data-type="sect2" id="using-the-2010-page-curator-aOIJu5HnFW">
 <h2>Using the 2010 Page (Curator)</h2>
 
 <p>The 2010 page is a detailed page for monitoring the Curator MapReduce framework. &nbsp;This page provides details on jobs, scans, and associated tasks.&nbsp;</p>
@@ -5333,7 +5349,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Curator Nodes' table:</p>
 
-<figure id="id-yrtxOTOHdFz"><img alt="2010 Page - Curator Nodes" class="iimagesv22010pagescurator_nodes2png" src="imagesv2/2010Pages/curator_nodes2.png">
+<figure id="id-n3t5FrurHNFB"><img alt="2010 Page - Curator Nodes" class="iimagesv22010pagescurator_nodes2png" src="imagesv2/2010Pages/curator_nodes2.png">
 <figcaption><span class="label">Figure 14-16. </span>2010 Page - Curator Nodes</figcaption>
 </figure>
 
@@ -5354,7 +5370,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'Curator Jobs' table:</p>
 
-<figure id="id-aztNAs5HnFW"><img alt="2010 Page - Curator Jobs" class="iimagesv22010pagescurator_jobs2png" src="imagesv2/2010Pages/curator_jobs2.png">
+<figure id="id-yrtkhpuvHzFk"><img alt="2010 Page - Curator Jobs" class="iimagesv22010pagescurator_jobs2png" src="imagesv2/2010Pages/curator_jobs2.png">
 <figcaption><span class="label">Figure 14-17. </span>2010 Page - Curator Jobs</figcaption>
 </figure>
 
@@ -5411,13 +5427,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the job details table:</p>
 
-<figure id="id-VrtvkToHaFz"><img alt="2010 Page - Curator Job - Details" class="iimagesv22010pagesjob_details2png" src="imagesv2/2010Pages/job_details2.png">
+<figure id="id-aztPFgu9HWFZ"><img alt="2010 Page - Curator Job - Details" class="iimagesv22010pagesjob_details2png" src="imagesv2/2010Pages/job_details2.png">
 <figcaption><span class="label">Figure 14-18. </span>2010 Page - Curator Job - Details</figcaption>
 </figure>
 
 <p>The figure shows the 'Background Task Stats' table:</p>
 
-<figure id="id-89tAmi2HkFZ"><img alt="2010 Page - Curator Job - Tasks" class="iimagesv22010pagesjob_tasks2png" src="imagesv2/2010Pages/job_tasks2.png">
+<figure id="id-9otmfbuNH3Fx"><img alt="2010 Page - Curator Job - Tasks" class="iimagesv22010pagesjob_tasks2png" src="imagesv2/2010Pages/job_tasks2.png">
 <figcaption><span class="label">Figure 14-19. </span>2010 Page - Curator Job - Tasks</figcaption>
 </figure>
 
@@ -5425,7 +5441,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the 'MapReduce Jobs' table:</p>
 
-<figure class="large" id="id-A0tvWfGHJFx"><img alt="2010 Page - MapReduce Jobs" class="iimagesv22010pagescurator_mrjobs2png" src="imagesv2/2010Pages/curator_mrjobs2.png">
+<figure class="large" id="id-ZptlI1uvHkFQ"><img alt="2010 Page - MapReduce Jobs" class="iimagesv22010pagescurator_mrjobs2png" src="imagesv2/2010Pages/curator_mrjobs2.png">
 <figcaption><span class="label">Figure 14-20. </span>2010 Page - MapReduce Jobs</figcaption>
 </figure>
 
@@ -5433,7 +5449,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows a sample of some of the job counters:</p>
 
-<figure id="id-GRtXbFRHwF1"><img alt="2010 Page - MapReduce Job - Counters" class="iimagesv22010pagesjob_counters2png" src="imagesv2/2010Pages/job_counters2.png">
+<figure id="id-zmt5CAuxHlFm"><img alt="2010 Page - MapReduce Job - Counters" class="iimagesv22010pagesjob_counters2png" src="imagesv2/2010Pages/job_counters2.png">
 <figcaption><span class="label">Figure 14-21. </span>2010 Page - MapReduce Job - Counters</figcaption>
 </figure>
 
@@ -5441,9 +5457,10 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>The figure shows the&nbsp;'Queued Curator Jobs' and 'Last Successful Curator Scans' section:</p>
 
-<figure class="large" id="id-1ntR3sVHVFQ"><img alt="2010 Page - Queued and Successful Scans" class="iimagesv22010pagescurator_queue_lastsuccessful2png" src="imagesv2/2010Pages/curator_queue_lastsuccessful2.png">
+<figure class="large" id="id-0OtyTyu9HJF3"><img alt="2010 Page - Queued and Successful Scans" class="iimagesv22010pagescurator_queue_lastsuccessful2png" src="imagesv2/2010Pages/curator_queue_lastsuccessful2.png">
 <figcaption><span class="label">Figure 14-22. </span>2010 Page - Queued and Successful Scans</figcaption>
 </figure>
+</section>
 </section>
 </section>
 </div>
