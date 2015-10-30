@@ -5537,7 +5537,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <figcaption><span class="label">Figure 16-1. </span>ESXi Host Networking</figcaption>
 </figure>
 
-<p>In the event of a local CVM failure, the local 192.168.5.2 addresses previously hosted by the local CVM are unavailable.&nbsp; DSF will automatically detect this outage and will redirect these I/Os to another CVM in the cluster over 10GbE.&nbsp; The re-routing is done transparently to the hypervisor and VMs running on the host.&nbsp; This means that even if a CVM is powered down, the VMs will still continue to be able to perform I/Os to DSF.&nbsp; DSF is also self-healing, meaning it will detect the CVM has been powered off and will automatically reboot or power-on the local CVM.&nbsp; Once the local CVM is back up and available, traffic will then seamlessly be transferred back and served by the local CVM.</p>
+<p>In the event of a local CVM failure, the local 192.168.5.2 addresses previously hosted by the local CVM are unavailable.&nbsp; DSF will automatically detect this outage and will redirect these I/Os to another CVM in the cluster over 10GbE.&nbsp; The re-routing is done transparently to the hypervisor and VMs running on the host.&nbsp; This means that even if a CVM is powered down, the VMs will still continue to be able to perform I/Os to DSF. Once the local CVM is back up and available, traffic will then seamlessly be transferred back and served by the local CVM.</p>
 
 <p>The following figure shows a graphical representation of how this looks for a failed CVM:</p>
 
