@@ -5,7 +5,7 @@
     <title>The Nutanix Bible</title>
     <meta name="description" content="The Nutanix Bible - A detailed narrative of the Nutanix architecture, how the software and features work and how to leverage it for maximum performance."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="keywords" content="nutanix, nutanix bible,nutanix architecture, prism, acropolis, webscale"/>
+    <meta name="keywords" content="nutanix, nutanix bible,nutanix architecture, prism, acropolis,nutanix openstack, webscale"/>
     <meta name="robots" content="index, follow"/>
 
     <!-- Open Graph data -->
@@ -702,7 +702,7 @@
 <p>A brief look at the history of infrastructure and what has led us to where we are today.</p>
 
 <section data-type="chapter" id="the-evolution-of-the-datacenter-R5INu4">
-<h1>The Evolution of the Datacenter</h1>
+<h2>The Evolution of the Datacenter</h2>
 
 <p>The datacenter has evolved significantly over the last several decades. The following sections will examine each era in detail.&nbsp;&nbsp;</p>
 
@@ -836,7 +836,7 @@
 </section>
 
 <section data-type="chapter" id="the-importance-of-latency-13I4Ta">
-<h1>The Importance of Latency</h1>
+<h2>The Importance of Latency</h2>
 
 <p>The figure below characterizes the various latencies for specific types of I/O:</p>
 
@@ -1048,7 +1048,7 @@
 </section>
 
 <section data-type="chapter" id="book-of-web-scale-NYIQSn">
-<h1>Book of Web-Scale</h1>
+<h2>Book of Web-Scale</h2>
 
 <p class="definition"><strong>web·scale - /web ' skãl/ - noun - computing architecture</strong>
 <br>
@@ -1194,7 +1194,7 @@ a new architectural approach to infrastructure and computing.</p>
 one-click management and interface for datacenter operations.</p>
 
 <section data-type="chapter" id="design-methodology-and-iterations-13IRuV">
-<h1>Design Methodology and Iterations</h1>
+<h2>Design Methodology and Iterations</h2>
 
 <p>
 	Building a beautiful, empathetic and intuitive product are core to the Nutanix platform and something we take very seriously.  This section will cover our design methodology and how we iterate on them.  More coming here soon!
@@ -1213,7 +1213,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="chapter" id="architecture-NYIVT0">
-<h1>Architecture</h1>
+<h2>Architecture</h2>
 
 <p>Prism is a distributed resource management platform which allows users to manage and monitor objects and services across their Nutanix environment.</p>
 
@@ -1293,7 +1293,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="chapter" id="navigation-22IzS5">
-<h1>Navigation</h1>
+<h2>Navigation</h2>
 
 <p>Prism is fairly straight forward and simple to use, however we'll cover some of the main pages and basic usage.</p>
 
@@ -1445,7 +1445,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="chapter" id="usage-and-troubleshooting-3jIxHa">
-<h1>Usage and Troubleshooting</h1>
+<h2>Usage and Troubleshooting</h2>
 
 <p>In the following sections we're cover some of the typical Prism uses as well as some common troubleshooting scenarios.</p>
 
@@ -1665,7 +1665,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="chapter" id="apis-and-interfaces-PgIAF1">
-<h1>APIs and Interfaces</h1>
+<h2>APIs and Interfaces</h2>
 
 <p>Core to any dynamic or “software-defined” environment, Nutanix provides a vast array of interfaces allowing for simple programability and interfacing. Here are the main interfaces:</p>
 
@@ -2215,7 +2215,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 </section>
 
 <section data-type="chapter" id="integrations-lkIJt8">
-<h1>Integrations</h1>
+<h2>Integrations</h2>
 
 <section data-type="sect1" id="openstack-M2IosAtq">
 <h1>OpenStack</h1>
@@ -2907,7 +2907,7 @@ storage, compute and virtualization platform.
 </p>
 
 <section data-type="chapter" id="architecture-NYI5ul">
-<h1>Architecture</h1>
+<h2>Architecture</h2>
 <p>Acropolis is a distributed multi-resource manager,&nbsp;orchestration platform and data plane.</p>
 
 <p>It is broken down into three main components:</p>
@@ -3136,7 +3136,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="chapter" id="distributed-storage-fabric-22IlTD">
-<h1>Distributed Storage Fabric</h1>
+<h2>Distributed Storage Fabric</h2>
 
 <p>Together, a group of Nutanix nodes forms a distributed platform called the Acropolis Distributed Storage Fabric (DSF).&nbsp; DSF appears to the hypervisor like any centralized storage array, however all of the I/Os are handled locally to provide the highest performance.&nbsp; More detail on how these nodes form a distributed system can be found in the next section.</p>
 
@@ -4318,13 +4318,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="chapter" id="application-mobility-fabric-coming-soon-3jIvS1">
-<h1>Application Mobility Fabric - coming soon!</h1>
+<h2>Application Mobility Fabric - coming soon!</h2>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="chapter" id="acropolis-hypervisor-PgIzH9">
-<h1>Acropolis Hypervisor</h1>
+<h2>Acropolis Hypervisor</h2>
 
 <section data-type="sect1" id="node-architecture-lkIms8H1">
 <h1>Node Architecture</h1>
@@ -4845,7 +4845,7 @@ Cat /var/log/iscsi_redirector</p>
 </section>
 
 <section data-type="chapter" id="administration-lkInFl">
-<h1>Administration</h1>
+<h2>Administration</h2>
 
 <section data-type="sect1" id="important-pages-M2IosXFw">
 <h1>Important Pages</h1>
@@ -5475,7 +5475,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h1><span class="label">Part IV. </span>Book of vSphere</h1>
 
 <section data-type="chapter" id="architecture-NYIMsy">
-<h1>Architecture</h1>
+<h2>Architecture</h2>
 
 <section data-type="sect1" id="node-architecture-22IRsYsQ">
 <h1>Node Architecture</h1>
@@ -5505,7 +5505,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="chapter" id="how-it-works-22IBuk">
-<h1>How It Works</h1>
+<h2>How It Works</h2>
 
 <section data-type="sect1" id="array-offloads-vaai-3jImsMuQ">
 <h1>Array Offloads – VAAI</h1>
@@ -5554,7 +5554,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="chapter" id="administration-3jI3Tg">
-<h1>Administration</h1>
+<h2>Administration</h2>
 
 <section data-type="sect1" id="important-pages-PgIys4Tb">
 <h1>Important Pages</h1>
@@ -5666,7 +5666,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h1><span class="label">Part V. </span>Book of Hyper-V</h1>
 
 <section data-type="chapter" id="architecture-22IRsV">
-<h1>Architecture</h1>
+<h2>Architecture</h2>
 
 <section data-type="sect1" id="node-architecture-3jImsksn">
 <h1>Node Architecture</h1>
@@ -5696,7 +5696,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="chapter" id="how-it-works-3jIAul">
-<h1>How It Works</h1>
+<h2>How It Works</h2>
 
 <section data-type="sect1" id="array-offloads-odx-PgIysQu2">
 <h1>Array Offloads – ODX</h1>
@@ -5723,7 +5723,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="chapter" id="administration-PgIYTe">
-<h1>Administration</h1>
+<h2>Administration</h2>
 
 <section data-type="sect1" id="important-pages-lkImsxTa">
 <h1>Important Pages</h1>
