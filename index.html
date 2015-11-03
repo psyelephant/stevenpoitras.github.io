@@ -66,11 +66,7 @@
 </section>
 
 <section data-type="copyright-page" class="page-title" id="id-7ANIl">
-<!--
-<h1>The Nutanix Bible</h1>
 
-<p>by Steven Poitras</p>
--->
 <img src="assets/ornament1.svg" alt="" class="ornament">
 <p class="small"><b>Copyright (c) 2015:</b> The Nutanix Bible and StevenPoitras.com, 2015. Unauthorized use and/or duplication of this material without express and written permission from this blog’s author and/or owner is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to Steven Poitras and StevenPoitras.com with appropriate and specific direction to the original content.</p>
 </section>
@@ -408,7 +404,7 @@
     <a href="index.html#acropolis-hypervisor-PgIzH9">Acropolis Hypervisor</a>
             <ol>
   <li data-type="sect1">
-    <a href="index.html#node-architecture-lkIms8H1">Node Architecture</a>
+    <a href="index.html#node-architecture-lkIms8h3">Node Architecture</a>
             <ol>
 </ol>
       </li>
@@ -495,7 +491,7 @@
     <a href="index.html#troubleshooting-andamp-advanced-administration-BNI4HzFZ">Troubleshooting &amp; Advanced Administration</a>
             <ol>
   <li data-type="sect2">
-    <a href="index.html#using-the-2009-page-stargate-gnIoCmH1FP">Using the 2009 Page (Stargate)</a>
+    <a href="index.html#using-the-2009-page-stargate-gnIoCmh3FP">Using the 2009 Page (Stargate)</a>
   </li>
   <li data-type="sect2">
     <a href="index.html#using-the-2009vdisk_stats-page-EqIdsRHzFo">Using the 2009/vdisk_stats Page</a>
@@ -697,7 +693,7 @@
 </section>
 
 <div data-type="part" id="a-brief-lesson-in-history-6qVi1">
-<h1><span class="label">Part I. </span>A Brief Lesson in History</h1>
+<h3><span class="label">Part I. </span>A Brief Lesson in History</h3>
 
 <p>A brief look at the history of infrastructure and what has led us to where we are today.</p>
 
@@ -707,7 +703,7 @@
 <p>The datacenter has evolved significantly over the last several decades. The following sections will examine each era in detail.&nbsp;&nbsp;</p>
 
 <section data-type="sect1" id="the-era-of-the-mainframe-NYI5u8uq">
-<h1>The Era of the Mainframe</h1>
+<h3>The Era of the Mainframe</h3>
 
 <p>The mainframe ruled for many years and laid the core foundation of where we are today. It allowed companies to leverage the following key characteristics:</p>
 
@@ -726,7 +722,7 @@
 </section>
 
 <section data-type="sect1" id="the-move-to-stand-alone-servers-22IlTzuZ">
-<h1>The Move to Stand-Alone Servers</h1>
+<h3>The Move to Stand-Alone Servers</h3>
 
 <p>With mainframes, it was very difficult for organizations within a business to leverage these capabilities which partly led to the entrance of pizza boxes or stand-alone servers. Key characteristics of stand-alone servers included:</p>
 
@@ -746,7 +742,7 @@
 </section>
 
 <section data-type="sect1" id="centralized-storage-3jIvSMu5">
-<h1>Centralized Storage</h1>
+<h3>Centralized Storage</h3>
 
 <p>Businesses always need to make money and data is a key piece of that puzzle. With direct-attached storage (DAS), organizations either needed more space than was locally available, or data high availability (HA) where a server failure wouldn’t cause data unavailability.</p>
 
@@ -768,7 +764,7 @@
 </section>
 
 <section data-type="sect1" id="the-introduction-of-virtualization-PgIzHQum">
-<h1>The Introduction of Virtualization</h1>
+<h3>The Introduction of Virtualization</h3>
 
 <p>At this point in time, compute utilization was low and resource efficiency was impacting the bottom line. Virtualization was then introduced and enabled multiple workloads and operating systems (OSs) to run as virtual machines (VMs) on a single piece of hardware. Virtualization enabled businesses to increase utilization of their pizza boxes, but also increased the number of silos and the impacts of an outage. Key characteristics of virtualization included:</p>
 
@@ -788,7 +784,7 @@
 </section>
 
 <section data-type="sect1" id="virtualization-matures-lkInFEuj">
-<h1>Virtualization Matures</h1>
+<h3>Virtualization Matures</h3>
 
 <p>The hypervisor became a very efficient and feature-filled solution. With the advent of tools, including VMware vMotion, HA, and DRS, users obtained the ability to provide VM high availability and migrate compute workloads dynamically. The only caveat was the reliance on centralized storage, causing the two paths to merge. The only down turn was the increased load on the storage array before and VM sprawl led to contention for storage I/O. Key characteristics included:</p>
 
@@ -816,7 +812,7 @@
 </section>
 
 <section data-type="sect1" id="solid-state-disks-ssds-M2I9tquP">
-<h1>Solid State Disks (SSDs)</h1>
+<h3>Solid State Disks (SSDs)</h3>
 
 <p>SSDs helped alleviate this I/O bottleneck by providing much higher I/O performance without the need for tons of disk enclosures.&nbsp; However, given the extreme advances in performance, the controllers and network had not yet evolved to handle the vast I/O available. Key characteristics of SSDs included:</p>
 
@@ -946,7 +942,7 @@
 </ul>
 
 <section data-type="sect1" id="looking-at-the-bandwidth-QMIXtzTn">
-<h1>Looking at the Bandwidth</h1>
+<h3>Looking at the Bandwidth</h3>
 
 <p>For traditional storage, there are a few main types of media for I/O:</p>
 
@@ -1020,7 +1016,7 @@
 </section>
 
 <section data-type="sect1" id="the-impact-to-memory-latency-J5IMf8Ty">
-<h1>The Impact to Memory Latency</h1>
+<h3>The Impact to Memory Latency</h3>
 
 <p>Typical main memory latency is ~100ns (will vary), we can perform the following calculations:</p>
 
@@ -1083,7 +1079,7 @@ a new architectural approach to infrastructure and computing.</p>
 <p>The following sections will provide a technical perspective on what they actually mean.</p>
 
 <section data-type="sect1" id="hyper-convergence-ONIRcvSY">
-<h1>Hyper-Convergence</h1>
+<h3>Hyper-Convergence</h3>
 
 <p>There are differing opinions on what hyper-convergence actually is.&nbsp; It also varies based on the scope of components (e.g. virtualization, networking, etc.). However, the core concept comes down to the following: natively combining two or more components into a single unit. ‘Natively’ is the key word here. In order to be the most effective, the components must be natively integrated and not just bundled together. In the case of Nutanix, we natively converge compute + storage to form a single node used in our appliance.&nbsp; For others, this might be converging storage with the network, etc. What it really means:</p>
 
@@ -1101,7 +1097,7 @@ a new architectural approach to infrastructure and computing.</p>
 </section>
 
 <section data-type="sect1" id="software-defined-intelligence-nrIRIWSn">
-<h1>Software-Defined Intelligence</h1>
+<h3>Software-Defined Intelligence</h3>
 
 <p>Software-defined intelligence is taking the core logic from normally proprietary or specialized hardware (e.g. ASIC / FPGA) and doing it in software on commodity hardware. For Nutanix, we take the traditional storage logic (e.g. RAID, deduplication, compression, etc.) and put that into software that runs in each of the Nutanix CVMs on standard x86 hardware. What it really means:</p>
 
@@ -1119,7 +1115,7 @@ a new architectural approach to infrastructure and computing.</p>
 </section>
 
 <section data-type="sect1" id="distributed-autonomous-systems-b1IeU4Sb">
-<h1>Distributed Autonomous Systems</h1>
+<h3>Distributed Autonomous Systems</h3>
 
 <p>Distributed autonomous systems involve moving away from the traditional concept of having a single unit responsible for doing something and distributing that role among all nodes within the cluster.&nbsp; You can think of this as creating a purely distributed system. Traditionally, vendors have assumed that hardware will be reliable, which, in most cases can be true.&nbsp; However, core to distributed systems is the idea that hardware will eventually fail and handling that fault in an elegant and non-disruptive way is key.</p>
 
@@ -1140,7 +1136,7 @@ a new architectural approach to infrastructure and computing.</p>
 </section>
 
 <section data-type="sect1" id="incremental-and-linear-scale-out-rkIZhxSN">
-<h1>Incremental and linear scale out</h1>
+<h3>Incremental and linear scale out</h3>
 
 <p>Incremental and linear scale out relates to the ability to start with a certain set of resources and as needed scale them out while linearly increasing the performance of the system.&nbsp; All of the constructs mentioned above are critical enablers in making this a reality. For example, traditionally you’d have 3-layers of components for running virtual workloads: servers, storage, and network – all of which are scaled independently.&nbsp; As an example, when you scale out the number of servers you’re not scaling out your storage performance. With a hyper-converged platform like Nutanix, when you scale out with new node(s) you’re scaling out:</p>
 
@@ -1167,7 +1163,7 @@ a new architectural approach to infrastructure and computing.</p>
 </section>
 
 <section data-type="sect1" id="making-sense-of-it-all-22IWHQ">
-<h1>Making Sense of It All</h1>
+<h3>Making Sense of It All</h3>
 
 <p>In summary:</p>
 
@@ -1262,12 +1258,12 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-05i5cRT9"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>For larger or distributed deployments (e.g. more than one cluster or multiple sites) it is recommended to use Prism Central to simplify operations and provide a single management UI for all clusters / sites.</p>
 </div>
 
-<h1>Prism Services</h1>
+<h3>Prism Services</h3>
 
 <p>A Prism service runs on every CVM with an elected Prism Leader which is responsible for handling HTTP requests.&nbsp; Similar to other components which have a Master, if the Prism Leader fails, a new one will be elected. &nbsp;When a CVM which is not the Prism Leader gets a HTTP request it will permanently redirect the request to the current Prism Leader using HTTP response status code 301.</p>
 
@@ -1278,7 +1274,7 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="prism-ports-53iysDTA"><h6>Note</h6>
-<h1>Prism ports</h1>
+<h3>Prism ports</h3>
 
 <p>Prism listens on ports 80 and 9440, if HTTP traffic comes in on port 80 it is redirected to HTTPS on port 9440.</p>
 </div>
@@ -1286,7 +1282,7 @@ one-click management and interface for datacenter operations.</p>
 <p>When using the cluster external IP (recommended),&nbsp;it will always be hosted by the current Prism Leader. &nbsp;In the event of a Prism Leader failure the cluster IP will be assumed by the newly elected Prism Leader and a gratuitous ARP (gARP) will be used to clean any stale ARP cache entries. &nbsp;In this scenario any time the cluster IP is used to access Prism, no redirection is necessary as that will already be the Prism Leader.</p>
 
 <div data-type="note" class="note" id="pro-tip-1RiATNTX"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>You can determine the current Prism leader by running 'curl localhost:2019/prism/leader' on any CVM.</p>
 </div>
@@ -1310,7 +1306,7 @@ one-click management and interface for datacenter operations.</p>
 <p>Prism Central and Prism Element will be covered in more detail in the following sections.</p>
 
 <section data-type="sect1" id="prism-central-4aI3tqSe">
-<h1>Prism Central</h1>
+<h3>Prism Central</h3>
 
 <p>Prism Central contains the following main pages:</p>
 
@@ -1346,14 +1342,14 @@ one-click management and interface for datacenter operations.</p>
 <p>From here you can monitor the overall status of your environment, and dive deeper if there are any alerts or items of interest.</p>
 
 <div data-type="note" class="note" id="pro-tip-G9iVFptNS9"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>If everything is green, go back to doing something else :)</p>
 </div>
 </section>
 
 <section data-type="sect1" id="prism-element-BNIWfdSz">
-<h1>Prism Element</h1>
+<h3>Prism Element</h3>
 
 <p>Prism Element contains the following main pages:</p>
 
@@ -1410,7 +1406,7 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="keyboard-shortcuts-53i0FXfDS9"><h6>Note</h6>
-<h1>Keyboard Shortcuts</h1>
+<h3>Keyboard Shortcuts</h3>
 
 <p>Accessibility and ease of use is a very critical construct in Prism. &nbsp;To simplify things for the end-user a set of shortcuts have been added to allow users to do everything from their keyboard.</p>
 
@@ -1450,7 +1446,7 @@ one-click management and interface for datacenter operations.</p>
 <p>In the following sections we're cover some of the typical Prism uses as well as some common troubleshooting scenarios.</p>
 
 <section data-type="sect1" id="nutanix-software-upgrade-lkIBu8H5">
-<h1>Nutanix Software Upgrade</h1>
+<h3>Nutanix Software Upgrade</h3>
 
 <p>Performing a Nutanix software upgrade is a very simple and non-disruptive process.</p>
 
@@ -1499,14 +1495,14 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="note-P0i1TQuRHz"><h6>Note</h6>
-<h1>Note</h1>
+<h3>Note</h3>
 
 <p>Your Prism session will briefly disconnect during the upgrade when the current Prism Leader is upgraded. &nbsp;All VMs and services running remain unaffected.</p>
 </div>
 </section>
 
 <section data-type="sect1" id="hypervisor-upgrade-M2I5TWHq">
-<h1>Hypervisor Upgrade</h1>
+<h3>Hypervisor Upgrade</h3>
 
 <p>Similar to Nutanix software upgrades, hypervisor upgrades can be fully automated in a rolling manner via Prism.</p>
 
@@ -1545,7 +1541,7 @@ one-click management and interface for datacenter operations.</p>
 <p>Similar to the rolling nature of the Nutanix software upgrades, each host will be upgraded in a rolling manner with zero impact to running VMs. &nbsp;VMs will be live-migrated off the current host, the host will be upgraded, and then rebooted. &nbsp;This process will iterate through each host until all hosts in the cluster are upgraded.</p>
 
 <div data-type="note" class="note" id="pro-tip-21iyCmTqHR"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>You can also get cluster wide upgrade status from any Nutanix CVM by running 'host_upgrade --status'. &nbsp;The detailed per host status is logged to ~/data/logs/host_upgrade.out on each CVM.</p>
 </div>
@@ -1559,7 +1555,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="sect1" id="cluster-expansion-add-node-QMI5SwHj">
-<h1>Cluster Expansion (add node)</h1>
+<h3>Cluster Expansion (add node)</h3>
 
 <p>
 	The ability to dynamically scale the Acropolis cluster is core to its functionality.  To scale an Acropolis cluster, rack / stack / cable the nodes and power them on.  Once the nodes are powered up they will be discoverable by the current cluster using mDNS.
@@ -1644,7 +1640,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="sect1" id="capacity-planning-J5IrHVHl">
-<h1>Capacity Planning</h1>
+<h3>Capacity Planning</h3>
 
 <p>To get detailed capacity planning details you can click on a specific cluster under the 'cluster runway' section in Prism Central to get more details:</p>
 
@@ -1690,13 +1686,13 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="api-authentication-schemes-Ami1fVF9"><h6>Note</h6>
-<h1>API Authentication Scheme(s)</h1>
+<h3>API Authentication Scheme(s)</h3>
 
 <p>As of 4.5.x basic authentication over HTTPS is leveraged for client and HTTP call authentication.</p>
 </div>
 
 <section data-type="sect1" id="acli-b1IPigFB">
-<h1>ACLI</h1>
+<h3>ACLI</h3>
 
 <p>The Acropolis CLI (ACLI) is the CLI for managing the Acropolis portion of the Nutanix product. &nbsp;These capabilities were enabled in releases after 4.1.2.</p>
 
@@ -1888,7 +1884,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="sect1" id="ncli-rkIAcbFJ">
-<h1>NCLI</h1>
+<h3>NCLI</h3>
 
 <p>NOTE: All of these actions can be performed via the HTML5 GUI and REST API.&nbsp; I just use these commands as part of my scripting to automate tasks.</p>
 
@@ -2030,7 +2026,7 @@ one-click management and interface for datacenter operations.</p>
 </section>
 
 <section data-type="sect1" id="powershell-cmdlets-mkIgIjFr">
-<h1>PowerShell CMDlets</h1>
+<h3>PowerShell CMDlets</h3>
 
 <p>The below will cover the Nutanix PowerShell CMDlets, how to use them and some general background on Windows PowerShell.</p>
 
@@ -2218,7 +2214,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <h2>Integrations</h2>
 
 <section data-type="sect1" id="openstack-M2IosAtq">
-<h1>OpenStack</h1>
+<h3>OpenStack</h3>
 
 <p><a href="https://www.openstack.org/">OpenStack </a>is an open source platform for managing and building clouds. &nbsp;It is primarily broken into the front-end (dashboard and API) and infrastructure services (compute, storage, etc.).</p>
 
@@ -2248,7 +2244,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 </figure>
 
 <div data-type="note" class="note" id="supported-openstack-controllers-kpi1fysgtX"><h6>Note</h6>
-<h1>Supported OpenStack Controllers</h1>
+<h3>Supported OpenStack Controllers</h3>
 
 <p>The current solution (as of 4.5.1) requires an OpenStack Controller on version Kilo or later.</p>
 </div>
@@ -2315,7 +2311,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 </table>
 
 <section data-type="sect2" id="openstack-components-vlIPIGs4tE">
-<h2>OpenStack Components</h2>
+<h4>OpenStack Components</h4>
 
 <p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these funcitons will be hosted by the OpenStack Controller and some will be hosted by the Acropolis OVM.</p>
 
@@ -2465,7 +2461,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </p>
 
 <div data-type="note" class="note" id="pro-tip-oZibumIWs2tJ"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>For larger deployments Glance should run on at least two Acropolis Clusters per site.  This will provide Image Repo HA in the case of a cluster outage and ensure the images will always be available when not in the Image Cache.</p>
 </div>
@@ -2493,7 +2489,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
  </p>
 
 <div data-type="note" class="note" id="supported-network-types-05iAcpIrsEtB"><h6>Note</h6>
-<h1>Supported Network Types</h1>
+<h3>Supported Network Types</h3>
 
 <p>Currently only Local and VLAN network types are supported.</p>
 </div>
@@ -2501,7 +2497,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <p>The Keystone and Horizon components run in an OpenStack Controller which interfaces with the Acropolis OVM. The OVM(s) have an OpenStack Driver which is responsible for translating the OpenStack API calls into native Acropolis API calls.</p>
 </section>
 <section data-type="sect2" id="design-and-deployment-jrIJU1swtX">
-<h2>Design and Deployment</h2>
+<h4>Design and Deployment</h4>
 
 <p>
 	For large scale cloud deployments it is important to leverage a delivery topology that will be distributed and meet the requirements of the end-users while providing flexibility and locality.
@@ -2792,7 +2788,7 @@ The following values are used as defaults: <br>
 </section>
 
 <section data-type="sect2" id="troubleshooting-andamp-advanced-administration-yAIkhjswtx">
-<h2>Troubleshooting &amp; Advanced Administration</h2>
+<h4>Troubleshooting &amp; Advanced Administration</h4>
 
 <section data-type="sect3" id="key-log-locations-eqIlsmhJsJtN">
 <h2>Key log locations</h2>
@@ -2835,7 +2831,7 @@ The following values are used as defaults: <br>
 </p>
 
 <div data-type="note" class="note" id="pro-tip-l9ioTesBhEsBtZ"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Check NTP if a service is seen as state 'down' in OpenStack Manager (Admin UI or CLI) eventhough the service is running in the OVM.  Many services have a requirement for time to be in sync between the OpenStack Controller and Acropolis OVM.</p>
 </div>
@@ -2941,13 +2937,13 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="supported-hypervisors-for-vm-management-8Mirfxuk"><h6>Note</h6>
-<h1>Supported Hypervisors for VM Management</h1>
+<h3>Supported Hypervisors for VM Management</h3>
 
 <p>Currently, the only fully supported hypervisor for VM management is Acropolis Hypervisor, however this may expand in the future. &nbsp;The Volumes API and read-only operations are still supported on all.</p>
 </div>
 
 <section data-type="sect1" id="acropolis-services-BNIDiAuZ">
-<h1>Acropolis Services</h1>
+<h3>Acropolis Services</h3>
 
 <p>An Acropolis Slave runs on every CVM with an elected Acropolis Master which is responsible for task scheduling, execution, IPAM, etc.&nbsp; Similar to other components which have a Master, if the Acropolis Master fails, a new one will be elected.</p>
 
@@ -2979,7 +2975,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="converged-platform-ONIRcmuA">
-<h1>Converged Platform</h1>
+<h3>Converged Platform</h3>
 
 <p>For a video explanation you can watch the following video: <a href="https://youtu.be/OPYA5-V0yRo">LINK</a></p>
 
@@ -2997,7 +2993,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="software-defined-nrIRIyux">
-<h1>Software-Defined</h1>
+<h3>Software-Defined</h3>
 
 <p>As mentioned above (likely numerous times), the Nutanix platform is a software-based solution which ships as a bundled software + hardware appliance.&nbsp; The controller VM is where the vast majority of the Nutanix software and logic sits and was designed from the beginning to be an extensible and pluggable architecture. A key benefit to being software-defined and not relying upon any hardware offloads or constructs is around extensibility.&nbsp; As with any product life cycle,&nbsp;advancements and new features will always be introduced.&nbsp;</p>
 
@@ -3013,7 +3009,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="cluster-components-b1IeUMu5">
-<h1>Cluster Components</h1>
+<h3>Cluster Components</h3>
 
 <p>For a visual explanation you can watch the following video:&nbsp;<a href="https://youtu.be/3v5RI_IbfV4">LINK</a></p>
 
@@ -3090,7 +3086,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="drive-breakdown-rkIZh9uO">
-<h1>Drive Breakdown</h1>
+<h3>Drive Breakdown</h3>
 
 <p>In this section, I’ll cover how the various storage devices (SSD / HDD) are broken down, partitioned, and utilized by the Nutanix platform. NOTE: All of the capacities used are in Base2 Gibibyte (GiB) instead of the Base10 Gigabyte (GB).&nbsp; Formatting of the drives with a filesystem and associated overheads has also been taken into account.</p>
 
@@ -3147,7 +3143,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <section data-type="sect1" id="data-structure-M2IySRTw">
-<h1>Data Structure</h1>
+<h3>Data Structure</h3>
 
 <p>The Acropolis Distributed Storage Fabric is composed of the following high-level struct:</p>
 
@@ -3206,7 +3202,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="io-path-overview-QMIBHzTQ">
-<h1>I/O Path Overview</h1>
+<h3>I/O Path Overview</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/SULqVPVXefY">LINK</a></p>
 
@@ -3246,7 +3242,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="cache-granularity-and-logic-21igh5H0T3"><h6>Note</h6>
-<h1>Cache Granularity and Logic</h1>
+<h3>Cache Granularity and Logic</h3>
 
 <p>Data is brought into the cache at a 4K granularity and all caching is done real-time (e.g. no delay or batch process data to pull data into the cache).</p>
 </div>
@@ -3260,7 +3256,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="data-protection-J5I3F8Tw">
-<h1>Data Protection</h1>
+<h3>Data Protection</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/OWhdo81yTpk">LINK</a></p>
 
@@ -3278,7 +3274,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="scalable-metadata-4aI3tRTg">
-<h1>Scalable Metadata</h1>
+<h3>Scalable Metadata</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/MlQczJhQI3U">LINK</a></p>
 
@@ -3304,7 +3300,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="data-path-resiliency-BNIWfkTZ">
-<h1>Data Path Resiliency</h1>
+<h3>Data Path Resiliency</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/SJIb_mTdMPg">LINK</a></p>
 
@@ -3388,7 +3384,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="compression-ONIqiMTA">
-<h1>Compression</h1>
+<h3>Compression</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/ERDqOCzDcQY">LINK</a></p>
 
@@ -3405,7 +3401,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-1RiZtvidTQ"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Almost always use inline compression (compression delay = 0) as it will only compress larger / sequential writes and not impact random write performance.</p>
 
@@ -3435,7 +3431,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="erasure-coding-nrIjcoTx">
-<h1>Erasure Coding</h1>
+<h3>Erasure Coding</h3>
 
 <p>The Nutanix platform relies leverages factor (RF) for data protection and availability.&nbsp; This method provides the highest degree of availability because it does not require reading from more than one storage location or data re-computation on failure.&nbsp; However, this does come at the cost of storage resources as full copies are required.&nbsp;</p>
 
@@ -3448,7 +3444,7 @@ storage, compute and virtualization platform.
 <p>For example, “RF2 like” availability (e.g., N+1) could consist of 3 or 4 data blocks and 1 parity block in a strip (e.g., 3/1 or 4/1).&nbsp; “RF3 like” availability (e.g. N+2) could consist of 3 or 4 data blocks and 2 parity blocks in a strip (e.g. 3/2 or 4/2).</p>
 
 <div data-type="note" class="note" id="pro-tip-1RinF8cdTQ"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>You can override the default strip size (4/1 for “RF2 like” or 4/2 for “RF3 like”) via NCLI ‘ctr [create / edit] … erasure-code=&lt;N&gt;/&lt;K&gt;’ where N is the number of data blocks and K is the number of parity blocks.</p>
 </div>
@@ -3501,7 +3497,7 @@ storage, compute and virtualization platform.
 </table>
 
 <div data-type="note" class="note" id="pro-tip-P0iqcdcwT1"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>It is always recommended to have a cluster size which has at least 1 more node than the combined strip size (data + parity) to allow for rebuilding of the strips in the event of a node failure.  This eliminates any computation overhead on reads once the strips have been rebuilt (automated via Curator).  For example, a 4/1 strip should have at least 6 nodes in the cluster.  The previous table follows this best practice.</p>
 </div>
@@ -3533,14 +3529,14 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-mEiEtYcoTN"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Erasure Coding pairs perfectly with inline compression which will add to the storage savings.  I leverage inline compression + EC in my environments.</p>
 </div>
 </section>
 
 <section data-type="sect1" id="elastic-dedupe-engine-b1I4I5T5">
-<h1>Elastic Dedupe Engine</h1>
+<h3>Elastic Dedupe Engine</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/C-rp13cDpNw">LINK</a></p>
 
@@ -3555,7 +3551,7 @@ storage, compute and virtualization platform.
 </p>
 
 <div data-type="note" class="note" id="pro-tip-N8iNFMIYT8"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Use performance tier deduplication on your base images (you can manually fingerprint them using vdisk_manipulator) to take advantage of the content cache.</p>
 
@@ -3573,7 +3569,7 @@ storage, compute and virtualization platform.
 <p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Content Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Content Cache and pool structure, please refer to the ‘Content Cache’ sub-section in the I/O path overview.</p>
 
 <div data-type="note" class="note" id="fingerprinted-vdisk-offsets-l9ijcWIATe"><h6>Note</h6>
-<h1>Fingerprinted vDisk Offsets</h1>
+<h3>Fingerprinted vDisk Offsets</h3>
 <p>
 	Prior to 4.5 only the first 12GB of a vDisk was eligible to be fingerprinted.  This was done to maintain a smaller metadata footprint and since the OS is normally the most common data.  As of 4.5 this has increased to 24GB due to higher metadata efficiencies.
 </p>
@@ -3588,7 +3584,7 @@ storage, compute and virtualization platform.
 <p>You can view the current deduplication rates via Prism on the Storage &gt; Dashboard page.</p>
 
 <div data-type="note" class="note" id="dedup-compression-42ikCZI8Tk"><h6>Note</h6>
-<h1>Dedup + Compression</h1>
+<h3>Dedup + Compression</h3>
 
 <p>
 	As of 4.5 both deduplication and compression can be enabled on the same container.  However, unless the data is dedupable (conditions explained earlier in section), stick with compression.
@@ -3598,7 +3594,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="storage-tiering-and-prioritization-rkIqUgTO">
-<h1>Storage Tiering and Prioritization</h1>
+<h3>Storage Tiering and Prioritization</h3>
 
 <p>The Disk Balancing section above talked about how storage capacity was pooled among all nodes in a Nutanix cluster and that ILM would be used to keep hot data local.&nbsp; A similar concept applies to disk tiering, in which the cluster’s SSD and HDD tiers are cluster-wide and DSF ILM is responsible for triggering data movement events. A local node’s SSD tier is always the highest priority tier for all I/O generated by VMs running on that node, however all of the cluster’s SSD resources are made available to all nodes within the cluster.&nbsp; The SSD tier will always offer the highest performance and is a very important thing to manage for hybrid arrays.</p>
 
@@ -3634,7 +3630,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="disk-balancing-mkIOhPTq">
-<h1>Disk Balancing</h1>
+<h3>Disk Balancing</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/atbkgrmpVNo">LINK</a></p>
 
@@ -3666,7 +3662,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="availability-domains-WnIbC8TM">
-<h1>Availability Domains</h1>
+<h3>Availability Domains</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/LDaNY9AJDn8">LINK</a></p>
 
@@ -3699,7 +3695,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="data-awareness-conditions-BWiXUZCJTv"><h6>Note</h6>
-	<h1>Data Awareness Conditions</h1>
+	<h3>Data Awareness Conditions</h3>
 <p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
 
 <ul>
@@ -3746,7 +3742,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="metadata-awareness-conditions-wDioinCwTQ"><h6>Note</h6>
-	<h1>Metadata Awareness Conditions</h1>
+	<h3>Metadata Awareness Conditions</h3>
 <p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
 
 <ul>
@@ -3832,7 +3828,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="snapshots-and-clones-vlInsNTB">
-<h1>Snapshots and Clones</h1>
+<h3>Snapshots and Clones</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/uK5wWR44UYE">LINK</a></p>
 
@@ -3874,7 +3870,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="replication-and-multi-site-disaster-recovery-jrIOuxT2">
-<h1>Replication and Multi-Site Disaster Recovery</h1>
+<h3>Replication and Multi-Site Disaster Recovery</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/AoKwKI7CXIM">LINK</a></p>
 
@@ -3912,7 +3908,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-bOi5hDuyTp"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Ensure the target site has ample capacity (compute/storage) to handle a full site failure.&nbsp; In certain cases replication/DR between racks within a single site can also make sense.</p>
 </div>
@@ -3926,7 +3922,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-W1i5uRuRT2"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Create multiple PDs for various services tiers driven by a desired RPO/RTO.&nbsp; For file distribution (e.g. golden images, ISOs, etc.) you can create a PD with the files to replication.</p>
 </div>
@@ -3940,7 +3936,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-yGioHpuoTz"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Group dependent application or service VMs in a consistency group to ensure they are recovered in a consistent state (e.g. App and DB)</p>
 </div>
@@ -3953,7 +3949,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-Y2iwfquqTR"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>The snapshot schedule should be equal to your desired RPO</p>
 </div>
@@ -3967,7 +3963,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-EaiQIYuoTo"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>The retention policy should equal the number of restore points required per VM/file</p>
 </div>
@@ -3997,7 +3993,7 @@ storage, compute and virtualization platform.
 <p>It is also possible to configure a remote site with a proxy which will be used as a bridgehead for all coordination and replication traffic coming from a cluster.</p>
 
 <div data-type="note" class="note" id="pro-tip-xkiRf1uDTz"><h6>Note</h6>
-<h1>Pro Tip</h1>
+<h3>Pro Tip</h3>
 
 <p>When using a remote site configured with a proxy, always utilize the cluster IP as that will always be hosted by the Prism Leader and available, even if CVM(s) go down.</p>
 </div>
@@ -4011,7 +4007,7 @@ storage, compute and virtualization platform.
 <p>In certain scenarios, it is also possible to configure a remote site using a SSH tunnel where all traffic will flow between two CVMs.</p>
 
 <div data-type="note" class="note" id="note-kpirUduBT3"><h6>Note</h6>
-<h1>Note</h1>
+<h3>Note</h3>
 This should only be used for non-production scenarios and the cluster IPs should be used to ensure availability.</div>
 
 <p>The following figure shows a representation of the replication architecture using a SSH tunnel:</p>
@@ -4031,14 +4027,14 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <div data-type="note" class="note" id="note-3Nim3HyulTb"><h6>Note</h6>
-<h1>Note</h1>
+<h3>Note</h3>
 
 <p>Fingerprinting must be enabled on the source and target container / vstore for replication deduplication to occur.</p>
 </div>
 </section>
 
 <section data-type="sect1" id="cloud-connect-yAI5T1Td">
-<h1>Cloud Connect</h1>
+<h3>Cloud Connect</h3>
 
 <p>Building upon the native DR / replication capabilities of DSF, Cloud Connect extends this capability into cloud providers (currently Amazon Web Services, or AWS).&nbsp; NOTE: This feature is currently limited to just backup / replication.</p>
 
@@ -4072,7 +4068,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="metro-availability-eqInSNTE">
-<h1>Metro Availability</h1>
+<h3>Metro Availability</h3>
 
 <p>Nutanix provides native “stretch clustering” capabilities which allow for a compute and storage cluster to span multiple physical sites.&nbsp; In these deployments, the compute cluster spans two locations and has access to a shared pool of storage.</p>
 
@@ -4104,7 +4100,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="volumes-api-wrIRHzTv">
-<h1>Volumes API</h1>
+<h3>Volumes API</h3>
 
 <p>The Acropolis Volumes API exposes back-end DSF storage to external consumers (guest OS, physical hosts, containers, etc.) via iSCSI (today).</p>
 
@@ -4206,7 +4202,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="networking-and-io-YWI5FoTZ">
-<h1>Networking and I/O</h1>
+<h3>Networking and I/O</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/Bz37Eu_TgxY">LINK</a></p>
 
@@ -4224,7 +4220,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="data-locality-qeI8t8Td">
-<h1>Data Locality</h1>
+<h3>Data Locality</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/ocLD5nBbUTU">LINK</a></p>
 
@@ -4234,12 +4230,12 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>The following figure shows an example of how data will “follow” the VM as it moves between hypervisor nodes:</p>
 
-<figure class="large" id="id-J2trH1t9T9"><img alt="Data Locality" class="iimagesv2data_locality2png" src="imagesv2/data_locality2.png">
+<figure class="large" id="id-J2trh3t9T9"><img alt="Data Locality" class="iimagesv2data_locality2png" src="imagesv2/data_locality2.png">
 <figcaption><span class="label">Figure 11-55. </span>Data Locality</figcaption>
 </figure>
 
 <div data-type="note" class="note" id="thresholds-for-data-migration-Oxi4FOtjTJ"><h6>Note</h6>
-<h1>Thresholds for Data Migration</h1>
+<h3>Thresholds for Data Migration</h3>
 
 <p>Data locality is a real-time operation and an extent group will be migrated when the following occurs:
 "3 touches within a 10 minute window where multiple reads every 10 second sampling count as a single touch".
@@ -4249,7 +4245,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="shadow-clones-gnIEf8T1">
-<h1>Shadow Clones</h1>
+<h3>Shadow Clones</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/oqfFDMYQFJg">LINK</a></p>
 
@@ -4267,7 +4263,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="storage-layers-and-monitoring-EqIjiATz">
-<h1>Storage Layers and Monitoring</h1>
+<h3>Storage Layers and Monitoring</h3>
 
 <p>The Nutanix platform monitors storage at multiple layers throughout the stack, ranging from the VM/Guest OS all the way down to the physical disk devices.&nbsp; Knowing the various tiers and how these relate is important whenever monitoring the solution and allows you to get full visibility of how the ops relate. The following figure shows the various layers of where operations are monitored and the relative granularity which are explained below:</p>
 
@@ -4310,7 +4306,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </ul>
 
 <div data-type="note" class="note" id="metric-and-stat-retention-yGiRUBioTz"><h6>Note</h6>
-<h1>Metric and Stat Retention</h1>
+<h3>Metric and Stat Retention</h3>
 
 <p>Metrics and time series data is stored locally for 90 days in Prism Element.  For Prism Central and Insights, data can be stored indefinitely (assuming capacity is available).</p>
 </div>
@@ -4326,8 +4322,8 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="chapter" id="acropolis-hypervisor-PgIzH9">
 <h2>Acropolis Hypervisor</h2>
 
-<section data-type="sect1" id="node-architecture-lkIms8H1">
-<h1>Node Architecture</h1>
+<section data-type="sect1" id="node-architecture-lkIms8h3">
+<h3>Node Architecture</h3>
 
 <p>In Acropolis Hypervisor deployments, the Controller VM (CVM) runs as a VM and disks are presented using PCI passthrough.&nbsp; This allows the full PCI controller (and attached devices) to be passed through directly to the CVM and bypass the hypervisor.&nbsp; Acropolis Hypervisor is based upon CentOS KVM.</p>
 
@@ -4341,7 +4337,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="kvm-architecture-M2I0uWHw">
-<h1>KVM Architecture</h1>
+<h3>KVM Architecture</h3>
 
 <p>Within KVM there are a few main components:</p>
 
@@ -4372,7 +4368,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>Communication between Acropolis and KVM occurs via Libvirt.&nbsp;</p>
 
 <div data-type="note" class="note" id="processor-generation-compatability-AmibF4u9Hx"><h6>Note</h6>
-<h1>Processor generation compatability</h1>
+<h3>Processor generation compatability</h3>
 
 <p>Similar to VMware's Enhanced vMotion Capability (EVC) which allows VMs to move between different processor generations; Acropolis Hypervisor will determine the lowest processor generation in the cluster and constrain all QEMU domains to that level.  This allows mixing of processor generations within an AHV cluster and ensures the ability to live migrate between hosts.</p>
 </div>
@@ -4380,7 +4376,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="configuration-maximums-and-scalability-QMImTwHQ">
-<h1>Configuration Maximums and Scalability</h1>
+<h3>Configuration Maximums and Scalability</h3>
 
 <p>The following configuration maximums and scalability limits are applicable:</p>
 
@@ -4394,7 +4390,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="networking-J5IbSVHw">
-<h1>Networking</h1>
+<h3>Networking</h3>
 
 <p>Acropolis Hypervisor leverages Open vSwitch (OVS) for all VM networking.&nbsp; VM networking is configured through Prism / ACLI and each VM nic is connected into a tap interface.</p>
 
@@ -4406,10 +4402,10 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="how-it-works-4aIRHwHg">
-<h1>How It Works</h1>
+<h3>How It Works</h3>
 
 <section data-type="sect2" id="iscsi-multi-pathing-BNIZsRHzHv">
-<h2>iSCSI Multi-pathing</h2>
+<h4>iSCSI Multi-pathing</h4>
 
 <p>On each KVM host there is a iSCSI redirector daemon running which checks Stargate health throughout the cluster using NOP OUT commands.</p>
 
@@ -4433,7 +4429,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect2" id="ip-address-management-ONIyujHgHJ">
-<h2>IP Address Management</h2>
+<h4>IP Address Management</h4>
 
 <p>The Acropolis IP address management (IPAM) solution provides the ability to establish a DHCP scope and assign addresses to VMs.&nbsp; This leverages VXLAN and OpenFlow rules to intercept the DHCP request and respond with a DHCP response.</p>
 
@@ -4453,7 +4449,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect2" id="vm-high-availability-ha-nrIkT2HrHN">
-<h2>VM High Availability (HA)</h2>
+<h4>VM High Availability (HA)</h4>
 <p>
 	Acropolis hypervisor VM HA is a feature built to ensure VM availability in the event of a host or block outage.  In the event of a host failure the VMs previously running on that host will be restarted on other healthy nodes throughout the cluster.  The Acropolis Master is responsible for restarting the VM(s) on the healthy host(s).
 </p>
@@ -4471,7 +4467,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="default-vm-restart-policy-RDiqH9TWHRHG"><h6>Note</h6>
-<h1>Default VM restart policy</h1>
+<h3>Default VM restart policy</h3>
 <p>
 	By default any AHV cluster will do its best to restart VM(s) in the event of a host failure.  In this mode, when a host becomes unavailable, the previously running VMs will be restarted on the remaining healthy hosts if possible.  Since this is best effort (meaning resources aren't reserved) the ability to restart all VMs will be dependent on available AHV resources.
 </p>
@@ -4507,7 +4503,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-21irfmTqHRHb"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 <p>
 	Use reserve hosts when:
 </p>
@@ -4543,7 +4539,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="pro-tip-MziqURTqHbHX"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 <p>
 	You can override or manually set the number of reserved failover hosts with the following ACLI command:
 </p>
@@ -4580,7 +4576,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="pro-tip-mEiEtPTrHdHM"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Keep your hosts balanced when using segment based reservation.  This will give the highest utilization and ensure not too many segments are reserved.</p>
 </div>
@@ -4601,8 +4597,8 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 13-14. </span>HA - Reserved Segment - Fail Over</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="reserved-segments-calculation-eriXUNTQH1H8"><h6>Note</h6>
-<h1>Reserved segment(s) calculation</h1>
+<div data-type="note" class="note" id="reserved-segments-calculation-eriXUNTQh3H8"><h6>Note</h6>
+<h3>Reserved segment(s) calculation</h3>
 <p>
 	The system will automatically calculate the total number of reserved segments and per host reservation.  To gain some insight on how this is calculated some details on the calculation can be found in the following text.
 </p>
@@ -4646,19 +4642,19 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="administration-BNIyFRHZ">
-<h1>Administration</h1>
+<h3>Administration</h3>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="sect1" id="important-pages-ONIPtjHA">
-<h1>Important Pages</h1>
+<h3>Important Pages</h3>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="sect1" id="command-reference-nrIef2Hx">
-<h1>Command Reference</h1>
+<h3>Command Reference</h3>
 
 <h2>Enable 10GbE links only on OVS</h2>
 
@@ -4802,13 +4798,13 @@ ovs-vsctl list port &lt;bond&gt;</p>
 </section>
 
 <section data-type="sect1" id="metrics-and-thresholds-b1IPiXH5">
-<h1>Metrics and Thresholds</h1>
+<h3>Metrics and Thresholds</h3>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="sect1" id="troubleshooting-andamp-advanced-administration-rkIAcyHO">
-<h1>Troubleshooting &amp; Advanced Administration</h1>
+<h3>Troubleshooting &amp; Advanced Administration</h3>
 
 <h2>Check iSCSI Redirector Logs</h2>
 
@@ -4848,7 +4844,7 @@ Cat /var/log/iscsi_redirector</p>
 <h2>Administration</h2>
 
 <section data-type="sect1" id="important-pages-M2IosXFw">
-<h1>Important Pages</h1>
+<h3>Important Pages</h3>
 
 <p>These are advanced Nutanix pages besides the standard user interface that allow you to monitor detailed stats and metrics.&nbsp; The URLs are formatted in the following way: http://&lt;Nutanix CVM IP/DNS&gt;:&lt;Port/path (mentioned below)&gt;&nbsp; Example: http://MyCVM-A:2009&nbsp; NOTE: if you’re on a different subnet IPtables will need to be disabled on the CVM to access the pages.</p>
 
@@ -4910,7 +4906,7 @@ Cat /var/log/iscsi_redirector</p>
 </section>
 
 <section data-type="sect1" id="cluster-commands-QMIMupFQ">
-<h1>Cluster Commands</h1>
+<h3>Cluster Commands</h3>
 
 <h2>Check cluster status</h2>
 
@@ -5136,19 +5132,19 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="sect1" id="metrics-and-thresholds-J5IvTbFw">
-<h1>Metrics and Thresholds</h1>
+<h3>Metrics and Thresholds</h3>
 
 <p>The following section will cover specific metrics and thresholds on the Nutanix back end.&nbsp; More updates to these coming shortly!</p>
 </section>
 
 <section data-type="sect1" id="gflags-4aI2S1Fg">
-<h1>Gflags</h1>
+<h3>Gflags</h3>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="sect1" id="troubleshooting-andamp-advanced-administration-BNI4HzFZ">
-<h1>Troubleshooting &amp; Advanced Administration</h1>
+<h3>Troubleshooting &amp; Advanced Administration</h3>
 
 <h2>Find Acropolis logs</h2>
 
@@ -5176,13 +5172,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p class="codetext">allssh "cat ~/data/logs/Stargate.FATAL"</p>
 
-<section data-type="sect2" id="using-the-2009-page-stargate-gnIoCmH1FP">
-<h2>Using the 2009 Page (Stargate)</h2>
+<section data-type="sect2" id="using-the-2009-page-stargate-gnIoCmh3FP">
+<h4>Using the 2009 Page (Stargate)</h4>
 
 <p>In most cases Prism should be able to give you all of the information and data points you require. &nbsp;However,&nbsp;in certain scenarios, or if you want some more detailed data you can leverage the Stargate aka 2009 page. &nbsp;The 2009 page can be viewed by navigating to &lt;CVM IP&gt;:2009.</p>
 
 <div data-type="note" class="note" id="accessing-back-end-pages-JZiaukClH9F5"><h6>Note</h6>
-<h1>Accessing back-end pages</h1>
+<h3>Accessing back-end pages</h3>
 
 <p>If you're on a different network segment (L2 subnet)&nbsp;you'll need to add a rule in IP tables to access any of the back-end pages.</p>
 </div>
@@ -5210,7 +5206,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-vAiPIXC9HxF5"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>In ideal cases the hit rates should be above 80-90%+ if the workload is read heavy for the best possible read performance.</p>
 </div>
@@ -5234,7 +5230,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-EaigHoCDHoFE"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>When looking at any potential performance issues I always look at the following:</p>
 
@@ -5248,7 +5244,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </div>
 </section>
 <section data-type="sect2" id="using-the-2009vdisk_stats-page-EqIdsRHzFo">
-<h2>Using the 2009/vdisk_stats Page</h2>
+<h4>Using the 2009/vdisk_stats Page</h4>
 
 <p>The 2009 vdisk_stats page is a detailed page which provides even further data points per vDisk. &nbsp;This page includes details and a histogram of items like randomness, latency histograms, I/O sizes and working set details.</p>
 
@@ -5315,7 +5311,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-dbi8IEsnHWF4"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>If you're seeing high read latency take a look at the read source for the vDisk and take a look where the I/Os are being served from. &nbsp;In most cases high latency could be caused by reads coming from HDD (Estore HDD).</p>
 </div>
@@ -5329,7 +5325,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-xkiVsosqHzF5"><h6>Note</h6>
-<h1>Pro tip</h1>
+<h3>Pro tip</h3>
 
 <p>Random or smaller I/Os (&lt;64K) will be written to the Oplog. &nbsp;Larger or sequential I/Os will bypass the Oplog and be directly written to the Extent Store (Estore).</p>
 </div>
@@ -5343,7 +5339,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 </section>
 <section data-type="sect2" id="using-the-2010-page-curator-aOIJu5HnFW">
-<h2>Using the 2010 Page (Curator)</h2>
+<h4>Using the 2010 Page (Curator)</h4>
 
 <p>The 2010 page is a detailed page for monitoring the Curator MapReduce framework. &nbsp;This page provides details on jobs, scans, and associated tasks.&nbsp;</p>
 
@@ -5478,7 +5474,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h2>Architecture</h2>
 
 <section data-type="sect1" id="node-architecture-22IRsYsQ">
-<h1>Node Architecture</h1>
+<h3>Node Architecture</h3>
 
 <p>In ESXi deployments, the Controller VM (CVM) runs as a VM and disks are presented using VMDirectPath I/O.&nbsp; This allows the full PCI controller (and attached devices) to be passed through directly to the CVM and bypass the hypervisor.</p>
 
@@ -5488,7 +5484,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="sect1" id="configuration-maximums-and-scalability-3jIAuksQ">
-<h1>Configuration Maximums and Scalability</h1>
+<h3>Configuration Maximums and Scalability</h3>
 
 <p>The following configuration maximums and scalability limits are applicable:</p>
 
@@ -5508,7 +5504,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h2>How It Works</h2>
 
 <section data-type="sect1" id="array-offloads-vaai-3jImsMuQ">
-<h1>Array Offloads – VAAI</h1>
+<h3>Array Offloads – VAAI</h3>
 
 <p>The Nutanix platform supports the VMware APIs for Array Integration (VAAI),&nbsp;which allows the hypervisor to offload certain tasks to the array.&nbsp; This is much more efficient as the hypervisor doesn’t need to be the 'man in the middle'. Nutanix currently supports the VAAI primitives for NAS, including the ‘full file clone’, ‘fast file clone’, and ‘reserve space’ primitives.&nbsp; Here’s a good article explaining the various primitives: http://cormachogan.com/2012/11/08/vaai-comparison-block-versus-nas/.&nbsp;</p>
 
@@ -5533,7 +5529,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="sect1" id="cvm-autopathing-aka-hapy-PgIJuQub">
-<h1>CVM Autopathing aka Ha.py</h1>
+<h3>CVM Autopathing aka Ha.py</h3>
 
 <p>In this section, I’ll cover how CVM 'failures' are handled (I’ll cover how we handle component failures in future update).&nbsp; A CVM 'failure' could include a user powering down the CVM, a CVM rolling upgrade, or any event which might bring down the CVM. DSF has a feature called autopathing where when a local CVM becomes unavailable, the I/Os are then transparently handled by other CVMs in the cluster. The hypervisor and CVM communicate using a private 192.168.5.0 network on a dedicated vSwitch (more on this above).&nbsp; This means that for all storage I/Os, these are happening to the internal IP addresses on the CVM (192.168.5.2).&nbsp; The external IP address of the CVM is used for remote replication and for CVM communication.</p>
 
@@ -5557,13 +5553,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h2>Administration</h2>
 
 <section data-type="sect1" id="important-pages-PgIys4Tb">
-<h1>Important Pages</h1>
+<h3>Important Pages</h3>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="sect1" id="command-reference-lkIBuxTJ">
-<h1>Command Reference</h1>
+<h3>Command Reference</h3>
 
 <h2>ESXi cluster upgrade</h2>
 
@@ -5649,14 +5645,14 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="sect1" id="metrics-and-thresholds-M2I5TRTv">
-<h1>Metrics and Thresholds</h1>
+<h3>Metrics and Thresholds</h3>
 
 <p>More coming soon!</p>
 </section>
 </section>
 
 <section data-type="sect1" id="troubleshooting-andamp-advanced-administration-PgIPS5">
-<h1>Troubleshooting &amp; Advanced Administration</h1>
+<h3>Troubleshooting &amp; Advanced Administration</h3>
 
 <p>More coming soon!</p>
 </section>
@@ -5669,7 +5665,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h2>Architecture</h2>
 
 <section data-type="sect1" id="node-architecture-3jImsksn">
-<h1>Node Architecture</h1>
+<h3>Node Architecture</h3>
 
 <p>In Hyper-V deployments, the Controller VM (CVM) runs as a VM and disks are presented using disk passthrough.</p>
 
@@ -5679,7 +5675,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </section>
 
 <section data-type="sect1" id="configuration-maximums-and-scalability-PgIJu8s2">
-<h1>Configuration Maximums and Scalability</h1>
+<h3>Configuration Maximums and Scalability</h3>
 
 <p>The following configuration maximums and scalability limits are applicable:</p>
 
@@ -5699,7 +5695,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h2>How It Works</h2>
 
 <section data-type="sect1" id="array-offloads-odx-PgIysQu2">
-<h1>Array Offloads – ODX</h1>
+<h3>Array Offloads – ODX</h3>
 
 <p>The Nutanix platform supports the Microsoft Offloaded Data Transfers (ODX), which allow the hypervisor to offload certain tasks to the array.&nbsp; This is much more efficient as the hypervisor doesn’t need to be the 'man in the middle'. Nutanix currently supports the ODX primitives for SMB, which include full copy and zeroing operations.&nbsp; However, contrary to VAAI which has a 'fast file' clone operation (using writable snapshots), the ODX primitives do not have an equivalent and perform a full copy.&nbsp; Given this, it is more efficient to rely on the native DSF clones which can currently be invoked via nCLI, REST, or Powershell CMDlets. Currently ODX IS invoked for the following operations:</p>
 
@@ -5726,13 +5722,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <h2>Administration</h2>
 
 <section data-type="sect1" id="important-pages-lkImsxTa">
-<h1>Important Pages</h1>
+<h3>Important Pages</h3>
 
 <p>More coming soon!</p>
 </section>
 
 <section data-type="sect1" id="command-reference-M2I0uRT0">
-<h1>Command Reference</h1>
+<h3>Command Reference</h3>
 
 <h2>Execute command on multiple remote hosts</h2>
 
@@ -5806,14 +5802,14 @@ Get-VM | Where {$_.Name -match $vmPrefix} | Stop-VM</p>
 </section>
 
 <section data-type="sect1" id="metrics-and-thresholds-QMImTzTx">
-<h1>Metrics and Thresholds</h1>
+<h3>Metrics and Thresholds</h3>
 
 <p>More coming soon!</p>
 </section>
 </section>
 
 <section data-type="sect1" id="troubleshooting-andamp-advanced-administration-lkI8SA">
-<h1>Troubleshooting &amp; Advanced Administration</h1>
+<h3>Troubleshooting &amp; Advanced Administration</h3>
 
 <p>More coming soon!</p>
 </section>
