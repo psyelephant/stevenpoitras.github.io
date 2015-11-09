@@ -693,7 +693,7 @@
 </section>
 
 <div data-type="part" id="a-brief-lesson-in-history-6qVi1">
-<h3><span class="label">Part I. </span>A Brief Lesson in History</h3>
+<h1><span class="label">Part I. </span>A Brief Lesson in History</h1>
 
 <p>A brief look at the history of infrastructure and what has led us to where we are today.</p>
 
@@ -1671,7 +1671,7 @@ one-click management and interface for datacenter operations.</p>
 	<li>Scripting interfaces</li>
 </ul>
 
-<p>Core to this is the REST API which exposes every capability and data point of the Prism UI and allows for orchestration or automation tools to easily drive Nutanix action.&nbsp; This enables tools like vRealize Operations, System Center Orchestrator, Ansible, SALT, etc.&nbsp;to easily create custom workflows for Nutanix. Also, this means that any third-party developer could create their own custom UI and pull in Nutanix data via REST.</p>
+<p>Core to this is the REST API which exposes every capability and data point of the Prism UI and allows for orchestration or automation tools to easily drive Nutanix action.&nbsp; This enables tools like Saltstack, Puppet, vRealize Operations, System Center Orchestrator, Ansible, etc.&nbsp;to easily create custom workflows for Nutanix. Also, this means that any third-party developer could create their own custom UI and pull in Nutanix data via REST.</p>
 
 <p>The following figure shows a small snippet of the Nutanix REST API explorer which allows developers to interact with the API and see expected data formats:</p>
 
@@ -1764,7 +1764,7 @@ one-click management and interface for datacenter operations.</p>
 
 <h2>Configure DHCP DNS servers for network</h2>
 
- <p class="codedescription">Description: Set DHCP DNS</p>
+<p class="codedescription">Description: Set DHCP DNS</p>
 
 <p class="codetext">net.update_dhcp_dns &lt;NET NAME&gt; servers=&lt;COMMA SEPARATED DNS IPs&gt; domains=&lt;COMMA SEPARATED DOMAINS&gt;</p>
 
@@ -1788,7 +1788,7 @@ one-click management and interface for datacenter operations.</p>
 
 <h2>Clone VM from existing</h2>
 
- <p class="codedescription">Description: Create clone of existing VM</p>
+<p class="codedescription">Description: Create clone of existing VM</p>
 
 <p class="codetext">vm.clone &lt;CLONE NAME(S)&gt; clone_from_vm=&lt;SOURCE VM NAME&gt;</p>
 
@@ -2223,12 +2223,12 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <ul>
 	<li>OpenStack Controller (OSC)
 		<ul>
-			<li>An existing, or newly provisioned VM or host hosting the OpenStack UI, API and services.  Handles all OpenStack API calls.</li>
+			<li>An existing, or newly provisioned VM or host hosting the OpenStack UI, API and services.  Handles all OpenStack API calls.  In an Acropolis OVM deployment this is co-located with the Acropolis OpenStack Drivers.</li>
 		</ul>
 	</li>
-	<li>Acropolis OpenStack Services VM (OVM)
+	<li>Acropolis OpenStack VM (OVM)
 		<ul>
-			<li>VM with Acropolis drivers that is responsible for taking OpenStack RPCs from the OpenStack Controller and translates them into native Acropolis API calls.</li>
+			<li>Responsible for taking OpenStack RPCs from the OpenStack Controller and translates them into native Acropolis API calls.</li>
 		</ul>
 	</li>
 </ul>
@@ -2313,7 +2313,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <section data-type="sect2" id="openstack-components-vlIPIGs4tE">
 <h4>OpenStack Components</h4>
 
-<p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these funcitons will be hosted by the OpenStack Controller and some will be hosted by the Acropolis OVM.</p>
+<p>OpenStack is composed of a set of components which are responsible for serving various infrastructure functions.  Some of these functions will be hosted by the OpenStack Controller and some will be hosted by the Acropolis OVM.</p>
 
 <p>The table shows the core OpenStack components and role mapping:</p>
 
