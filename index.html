@@ -84,6 +84,14 @@
 </a>
 </section>
 
+<!-- START: Ken Chen 11-17-2015-->
+<div id="nav-icon"><div></div></div>
+<div class="nav-title">
+  Table of Content
+  <div id="nav-close-button"></div>
+</div>
+<!-- END: Ken Chen 11-17-2015-->
+
 <nav data-type="toc">
 <ol>
   <li data-type="preface">
@@ -730,7 +738,7 @@
 <ul>
 	<li>The high costs of procuring infrastructure</li>
 	<li>Inherent complexity</li>
-	<li>&nbsp;A lack of flexibility and highly siloed environments</li>
+	<li>A lack of flexibility and highly siloed environments</li>
 </ul>
 </section>
 
@@ -1269,7 +1277,7 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-05i5cRT9"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>For larger or distributed deployments (e.g. more than one cluster or multiple sites) it is recommended to use Prism Central to simplify operations and provide a single management UI for all clusters / sites.</p>
 </div>
@@ -1293,7 +1301,7 @@ one-click management and interface for datacenter operations.</p>
 <p>When using the cluster external IP (recommended),&nbsp;it will always be hosted by the current Prism Leader. &nbsp;In the event of a Prism Leader failure the cluster IP will be assumed by the newly elected Prism Leader and a gratuitous ARP (gARP) will be used to clean any stale ARP cache entries. &nbsp;In this scenario any time the cluster IP is used to access Prism, no redirection is necessary as that will already be the Prism Leader.</p>
 
 <div data-type="note" class="note" id="pro-tip-1RiATNTX"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>You can determine the current Prism leader by running 'curl localhost:2019/prism/leader' on any CVM.</p>
 </div>
@@ -1353,7 +1361,7 @@ one-click management and interface for datacenter operations.</p>
 <p>From here you can monitor the overall status of your environment, and dive deeper if there are any alerts or items of interest.</p>
 
 <div data-type="note" class="note" id="pro-tip-G9iVFptNS9"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>If everything is green, go back to doing something else :)</p>
 </div>
@@ -1552,7 +1560,7 @@ one-click management and interface for datacenter operations.</p>
 <p>Similar to the rolling nature of the Nutanix software upgrades, each host will be upgraded in a rolling manner with zero impact to running VMs. &nbsp;VMs will be live-migrated off the current host, the host will be upgraded, and then rebooted. &nbsp;This process will iterate through each host until all hosts in the cluster are upgraded.</p>
 
 <div data-type="note" class="note" id="pro-tip-21iyCmTqHR"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>You can also get cluster wide upgrade status from any Nutanix CVM by running 'host_upgrade --status'. &nbsp;The detailed per host status is logged to ~/data/logs/host_upgrade.out on each CVM.</p>
 </div>
@@ -1709,7 +1717,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p>NOTE: All of these actions can be performed via the HTML5 GUI and REST API.&nbsp; I just use these commands as part of my scripting to automate tasks.</p>
 
-<h2>Enter ACLI shell</h2>
+<h5>Enter ACLI shell</h5>
 
 <p class="codedescription">Description: Enter ACLI shell (run from any CVM)</p>
 
@@ -1721,19 +1729,19 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">ACLI &lt;Command&gt;</p>
 
-<h2>Output ACLI response in json format</h2>
+<h5>Output ACLI response in json format</h5>
 
  <p class="codedescription">Description: Lists Acropolis nodes in the cluster.</p>
 
 <p class="codetext">Acli –o json</p>
 
-<h2>List hosts</h2>
+<h5>List hosts</h5>
 
  <p class="codedescription">Description: Lists Acropolis nodes in the cluster.</p>
 
 <p class="codetext">host.list</p>
 
-<h2>Create network</h2>
+<h5>Create network</h5>
 
  <p class="codedescription">Description: Create network based on VLAN</p>
 
@@ -1741,13 +1749,13 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: net.create vlan.133 ip_config=10.1.1.1/24</p>
 
-<h2>List network(s)</h2>
+<h5>List network(s)</h5>
 
  <p class="codedescription">Description: List networks</p>
 
 <p class="codetext">net.list</p>
 
-<h2>Create DHCP scope</h2>
+<h5>Create DHCP scope</h5>
 
  <p class="codedescription">Description: Create dhcp scope</p>
 
@@ -1757,7 +1765,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: net.add_dhcp_pool vlan.100 start=10.1.1.100 end=10.1.1.200</p>
 
-<h2>Get an existing networks details</h2>
+<h5>Get an existing networks details</h5>
 
  <p class="codedescription">Description: Get a network's properties</p>
 
@@ -1765,7 +1773,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: net.get vlan.133</p>
 
-<h2>Get an existing networks details</h2>
+<h5>Get an existing networks details</h5>
 
  <p class="codedescription">Description: Get a network's VMs and details including VM name / UUID, MAC address and IP</p>
 
@@ -1773,7 +1781,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: net.list_vms vlan.133</p>
 
-<h2>Configure DHCP DNS servers for network</h2>
+<h5>Configure DHCP DNS servers for network</h5>
 
 <p class="codedescription">Description: Set DHCP DNS</p>
 
@@ -1781,7 +1789,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: net.set_dhcp_dns vlan.100 servers=10.1.1.1,10.1.1.2 domains=splab.com</p>
 
-<h2>Create Virtual Machine</h2>
+<h5>Create Virtual Machine</h5>
 
  <p class="codedescription">Description: Create VM</p>
 
@@ -1789,7 +1797,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.create testVM memory=2G num_vcpus=2</p>
 
-<h2>Bulk Create Virtual Machine</h2>
+<h5>Bulk Create Virtual Machine</h5>
 
  <p class="codedescription">Description: Create bulk VM</p>
 
@@ -1797,7 +1805,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.create testVM[000..999]&nbsp;memory=2G num_vcpus=2</p>
 
-<h2>Clone VM from existing</h2>
+<h5>Clone VM from existing</h5>
 
 <p class="codedescription">Description: Create clone of existing VM</p>
 
@@ -1805,7 +1813,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.clone testClone clone_from_vm=MYBASEVM</p>
 
-<h2>Bulk Clone VM from existing</h2>
+<h5>Bulk Clone VM from existing</h5>
 
  <p class="codedescription">Description: Create bulk clones of existing VM</p>
 
@@ -1813,7 +1821,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.clone testClone[001..999]&nbsp;clone_from_vm=MYBASEVM</p>
 
-<h2>Create disk and add to VM</h2>
+<h5>Create disk and add to VM</h5>
 
 <p class="codetext"># Description: Create disk for OS</p>
 
@@ -1821,7 +1829,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext"> class="codetext"Example: vm.disk_create testVM create_size=500G container=default</p>
 
-<h2>Add NIC to VM</h2>
+<h5>Add NIC to VM</h5>
 
  <p class="codedescription">Description: Create and add NIC</p>
 
@@ -1829,7 +1837,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.nic_create testVM network=vlan.100</p>
 
-<h2>Set VM’s boot device to disk</h2>
+<h5>Set VM’s boot device to disk</h5>
 
  <p class="codedescription">Description: Set a VM boot device</p>
 
@@ -1839,7 +1847,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.update_boot_device testVM disk_addr=scsi.0</p>
 
-<h2>Set VM’s boot device to CDrom</h2>
+<h5>Set VM’s boot device to CDrom</h5>
 
 <p>Set to boot from CDrom</p>
 
@@ -1847,7 +1855,7 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.update_boot_device testVM disk_addr=ide.0</p>
 
-<h2>Mount ISO to CDrom</h2>
+<h5>Mount ISO to CDrom</h5>
 
  <p class="codedescription">Description: Mount ISO to VM cdrom</p>
 
@@ -1871,13 +1879,13 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">Example: vm.disk_update atestVM1 ide.0 clone_nfs_file=/default/ISOs/myfile.iso</p>
 
-<h2>Detach ISO from CDrom</h2>
+<h5>Detach ISO from CDrom</h5>
 
  <p class="codedescription">Description: Remove ISO from CDrom</p>
 
 <p class="codetext">vm.disk_update &lt;VM NAME&gt; &lt;CDROM BUS&gt; empty=true</p>
 
-<h2>Power on VM(s)</h2>
+<h5>Power on VM(s)</h5>
 
  <p class="codedescription">Description: Power on VM(s)</p>
 
@@ -1899,55 +1907,55 @@ one-click management and interface for datacenter operations.</p>
 
 <p>NOTE: All of these actions can be performed via the HTML5 GUI and REST API.&nbsp; I just use these commands as part of my scripting to automate tasks.</p>
 
-<h2>Add subnet to NFS whitelist</h2>
+<h5>Add subnet to NFS whitelist</h5>
 
 <p class="codedescription">Description: Adds a particular subnet to the NFS whitelist</p>
 
 <p class="codetext">ncli cluster add-to-nfs-whitelist ip-subnet-masks=10.2.0.0/255.255.0.0</p>
 
-<h2>Display Nutanix Version</h2>
+<h5>Display Nutanix Version</h5>
 
  <p class="codedescription">Description: Displays the current version of the Nutanix software</p>
 
 <p class="codetext">ncli cluster version</p>
 
-<h2>Display hidden NCLI options</h2>
+<h5>Display hidden NCLI options</h5>
 
  <p class="codedescription">Description: Displays the hidden ncli commands/options</p>
 
 <p class="codetext">ncli helpsys listall hidden=true [detailed=false|true]</p>
 
-<h2>List Storage Pools</h2>
+<h5>List Storage Pools</h5>
 
  <p class="codedescription">Description: Displays the existing storage pools</p>
 
 <p class="codetext">ncli sp ls</p>
 
-<h2>List containers</h2>
+<h5>List containers</h5>
 
  <p class="codedescription">Description: Displays the existing containers</p>
 
 <p class="codetext">ncli ctr ls</p>
 
-<h2>Create container</h2>
+<h5>Create container</h5>
 
 <p class="codedescription">Description: Creates a new container</p>
 
 <p class="codetext">ncli ctr create name=&lt;NAME&gt; sp-name=&lt;SP NAME&gt;</p>
 
-<h2>List VMs</h2>
+<h5>List VMs</h5>
 
  <p class="codedescription">Description: Displays the existing VMs</p>
 
 <p class="codetext">ncli vm ls</p>
 
-<h2>List public keys</h2>
+<h5>List public keys</h5>
 
  <p class="codedescription">Description: Displays the existing public keys</p>
 
 <p class="codetext">ncli cluster list-public-keys</p>
 
-<h2>Add public key</h2>
+<h5>Add public key</h5>
 
  <p class="codedescription">Description: Adds a public key for cluster access</p>
 
@@ -1957,79 +1965,79 @@ one-click management and interface for datacenter operations.</p>
 
 <p class="codetext">ncli cluster add-public-key name=myPK file-path=~/mykey.pub</p>
 
-<h2>Remove public key</h2>
+<h5>Remove public key</h5>
 
  <p class="codedescription">Description: Removes a public key for cluster access</p>
 
 <p class="codetext">ncli cluster remove-public-keys name=myPK</p>
 
-<h2>Create protection domain</h2>
+<h5>Create protection domain</h5>
 
  <p class="codedescription">Description: Creates a protection domain</p>
 
 <p class="codetext">ncli pd create name=&lt;NAME&gt;</p>
 
-<h2>Create remote site</h2>
+<h5>Create remote site</h5>
 
  <p class="codedescription">Description: Create a remote site for replication</p>
 
 <p class="codetext">ncli remote-site create name=&lt;NAME&gt; address-list=&lt;Remote Cluster IP&gt;</p>
 
-<h2>Create protection domain for all VMs in container</h2>
+<h5>Create protection domain for all VMs in container</h5>
 
  <p class="codedescription">Description: Protect all VMs in the specified container</p>
 
 <p class="codetext">ncli pd protect name=&lt;PD NAME&gt; ctr-id=&lt;Container ID&gt; cg-name=&lt;NAME&gt;</p>
 
-<h2>Create protection domain with specified VMs</h2>
+<h5>Create protection domain with specified VMs</h5>
 
  <p class="codedescription">Description: Protect the VMs specified</p>
 
 <p class="codetext">ncli pd protect name=&lt;PD NAME&gt; vm-names=&lt;VM Name(s)&gt; cg-name=&lt;NAME&gt;</p>
 
-<h2>Create protection domain for DSF files (aka vDisk)</h2>
+<h5>Create protection domain for DSF files (aka vDisk)</h5>
 
  <p class="codedescription">Description: Protect the DSF Files specified</p>
 
 <p class="codetext">ncli pd protect name=&lt;PD NAME&gt; files=&lt;File Name(s)&gt; cg-name=&lt;NAME&gt;</p>
 
-<h2>Create snapshot of protection domain</h2>
+<h5>Create snapshot of protection domain</h5>
 
  <p class="codedescription">Description: Create a one-time snapshot of the protection domain</p>
 
 <p class="codetext">ncli pd add-one-time-snapshot name=&lt;PD NAME&gt; retention-time=&lt;seconds&gt;</p>
 
-<h2>Create snapshot and replication schedule to remote site</h2>
+<h5>Create snapshot and replication schedule to remote site</h5>
 
  <p class="codedescription">Description: Create a recurring snapshot schedule and replication to n remote sites</p>
 
 <p class="codetext">ncli pd set-schedule name=&lt;PD NAME&gt; interval=&lt;seconds&gt; retention-policy=&lt;POLICY&gt; remote-sites=&lt;REMOTE SITE NAME&gt;</p>
 
-<h2>List replication status</h2>
+<h5>List replication status</h5>
 
  <p class="codedescription">Description: Monitor replication status</p>
 
 <p class="codetext">ncli pd list-replication-status</p>
 
-<h2>Migrate protection domain to remote site</h2>
+<h5>Migrate protection domain to remote site</h5>
 
  <p class="codedescription">Description: Fail-over a protection domain to a remote site</p>
 
 <p class="codetext">ncli pd migrate name=&lt;PD NAME&gt; remote-site=&lt;REMOTE SITE NAME&gt;</p>
 
-<h2>Activate protection domain</h2>
+<h5>Activate protection domain</h5>
 
  <p class="codedescription">Description: Activate a protection domain at a remote site</p>
 
 <p class="codetext">ncli pd activate name=&lt;PD NAME&gt;</p>
 
-<h2>Enable DSF Shadow Clones</h2>
+<h5>Enable DSF Shadow Clones</h5>
 
  <p class="codedescription">Description: Enables the DSF Shadow Clone feature</p>
 
 <p class="codetext">ncli cluster edit-params enable-shadow-clones=true</p>
 
-<h2>Enable Dedup for vDisk</h2>
+<h5>Enable Dedup for vDisk</h5>
 
  <p class="codedescription">Description: Enables fingerprinting and/or on disk dedup for a specific vDisk</p>
 
@@ -2041,15 +2049,15 @@ one-click management and interface for datacenter operations.</p>
 
 <p>The below will cover the Nutanix PowerShell CMDlets, how to use them and some general background on Windows PowerShell.</p>
 
-<h2>Basics</h2>
+<h5>Basics</h5>
 
 <p>Windows PowerShell is a powerful shell (hence the name ;P) and scripting language built on the .NET framework.&nbsp; It is a very simple to use language and is built to be intuitive and interactive.&nbsp; Within PowerShell there are a few key constructs/Items:</p>
 
-<h2>CMDlets</h2>
+<h5>CMDlets</h5>
 
 <p>CMDlets are commands or .NET classes which perform a particular operation.&nbsp; They are usually conformed to the Getter/Setter methodology and typically use a &lt;Verb&gt;-&lt;Noun&gt; based structure.&nbsp; For example: Get-Process, Set-Partition, etc.</p>
 
-<h2>Piping or Pipelining</h2>
+<h5>Piping or Pipelining</h5>
 
 <p>Piping is an important construct in PowerShell (similar to its use in Linux) and can greatly simplify things when used correctly.&nbsp; With piping you’re essentially taking the output of one section of the pipeline and using that as input to the next section of the pipeline.&nbsp; The pipeline can be as long as required (assuming there remains output which is being fed to the next section of the pipe). A very simple example could be getting the current processes, finding those that match a particular trait or filter and then sorting them:</p>
 
@@ -2065,11 +2073,11 @@ $myArray | %{
 <br>
 }</p>
 
-<h2>Key Object Types</h2>
+<h5>Key Object Types</h5>
 
 <p>Below are a few of the key object types in PowerShell.&nbsp; You can easily get the object type by using the .getType() method, for example: $someVariable.getType() will return the objects type.</p>
 
-<h2>Variable</h2>
+<h5>Variable</h5>
 
 <p class="codetext">$myVariable = "foo"</p>
 
@@ -2079,17 +2087,17 @@ $myArray | %{
 
 <p>In this example the commands inside the parentheses will be evaluated first then variable will be the outcome of that.</p>
 
-<h2>Array</h2>
+<h5>Array</h5>
 
 <p class="codetext">$myArray = @("Value","Value")</p>
 
 <p class="note">Note: You can also have an array of arrays, hash tables or custom objects</p>
 
-<h2>Hash Table</h2>
+<h5>Hash Table</h5>
 
 <p class="codetext">$myHash = @{"Key" = "Value";"Key" = "Value"}</p>
 
-<h2>Useful commands</h2>
+<h5>Useful commands</h5>
 
 <p>Get the help content for a particular CMDlet (similar to a man page in Linux)</p>
 
@@ -2103,7 +2111,7 @@ $myArray | %{
 
 <p class="codetext">Example: $someObject | Get-Member</p>
 
-<h2>Core Nutanix CMDlets and Usage</h2>
+<h5>Core Nutanix CMDlets and Usage</h5>
 
 <p>Download Nutanix CMDlets Installer The Nutanix CMDlets can be downloaded directly from the Prism UI (post 4.0.1) and can be found on the drop down in the upper right hand corner:</p>
 
@@ -2111,7 +2119,7 @@ $myArray | %{
 <figcaption><span class="label">Figure 8-3. </span>Prism CMDlets Installer Link</figcaption>
 </figure>
 
-<h2>Load Nutanix Snappin</h2>
+<h5>Load Nutanix Snappin</h5>
 
 <p>Check if snappin is loaded and if not, load</p>
 
@@ -2123,11 +2131,11 @@ $myArray | %{
 <br>
 }</p>
 
-<h2>List Nutanix CMDlets</h2>
+<h5>List Nutanix CMDlets</h5>
 
 <p class="codetext">Get-Command | Where-Object{$_.PSSnapin.Name -eq "NutanixCmdletsPSSnapin"}</p>
 
-<h2>Connect to a Acropolis Cluster</h2>
+<h5>Connect to a Acropolis Cluster</h5>
 
 <p class="codetext">Connect-NutanixCluster -Server $server -UserName "myuser" -Password "myuser" -AcceptInvalidSSLCerts</p>
 
@@ -2135,7 +2143,7 @@ $myArray | %{
 
 <p class="codetext">Connect-NutanixCluster -Server $server -UserName "myuser" -Password (Read-Host "Password: ") -AcceptInvalidSSLCerts</p>
 
-<h2>Get Nutanix VMs matching a certain search string</h2>
+<h5>Get Nutanix VMs matching a certain search string</h5>
 
 <p>Set to variable</p>
 
@@ -2151,7 +2159,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p class="codetext">Get-NTNXVM | where {$_.vmName -match "myString"} | ft</p>
 
-<h2>Get Nutanix vDisks</h2>
+<h5>Get Nutanix vDisks</h5>
 
 <p>Set to variable</p>
 
@@ -2165,7 +2173,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p class="codetext">Get-NTNXVDisk | ft</p>
 
-<h2>Get Nutanix Containers</h2>
+<h5>Get Nutanix Containers</h5>
 
 <p>Set to variable</p>
 
@@ -2179,7 +2187,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p class="codetext">Get-NTNXContainer | ft</p>
 
-<h2>Get Nutanix Protection Domains</h2>
+<h5>Get Nutanix Protection Domains</h5>
 
 <p>Set to variable</p>
 
@@ -2193,7 +2201,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p class="codetext">Get-NTNXProtectionDomain | ft</p>
 
-<h2>Get Nutanix Consistency Groups</h2>
+<h5>Get Nutanix Consistency Groups</h5>
 
 <p>Set to variable</p>
 
@@ -2207,7 +2215,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 
 <p class="codetext">Get-NTNXProtectionDomainConsistencyGroup | ft</p>
 
-<h2>Resources and Scripts:</h2>
+<h5>Resources and Scripts:</h5>
 
 <ul>
 	<li>Nutanix Github - <a href="https://github.com/nutanix/Automation" target="_blank">https://github.com/nutanix/Automation</a></li>
@@ -2490,7 +2498,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </p>
 
 <div data-type="note" class="note" id="pro-tip-oZibumIWs2tJ"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>For larger deployments Glance should run on at least two Acropolis Clusters per site.  This will provide Image Repo HA in the case of a cluster outage and ensure the images will always be available when not in the Image Cache.</p>
 </div>
@@ -2860,7 +2868,7 @@ The following values are used as defaults: <br>
 </p>
 
 <div data-type="note" class="note" id="pro-tip-l9ioTesBhEsBtZ"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Check NTP if a service is seen as state 'down' in OpenStack Manager (Admin UI or CLI) eventhough the service is running in the OVM.  Many services have a requirement for time to be in sync between the OpenStack Controller and Acropolis OVM.</p>
 </div>
@@ -3430,7 +3438,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-1RiZtvidTQ"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Almost always use inline compression (compression delay = 0) as it will only compress larger / sequential writes and not impact random write performance.</p>
 
@@ -3473,7 +3481,7 @@ storage, compute and virtualization platform.
 <p>For example, “RF2 like” availability (e.g., N+1) could consist of 3 or 4 data blocks and 1 parity block in a strip (e.g., 3/1 or 4/1).&nbsp; “RF3 like” availability (e.g. N+2) could consist of 3 or 4 data blocks and 2 parity blocks in a strip (e.g. 3/2 or 4/2).</p>
 
 <div data-type="note" class="note" id="pro-tip-1RinF8cdTQ"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>You can override the default strip size (4/1 for “RF2 like” or 4/2 for “RF3 like”) via NCLI ‘ctr [create / edit] … erasure-code=&lt;N&gt;/&lt;K&gt;’ where N is the number of data blocks and K is the number of parity blocks.</p>
 </div>
@@ -3526,7 +3534,7 @@ storage, compute and virtualization platform.
 </table>
 
 <div data-type="note" class="note" id="pro-tip-P0iqcdcwT1"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>It is always recommended to have a cluster size which has at least 1 more node than the combined strip size (data + parity) to allow for rebuilding of the strips in the event of a node failure.  This eliminates any computation overhead on reads once the strips have been rebuilt (automated via Curator).  For example, a 4/1 strip should have at least 6 nodes in the cluster.  The previous table follows this best practice.</p>
 </div>
@@ -3558,7 +3566,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-mEiEtYcoTN"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Erasure Coding pairs perfectly with inline compression which will add to the storage savings.  I leverage inline compression + EC in my environments.</p>
 </div>
@@ -3580,7 +3588,7 @@ storage, compute and virtualization platform.
 </p>
 
 <div data-type="note" class="note" id="pro-tip-N8iNFMIYT8"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Use performance tier deduplication on your base images (you can manually fingerprint them using vdisk_manipulator) to take advantage of the content cache.</p>
 
@@ -3937,7 +3945,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-bOi5hDuyTp"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Ensure the target site has ample capacity (compute/storage) to handle a full site failure.&nbsp; In certain cases replication/DR between racks within a single site can also make sense.</p>
 </div>
@@ -3951,7 +3959,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-W1i5uRuRT2"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Create multiple PDs for various services tiers driven by a desired RPO/RTO.&nbsp; For file distribution (e.g. golden images, ISOs, etc.) you can create a PD with the files to replication.</p>
 </div>
@@ -3965,7 +3973,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-yGioHpuoTz"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Group dependent application or service VMs in a consistency group to ensure they are recovered in a consistent state (e.g. App and DB)</p>
 </div>
@@ -3978,7 +3986,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-Y2iwfquqTR"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>The snapshot schedule should be equal to your desired RPO</p>
 </div>
@@ -3992,7 +4000,7 @@ storage, compute and virtualization platform.
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-EaiQIYuoTo"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>The retention policy should equal the number of restore points required per VM/file</p>
 </div>
@@ -4022,7 +4030,7 @@ storage, compute and virtualization platform.
 <p>It is also possible to configure a remote site with a proxy which will be used as a bridgehead for all coordination and replication traffic coming from a cluster.</p>
 
 <div data-type="note" class="note" id="pro-tip-xkiRf1uDTz"><h6>Note</h6>
-<h3>Pro Tip</h3>
+<h5>Pro tip</h5>
 
 <p>When using a remote site configured with a proxy, always utilize the cluster IP as that will always be hosted by the Prism Leader and available, even if CVM(s) go down.</p>
 </div>
@@ -4532,7 +4540,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </ul>
 
 <div data-type="note" class="note" id="pro-tip-21irfmTqHRHb"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 <p>
 	Use reserve hosts when:
 </p>
@@ -4568,7 +4576,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="pro-tip-MziqURTqHbHX"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 <p>
 	You can override or manually set the number of reserved failover hosts with the following ACLI command:
 </p>
@@ -4605,7 +4613,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="pro-tip-mEiEtPTrHdHM"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Keep your hosts balanced when using segment based reservation.  This will give the highest utilization and ensure not too many segments are reserved.</p>
 </div>
@@ -5235,7 +5243,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-vAiPIXC9HxF5"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>In ideal cases the hit rates should be above 80-90%+ if the workload is read heavy for the best possible read performance.</p>
 </div>
@@ -5259,7 +5267,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-EaigHoCDHoFE"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>When looking at any potential performance issues I always look at the following:</p>
 
@@ -5340,7 +5348,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-dbi8IEsnHWF4"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>If you're seeing high read latency take a look at the read source for the vDisk and take a look where the I/Os are being served from. &nbsp;In most cases high latency could be caused by reads coming from HDD (Estore HDD).</p>
 </div>
@@ -5354,7 +5362,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-xkiVsosqHzF5"><h6>Note</h6>
-<h3>Pro tip</h3>
+<h5>Pro tip</h5>
 
 <p>Random or smaller I/Os (&lt;64K) will be written to the Oplog. &nbsp;Larger or sequential I/Os will bypass the Oplog and be directly written to the Extent Store (Estore).</p>
 </div>
@@ -5851,5 +5859,8 @@ Get-VM | Where {$_.Name -match $vmPrefix} | Stop-VM</p>
 </section>
 
     </div>
+    <!-- START: Ken Chen 11-11-2015-->
+    <script src="js/menu.js"></script>
+    <!-- END: Ken Chen 11-11-2015-->
   </body>
 </html>
