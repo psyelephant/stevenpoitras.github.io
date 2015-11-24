@@ -1514,7 +1514,7 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="note-P0i1TQuRHz"><h6>Note</h6>
-<h3>Note</h3>
+<h5>Note</h5>
 
 <p>Your Prism session will briefly disconnect during the upgrade when the current Prism Leader is upgraded. &nbsp;All VMs and services running remain unaffected.</p>
 </div>
@@ -1705,7 +1705,7 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <div data-type="note" class="note" id="api-authentication-schemes-Ami1fVF9"><h6>Note</h6>
-<h3>API Authentication Scheme(s)</h3>
+<h5>API Authentication Scheme(s)</h5>
 
 <p>As of 4.5.x basic authentication over HTTPS is leveraged for client and HTTP call authentication.</p>
 </div>
@@ -2280,8 +2280,8 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 <figcaption><span class="label">Figure 9-1. </span>OpenStack + Acropolis OpenStack Driver</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="supported-openstack-controllers-kpi1fysgtX"><h6>Note</h6>
-<h3>Supported OpenStack Controllers</h3>
+<div data-type="note" class="note" id="supported-openstack-controllers-kpi1fysgtX">
+<h5>Supported OpenStack Controllers</h5>
 
 <p>The current solution (as of 4.5.1) requires an OpenStack Controller on version Kilo or later.</p>
 </div>
@@ -2427,7 +2427,7 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 	In the following sections we will go through some of the main OpenStack components and how they are integrated into the Nutanix platform.
 </p>
 
-<h2>Nova</h2>
+<h5>Nova</h5>
 <p>
 Nova is the compute engine and scheduler for the OpenStack platform.  In the Nutanix OpenStack solution each Acropolis OVM acts as a compute host and every Acropolis Cluster will act as a single hypervisor host eligible for scheduling OpenStack instances. The Acropolis OVM runs the Nova-compute service.
 </p>
@@ -2466,12 +2466,12 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	As you can see from the previous image the full cluster resources are seen in a single hypervisor host.
 </p>
 
-<h2>Swift</h2>
+<h5>Swift</h5>
 <p>
 	Swift in an object store used to store and retrieve files.  This is currently only leveraged for backup / restore of snapshots and images.
 </p>
 
-<h2>Cinder</h2>
+<h5>Cinder</h5>
 <p>
 	Cinder is OpenStack's volume component for exposing iSCSI targets.  Cinder leverages the Acropolis Volumes API in the Nutanix solution.  These volumes are attached to the instance(s) directly as block devies (as compared to in-guest).
 </p>
@@ -2486,7 +2486,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <figcaption><span class="label">Figure 9-6. </span>OpenStack Cinder Services</figcaption>
 </figure>
 
-<h2>Glance / Image Repo</h2>
+<h5>Glance / Image Repo</h5>
 <p>
 	Glance is the image store for OpenStack and shows the available images for provisioning.  Images can include ISOs, disks, and snapshots.
 </p>
@@ -2507,7 +2507,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Acropolis Cluster(s).  In this case the Image Cache will be leveraged on the target Acropolis Cluster(s) to cache the image locally for any subsequent provisioning requsts for the image.
 </p>
 
-<h2>Neutron</h2>
+<h5>Neutron</h5>
 <p>
 	Neutron is the networking component of OpenStack and responsible for network configuration.  The Acropolis OVM allows network CRUD operations to be performed by the OpenStack portal and will then make the required changes in Acropolis.
 </p>
@@ -2526,7 +2526,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
  </p>
 
 <div data-type="note" class="note" id="supported-network-types-05iAcpIrsEtB"><h6>Note</h6>
-<h3>Supported Network Types</h3>
+<h5>Supported Network Types</h5>
 
 <p>Currently only Local and VLAN network types are supported.</p>
 </div>
@@ -2612,7 +2612,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </figure>
 
 <section data-type="sect3" id="services-design-and-scaling-okI9IMUWs2tJ">
-<h2>Services Design and Scaling</h2>
+<h4>Services Design and Scaling</h4>
 
 <p>For larger deployments it is recommended to have multiple Acropolis OVMs connected to the OpenStack Controller abstracted by a load balancer. This allows for HA and of the OVMs as well as distribution of transactions. The OVM(s) don't contain any state information allowing them to be scaled.</p>
 
@@ -2633,8 +2633,8 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 <figcaption><span class="label">Figure 9-12. </span>OpenStack - Multi-Site</figcaption>
 </figure>
 </section>
-<h2>Deployment</h2>
-<h3>Acropolis OVM</h3>
+<h4>Deployment</h4>
+<h5>Acropolis OVM</h5>  <!-- TODO - left off changing heading -->
 
 <p>
 	The OVM can be deployed as a standalone RPM on a CentOS / Redhat distro or as a full VM.  The Acropolis OVM can be deployed on any platform (Nutanix or non-Nutanix) as long as it has network connectivity to the OpenStack Controller and Nutanix Cluster(s).
@@ -2678,10 +2678,6 @@ vm.on &lt;VM_NAME&gt;
 
 <p>
 	Next we'll configure the OVM(s) by running the following commands (must be run on every OVM):
-</p>
-
-<p class="codetext"># Enter OVM Shell (if not already) <br>
-	ovmctl
 </p>
 
 <p class="codetext"># Register OpenStack Driver service <br>
@@ -2828,7 +2824,7 @@ The following values are used as defaults: <br>
 <h4>Troubleshooting &amp; Advanced Administration</h4>
 
 <section data-type="sect3" id="key-log-locations-eqIlsmhJsJtN">
-<h2>Key log locations</h2>
+<h5>Key log locations</h5>
 <table>
   <tr>
     <th>Component</th>
