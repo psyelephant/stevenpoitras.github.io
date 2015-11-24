@@ -2640,7 +2640,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	The OVM can be deployed as a standalone RPM on a CentOS / Redhat distro or as a full VM.  The Acropolis OVM can be deployed on any platform (Nutanix or non-Nutanix) as long as it has network connectivity to the OpenStack Controller and Nutanix Cluster(s).
 </p>
 <p>
-	The VM(s) ofr the Acropolis OVM can be deployed on a Nutanix AHV cluster using the following steps.  If the OVM is already deployed you can skip past the VM creation steps.  You can use the full OVM image or use an existing CentOS / Redhat VM image.
+	The VM(s) for the Acropolis OVM can be deployed on a Nutanix AHV cluster using the following steps.  If the OVM is already deployed you can skip past the VM creation steps.  You can use the full OVM image or use an existing CentOS / Redhat VM image.
 </p>
 <p>
 	First we will import the provided Acropolis OVM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
@@ -2975,38 +2975,6 @@ storage, compute and virtualization platform.
 <p>Currently, the only fully supported hypervisor for VM management is Acropolis Hypervisor, however this may expand in the future. &nbsp;The Volumes API and read-only operations are still supported on all.</p>
 </div>
 
-<section data-type="sect1" id="acropolis-services-BNIDiAuZ">
-<h3>Acropolis Services</h3>
-
-<p>An Acropolis Slave runs on every CVM with an elected Acropolis Master which is responsible for task scheduling, execution, IPAM, etc.&nbsp; Similar to other components which have a Master, if the Acropolis Master fails, a new one will be elected.</p>
-
-<p>The role breakdown for each can be seen below:</p>
-
-<ul>
-	<li>Acropolis Master
-	<ul>
-		<li>Task scheduling &amp; execution</li>
-		<li>Stat collection / publishing</li>
-		<li>Network Controller (for hypervisor)</li>
-		<li>VNC proxy (for hypervisor)</li>
-		<li>HA (for hypervisor)</li>
-	</ul>
-	</li>
-	<li>&nbsp;Acropolis Slave
-	<ul>
-		<li>Stat collection / publishing</li>
-		<li>VNC proxy (for hypervisor)</li>
-	</ul>
-	</li>
-</ul>
-
-<p>Here we show a conceptual view of the Acropolis Master / Slave relationship:</p>
-
-<figure id="id-DktkHGijuw"><img alt="Acropolis Services" class="iimagesv2acrop_componentspng image" src="imagesv2/acrop_components.png">
-<figcaption><span class="label">Figure 10-2. </span>Acropolis Services</figcaption>
-</figure>
-</section>
-
 <section data-type="sect1" id="converged-platform-ONIRcmuA">
 <h3>Converged Platform</h3>
 
@@ -3116,6 +3084,38 @@ storage, compute and virtualization platform.
 	<li>Key Role: vDisk configuration manager</li>
 	<li>Description: Pithos is responsible for vDisk (DSF file) configuration data.&nbsp; Pithos runs on every node and is built on top of Cassandra.</li>
 </ul>
+</section>
+
+<section data-type="sect1" id="acropolis-services-BNIDiAuZ">
+<h3>Acropolis Services</h3>
+
+<p>An Acropolis Slave runs on every CVM with an elected Acropolis Master which is responsible for task scheduling, execution, IPAM, etc.&nbsp; Similar to other components which have a Master, if the Acropolis Master fails, a new one will be elected.</p>
+
+<p>The role breakdown for each can be seen below:</p>
+
+<ul>
+	<li>Acropolis Master
+	<ul>
+		<li>Task scheduling &amp; execution</li>
+		<li>Stat collection / publishing</li>
+		<li>Network Controller (for hypervisor)</li>
+		<li>VNC proxy (for hypervisor)</li>
+		<li>HA (for hypervisor)</li>
+	</ul>
+	</li>
+	<li>&nbsp;Acropolis Slave
+	<ul>
+		<li>Stat collection / publishing</li>
+		<li>VNC proxy (for hypervisor)</li>
+	</ul>
+	</li>
+</ul>
+
+<p>Here we show a conceptual view of the Acropolis Master / Slave relationship:</p>
+
+<figure id="id-DktkHGijuw"><img alt="Acropolis Services" class="iimagesv2acrop_componentspng image" src="imagesv2/acrop_components.png">
+<figcaption><span class="label">Figure 10-2. </span>Acropolis Services</figcaption>
+</figure>
 </section>
 
 <section data-type="sect1" id="drive-breakdown-rkIZh9uO">
