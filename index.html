@@ -2970,7 +2970,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="supported-hypervisors-for-vm-management-8Mirfxuk"><h6>Note</h6>
-<h3>Supported Hypervisors for VM Management</h3>
+<h5>Supported Hypervisors for VM Management</h5>
 
 <p>Currently, the only fully supported hypervisor for VM management is Acropolis Hypervisor, however this may expand in the future. &nbsp;The Volumes API and read-only operations are still supported on all.</p>
 </div>
@@ -3022,63 +3022,63 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 10-5. </span>Nutanix Cluster Components</figcaption>
 </figure>
 
-<h2>Cassandra</h2>
+<h5>Cassandra</h5>
 
 <ul>
 	<li>Key Role: Distributed metadata store</li>
 	<li>Description: Cassandra stores and manages all of the cluster metadata in a distributed ring-like manner based upon a heavily modified Apache Cassandra.&nbsp; The Paxos algorithm is utilized to enforce strict consistency.&nbsp; This service runs on every node in the cluster.&nbsp; The Cassandra is accessed via an interface called Medusa.</li>
 </ul>
 
-<h2>Zookeeper</h2>
+<h5>Zookeeper</h5>
 
 <ul>
 	<li>Key Role: Cluster configuration manager</li>
 	<li>Description: Zookeeper stores all of the cluster configuration including hosts, IPs, state, etc. and is based upon Apache Zookeeper.&nbsp; This service runs on three nodes in the cluster, one of which is elected as a leader.&nbsp; The leader receives all requests and forwards them to its peers.&nbsp; If the leader fails to respond, a new leader is automatically elected.&nbsp;&nbsp; Zookeeper is accessed via an interface called Zeus.</li>
 </ul>
 
-<h2>Stargate</h2>
+<h5>Stargate</h5>
 
 <ul>
 	<li>Key Role: Data I/O manager</li>
 	<li>Description: Stargate is responsible for all data management and I/O operations and is the main interface from the hypervisor (via NFS, iSCSI, or SMB).&nbsp; This service runs on every node in the cluster in order to serve localized I/O.</li>
 </ul>
 
-<h2>Curator</h2>
+<h5>Curator</h5>
 
 <ul>
 	<li>Key Role: Map reduce cluster management and cleanup</li>
 	<li>Description: Curator is responsible for managing and distributing tasks throughout the cluster, including disk balancing, proactive scrubbing, and many more items.&nbsp; Curator runs on every node and is controlled by an elected Curator Master who is responsible for the task and job delegation.&nbsp; There are two scan types for Curator, a full scan which occurs around every 6 hours and a partial scan which occurs every hour.</li>
 </ul>
 
-<h2>Prism</h2>
+<h5>Prism</h5>
 
 <ul>
 	<li>Key Role: UI and API</li>
 	<li>Description: Prism is the management gateway for component and administrators to configure and monitor the Nutanix cluster.&nbsp; This includes Ncli, the HTML5 UI, and REST API.&nbsp; Prism runs on every node in the cluster and uses an elected leader like all components in the cluster.</li>
 </ul>
 
-<h2>Genesis</h2>
+<h5>Genesis</h5>
 
 <ul>
 	<li>Key Role: Cluster component &amp; service manager</li>
 	<li>Description:&nbsp; Genesis is a process which runs on each node and is responsible for any services interactions (start/stop/etc.) as well as for the initial configuration.&nbsp; Genesis is a process which runs independently of the cluster and does not require the cluster to be configured/running.&nbsp; The only requirement for Genesis to be running is that Zookeeper is up and running.&nbsp; The cluster_init and cluster_status pages are displayed by the Genesis process.</li>
 </ul>
 
-<h2>Chronos</h2>
+<h5>Chronos</h5>
 
 <ul>
 	<li>Key Role: Job and task scheduler</li>
 	<li>Description: Chronos is responsible for taking the jobs and tasks resulting from a Curator scan and scheduling/throttling tasks among nodes.&nbsp; Chronos runs on every node and is controlled by an elected Chronos Master that is responsible for the task and job delegation and runs on the same node as the Curator Master.</li>
 </ul>
 
-<h2>Cerebro</h2>
+<h5>Cerebro</h5>
 
 <ul>
 	<li>Key Role: Replication/DR manager</li>
 	<li>Description: Cerebro is responsible for the replication and DR capabilities of DSF.&nbsp; This includes the scheduling of snapshots, the replication to remote sites, and the site migration/failover.&nbsp; Cerebro runs on every node in the Nutanix cluster and all nodes participate in replication to remote clusters/sites.</li>
 </ul>
 
-<h2>Pithos</h2>
+<h5>Pithos</h5>
 
 <ul>
 	<li>Key Role: vDisk configuration manager</li>
@@ -3123,7 +3123,7 @@ storage, compute and virtualization platform.
 
 <p>In this section, I’ll cover how the various storage devices (SSD / HDD) are broken down, partitioned, and utilized by the Nutanix platform. NOTE: All of the capacities used are in Base2 Gibibyte (GiB) instead of the Base10 Gigabyte (GB).&nbsp; Formatting of the drives with a filesystem and associated overheads has also been taken into account.</p>
 
-<h2>SSD Devices</h2>
+<h2>SSD Devices</h5>
 
 <p>SSD devices store a few key items which are explained in greater detail above:</p>
 
@@ -3145,7 +3145,7 @@ storage, compute and virtualization platform.
 
 <p>Most models ship with 1 or 2 SSDs, however the same construct applies for models shipping with more SSD devices. For example, if we apply this to an example 3060 or 6060 node which has 2 x 400GB SSDs, this would give us 100GiB of OpLog, 40GiB of Content Cache, and ~440GiB of Extent Store SSD capacity per node.</p>
 
-<h2>HDD Devices</h2>
+<h5>HDD Devices</h5>
 
 <p>Since HDD devices are primarily used for bulk storage, their breakdown is much simpler:</p>
 
@@ -3180,21 +3180,21 @@ storage, compute and virtualization platform.
 
 <p>The Acropolis Distributed Storage Fabric is composed of the following high-level struct:</p>
 
-<h2>Storage Pool</h2>
+<h5>Storage Pool</h5>
 
 <ul>
 	<li>Key Role: Group of physical devices</li>
 	<li>Description: A storage pool is a group of physical storage devices including PCIe SSD, SSD, and HDD devices for the cluster.&nbsp; The storage pool can span multiple Nutanix nodes and is expanded as the cluster scales.&nbsp; In most configurations, only a single storage pool is leveraged.</li>
 </ul>
 
-<h2>Container</h2>
+<h5>Container</h5>
 
 <ul>
 	<li>Key Role: Group of VMs/files</li>
 	<li>Description: A container is a logical segmentation of the Storage Pool and contains a group of VM or files (vDisks).&nbsp; Some configuration options (e.g., RF) are configured at the container level, however are applied at the individual VM/file level.&nbsp; Containers typically have a 1 to 1 mapping with a datastore (in the case of NFS/SMB).</li>
 </ul>
 
-<h2>vDisk</h2>
+<h5>vDisk</h5>
 
 <ul>
 	<li>Key Role: vDisk</li>
@@ -3207,14 +3207,14 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 11-2. </span>High-level Filesystem Breakdown</figcaption>
 </figure>
 
-<h2>Extent</h2>
+<h5>Extent</h5>
 
 <ul>
 	<li>Key Role: Logically contiguous data</li>
 	<li>Description: An extent is a 1MB piece of logically contiguous data which consists of n number of contiguous blocks (varies depending on guest OS block size).&nbsp; Extents are written/read/modified on a sub-extent basis (aka slice) for granularity and efficiency.&nbsp; An extent’s slice may be trimmed when moving into the cache depending on the amount of data being read/cached.</li>
 </ul>
 
-<h2>Extent Group</h2>
+<h5>Extent Group</h5>
 
 <ul>
 	<li>Key Role: Physically contiguous stored data</li>
