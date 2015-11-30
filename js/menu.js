@@ -91,26 +91,25 @@ for (var i = 0; i < headerList.length; i++) {
   listContent = headerList[i].innerText;
   listNode = headerList[i].cloneNode(true);
   listID = "anchor-" + listContent.replace(new RegExp(" ", "g"), "-").toLowerCase();
-  
+
   headerList[i].id = listID;
-  
+
   if (listCurrentDepth == listPreviousDepth) {
     listCurrentAll = listCurrentAll + "</li><li><a href='#" + listID + "'>" + listContent + "</a>";
-    
+
   } else if (listCurrentDepth > listPreviousDepth) {
     listCurrentAll = listCurrentAll + "<ol><li><a href='#" + listID + "'>" + listContent + "</a>";
-    
+
   } else if (listPreviousDepth == (listCurrentDepth + 1)) {
     listCurrentAll = listCurrentAll + "</li></ol></li><li><a href='#" + listID + "'>" + listContent + "</a>";
-    
+
   } else if (listPreviousDepth == (listCurrentDepth + 2)) {
     listCurrentAll = listCurrentAll + "</li></ol></li></ol></li><li><a href='#" + listID + "'>" + listContent + "</a>";
-    
+
   } else if (listPreviousDepth == (listCurrentDepth + 3)) {
-    nlistCurrentAll = listCurrentAll + "</li></ol></li></ol></li></ol>/li><li><a href='#" + listID + "'>" + listContent + "</a>";
-    
+    listCurrentAll = listCurrentAll + "</li></ol></li></ol></li></ol></li><li><a href='#" + listID + "'>" + listContent + "</a>";
   }
-  
+
   listPreviousDepth = listCurrentDepth;
 }
 

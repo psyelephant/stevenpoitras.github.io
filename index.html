@@ -2872,7 +2872,7 @@ The following values are used as defaults: <br>
 </section>
 
 <section data-type="sect3" id="command-reference-wrIWughosjtE">
-<h2>Command Reference</h2>
+<h5>Command Reference</h5>
 
 <p>Load Keystone source (perform before running other commands)</p>
 
@@ -3123,7 +3123,7 @@ storage, compute and virtualization platform.
 
 <p>In this section, I’ll cover how the various storage devices (SSD / HDD) are broken down, partitioned, and utilized by the Nutanix platform. NOTE: All of the capacities used are in Base2 Gibibyte (GiB) instead of the Base10 Gigabyte (GB).&nbsp; Formatting of the drives with a filesystem and associated overheads has also been taken into account.</p>
 
-<h2>SSD Devices</h5>
+<h5>SSD Devices</h5>
 
 <p>SSD devices store a few key items which are explained in greater detail above:</p>
 
@@ -3355,7 +3355,7 @@ storage, compute and virtualization platform.
 	<li>Node Failure</li>
 </ul>
 
-<h2>Disk Failure</h2>
+<h5>Disk Failure</h5>
 
 <p>A disk failure can be characterized as just that, a disk which has either been removed, had a dye failure, or is experiencing I/O errors and has been proactively removed.</p>
 
@@ -3375,7 +3375,7 @@ storage, compute and virtualization platform.
 
 <p>This substantially reduces the time required for re-protection, as the power of the full cluster can be utilized; the larger the cluster, the faster the re-protection.</p>
 
-<h2>CVM “Failure”</h2>
+<h5>CVM “Failure”</h5>
 
 <p>A CVM "failure” can be characterized as a CVM power action causing the CVM to be temporarily unavailable.&nbsp; The system is designed to transparently handle these gracefully.&nbsp; In the event of a failure, I/Os will be re-directed to other CVMs within the cluster.&nbsp; The mechanism for this will vary by hypervisor.&nbsp;</p>
 
@@ -3397,7 +3397,7 @@ storage, compute and virtualization platform.
 
 <p>Similar to Autopathing with ESXi and Hyper-V, when the local CVM comes back online, it’ll take over as the primary path.</p>
 
-<h2>Node Failure</h2>
+<h5>Node Failure</h5>
 
 <p>VM Impact:</p>
 
@@ -3602,7 +3602,7 @@ storage, compute and virtualization platform.
 <p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Content Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Content Cache and pool structure, please refer to the ‘Content Cache’ sub-section in the I/O path overview.</p>
 
 <div data-type="note" class="note" id="fingerprinted-vdisk-offsets-l9ijcWIATe"><h6>Note</h6>
-<h3>Fingerprinted vDisk Offsets</h3>
+<h5>Fingerprinted vDisk Offsets</h5>
 <p>
 	Prior to 4.5 only the first 12GB of a vDisk was eligible to be fingerprinted.  This was done to maintain a smaller metadata footprint and since the OS is normally the most common data.  As of 4.5 this has increased to 24GB due to higher metadata efficiencies.
 </p>
@@ -3617,7 +3617,7 @@ storage, compute and virtualization platform.
 <p>You can view the current deduplication rates via Prism on the Storage &gt; Dashboard page.</p>
 
 <div data-type="note" class="note" id="dedup-compression-42ikCZI8Tk"><h6>Note</h6>
-<h3>Dedup + Compression</h3>
+<h5>Dedup + Compression</h5>
 
 <p>
 	As of 4.5 both deduplication and compression can be enabled on the same container.  However, unless the data is dedupable (conditions explained earlier in section), stick with compression.
@@ -3711,7 +3711,7 @@ storage, compute and virtualization platform.
 	<li>Configuration Data (Zookeeper)</li>
 </ul>
 
-<h2>Data</h2>
+<h5>Data</h5>
 
 <p>With DSF, data replicas will be written to other blocks in the cluster to ensure that in the case of a block failure or planned downtime, the data remains available.&nbsp; This is true for both RF2 and RF3 scenarios, as well as in the case of a block failure. An easy comparison would be “node awareness”, where a replica would need to be replicated to another node which will provide protection in the case of a node failure.&nbsp; Block awareness further enhances this by providing data availability assurances in the case of block outages.</p>
 
@@ -3728,7 +3728,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="data-awareness-conditions-BWiXUZCJTv"><h6>Note</h6>
-	<h3>Data Awareness Conditions</h3>
+<h5>Data Awareness Conditions</h5>
 <p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
 
 <ul>
@@ -3748,7 +3748,7 @@ storage, compute and virtualization platform.
 </ul>
 </div>
 
-<h2>Metadata</h2>
+<h5>Metadata</h5>
 
 <p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
 
@@ -3775,7 +3775,7 @@ storage, compute and virtualization platform.
 </figure>
 
 <div data-type="note" class="note" id="metadata-awareness-conditions-wDioinCwTQ"><h6>Note</h6>
-	<h3>Metadata Awareness Conditions</h3>
+<h5>Metadata Awareness Conditions</h5>
 <p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
 
 <ul>
@@ -3838,7 +3838,7 @@ storage, compute and virtualization platform.
 </ul>
 </div>
 
-<h2>Configuration Data</h2>
+<h5>Configuration Data</h5>
 
 <p>Nutanix leverages Zookeeper to store essential configuration data for the cluster.&nbsp; This role is also distributed in a block-aware manner to ensure availability in the case of a block failure.</p>
 
@@ -3918,7 +3918,7 @@ storage, compute and virtualization platform.
 	<li>Global Deduplication</li>
 </ul>
 
-<h2>Replication Topologies</h2>
+<h5>Replication Topologies</h5>
 
 <p>Traditionally, there are a few key replication topologies: Site to site, hub and spoke, and full and/or partial mesh.&nbsp; Contrary to traditional solutions which only allow for site to site or hub and spoke, Nutanix provides a fully mesh or flexible many-to-many model.</p>
 
@@ -3928,11 +3928,11 @@ storage, compute and virtualization platform.
 
 <p>Essentially, this allows the admin to determine a replication capability that meets their company's needs.</p>
 
-<h2>Implementation Constructs</h2>
+<h5>Implementation Constructs</h5>
 
 <p>Within Nutanix DR, there are a few key constructs which are explained below:</p>
 
-<h4>Remote Site</h4>
+<h6>Remote Site</h6>
 
 <ul>
 	<li>Key Role: A remote Nutanix cluster</li>
@@ -3946,7 +3946,7 @@ storage, compute and virtualization platform.
 <p>Ensure the target site has ample capacity (compute/storage) to handle a full site failure.&nbsp; In certain cases replication/DR between racks within a single site can also make sense.</p>
 </div>
 
-<h4>Protection Domain (PD)</h4>
+<h6>Protection Domain (PD)</h6>
 
 <ul>
 	<li>Key Role: Macro group of VMs and/or files to protect</li>
@@ -3960,7 +3960,7 @@ storage, compute and virtualization platform.
 <p>Create multiple PDs for various services tiers driven by a desired RPO/RTO.&nbsp; For file distribution (e.g. golden images, ISOs, etc.) you can create a PD with the files to replication.</p>
 </div>
 
-<h4>Consistency Group (CG)</h4>
+<h6>Consistency Group (CG)</h6>
 
 <ul>
 	<li>Key Role: Subset of VMs/files in PD to be crash-consistent</li>
@@ -3974,7 +3974,7 @@ storage, compute and virtualization platform.
 <p>Group dependent application or service VMs in a consistency group to ensure they are recovered in a consistent state (e.g. App and DB)</p>
 </div>
 
-<h4>Replication Schedule</h4>
+<h6>Replication Schedule</h6>
 
 <ul>
 	<li>Key Role: Snapshot and replication schedule</li>
@@ -3987,7 +3987,7 @@ storage, compute and virtualization platform.
 <p>The snapshot schedule should be equal to your desired RPO</p>
 </div>
 
-<h4>Retention Policy</h4>
+<h6>Retention Policy</h6>
 
 <ul>
 	<li>Key Role: Number of local and remote snapshots to keep</li>
@@ -4009,7 +4009,7 @@ storage, compute and virtualization platform.
 
 <p>It’s important to mention that a full container can be protected for simplicity; however the platform provides the ability to protect down to the granularity of a single VM and/or file level.</p>
 
-<h2>Replication Lifecycle</h2>
+<h5>Replication Lifecycle</h5>
 
 <p>Nutanix replication leverages the Cerebro service mentioned above.&nbsp; The Cerebro service is broken into a “Cerebro Master”, which is a dynamically elected CVM, and Cerebro Slaves, which run on every CVM.&nbsp; In the event where the CVM acting as the “Cerebro Master” fails, a new “Master” is elected.</p>
 
@@ -4040,7 +4040,7 @@ storage, compute and virtualization platform.
 <p>In certain scenarios, it is also possible to configure a remote site using a SSH tunnel where all traffic will flow between two CVMs.</p>
 
 <div data-type="note" class="note" id="note-kpirUduBT3"><h6>Note</h6>
-<h3>Note</h3>
+<h5>Note</h5>
 This should only be used for non-production scenarios and the cluster IPs should be used to ensure availability.</div>
 
 <p>The following figure shows a representation of the replication architecture using a SSH tunnel:</p>
@@ -4049,7 +4049,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 11-40. </span>Replication Architecture - SSH Tunnel</figcaption>
 </figure>
 
-<h2>Global Deduplication</h2>
+<h5>Global Deduplication</h5>
 
 <p>As explained in the Elastic Deduplication Engine section above, DSF has the ability to deduplicate data by just updating metadata pointers. The same concept is applied to the DR and replication feature.&nbsp; Before sending data over the wire, DSF will query the remote site and check whether or not the fingerprint(s) already exist on the target (meaning the data already exists).&nbsp; If so, no data will be shipped over the wire and only a metadata update will occur. For data which doesn’t exist on the target, the data will be compressed and sent to the target site.&nbsp; At this point, the data exists on both sites is usable for deduplication.</p>
 
@@ -4060,7 +4060,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <div data-type="note" class="note" id="note-3Nim3HyulTb"><h6>Note</h6>
-<h3>Note</h3>
+<h5>Note</h5>
 
 <p>Fingerprinting must be enabled on the source and target container / vstore for replication deduplication to occur.</p>
 </div>
@@ -4268,10 +4268,10 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <div data-type="note" class="note" id="thresholds-for-data-migration-Oxi4FOtjTJ"><h6>Note</h6>
-<h3>Thresholds for Data Migration</h3>
+<h5>Thresholds for Data Migration</h5>
 
 <p>Data locality is a real-time operation and an extent group will be migrated when the following occurs:
-"3 touches within a 10 minute window where multiple reads every 10 second sampling count as a single touch".
+"3 touches for random or 10 touches for sequential within a 10 minute window where multiple reads every 10 second sampling count as a single touch".
 </p>
 </div>
 
@@ -4306,7 +4306,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>&nbsp;</p>
 
-<h2>Virtual Machine Layer</h2>
+<h5>Virtual Machine Layer</h5>
 
 <ul>
 	<li>Key Role: Metrics reported by the hypervisor for the VM</li>
@@ -4314,7 +4314,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 	<li>When to use: When troubleshooting or looking for VM level detail</li>
 </ul>
 
-<h2>Hypervisor Layer</h2>
+<h5>Hypervisor Layer</h5>
 
 <ul>
 	<li>Key Role: Metrics reported by the Hypervisor(s)</li>
@@ -4322,7 +4322,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 	<li>When to use: Most common cases as this will provide the most detailed and valuable metrics.</li>
 </ul>
 
-<h2>Controller Layer</h2>
+<h5>Controller Layer</h5>
 
 <ul>
 	<li>Key Role: Metrics reported by the Nutanix Controller(s)</li>
@@ -4330,7 +4330,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 	<li>When to use: Similar to the hypervisor layer, can be used to show how much backend operation is taking place.</li>
 </ul>
 
-<h2>Disk Layer</h2>
+<h5>Disk Layer</h5>
 
 <ul>
 	<li>Key Role: Metrics reported by the Disk Device(s)</li>
@@ -4339,7 +4339,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </ul>
 
 <div data-type="note" class="note" id="metric-and-stat-retention-yGiRUBioTz"><h6>Note</h6>
-<h3>Metric and Stat Retention</h3>
+<h5>Metric and Stat Retention</h5>
 
 <p>Metrics and time series data is stored locally for 90 days in Prism Element.  For Prism Central and Insights, data can be stored indefinitely (assuming capacity is available).</p>
 </div>
@@ -4401,7 +4401,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>Communication between Acropolis and KVM occurs via Libvirt.&nbsp;</p>
 
 <div data-type="note" class="note" id="processor-generation-compatability-AmibF4u9Hx"><h6>Note</h6>
-<h3>Processor generation compatability</h3>
+<h5>Processor generation compatability</h5>
 
 <p>Similar to VMware's Enhanced vMotion Capability (EVC) which allows VMs to move between different processor generations; Acropolis Hypervisor will determine the lowest processor generation in the cluster and constrain all QEMU domains to that level.  This allows mixing of processor generations within an AHV cluster and ensures the ability to live migrate between hosts.</p>
 </div>
@@ -4500,7 +4500,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <div data-type="note" class="note" id="default-vm-restart-policy-RDiqH9TWHRHG"><h6>Note</h6>
-<h3>Default VM restart policy</h3>
+<h5>Default VM restart policy</h5>
 <p>
 	By default any AHV cluster will do its best to restart VM(s) in the event of a host failure.  In this mode, when a host becomes unavailable, the previously running VMs will be restarted on the remaining healthy hosts if possible.  Since this is best effort (meaning resources aren't reserved) the ability to restart all VMs will be dependent on available AHV resources.
 </p>
@@ -4565,7 +4565,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 	I'll cover both reservation options in the following sections.
 </p>
 
-<h3>Reserve Hosts</h3>
+<h5>Reserve Hosts</h5>
 
 <p>
 	  By default the number of failures to tolerate will be the same as the cluster FT level (i.e. 1 for FT1 aka RF2, 2 for FT2 aka RF3, etc.).  It is possible to override this via acli.
@@ -4603,7 +4603,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 13-12. </span>HA - Reserved Host - Fail Back</figcaption>
 </figure>
 
-<h3>Reserve Segments</h3>
+<h5>Reserve Segments</h5>
 <p>
 	Reserve segments distributes the resource reservation across all hosts in a cluster.  In this scenario, each host will share a portion of the reservation for HA.  This ensures the overall cluster has enough failover capacity to restart VM(s) in the event of a host failure.
 </p>
@@ -4631,7 +4631,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <div data-type="note" class="note" id="reserved-segments-calculation-eriXUNTQh3H8"><h6>Note</h6>
-<h3>Reserved segment(s) calculation</h3>
+<h5>Reserved segment(s) calculation</h5>
 <p>
 	The system will automatically calculate the total number of reserved segments and per host reservation.  To gain some insight on how this is calculated some details on the calculation can be found in the following text.
 </p>
@@ -4689,7 +4689,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="command-reference-nrIef2Hx">
 <h3>Command Reference</h3>
 
-<h2>Enable 10GbE links only on OVS</h2>
+<h5>Enable 10GbE links only on OVS</h5>
 
 <p class="codedescription">Description: Enable 10g only on bond0 for local host</p>
 
@@ -4699,7 +4699,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 allssh "manage_ovs --interfaces 10g update_uplinks"
 </p>
 
-<h2>Show OVS uplinks</h2>
+<h5>Show OVS uplinks</h5>
 
  <p class="codedescription">Description: Show ovs uplinks for local host</p>
 
@@ -4709,7 +4709,7 @@ allssh "manage_ovs --interfaces 10g update_uplinks"
 
 <p class="codetext">allssh "manage_ovs show_uplinks"</p>
 
-<h2>Show OVS interfaces</h2>
+<h5>Show OVS interfaces</h5>
 
  <p class="codedescription">Description: Show ovs interfaces for local host</p>
 
@@ -4719,19 +4719,19 @@ allssh "manage_ovs --interfaces 10g update_uplinks"
 
 <p class="codetext">allssh "manage_ovs show_interfaces"</p>
 
-<h2>Show OVS switch information</h2>
+<h5>Show OVS switch information</h5>
 
  <p class="codedescription">Description: Show switch information</p>
 
 <p class="codetext">ovs-vsctl show</p>
 
-<h2>List OVS bridges</h2>
+<h5>List OVS bridges</h5>
 
  <p class="codedescription">Description: List bridges</p>
 
 <p class="codetext">ovs-vsctl list br</p>
 
-<h2>Show OVS bridge information</h2>
+<h5>Show OVS bridge information</h5>
 
  <p class="codedescription">Description: Show OVS port information</p>
 
@@ -4739,13 +4739,13 @@ allssh "manage_ovs --interfaces 10g update_uplinks"
 <br>
 ovs-vsctl list port &lt;bond&gt;</p>
 
-<h2>Show OVS interface information</h2>
+<h5>Show OVS interface information</h5>
 
  <p class="codedescription">Description: Show interface information</p>
 
 <p class="codetext">ovs-vsctl list interface br0</p>
 
-<h2>Show ports / interfaces on bridge</h2>
+<h5>Show ports / interfaces on bridge</h5>
 
 <p class="codedescription">Description: Show ports on a bridge</p>
 
@@ -4755,13 +4755,13 @@ ovs-vsctl list port &lt;bond&gt;</p>
 
 <p class="codetext">ovs-vsctl list-ifaces br0</p>
 
-<h2>Create OVS bridge</h2>
+<h5>Create OVS bridge</h5>
 
 <p class="codedescription">Description: Create bridge</p>
 
 <p class="codetext">ovs-vsctl add-br &lt;bridge&gt;</p>
 
-<h2>Add ports to bridge</h2>
+<h5>Add ports to bridge</h5>
 
  <p class="codedescription">Description: Add port to bridge</p>
 
@@ -4771,7 +4771,7 @@ ovs-vsctl list port &lt;bond&gt;</p>
 
 <p class="codetext">ovs-vsctl add-bond &lt;bridge&gt; &lt;port&gt; &lt;iface&gt;</p>
 
-<h2>Show OVS bond details</h2>
+<h5>Show OVS bond details</h5>
 
 <p class="codedescription">Description: Show bond details</p>
 
@@ -4781,7 +4781,7 @@ ovs-vsctl list port &lt;bond&gt;</p>
 
 <p class="codetext">ovs-appctl bond/show bond0</p>
 
-<h2>Set bond mode and configure LACP on bond</h2>
+<h5>Set bond mode and configure LACP on bond</h5>
 
 <p class="codedescription">Description: Enable LACP on ports</p>
 
@@ -4791,19 +4791,19 @@ ovs-vsctl list port &lt;bond&gt;</p>
 
 <p class="codetext">for i in `hostips`;do echo $i; ssh $i source /etc/profile &gt; /dev/null 2&gt;&amp;1; ovs-vsctl set port bond0 lacp=active;done</p>
 
-<h2>Show LACP details on bond</h2>
+<h5>Show LACP details on bond</h5>
 
 <p class="codedescription">Description: Show LACP details</p>
 
 <p class="codetext">ovs-appctl lacp/show &lt;bond&gt;</p>
 
-<h2>Set bond mode</h2>
+<h5>Set bond mode</h5>
 
 <p class="codedescription">Description: Set bond mode on ports</p>
 
 <p class="codetext">ovs-vsctl set port &lt;bond&gt; bond_mode=&lt;active-backup, balance-slb, balance-tcp&gt;</p>
 
-<h2>Show OpenFlow information</h2>
+<h5>Show OpenFlow information</h5>
 
 <p class="codedescription">Description: Show OVS openflow details</p>
 
@@ -4813,7 +4813,7 @@ ovs-vsctl list port &lt;bond&gt;</p>
 
 <p class="codetext">ovs-ofctl dump-flows br0</p>
 
-<h2>Get QEMU PIDs and top information</h2>
+<h5>Get QEMU PIDs and top information</h5>
 
 <p class="codedescription">Description: Get QEMU PIDs</p>
 
@@ -4823,7 +4823,7 @@ ovs-vsctl list port &lt;bond&gt;</p>
 
 <p class="codetext">top -p &lt;PID&gt;</p>
 
-<h2>Get active Stargate for QEMU processes</h2>
+<h5>Get active Stargate for QEMU processes</h5>
 
 <p class="codedescription">Description: Get active Stargates for storage I/O for each QEMU processes</p>
 
@@ -4839,7 +4839,7 @@ ovs-vsctl list port &lt;bond&gt;</p>
 <section data-type="sect1" id="troubleshooting-andamp-advanced-administration-rkIAcyHO">
 <h3>Troubleshooting &amp; Advanced Administration</h3>
 
-<h2>Check iSCSI Redirector Logs</h2>
+<h5>Check iSCSI Redirector Logs</h5>
 
 <p class="codedescription">Description: Check iSCSI Redirector Logs for all hosts</p>
 
@@ -4851,7 +4851,7 @@ ovs-vsctl list port &lt;bond&gt;</p>
 <br>
 Cat /var/log/iscsi_redirector</p>
 
-<h2>Monitor CPU steal (stolen CPU)</h2>
+<h5>Monitor CPU steal (stolen CPU)</h5>
 
 <p class="codedescription">Description: Monitor CPU steal time (stolen CPU)</p>
 
@@ -4859,7 +4859,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">Cpu(s):&nbsp; 0.0%us, 0.0%sy,&nbsp; 0.0%ni, 96.4%id,&nbsp; 0.0%wa,&nbsp; 0.0%hi,&nbsp; 0.1%si,&nbsp; <strong>0.0%st</strong></p>
 
-<h2>Monitor VM network resource stats</h2>
+<h5>Monitor VM network resource stats</h5>
 
 <p class="codedescription">Description: Monitor VM resource stats</p>
 
@@ -4881,59 +4881,59 @@ Cat /var/log/iscsi_redirector</p>
 
 <p>These are advanced Nutanix pages besides the standard user interface that allow you to monitor detailed stats and metrics.&nbsp; The URLs are formatted in the following way: http://&lt;Nutanix CVM IP/DNS&gt;:&lt;Port/path (mentioned below)&gt;&nbsp; Example: http://MyCVM-A:2009&nbsp; NOTE: if you’re on a different subnet IPtables will need to be disabled on the CVM to access the pages.</p>
 
-<h2>2009 Page</h2>
+<h5>2009 Page</h5>
 
 <p>This is a Stargate page used to monitor the back end storage system and should only be used by advanced users.&nbsp; I’ll have a post that explains the 2009 pages and things to look for.</p>
 
-<h2>2009/latency Page</h2>
+<h5>2009/latency Page</h5>
 
 <p>This is a Stargate page used to monitor the back end latency.</p>
 
-<h2>2009/vdisk_stats Page</h2>
+<h5>2009/vdisk_stats Page</h5>
 
 <p>This is a Stargate page used to show various vDisk stats including histograms of I/O sizes, latency, write hits (e.g., OpLog, eStore), read hits (cache, SSD, HDD, etc.) and more.</p>
 
-<h2>2009/h/traces Page</h2>
+<h5>2009/h/traces Page</h5>
 
 <p>This is the Stargate page used to monitor activity traces for operations.</p>
 
-<h2>2009/h/vars Page</h2>
+<h5>2009/h/vars Page</h5>
 
 <p>This is the Stargate page used to monitor various counters.</p>
 
-<h2>2010 Page</h2>
+<h5>2010 Page</h5>
 
 <p>This is the Curator page which is used for monitoring Curator runs.</p>
 
-<h2>2010/master/control Page</h2>
+<h5>2010/master/control Page</h5>
 
 <p>This is the Curator control page which is used to manually start Curator jobs</p>
 
-<h2>2011 Page</h2>
+<h5>2011 Page</h5>
 
 <p>This is the Chronos page which monitors jobs and tasks scheduled by Curator.</p>
 
-<h2>2020 Page</h2>
+<h5>2020 Page</h5>
 
 <p>&nbsp;This is the Cerebro page which monitors the protection domains, replication status and DR.</p>
 
-<h2>2020/h/traces Page</h2>
+<h5>2020/h/traces Page</h5>
 
 <p>This is the Cerebro page used to monitor activity traces for PD operations and replication.</p>
 
-<h2>2030 Page</h2>
+<h5>2030 Page</h5>
 
 <p>This is the main Acropolis page and shows details about the environment hosts, any currently running tasks and networking details..</p>
 
-<h2>2030/sched Page</h2>
+<h5>2030/sched Page</h5>
 
 <p>This is an Acropolis page used to show information about VM and resource scheduling used for placement decisions.&nbsp; This page shows the available host resources and VMs running on each host.</p>
 
-<h2>2030/tasks Page</h2>
+<h5>2030/tasks Page</h5>
 
 <p>This is an Acropolis page used to show information about Acropolis tasks and their state.&nbsp; You can click on the task UUID to get detailed JSON about the task.</p>
 
-<h2>2030/vms Page</h2>
+<h5>2030/vms Page</h5>
 
 <p>This is an Acropolis page used to show information about Acropolis VMs and details about them.&nbsp; You can click on the VM Name to connect to the console.</p>
 </section>
@@ -4941,19 +4941,19 @@ Cat /var/log/iscsi_redirector</p>
 <section data-type="sect1" id="cluster-commands-QMIMupFQ">
 <h3>Cluster Commands</h3>
 
-<h2>Check cluster status</h2>
+<h5>Check cluster status</h5>
 
 <p class="codedescription">Description: Check cluster status from the CLI</p>
 
 <p class="codetext">cluster status</p>
 
-<h2>Check local CVM service status</h2>
+<h5>Check local CVM service status</h5>
 
 <p class="codedescription">Description: Check a single CVM's service status from the CLI</p>
 
 <p class="codetext">genesis status</p>
 
-<h2>Nutanix cluster upgrade</h2>
+<h5>Nutanix cluster upgrade</h5>
 
 <p class="codedescription">Description: Perform rolling (aka "live") cluster upgrade from the CLI</p>
 
@@ -4971,7 +4971,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">upgrade_status</p>
 
-<h2>Node(s) upgrade</h2>
+<h5>Node(s) upgrade</h5>
 
 <p class="codedescription">Description: Perform upgrade of specified node(s) to current clusters version</p>
 
@@ -4979,7 +4979,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">cluster -u &lt;NODE_IP(s)&gt; upgrade_node</p>
 
-<h2>Hypervisor upgrade status</h2>
+<h5>Hypervisor upgrade status</h5>
 
 <p class="codedescription">Description: Check hypervisor upgrade status from the CLI on any CVM</p>
 
@@ -4989,7 +4989,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">~/data/logs/host_upgrade.out</p>
 
-<h2>Restart cluster service from CLI</h2>
+<h5>Restart cluster service from CLI</h5>
 
 <p class="codedescription">Description: Restart a single cluster service from the CLI</p>
 
@@ -5001,7 +5001,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">cluster start&nbsp; #NOTE: This will start all stopped services</p>
 
-<h2>Start cluster service from CLI</h2>
+<h5>Start cluster service from CLI</h5>
 
 <p class="codedescription">Description: Start stopped cluster services from the CLI</p>
 
@@ -5015,7 +5015,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">Start single service: cluster start&nbsp; &lt;Service Name&gt;</p>
 
-<h2>Restart local service from CLI</h2>
+<h5>Restart local service from CLI</h5>
 
 <p class="codedescription">Description: Restart a single cluster service from the CLI</p>
 
@@ -5027,31 +5027,31 @@ Cat /var/log/iscsi_redirector</p>
 
 <p class="codetext">cluster start</p>
 
-<h2>Start local service from CLI</h2>
+<h5>Start local service from CLI</h5>
 
 <p class="codedescription">Description: Start stopped cluster services from the CLI</p>
 
 <p class="codetext">cluster start #NOTE: This will start all stopped services</p>
 
-<h2>Cluster add node from cmdline</h2>
+<h5>Cluster add node from cmdline</h5>
 
 <p class="codedescription">Description: Perform cluster add-node from CLI</p>
 
 <p class="codetext">ncli cluster discover-nodes | egrep "Uuid" | awk '{print $4}' | xargs -I UUID ncli cluster add-node node-uuid=UUID</p>
 
-<h2>Find number of vDisks</h2>
+<h5>Find number of vDisks</h5>
 
 <p class="codedescription">Description: Displays the number of vDisks</p>
 
 <p class="codetext">vdisk_config_printer | grep vdisk_id | wc -l</p>
 
-<h2>Find cluster id</h2>
+<h5>Find cluster id</h5>
 
 <p class="codedescription">Description: Find the cluster ID for the current cluster</p>
 
 <p class="codetext">zeus_config_printer | grep cluster_id</p>
 
-<h2>Open port</h2>
+<h5>Open port</h5>
 
 <p class="codedescription">Description: Enable port through IPtables</p>
 
@@ -5061,67 +5061,67 @@ Cat /var/log/iscsi_redirector</p>
 <br>
 sudo service iptables restart</p>
 
-<h2>Check for Shadow Clones</h2>
+<h5>Check for Shadow Clones</h5>
 
 <p class="codedescription">Description: Displays the shadow clones in the following format:&nbsp; name#id@svm_id</p>
 
 <p class="codetext">vdisk_config_printer | grep '#'</p>
 
-<h2>Reset Latency Page Stats</h2>
+<h5>Reset Latency Page Stats</h5>
 
 <p class="codedescription">Description: Reset the Latency Page (&lt;CVM IP&gt;:2009/latency) counters</p>
 
 <p class="codetext">allssh "wget $i:2009/latency/reset"</p>
 
-<h2>Find Number of vDisks</h2>
+<h5>Find Number of vDisks</h5>
 
 <p class="codedescription">Description: Find the current number of vDisks (files) on DSF</p>
 
 <p class="codetext">vdisk_config_printer | grep vdisk_id | wc -l</p>
 
-<h2>Start Curator scan from CLI</h2>
+<h5>Start Curator scan from CLI</h5>
 
 <p class="codedescription">Description: Starts a Curator full scan from the CLI</p>
 
 <p class="codetext">allssh "wget -O - "http://$i:2010/master/api/client/StartCuratorTasks?task_type=2";"</p>
 
-<h2>Compact ring</h2>
+<h5>Compact ring</h5>
 
 <p class="codedescription">Description: Compact the metadata ring</p>
 
 <p class="codetext">allssh "nodetool -h localhost compact"</p>
 
-<h2>Find NOS version</h2>
+<h5>Find NOS version</h5>
 
 <p class="codedescription">Description: Find the NOS&nbsp; version (NOTE: can also be done using NCLI)</p>
 
 <p class="codetext">allssh "cat /etc/nutanix/release_version"</p>
 
-<h2>Find CVM version</h2>
+<h5>Find CVM version</h5>
 
 <p class="codedescription">Description: Find the CVM image version</p>
 
 <p class="codetext">allssh "cat /etc/nutanix/svm-version"</p>
 
-<h2>Manually fingerprint vDisk(s)</h2>
+<h5>Manually fingerprint vDisk(s)</h5>
 
 <p class="codedescription">Description: Create fingerprints for a particular vDisk (For dedupe)&nbsp; NOTE: dedupe must be enabled on the container</p>
 
 <p class="codetext">vdisk_manipulator –vdisk_id=&lt;vDisk ID&gt; --operation=add_fingerprints</p>
 
-<h2>Echo Factory_Config.json for all cluster nodes</h2>
+<h5>Echo Factory_Config.json for all cluster nodes</h5>
 
 <p class="codedescription">Description: Echos the factory_config.jscon for all nodes in the cluster</p>
 
 <p class="codetext">allssh "cat /etc/nutanix/factory_config.json"</p>
 
-<h2>Upgrade a single Nutanix node’s NOS version</h2>
+<h5>Upgrade a single Nutanix node’s NOS version</h5>
 
 <p class="codedescription">Description: Upgrade a single node's NOS version to match that of the cluster</p>
 
 <p class="codetext">~/cluster/bin/cluster -u &lt;NEW_NODE_IP&gt; upgrade_node</p>
 
-<h2>&nbsp;List files (vDisk) on DSF</h2>
+<h5>&nbsp;List files (vDisk) on DSF</h5>
 
 <p class="codedescription">Description: List files and associated information for vDisks stored on DSF</p>
 
@@ -5131,7 +5131,7 @@ sudo service iptables restart</p>
 
 <p class="codetext">Nfs_ls --help</p>
 
-<h2>Install Nutanix Cluster Check (NCC)</h2>
+<h5>Install Nutanix Cluster Check (NCC)</h5>
 
 <p class="codedescription">Description: Installs the Nutanix Cluster Check (NCC) health script to test for potential issues and cluster health</p>
 
@@ -5153,7 +5153,7 @@ sudo service iptables restart</p>
 <br>
 echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
-<h2>Run Nutanix Cluster Check (NCC)</h2>
+<h5>Run Nutanix Cluster Check (NCC)</h5>
 
 <p class="codedescription">Description: Runs the Nutanix Cluster Check (NCC) health script to test for potential issues and cluster health.&nbsp; This is a great first step when troubleshooting any cluster issues.</p>
 
@@ -5179,13 +5179,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <section data-type="sect1" id="troubleshooting-andamp-advanced-administration-BNI4HzFZ">
 <h3>Troubleshooting &amp; Advanced Administration</h3>
 
-<h2>Find Acropolis logs</h2>
+<h5>Find Acropolis logs</h5>
 
 <p class="codedescription">Description: Find Acropolis logs for the cluster</p>
 
 <p class="codetext">allssh "cat ~/data/logs/Acropolis.log"</p>
 
-<h2>Find cluster error logs</h2>
+<h5>Find cluster error logs</h5>
 
 <p class="codedescription">Description: Find ERROR logs for the cluster</p>
 
@@ -5195,7 +5195,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p class="codetext">allssh "cat ~/data/logs/Stargate.ERROR"</p>
 
-<h2>Find cluster fatal logs</h2>
+<h5>Find cluster fatal logs</h5>
 
 <p class="codedescription">Description: Find FATAL logs for the cluster</p>
 
@@ -5211,7 +5211,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <p>In most cases Prism should be able to give you all of the information and data points you require. &nbsp;However,&nbsp;in certain scenarios, or if you want some more detailed data you can leverage the Stargate aka 2009 page. &nbsp;The 2009 page can be viewed by navigating to &lt;CVM IP&gt;:2009.</p>
 
 <div data-type="note" class="note" id="accessing-back-end-pages-JZiaukClH9F5"><h6>Note</h6>
-<h3>Accessing back-end pages</h3>
+<h5>Accessing back-end pages</h5>
 
 <p>If you're on a different network segment (L2 subnet)&nbsp;you'll need to add a rule in IP tables to access any of the back-end pages.</p>
 </div>
@@ -5594,7 +5594,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <section data-type="sect1" id="command-reference-lkIBuxTJ">
 <h3>Command Reference</h3>
 
-<h2>ESXi cluster upgrade</h2>
+<h5>ESXi cluster upgrade</h5>
 
  <p class="codedescription">Description: Perform an automated upgrade of ESXi hosts using the CLI
 <br>
@@ -5612,49 +5612,49 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p>Performing a rolling reboot of ESXi hosts: For PowerCLI on automated hosts reboots</p>
 
-<h2>Restart ESXi host services</h2>
+<h5>Restart ESXi host services</h5>
 
  <p class="codedescription">Description: Restart each ESXi hosts services in a incremental manner</p>
 
 <p class="codetext">for i in `hostips`;do ssh root@$i "services.sh restart";done</p>
 
-<h2>Display ESXi host nics in ‘Up’ state</h2>
+<h5>Display ESXi host nics in ‘Up’ state</h5>
 
  <p class="codedescription">Description: Display the ESXi host's nics which are in a 'Up' state</p>
 
 <p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i esxcfg-nics -l | grep Up;done</p>
 
-<h2>Display ESXi host 10GbE nics and status</h2>
+<h5>Display ESXi host 10GbE nics and status</h5>
 
  <p class="codedescription">Description: Display the ESXi host's 10GbE nics and status</p>
 
 <p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i esxcfg-nics -l | grep ixgbe;done</p>
 
-<h2>Display ESXi host active adapters</h2>
+<h5>Display ESXi host active adapters</h5>
 
  <p class="codedescription">Description: Display the ESXi host's active, standby and unused adapters</p>
 
 <p class="codetext">for i in `hostips`;do echo $i &amp;&amp;&nbsp; ssh root@$i "esxcli network vswitch standard policy failover get --vswitch-name vSwitch0";done</p>
 
-<h2>Display ESXi host routing tables</h2>
+<h5>Display ESXi host routing tables</h5>
 
  <p class="codedescription">Description: Display the ESXi host's routing tables</p>
 
 <p class="codetext">for i in `hostips`;do ssh root@$i 'esxcfg-route -l';done</p>
 
-<h2>Check if VAAI is enabled on datastore</h2>
+<h5>Check if VAAI is enabled on datastore</h5>
 
  <p class="codedescription">Description: Check whether or not VAAI is enabled/supported for a datastore</p>
 
 <p class="codetext">vmkfstools -Ph /vmfs/volumes/&lt;Datastore Name&gt;</p>
 
-<h2>Set VIB acceptance level to community supported</h2>
+<h5>Set VIB acceptance level to community supported</h5>
 
  <p class="codedescription">Description: Set the vib acceptance level to CommunitySupported allowing for 3rd party vibs to be installed</p>
 
 <p class="codetext">esxcli software acceptance set --level CommunitySupported</p>
 
-<h2>Install VIB</h2>
+<h5>Install VIB</h5>
 
  <p class="codedescription">Description: Install a vib without checking the signature</p>
 
@@ -5664,13 +5664,13 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <p class="codetext">esxcli software vib install --depoturl=/&lt;VIB directory&gt;/&lt;VIB name&gt; --no-sig-check</p>
 
-<h2>Check ESXi ramdisk space</h2>
+<h5>Check ESXi ramdisk space</h5>
 
  <p class="codedescription">Description: Check free space of ESXi ramdisk</p>
 
 <p class="codetext">for i in `hostips`;do echo $i; ssh root@$i 'vdf -h';done</p>
 
-<h2>Clear pynfs logs</h2>
+<h5>Clear pynfs logs</h5>
 
  <p class="codedescription">Description: Clears the pynfs logs on each ESXi host</p>
 
@@ -5763,7 +5763,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <section data-type="sect1" id="command-reference-M2I0uRT0">
 <h3>Command Reference</h3>
 
-<h2>Execute command on multiple remote hosts</h2>
+<h5>Execute command on multiple remote hosts</h5>
 
 <p class="codedescription">Description: Execute a powershell on one or many remote hosts</p>
 
@@ -5775,13 +5775,13 @@ Invoke-Command -ComputerName&nbsp; $targetServers {
 <br>
 }</p>
 
-<h2>Check available VMQ Offloads</h2>
+<h5>Check available VMQ Offloads</h5>
 
 <p class="codedescription">Description: Display the available number of VMQ offloads for a particular host</p>
 
 <p class="codetext">gwmi –Namespace "root\virtualization\v2" –Class Msvm_VirtualEthernetSwitch | select elementname, MaxVMQOffloads</p>
 
-<h2>Disable VMQ for VMs matching a specific prefix</h2>
+<h5>Disable VMQ for VMs matching a specific prefix</h5>
 
 <p class="codedescription">Description: Disable VMQ for specific VMs</p>
 
@@ -5789,7 +5789,7 @@ Invoke-Command -ComputerName&nbsp; $targetServers {
 <br>
 Get-VM | Where {$_.Name -match $vmPrefix} | Get-VMNetworkAdapter | Set-VMNetworkAdapter -VmqWeight 0</p>
 
-<h2>Enable VMQ for VMs matching a certain prefix</h2>
+<h5>Enable VMQ for VMs matching a certain prefix</h5>
 
 <p class="codedescription">Description: Enable VMQ for specific VMs</p>
 
@@ -5797,7 +5797,7 @@ Get-VM | Where {$_.Name -match $vmPrefix} | Get-VMNetworkAdapter | Set-VMNetwork
 <br>
 Get-VM | Where {$_.Name -match $vmPrefix} | Get-VMNetworkAdapter | Set-VMNetworkAdapter -VmqWeight 1</p>
 
-<h2>Power-On VMs matching a certain prefix</h2>
+<h5>Power-On VMs matching a certain prefix</h5>
 
 <p class="codedescription">Description: Power-On VMs matchin a certain prefix</p>
 
@@ -5805,7 +5805,7 @@ Get-VM | Where {$_.Name -match $vmPrefix} | Get-VMNetworkAdapter | Set-VMNetwork
 <br>
 Get-VM | Where {$_.Name -match $vmPrefix -and $_.StatusString -eq "Stopped"} | Start-VM</p>
 
-<h2>Shutdown VMs matching a certain prefix</h2>
+<h5>Shutdown VMs matching a certain prefix</h5>
 
 <p class="codedescription">Description: Shutdown VMs matchin a certain prefix</p>
 
@@ -5813,7 +5813,7 @@ Get-VM | Where {$_.Name -match $vmPrefix -and $_.StatusString -eq "Stopped"} | S
 <br>
 Get-VM | Where {$_.Name -match $vmPrefix -and $_.StatusString -eq "Running"}} | Shutdown-VM -RunAsynchronously</p>
 
-<h2>Stop VMs matching a certain prefix</h2>
+<h5>Stop VMs matching a certain prefix</h5>
 
 <p class="codedescription">Description: Stop VMs matchin a certain prefix</p>
 
@@ -5821,13 +5821,13 @@ Get-VM | Where {$_.Name -match $vmPrefix -and $_.StatusString -eq "Running"}} | 
 <br>
 Get-VM | Where {$_.Name -match $vmPrefix} | Stop-VM</p>
 
-<h2>Get Hyper-V host RSS settings</h2>
+<h5>Get Hyper-V host RSS settings</h5>
 
 <p class="codedescription">Description: Get Hyper-V host RSS (recieve side scaling) settings</p>
 
 <p class="codetext">Get-NetAdapterRss</p>
 
-<h2>Check Winsh and WinRM connectivity</h2>
+<h5>Check Winsh and WinRM connectivity</h5>
 
 <p class="codedescription">Description: Check Winsh and WinRM connectivity / status by performing a sample query which should return the computer system object not an error</p>
 
