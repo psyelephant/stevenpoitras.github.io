@@ -1,0 +1,328 @@
+// main: ../nutanixbible.less
+
+/************************************************/
+/*  START: Ken Chen 11-17-2015
+/************************************************/
+.container {  
+
+  > * {
+    .transition(.5s @easeInOutCubic all);
+  }
+  
+  .nav-active {
+    .transition(.5s @easeInOutCubic all);
+    .transform(translate3d(250px,0,0));
+  }
+}
+
+#nav-icon {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: calc(100% + 13px);
+  height: 60px;
+  z-index: 998;
+  cursor: pointer;
+  background-color: #fff;
+  .transition(.5s @easeInOutCubic all);
+  
+  &.hide {
+    .transform(translate3d(0,-60px,0));
+    
+    @media screen and (min-width: 700px) {
+      .transform(none);
+    }
+  }
+  
+  &.bordered {
+    box-shadow: 0 1px 0 fade(@black,10%);
+  }
+  
+  @media screen and (min-width: 700px) {
+    left: 40px - 18px;
+    top: 40px - 22px;
+    background-color: transparent;
+    border-radius: 4px;
+    width: 60px;
+  }
+  
+  &:hover {
+    &:before {
+      .transform(translate3d(0,-2px,0));
+    }
+    
+    &:after {
+      .transform(translate3d(0,2px,0));
+    }
+  }
+  
+  &.nav-active {
+    .transform(translate3d(0,0,0));
+  }
+  
+  div {
+    background-color: @black;
+    width: 24px;
+    height: 2px;
+    border-radius: 1px;
+    margin-left: 6%;
+    margin-top: 29px;
+    
+    @media screen and (min-width: 700px) {
+      margin-left: 18px;
+    }
+  }
+  
+  &:before {
+    background-color: @black;
+    content: '';
+    position: absolute;
+    left: 6%;
+    top: 22px;
+    width: 24px;
+    height: 2px;
+    border-radius: 1px;
+    .transition(.2s ease all);
+    
+    @media screen and (min-width: 700px) {
+      left: 18px;
+    }
+  }
+  
+  &:after {
+    background-color: @black;
+    content: '';
+    position: absolute;
+    left: 6%;
+    bottom: 22px;
+    width: 24px;
+    height: 2px;
+    border-radius: 1px;
+    .transition(.2s ease all);
+    
+    @media screen and (min-width: 700px) {
+      left: 18px;
+    }
+  }
+}
+
+.nav-title {
+  width: 100%;
+  .background-image(linear-gradient(to bottom, @black 67%, fade(@black,0) 100%));
+  font-size: 0.875em;
+  letter-spacing: 0.1875em;
+  font-weight: 500;
+  position: fixed;
+  left: -500px;
+  top: 0;
+  color: fade(@grey,50%);
+  z-index: 1000;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 6%;
+  cursor: default;
+  .transition(.5s @easeInOutCubic all, .2s ease opacity);
+  opacity: 0;
+
+  @media screen and (min-width: 700px) {
+    width: 500px - 16px;
+    padding: 30px 40px 40px 40px;
+    font-size: 1em;
+  }
+  
+  &.expanded {
+    opacity: 1;
+    .transform(translate3d(500px,0,0));
+  }
+
+  #nav-close-button {
+    position: absolute;
+    right: 6%;
+    top: 23px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    @media screen and (min-width: 700px) {
+      right: 40px;
+      top: 28px;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 14px;
+      width: 30px;
+      height: 1px;
+      border-radius: 1px;
+      background-color: @text;
+      .transform(rotate3d(0,0,1,45deg));
+      .transition(.3s @easeOutBack all);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 14px;
+      width: 30px;
+      height: 1px;
+      border-radius: 1px;
+      background-color: @text;
+      .transform(rotate3d(0,0,1,135deg));
+      .transition(.3s @easeOutBack all);
+    }
+
+    &:hover {
+      &:before {
+        background-color: #fff;
+        .transform(rotate3d(0,0,1,-45deg));
+      }
+
+      &:after {
+        background-color: #fff;
+        .transform(rotate3d(0,0,1,45deg));
+      }
+    }
+  }
+}
+
+nav {
+  background-color: @black;
+  position: fixed;
+  left: -500px;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 80px 6% 30px 6%;
+  .transition(.5s @easeInOutCubic all);
+  scrollbar-face-color: @black-2;
+  scrollbar-track-color: @black;
+  
+  @media screen and (min-width: 700px) {
+    width: 500px;
+    padding: 100px 40px 40px 40px;
+  }
+  
+  &::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: fade(@grey,30%);
+    width: 16px;
+    border-radius: 7px;
+    border: 3px solid @black;
+    cursor: pointer;
+    &:hover {
+      background: fade(@grey,60%);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: @black;
+  }
+  
+  &.expanded {
+    .transform(translate3d(500px,0,0));
+    
+    > ol {
+      opacity: 1;
+    }
+  }
+  
+  > ol {
+    .transition(.2s ease all);
+    opacity: 0;
+  }
+  
+  ol {
+    counter-reset: item;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    
+    @media screen and (min-width: 700px) {
+      width: 420px;
+    }
+  }
+  
+  li {
+    display: block;
+    color: @grey;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    position: relative;
+    
+    &:before {
+      content: counters(item, ".") " ";
+      counter-increment: item;
+      width: 50px;
+      display: inline-block;
+      font-size: 1em;
+      
+      @media screen and (min-width: 700px) {
+        width: 60px;
+      }
+    }
+  }
+  
+  a {
+    color: @grey;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    .transition(.1s all);
+    
+    &:hover {
+      color: #fff;
+    }
+  }
+  
+  > ol > li {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    font-size: 1.25em;
+    border-bottom: 1px solid @black-2;
+    
+    @media screen and (min-width: 700px) {
+      font-size: 1.5em;
+    }
+    
+    &:before {
+      display: inline-block;
+      width: 10px;
+      opacity: 0;
+      margin-right: -16px;
+    }
+  }
+  
+  > ol > li > ol > li {
+    padding-top: 15px;
+    font-size: 0.7em;
+    
+    @media screen and (min-width: 700px) {
+      font-size: 0.6666667em;
+    }
+    
+    &:first-child {
+      padding-top: 25px;
+    }
+    
+    a {
+      display: inline-block;
+      line-height: 1.688;
+      font-weight: 600;
+    }
+  }
+  
+}
+/************************************************/
+/*  END: Ken Chen 11-17-2015
+/************************************************/
