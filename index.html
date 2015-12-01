@@ -3727,26 +3727,57 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 11-26. </span>Block Failure Replica Placement</figcaption>
 </figure>
 
-<div data-type="note" class="note" id="data-awareness-conditions-BWiXUZCJTv"><h6>Note</h6>
-<h5>Data Awareness Conditions</h5>
-<p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
+<h5>Awareness Conditions and Tolerance</h5>
+<p>Below we breakdown some common scenarios and the level of tolerance:</p>
 
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th colspan="2">Simultaneous Failure Tolerance</th>
+  </tr>
+  <tr>
+    <th>Number of Blocks</th>
+    <th>Awareness Type</th>
+    <th>Cluster FT1</th>
+    <th>Cluster FT2</th>
+  </tr>
+  <tr>
+    <td>&lt;3</td>
+    <td>NODE</td>
+    <td>SINGLE NODE</td>
+    <td>DUAL NODE</td>
+  </tr>
+  <tr>
+    <td>3-5</td>
+    <td>NODE+BLOCK</td>
+    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
+    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
+  </tr>
+  <tr>
+    <td>5+</td>
+    <td>NODE+BLOCK</td>
+    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
+    <td>DUAL BLOCK <br/>(up to 8 nodes)</td>
+  </tr>
+</table>
+
+<p>
+  As of Acropolis base software version 4.5 and later block awareness is best effort and doesn't have strict requirements for enabling.  This was done to ensure clusters with skewed storage resources (e.g. storage heavy nodes) don't disable the feature.  With that stated, it is however still a best practice to have uniform blocks to minimize any storage skew.
+</p>
+
+<p>
+  Prior to 4.5 the following conditions must be met:
+</p>
 <ul>
-	<li>&lt; 3 blocks: <strong>NODE</strong> awareness</li>
-	<li>3+ blocks uniformly populated: <strong>BLOCK + NODE</strong> awareness</li>
-	<li>3+ blocks not uniformly populated
-	<ul>
-		<li>If SSD <strong>or</strong> HDD tier variance between blocks is &gt; max variance: <strong>NODE (pre 4.5) or BEST EFFORT BLOCK (post 4.5)</strong> awareness</li>
-		<li>If SSD and HDD tier variance between blocks is &lt; max variance: <strong>BLOCK + NODE</strong> awareness</li>
-	</ul>
-	</li>
+  <li>If SSD <strong>or</strong> HDD tier variance between blocks is &gt; max variance: <strong>NODE</strong> awareness</li>
+  <li>If SSD and HDD tier variance between blocks is &lt; max variance: <strong>BLOCK + NODE</strong> awareness</li>
 </ul>
 
 <p>Max tier variance is calculated as: 100 / (RF+1)</p>
 <ul>
 	<li>E.g., 33% for RF2 or 25% for RF3</li>
 </ul>
-</div>
 
 <h5>Metadata</h5>
 
@@ -4353,7 +4384,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="chapter" id="acropolis-hypervisor-PgIzH9">
-<h2>Acropolis Hypervisor</h2>
+<h2>Acropolis Hypervisor (AHV)</h2>
 
 <section data-type="sect1" id="node-architecture-lkIms8h3">
 <h3>Node Architecture</h3>
