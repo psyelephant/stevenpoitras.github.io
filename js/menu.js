@@ -16,7 +16,7 @@ var navCloseBtn         = document.getElementById('nav-close-button'),
     listPreviousDepth   = 0,
     listContent         = "Hello",
     listID              = "anchor-",
-    listCurrentAll      = "";
+    listCurrentAll      = "<div class='extra-title'><a href='#anchor-foreword-1'>Foreword</a></div>";
 
 navOpenBtn.addEventListener('click', function (e) {
   nav.classList.add('expanded');
@@ -60,11 +60,15 @@ window.addEventListener( 'scroll', function() {
     if( wScrollCurrent <= 60 ) {
       // scrolled to the very top
       navOpenBtn.classList.remove('hide');
-      navOpenBtn.classList.remove('bordered');
+      if (w <= 700) {
+        navOpenBtn.classList.remove('bordered');
+      }
     } else if ( wScrollDiff > 0 ) {
       // scrolled up
       navOpenBtn.classList.remove('hide');
-      navOpenBtn.classList.add('bordered');
+      if (w <= 700) {
+        navOpenBtn.classList.add('bordered');
+      }
     } else if ( wScrollDiff < 0 ) {
       // scrolled down
       if ( wScrollCurrent + wHeight >= dHeight - elHeight ) {
@@ -84,7 +88,7 @@ while (nav.firstChild) {
 // nav.classList.add('expanded');
 // navTitle.classList.add('expanded');
 
-for (var i = 0; i < headerList.length; i++) {
+for (var i = 3; i < headerList.length; i++) {
   listCurrentDepth = parseInt(headerList[i].tagName.substr(1));
   listContent = headerList[i].innerText;
   listID = "anchor-" + listContent.replace(new RegExp(" ", "g"), "-").toLowerCase() + "-" + i;

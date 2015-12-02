@@ -202,6 +202,7 @@ nav {
   .transition(.5s @easeInOutCubic all);
   scrollbar-face-color: @black-2;
   scrollbar-track-color: @black;
+  text-align: left;
   
   @media screen and (min-width: 700px) {
     width: 500px;
@@ -218,6 +219,7 @@ nav {
     border-radius: 7px;
     border: 3px solid @black;
     cursor: pointer;
+    
     &:hover {
       background: fade(@grey,60%);
     }
@@ -230,17 +232,17 @@ nav {
   &.expanded {
     .transform(translate3d(500px,0,0));
     
-    > ol {
+    > ol, .extra-title {
       opacity: 1;
     }
   }
   
-  > ol {
+  > ol, .extra-title {
     .transition(.2s ease all);
     opacity: 0;
   }
   
-  ol {
+  ol, .extra-title {
     counter-reset: item;
     margin: 0;
     padding: 0;
@@ -251,7 +253,7 @@ nav {
     }
   }
   
-  li {
+  li, .extra-title {
     display: block;
     color: @grey;
     margin: 0;
@@ -285,7 +287,7 @@ nav {
     }
   }
   
-  > ol > li {
+  > ol > li, .extra-title {
     padding-bottom: 30px;
     margin-bottom: 30px;
     font-size: 1.25em;
@@ -299,7 +301,7 @@ nav {
       display: inline-block;
       width: 10px;
       opacity: 0;
-      margin-right: -16px;
+      margin-right: -0.45em;
     }
   }
   

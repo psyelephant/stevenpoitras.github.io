@@ -681,6 +681,7 @@ nav {
   transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) all;
   scrollbar-face-color: #424950;
   scrollbar-track-color: #343536;
+  text-align: left;
 }
 @media screen and (min-width: 700px) {
   nav {
@@ -711,28 +712,33 @@ nav.expanded {
   -o-transform: translate3d(500px, 0, 0);
   transform: translate3d(500px, 0, 0);
 }
-nav.expanded > ol {
+nav.expanded > ol,
+nav.expanded .extra-title {
   opacity: 1;
 }
-nav > ol {
+nav > ol,
+nav .extra-title {
   -webkit-transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
   opacity: 0;
 }
-nav ol {
+nav ol,
+nav .extra-title {
   counter-reset: item;
   margin: 0;
   padding: 0;
   width: 100%;
 }
 @media screen and (min-width: 700px) {
-  nav ol {
+  nav ol,
+  nav .extra-title {
     width: 420px;
   }
 }
-nav li {
+nav li,
+nav .extra-title {
   display: block;
   color: #89949b;
   margin: 0;
@@ -740,7 +746,8 @@ nav li {
   line-height: 1em;
   position: relative;
 }
-nav li:before {
+nav li:before,
+nav .extra-title:before {
   content: counters(item, ".") " ";
   counter-increment: item;
   width: 50px;
@@ -748,7 +755,8 @@ nav li:before {
   font-size: 1em;
 }
 @media screen and (min-width: 700px) {
-  nav li:before {
+  nav li:before,
+  nav .extra-title:before {
     width: 60px;
   }
 }
@@ -766,22 +774,25 @@ nav a {
 nav a:hover {
   color: #fff;
 }
-nav > ol > li {
+nav > ol > li,
+nav .extra-title {
   padding-bottom: 30px;
   margin-bottom: 30px;
   font-size: 1.25em;
   border-bottom: 1px solid #424950;
 }
 @media screen and (min-width: 700px) {
-  nav > ol > li {
+  nav > ol > li,
+  nav .extra-title {
     font-size: 1.5em;
   }
 }
-nav > ol > li:before {
+nav > ol > li:before,
+nav .extra-title:before {
   display: inline-block;
   width: 10px;
   opacity: 0;
-  margin-right: -16px;
+  margin-right: -0.45em;
 }
 nav > ol > li > ol > li {
   padding-top: 15px;
