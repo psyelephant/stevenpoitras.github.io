@@ -2870,55 +2870,72 @@ storage, compute and virtualization platform.
 <p>In the event where the node remains down for a prolonged period of time, the down CVM will be removed from the metadata ring.&nbsp; It will be joined back into the ring after it has been up and stable for a duration of time.</p>
 </section>
 
-<section data-type="sect1" id="compression-ONIqiMTA">
-<h3>Compression</h3>
-
-<p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/ERDqOCzDcQY">LINK</a></p>
-
-<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ERDqOCzDcQY"></iframe></div>
-
-<p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.&nbsp; Currently compression is one of the key features of the COE to perform data optimization. DSF provides both inline and offline flavors of compression to best suit the customer’s needs and type of data.&nbsp;</p>
-
-<p>Inline compression will compress sequential streams of data or large I/O sizes in memory before it is written to disk, while offline compression will initially write the data as normal (in an un-compressed state) and then leverage the Curator framework to compress the data cluster wide. When inline compression is enabled but the I/Os are random in nature, the data will be written un-compressed in the OpLog, coalesced, and then compressed in memory before being written to the Extent Store. The Google Snappy compression library is leveraged which provides good compression ratios with minimal computational overhead and extremely fast compression / decompression rates.</p>
-
-<p>The following figure shows an example of how inline compression interacts with the DSF write I/O path:</p>
-
-<figure id="id-GRtVFZi0T1"><img alt="Inline Compression I/O Path" class="iimagesv2compression_1png" src="imagesv2/compression_1.png">
-<figcaption><span class="label">Figure 11-10. </span>Inline Compression I/O Path</figcaption>
-</figure>
-
-<div data-type="note" class="note" id="pro-tip-1RiZtvidTQ"><h6>Note</h6>
-<h5>Pro tip</h5>
-
-<p>Almost always use inline compression (compression delay = 0) as it will only compress larger / sequential writes and not impact random write performance.</p>
+<section data-type="sect1">
+<h3>Capacity Optimization</h3>
 
 <p>
-	Inline compression also pairs perfectly with erasure coding.
+  The Nutanix platform incorporates a wide range of storage optimization technologies that work in concert to make efficient use of available capacity for any workload. These technologies are intelligent and adaptive to workload characteristics, eliminating the need for manual configuration and fine-tuning.
 </p>
 
-</div>
+<p>
+  The following optimizations are leveraged:
+</p>
 
-<p>For offline compression, all new write I/O is written in an un-compressed state and follows the normal DSF I/O path.&nbsp; After the compression delay (configurable) is met and the data has become cold (down-migrated to the HDD tier via ILM), the data is eligible to become compressed. Offline compression uses the Curator MapReduce framework and all nodes will perform compression tasks.&nbsp; Compression tasks will be throttled by Chronos.</p>
+<ul>
+  <li>
+    Erasure Coding
+  </li>
+  <li>
+    Compression
+  </li>
+  <li>
+    Deduplication
+  </li>
+</ul>
 
-<p>The following figure shows an example of how offline compression interacts with the DSF write I/O path:</p>
+<p>
+  More detail on how each of these features can be found in the following sections.
+</p>
 
-<figure id="id-NMt1cmiYT8"><img alt="Offline Compression I/O Path" class="iimagesv2compression_2png" src="imagesv2/compression_2.png">
-<figcaption><span class="label">Figure 11-11. </span>Offline Compression I/O Path</figcaption>
-</figure>
+<p>
+  The table describes which optimizations are applicable to workloads a high-level:
+</p>
 
-<p>For read I/O, the data is first decompressed in memory and then the I/O is served.&nbsp; For data that is heavily accessed, the data will become decompressed in the HDD tier and can then leverage ILM to move up to the SSD tier as well as be stored in the cache.</p>
+<table>
+  <tr>
+    <th>Data Transform</th>
+    <th>Application(s)</th>
+    <th>Comments</th>
+  </tr>
+  <tr>
+    <td>Erasure Coding</td>
+    <td>All</td>
+    <td>Provides higher availability with reduced overheads than traditional RF.  No impact to normal write or read I/O performance.  Does have some read overhead in the case of a disk / node / block failure where data must be decoded.</td>
+  </tr>
+  <tr>
+    <td>Inline<br>Compression</td>
+    <td>All</td>
+    <td>No impact to random I/O, helps increase storage tier utilization.  Benefits large or sequential I/O performance by reducing data to replicate and read from disk.</td>
+  </tr>
+  <tr>
+    <td>Offline<br>Compression</td>
+    <td>None</td>
+    <td>Given inline compression will compress only large or sequential writes inline and do random or small I/Os post-process, that should be used instead.</td>
+  </tr>
+  <tr>
+    <td>Perf Tier<br>Dedup</td>
+    <td>P2V/V2V,Hyper-V (ODX),Cross-container clones</td>
+    <td>Greater cache efficiency for data which wasn't cloned or created using efficient Acropolis clones</td>
+  </tr>
+  <tr>
+    <td>Capacity Tier<br>Dedup</td>
+    <td>Same as perf tier dedup</td>
+    <td>Benefits of above with reduced overhead on disk</td>
+  </tr>
+</table>
 
-<p>The following figure shows an example of how decompression interacts with the DSF I/O path during read:</p>
-
-<figure id="id-PJtrhjiwT1"><img alt="Decompression I/O Path" class="iimagesv2compression_3png" src="imagesv2/compression_3.png">
-<figcaption><span class="label">Figure 11-12. </span>Decompression I/O Path</figcaption>
-</figure>
-
-<p>You can view the current compression rates via Prism on the Storage &gt; Dashboard page.</p>
-</section>
-
-<section data-type="sect1" id="erasure-coding-nrIjcoTx">
-<h3>Erasure Coding</h3>
+<section data-type="sect2" id="erasure-coding-nrIjcoTx">
+<h4>Erasure Coding</h4>
 
 <p>The Nutanix platform relies leverages factor (RF) for data protection and availability.&nbsp; This method provides the highest degree of availability because it does not require reading from more than one storage location or data re-computation on failure.&nbsp; However, this does come at the cost of storage resources as full copies are required.&nbsp;</p>
 
@@ -2994,7 +3011,7 @@ storage, compute and virtualization platform.
 <p>A normal environment using RF would look like the following:</p>
 
 <figure id="id-lNtGhwcATe"><img alt="Typical DSF RF Data Layout" class="iimagesv2ec_1png" src="imagesv2/ec_1.png">
-<figcaption><span class="label">Figure 11-13. </span>Typical DSF RF Data Layout</figcaption>
+<figcaption><span class="label">Figure 11-10. </span>Typical DSF RF Data Layout</figcaption>
 </figure>
 
 <p>In this scenario, we have a mix of both RF2 and RF3 data whose primary copies are local and replicas are distributed to other nodes throughout the cluster.</p>
@@ -3004,7 +3021,7 @@ storage, compute and virtualization platform.
 <p>The following figure shows an example 4/1 and 3/2 strip:</p>
 
 <figure id="id-4mtATYc8Tk"><img alt="DSF Encoded Strip - Pre-savings" class="iimagesv2ec_2png" src="imagesv2/ec_2.png">
-<figcaption><span class="label">Figure 11-14. </span>DSF Encoded Strip - Pre-savings</figcaption>
+<figcaption><span class="label">Figure 11-11. </span>DSF Encoded Strip - Pre-savings</figcaption>
 </figure>
 
 <p>Once the data has been successfully encoded (strips and parity calculation), the replica extent groups are then removed.</p>
@@ -3012,7 +3029,7 @@ storage, compute and virtualization platform.
 <p>The following figure shows the environment after EC has run with the storage savings:</p>
 
 <figure id="id-n3tMFNc1TN"><img alt="DSF Encoded Strip - Post-savings" class="iimagesv2ec_3png" src="imagesv2/ec_3.png">
-<figcaption><span class="label">Figure 11-15. </span>DSF Encoded Strip - Post-savings</figcaption>
+<figcaption><span class="label">Figure 11-12. </span>DSF Encoded Strip - Post-savings</figcaption>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-mEiEtYcoTN"><h6>Note</h6>
@@ -3022,8 +3039,55 @@ storage, compute and virtualization platform.
 </div>
 </section>
 
-<section data-type="sect1" id="elastic-dedupe-engine-b1I4I5T5">
-<h3>Elastic Dedupe Engine</h3>
+<section data-type="sect2" id="compression-ONIqiMTA">
+<h4>Compression</h4>
+
+<p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/ERDqOCzDcQY">LINK</a></p>
+
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ERDqOCzDcQY"></iframe></div>
+
+<p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.&nbsp; Currently compression is one of the key features of the COE to perform data optimization. DSF provides both inline and offline flavors of compression to best suit the customer’s needs and type of data.&nbsp;</p>
+
+<p>Inline compression will compress sequential streams of data or large I/O sizes in memory before it is written to disk, while offline compression will initially write the data as normal (in an un-compressed state) and then leverage the Curator framework to compress the data cluster wide. When inline compression is enabled but the I/Os are random in nature, the data will be written un-compressed in the OpLog, coalesced, and then compressed in memory before being written to the Extent Store. The Google Snappy compression library is leveraged which provides good compression ratios with minimal computational overhead and extremely fast compression / decompression rates.</p>
+
+<p>The following figure shows an example of how inline compression interacts with the DSF write I/O path:</p>
+
+<figure id="id-GRtVFZi0T1"><img alt="Inline Compression I/O Path" class="iimagesv2compression_1png" src="imagesv2/compression_1.png">
+<figcaption><span class="label">Figure 11-13. </span>Inline Compression I/O Path</figcaption>
+</figure>
+
+<div data-type="note" class="note" id="pro-tip-1RiZtvidTQ"><h6>Note</h6>
+<h5>Pro tip</h5>
+
+<p>Almost always use inline compression (compression delay = 0) as it will only compress larger / sequential writes and not impact random write performance.</p>
+
+<p>
+	Inline compression also pairs perfectly with erasure coding.
+</p>
+
+</div>
+
+<p>For offline compression, all new write I/O is written in an un-compressed state and follows the normal DSF I/O path.&nbsp; After the compression delay (configurable) is met and the data has become cold (down-migrated to the HDD tier via ILM), the data is eligible to become compressed. Offline compression uses the Curator MapReduce framework and all nodes will perform compression tasks.&nbsp; Compression tasks will be throttled by Chronos.</p>
+
+<p>The following figure shows an example of how offline compression interacts with the DSF write I/O path:</p>
+
+<figure id="id-NMt1cmiYT8"><img alt="Offline Compression I/O Path" class="iimagesv2compression_2png" src="imagesv2/compression_2.png">
+<figcaption><span class="label">Figure 11-14. </span>Offline Compression I/O Path</figcaption>
+</figure>
+
+<p>For read I/O, the data is first decompressed in memory and then the I/O is served.&nbsp; For data that is heavily accessed, the data will become decompressed in the HDD tier and can then leverage ILM to move up to the SSD tier as well as be stored in the cache.</p>
+
+<p>The following figure shows an example of how decompression interacts with the DSF I/O path during read:</p>
+
+<figure id="id-PJtrhjiwT1"><img alt="Decompression I/O Path" class="iimagesv2compression_3png" src="imagesv2/compression_3.png">
+<figcaption><span class="label">Figure 11-15. </span>Decompression I/O Path</figcaption>
+</figure>
+
+<p>You can view the current compression rates via Prism on the Storage &gt; Dashboard page.</p>
+</section>
+
+<section data-type="sect2" id="elastic-dedupe-engine-b1I4I5T5">
+<h4>Elastic Dedupe Engine</h4>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/C-rp13cDpNw">LINK</a></p>
 
@@ -3078,6 +3142,8 @@ storage, compute and virtualization platform.
 </p>
 
 </div>
+</section>
+
 </section>
 
 <section data-type="sect1" id="storage-tiering-and-prioritization-rkIqUgTO">
