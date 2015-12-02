@@ -396,6 +396,16 @@ blockquote{
   padding: 40px 0;
   margin-bottom: 3em;
 }
+/* Localization Flags */
+.localization {
+  font-size: 0;
+}
+.localization a {
+  display: inline-block;
+  text-decoration: none;
+  width: 36px;
+  margin: 0 10px;
+}
 /************************************************/
 /*  HELPER. Credit nicolas gallagher for this
 /************************************************/

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 48 32" style="enable-background:new 0 0 48 32;" xml:space="preserve">
+<style type="text/css">
+  .st1{fill:#FFFFFF;}
+  .st2{fill:#C4C9CD;}
+  .st3{fill:#CC3E3E;}
+  .st4{fill:#005B99;}
+  .st5{fill:#343536;}
+  .st6{fill:#CC3E3E;}
+  .st7{fill:#FFFFFF;}
+  .st8{fill:#C4C9CD;}
+  .st9{fill:#005B99;}
+</style>
+<g id="korean" class="flag">
+  <rect x="0.5" y="0.5" class="st1" width="47" height="31"/>
+  <path class="st2" d="M47,1v30H1V1H47 M48,0H0v32h48V0L48,0z"/>
+  <circle class="st3" cx="24" cy="16" r="7.9"/>
+  <path class="st4" d="M17.2,11.9c-1.1,1.9-0.5,4.3,1.3,5.4c1.9,1.1,4.3,0.5,5.4-1.3c1.1-1.9,3.6-2.5,5.4-1.3
+  c1.9,1.1,2.5,3.6,1.3,5.4c-2.3,3.7-7.1,4.9-10.8,2.7C16.2,20.5,15,15.6,17.2,11.9"/>
+  <rect x="9.3" y="2.7" transform="matrix(-0.8289 -0.5594 0.5594 -0.8289 14.4435 17.829)" class="st5" width="1.2" height="7.9"/>
+  <rect x="10.9" y="3.8" transform="matrix(-0.8285 -0.5599 0.5599 -0.8285 16.7278 20.6636)" class="st5" width="1.2" height="7.9"/>
+  <rect x="12.5" y="4.9" transform="matrix(-0.8297 -0.5581 0.5581 -0.8297 19.0492 23.4799)" class="st5" width="1.2" height="7.9"/>
+  <rect x="35.5" y="19.6" transform="matrix(-0.8288 -0.5596 0.5596 -0.8288 54.0092 59.3338)" class="st5" width="1.2" height="3.7"/>
+  <rect x="33.1" y="23.1" transform="matrix(-0.8296 -0.5583 0.5583 -0.8296 47.7481 64.4282)" class="st5" width="1.2" height="3.7"/>
+  <rect x="37" y="20.6" transform="matrix(-0.8285 -0.56 0.56 -0.8285 56.2798 62.1754)" class="st5" width="1.2" height="3.7"/>
+  <rect x="34.7" y="24.2" transform="matrix(-0.8276 -0.5613 0.5613 -0.8276 49.8987 67.3087)" class="st5" width="1.2" height="3.7"/>
+  <rect x="38.6" y="21.7" transform="matrix(-0.8294 -0.5586 0.5586 -0.8294 58.6397 64.9698)" class="st5" width="1.2" height="3.7"/>
+  <rect x="36.2" y="25.2" transform="matrix(-0.83 -0.5578 0.5578 -0.83 52.3652 70.0751)" class="st5" width="1.2" height="3.7"/>
+  <rect x="35.9" y="3.8" transform="matrix(-0.8302 0.5575 -0.5575 -0.8302 71.0846 -6.1138)" class="st5" width="1.2" height="7.9"/>
+  <rect x="36.2" y="3.1" transform="matrix(-0.8285 0.5599 -0.5599 -0.8285 70.1732 -11.6026)" class="st5" width="1.2" height="3.7"/>
+  <rect x="38.6" y="6.6" transform="matrix(-0.8283 0.5603 -0.5603 -0.8283 76.4877 -6.5024)" class="st5" width="1.2" height="3.7"/>
+  <rect x="33.1" y="5.2" transform="matrix(-0.8294 0.5586 -0.5586 -0.8294 65.6131 -5.8921)" class="st5" width="1.2" height="3.7"/>
+  <rect x="35.5" y="8.8" transform="matrix(-0.8291 0.559 -0.559 -0.8291 71.9247 -0.7907)" class="st5" width="1.2" height="3.7"/>
+  <rect x="12.5" y="19.2" transform="matrix(-0.829 0.5592 -0.5592 -0.829 36.9268 35.0408)" class="st5" width="1.2" height="7.9"/>
+  <rect x="9.3" y="21.3" transform="matrix(-0.8291 0.5591 -0.5591 -0.8291 32.3426 40.7033)" class="st5" width="1.2" height="7.9"/>
+  <rect x="9.7" y="20.6" transform="matrix(-0.8291 0.5591 -0.5591 -0.8291 31.4748 35.3172)" class="st5" width="1.2" height="3.7"/>
+  <rect x="12.1" y="24.2" transform="matrix(-0.8297 0.5582 -0.5582 -0.8297 37.7781 40.4576)" class="st5" width="1.2" height="3.7"/>
+</g>
+</svg>
