@@ -2877,11 +2877,11 @@ storage, compute and virtualization platform.
 
 <div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//ERDqOCzDcQY"></iframe></div>
 
-<p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.&nbsp; Currently compression is one of the key features of the COE to perform data optimization. DSF provides both in-line and post-process flavors of compression to best suit the customer’s needs and type of data.&nbsp;</p>
+<p>The Nutanix Capacity Optimization Engine (COE) is responsible for performing data transformations to increase data efficiency on disk.&nbsp; Currently compression is one of the key features of the COE to perform data optimization. DSF provides both inline and offline flavors of compression to best suit the customer’s needs and type of data.&nbsp;</p>
 
-<p>In-line compression will compress sequential streams of data or large I/O sizes in memory before it is written to disk, while post-process compression will initially write the data as normal (in an un-compressed state) and then leverage the Curator framework to compress the data cluster wide. When in-line compression is enabled but the I/Os are random in nature, the data will be written un-compressed in the OpLog, coalesced, and then compressed in memory before being written to the Extent Store. The Google Snappy compression library is leveraged which provides good compression ratios with minimal computational overhead and extremely fast compression / decompression rates.</p>
+<p>Inline compression will compress sequential streams of data or large I/O sizes in memory before it is written to disk, while offline compression will initially write the data as normal (in an un-compressed state) and then leverage the Curator framework to compress the data cluster wide. When inline compression is enabled but the I/Os are random in nature, the data will be written un-compressed in the OpLog, coalesced, and then compressed in memory before being written to the Extent Store. The Google Snappy compression library is leveraged which provides good compression ratios with minimal computational overhead and extremely fast compression / decompression rates.</p>
 
-<p>The following figure shows an example of how in-line compression interacts with the DSF write I/O path:</p>
+<p>The following figure shows an example of how inline compression interacts with the DSF write I/O path:</p>
 
 <figure id="id-GRtVFZi0T1"><img alt="Inline Compression I/O Path" class="iimagesv2compression_1png" src="imagesv2/compression_1.png">
 <figcaption><span class="label">Figure 11-10. </span>Inline Compression I/O Path</figcaption>
@@ -2898,12 +2898,12 @@ storage, compute and virtualization platform.
 
 </div>
 
-<p>For post-process compression, all new write I/O is written in an un-compressed state and follows the normal DSF I/O path.&nbsp; After the compression delay (configurable) is met and the data has become cold (down-migrated to the HDD tier via ILM), the data is eligible to become compressed. Post-process compression uses the Curator MapReduce framework and all nodes will perform compression tasks.&nbsp; Compression tasks will be throttled by Chronos.</p>
+<p>For offline compression, all new write I/O is written in an un-compressed state and follows the normal DSF I/O path.&nbsp; After the compression delay (configurable) is met and the data has become cold (down-migrated to the HDD tier via ILM), the data is eligible to become compressed. Offline compression uses the Curator MapReduce framework and all nodes will perform compression tasks.&nbsp; Compression tasks will be throttled by Chronos.</p>
 
-<p>The following figure shows an example of how post-process compression interacts with the DSF write I/O path:</p>
+<p>The following figure shows an example of how offline compression interacts with the DSF write I/O path:</p>
 
-<figure id="id-NMt1cmiYT8"><img alt="Post-process Compression I/O Path" class="iimagesv2compression_2png" src="imagesv2/compression_2.png">
-<figcaption><span class="label">Figure 11-11. </span>Post-process Compression I/O Path</figcaption>
+<figure id="id-NMt1cmiYT8"><img alt="Offline Compression I/O Path" class="iimagesv2compression_2png" src="imagesv2/compression_2.png">
+<figcaption><span class="label">Figure 11-11. </span>Offline Compression I/O Path</figcaption>
 </figure>
 
 <p>For read I/O, the data is first decompressed in memory and then the I/O is served.&nbsp; For data that is heavily accessed, the data will become decompressed in the HDD tier and can then leverage ILM to move up to the SSD tier as well as be stored in the cache.</p>
@@ -3031,7 +3031,7 @@ storage, compute and virtualization platform.
 
 <p>The Elastic Dedupe Engine is a software-based feature of DSF which allows for data deduplication in the capacity (HDD) and performance (SSD/Memory) tiers.&nbsp; Streams of data are fingerprinted during ingest using a SHA-1 hash at a 16K granularity.&nbsp; This fingerprint is only done on data ingest and is then stored persistently as part of the written block’s metadata.&nbsp; NOTE: Initially a 4K granularity was used for fingerprinting, however after testing 16K offered the best blend of deduplication with reduced metadata overhead.&nbsp; Deduplicated data is pulled into the content cache at a 4K granularity.</p>
 
-<p>Contrary to traditional approaches which utilize background scans requiring the data to be re-read, Nutanix performs the fingerprint in-line on ingest.&nbsp; For duplicate data that can be deduplicated in the capacity tier, the data does not need to be scanned or re-read, essentially duplicate copies can be removed.</p>
+<p>Contrary to traditional approaches which utilize background scans requiring the data to be re-read, Nutanix performs the fingerprint inline on ingest.&nbsp; For duplicate data that can be deduplicated in the capacity tier, the data does not need to be scanned or re-read, essentially duplicate copies can be removed.</p>
 
 <p>
 	To make the metadata overhead more efficient, fingerprint refcounts are monitored to track dedupability.  Fingerprints with low refcounts will be discarded to minimize the metadata overhead. To minimize fragmentation full extents will be preferred for capacity tier deduplication.
