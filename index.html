@@ -3934,7 +3934,7 @@ storage, compute and virtualization platform.
 </section>
 
 <section data-type="sect1" id="replication-and-multi-site-disaster-recovery-jrIOuxT2">
-<h3>Replication and Multi-Site Disaster Recovery</h3>
+<h3>Replication and DR</h3>
 
 <p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/AoKwKI7CXIM">LINK</a></p>
 
@@ -4047,6 +4047,10 @@ storage, compute and virtualization platform.
 <p>The Cerebro Master is responsible for managing task delegation to the local Cerebro Slaves as well as coordinating with remote Cerebro Master(s) when remote replication is occurring.</p>
 
 <p>During a replication, the Cerebro Master will figure out which data needs to be replicated, and delegate the replication tasks to the Cerebro Slaves which will then tell Stargate which data to replicate and to where.</p>
+
+<p>
+  Replicated data is protected at multiple layers throughout the process.  Extent reads on the source are checksummed to ensure consistency for source data (similar to how any DSF read occurs) and the new extent(s) are  checksummed at the target (similar to any DSF write).  TCP provides consistency on the network layer.
+</p>
 
 <p>The following figure shows a representation of this architecture:</p>
 
