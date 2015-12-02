@@ -73,7 +73,7 @@
 <p>
   Localized versions available:
 </p>
-  
+
 <div class="localization">
   <a href="http://nutanixbible.jpn.org/" target="_blank">
     <img src="assets/flag-japanese.svg" alt="Japanese" class="japanese">
@@ -85,7 +85,7 @@
     <img src="assets/flag-russian.svg" alt="Russian" class="russian">
   </a>
 </div>
-  
+
 </section>
 
 <!-- START: Ken Chen 11-17-2015-->
@@ -2750,7 +2750,7 @@ storage, compute and virtualization platform.
 <p>Data RF is configured via Prism and is done at the container level. All nodes participate in OpLog replication to eliminate any “hot nodes”, ensuring linear performance at scale.&nbsp; While the data is being written, a checksum is computed and stored as part of its metadata. Data is then asynchronously drained to the extent store where the RF is implicitly maintained.&nbsp; In the case of a node or disk failure, the data is then re-replicated among all nodes in the cluster to maintain the RF.&nbsp; Any time the data is read, the checksum is computed to ensure the data is valid.&nbsp; In the event where the checksum and data don’t match, the replica of the data will be read and will replace the non-valid copy.</p>
 
 <p>
-  Data is also consistently monitored to ensure integrity even when active I/O isn't occurring.  Stargate's scrubber operation will consistently scan a random subset of extent groups and perform checksum validation.  This protects against things like bit rot or corrupted sectors.
+  Data is also consistently monitored to ensure integrity even when active I/O isn't occurring.  Stargate's scrubber operation will consistently scan through extent groups and perform checksum validation when disks aren't heavily utilized.  This protects against things like bit rot or corrupted sectors.
 </p>
 
 <p>The following figure shows an example of what this logically looks like:&nbsp;</p>
