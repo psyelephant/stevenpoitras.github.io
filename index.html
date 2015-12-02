@@ -3299,6 +3299,10 @@ storage, compute and virtualization platform.
 
 <p>Data RF is configured via Prism and is done at the container level. All nodes participate in OpLog replication to eliminate any “hot nodes”, ensuring linear performance at scale.&nbsp; While the data is being written, a checksum is computed and stored as part of its metadata. Data is then asynchronously drained to the extent store where the RF is implicitly maintained.&nbsp; In the case of a node or disk failure, the data is then re-replicated among all nodes in the cluster to maintain the RF.&nbsp; Any time the data is read, the checksum is computed to ensure the data is valid.&nbsp; In the event where the checksum and data don’t match, the replica of the data will be read and will replace the non-valid copy.</p>
 
+<p>
+  Data is also consistently monitored to ensure integrity even when active I/O isn't occurring.  Stargate's scrubber operation will consistently scan a random subset of extent groups and perform checksum validation.  This protects against things like bit rot or corrupted sectors.
+</p>
+
 <p>The following figure shows an example of what this logically looks like:&nbsp;</p>
 
 <figure id="id-A0tbFVF8Tx"><img alt="DSF Data Protection" class="iimagesv2data_protectionpng fse fs" src="imagesv2/data_protection.png">
