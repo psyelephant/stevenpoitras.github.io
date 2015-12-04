@@ -2111,7 +2111,7 @@ vm.on &lt;VM_NAME&gt;
     OVM-alinone
     <ul>
       <li>
-        Includes OpenStack controller and OVM
+        OVM includes all Acropolis drivers and OpenStack controller
       </li>
     </ul>
   </li>
@@ -2119,14 +2119,14 @@ vm.on &lt;VM_NAME&gt;
     OVM-services
     <ul>
       <li>
-        Includes OVM and leverages external controller
+        OVM includes all Acropolis drivers and communicates with external/remote OpenStack controller
       </li>
     </ul>
   </li>
 </ul>
 
 <p>
-  Both deployment modes will be covered in the following sections.
+  Both deployment modes will be covered in the following sections.  You can use in any mode and also switch between modes.
 </p>
 
 <h5>OVM-allinone</h5>
@@ -3746,13 +3746,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>Building upon the native DR / replication capabilities of DSF, Cloud Connect extends this capability into cloud providers (currently Amazon Web Services, Microsoft Azure).&nbsp; NOTE: This feature is currently limited to just backup / replication.</p>
 
-<p>Very similar to creating a remote site to be used for native DR / replication, a “cloud remote site” is just created.&nbsp; When a new cloud remote site is created, Nutanix will automatically spin up a single node Nutanix cluster in EC2 (currently m1.xlarge) or Azure Virtual Machines (currently A4\ExtraLarge) to be used as the endpoint.</p>
+<p>Very similar to creating a remote site to be used for native DR / replication, a “cloud remote site” is just created.&nbsp; When a new cloud remote site is created, Nutanix will automatically spin up a single node Nutanix cluster in EC2 (currently m1.xlarge) or Azure Virtual Machines (currently D3) to be used as the endpoint.</p>
 
 <p>The cloud instance is based upon the same Acropolis code-base leveraged for locally running clusters.&nbsp; This means that all of the native replication capabilities (e.g., global deduplication, delta based replications, etc.) can be leveraged.</p>
 
 <p>In the case where multiple Nutanix clusters are leveraging Cloud Connect, they can either A) share the same instance running in the region, or B) spin up a new instance.</p>
 
-<p>The following figure shows a logical representation of an AWS based “remote site” used for Cloud Connect:</p>
+<p>The following figure shows a logical representation of a “remote site” used for Cloud Connect:</p>
 
 <figure id="id-lNtnF1TATe"><img alt="Cloud Connect - Region" class="iimagesv2cloudconn_1png" src="imagesv2/cloudconn_1.png">
 <figcaption><span class="label">Figure 11-42. </span>Cloud Connect Region</figcaption>
@@ -3764,7 +3764,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 11-43. </span>Cloud Connect Multi-region</figcaption>
 </figure>
 
-<p>The same replication / retention policies are leveraged for data replicated using Cloud Connect.&nbsp; As data / snapshots become stale, or expire, the Nutanix CVM in AWS will clean up data as necessary.</p>
+<p>The same replication / retention policies are leveraged for data replicated using Cloud Connect.&nbsp; As data / snapshots become stale, or expire, the cloud cluster will clean up data as necessary.</p>
 
 <p>If replication isn’t frequently occurring (e.g., daily or weekly), the platform can be configured to power up the cloud instance(s) prior to a scheduled replication and down after a replication has completed.</p>
 
