@@ -1707,19 +1707,6 @@ $vms = Get-NTNXVM | where {$_.vmName -match $searchString}</p>
 	</li>
 </ul>
 
-<p>
-  Taking the following key components into account, there are a few main methods of deployment:
-</p>
-
-<ul>
-  <li>
-    OVM Disk Image
-  </li>
-  <li>
-    OVM RPM
-  </li>
-</ul>
-
 <p>The OpenStack Controller can be an existing VM / host, or deployed as part of the OpenStack on Nutanix solution.  The Acropolis OVM is a helper VM which is deployed as part of the Nutanix OpenStack solution.</p>
 
 <p>The client communicates with the OpenStack Controller using their expected methods (Web UI / HTTP, SDK, CLI or API) and the OpenStack controller communicates with the Acropolis OVM which translates the requests into native Acropolis REST API calls using the OpenStack Driver.</p>
@@ -1897,7 +1884,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </p>
 
 <p>
-	You can view the compute and hypevisor hosts using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'Hypervisors'.
+	You can view the compute and hypervisor hosts using the OpenStack portal under 'Admin'-&gt;'System'-&gt;'Hypervisors'.
 </p>
 
 <p>The figure shows the Acropolis OVM as the compute host:</p>
@@ -2084,8 +2071,6 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </figure>
 </section>
 <h4>Deployment</h4>
-<h5>Acropolis OVM</h5>  <!-- TODO - left off changing heading -->
-
 <p>
 	The OVM can be deployed as a standalone RPM on a CentOS / Redhat distro or as a full VM.  The Acropolis OVM can be deployed on any platform (Nutanix or non-Nutanix) as long as it has network connectivity to the OpenStack Controller and Nutanix Cluster(s).
 </p>
@@ -2093,10 +2078,9 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	The VM(s) for the Acropolis OVM can be deployed on a Nutanix AHV cluster using the following steps.  If the OVM is already deployed you can skip past the VM creation steps.  You can use the full OVM image or use an existing CentOS / Redhat VM image.
 </p>
 <p>
-	First we will import the provided Acropolis OVM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
+	First we will import the provided Acropolis OVM disk image to Acropolis cluster.  This can be done by copying the disk image over using SCP or by specifying a URL to copy the file from.  We will cover importing this using the Images API.  Note: It is possible to deploy this VM anywhere, not necessarily on a Acropolis cluster.
 </p>
-<p>To copy the file SCP the image to any CVM IP on port 2222, the run the following command to create the image from the disk:</p>
-<p class="codetext">image.create &lt;IMAGE_NAME&gt; clone_from_vmdisk=&lt;IMAGE_PATH&gt; container=&lt;CONTAINER_NAME&gt;</p>
+
 <p>
 	To import the disk image using Images API, run the following command:
 </p>
@@ -2110,34 +2094,92 @@ vm.on &lt;VM_NAME&gt;
 
 <p>Once the VM(s) have been created and powered on, SSH to the OVM(s) using the provided credentials.</p>
 
-<p>
-  Next we'll download the RPM to the OVM(s) using SCP or wget or any other file transfer protocol to begin the installation.
-</p>
+<div data-type="note" class="note"><h6>Note</h6>
+<h5>OVMCTL Help</h5>
+
+<p>Help txt can be displayed by running the following command on the OVM:</p>
+  <p class="codetext">ovmctl --help
+
+</div>
 
 <p>
-  After the RPM has been downloaded we'll install it on the OVM(s):
+  The OVM supports two deployment modes:
 </p>
 
-<p class="codetext"># Install OVM RPM<br>
-	# If CentOS <br>
-  yum install &lt;OVM_RPM_NAME&gt; <br>
-  <br>
-  # If Redhat <br>
-  rpm -i &lt;OVM_RPM_NAME&gt;
-</p>
+<ul>
+  <li>
+    OVM-alinone
+    <ul>
+      <li>
+        Includes OpenStack controller and OVM
+      </li>
+    </ul>
+  </li>
+  <li>
+    OVM-services
+    <ul>
+      <li>
+        Includes OVM and leverages external controller
+      </li>
+    </ul>
+  </li>
+</ul>
 
 <p>
-	Next we'll configure the OVM(s) by running the following commands (must be run on every OVM):
+  Both deployment modes will be covered in the following sections.
 </p>
 
-<p class="codetext"># Register OpenStack Driver service <br>
-	ovmctl --add=service --name=&lt;OVM_NAME&gt; --ip=&lt;OVM_IP&gt; --username=root --password=admin
+<h5>OVM-allinone</h5>
+<p>
+  The following steps cover the OVM-allinone deployment.  Start by SSHing to the OVM(s) to run the following commands.
+</p>
+
+<p class="codetext">
+  # Register OpenStack Driver service <br>
+	ovmctl --add ovm --name &lt;OVM_NAME&gt; --ip &lt;OVM_IP&gt;
 </p>
 
 <p class="codetext">
 # Register OpenStack Controller <br>
-# Items in '[]' are optional <br>
-ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER_IP&gt; --username=&lt;OS_CONTROLLER_USERNAME&gt; --password=&lt;OS_CONTROLLER_PASSWORD&gt; [--auth_strategy=&lt;&gt; --auth_region=&lt;&gt; --auth_tenant=&lt;&gt; --auth_password=&lt;&gt; --db_nova=&lt;&gt; --db_cinder=&lt;&gt; --db_glance=&lt;&gt; --db_neutron=&lt;&gt; --db_nova_password=&lt;NOVA_DB_PASSWORD&gt; --db_cinder_password=&lt;CINDER_DB_PASSWORD&gt; --db_glance_password=&lt;GLANCE_DB_PASSWORD&gt; --db_neutron_password=&lt;NEUTRON_DB_PASSWORD&gt; --rpc_backend=&lt;&gt; --rpc_username=&lt;&gt; --rpc_password=&lt;&gt;]
+ovmctl --add controller --name &lt;OVM_NAME&gt; --ip &lt;OVM_IP&gt;
+</p>
+
+<p class="codetext">
+# Register Acropolis Cluster(s) (run for each cluster to add) <br>
+ovmctl --add cluster --name &lt;CLUSTER_NAME&gt; --ip &lt;CLUSTER_IP&gt; --username &lt;PRISM_USER&gt; --password &lt;PRISM_PASSWORD&gt;
+		<br>
+		<br>
+The following values are used as defaults: <br>
+    <span style="margin-left:2em">Number of VCPUs per core = 4</span><br>
+    <span style="margin-left:2em">Container name = default</span><br>
+    <span style="margin-left:2em">Image cache = disabled, Image cache URL = None</span><br>
+</p>
+
+<p>
+  Next we'll verify the configuration using the following command:
+</p>
+
+<p class="codetext">
+  ovmctl --show
+</p>
+
+<p>
+  At this point everything should be up and running and ready for consumption.
+</p>
+
+<h5>OVM-services</h5>
+<p>
+  The following steps cover the OVM-services deployment.  Start by SSHing to the OVM(s) to run the following commands.
+</p>
+
+<p class="codetext">
+  # Register OpenStack Driver service <br>
+	ovmctl --add ovm --name &lt;OVM_NAME&gt; --ip &lt;OVM_IP&gt;
+</p>
+
+<p class="codetext">
+# Register OpenStack Controller <br>
+ovmctl --add controller --name &lt;OS_CONTROLLER_NAME&gt; --ip &lt;OS_CONTROLLER_IP&gt; --username &lt;OS_CONTROLLER_USERNAME&gt; --password &lt;OS_CONTROLLER_PASSWORD&gt;
 			<br>
 			<br>
  The following values are used as defaults:<br>
@@ -2149,8 +2191,7 @@ ovmctl --add=controller --name=&lt;OS_CONTROLLER_NAME&gt; --ip=&lt;OS_CONTROLLER
 
 <p class="codetext">
 # Register Acropolis Cluster(s) (run for each cluster to add) <br>
-# Items in '[]' are optional <br>
-ovmctl --add=cluster --name=&lt;CLUSTER_NAME&gt; --ip=&lt;CLUSTER_IP&gt; --username=&lt;PRISM_USER&gt; --password=&lt;PRISM_PASSWORD&gt; --vnc=8081 [--num_vcpus_per_core=&lt;&gt; --container_name=&lt;&gt; --image_cache=&lt;enable|disable&gt; --image_cache_url=&lt;&gt;]
+ovmctl --add cluster --name &lt;CLUSTER_NAME&gt; --ip &lt;CLUSTER_IP&gt; --username &lt;PRISM_USER&gt; --password &lt;PRISM_PASSWORD&gt;
 		<br>
 		<br>
 The following values are used as defaults: <br>
@@ -2158,61 +2199,97 @@ The following values are used as defaults: <br>
     <span style="margin-left:2em">Container name = default</span><br>
     <span style="margin-left:2em">Image cache = disabled, Image cache URL = None</span><br>
 </p>
+
+<p>
+  If non-default passwords were used for the OpenStack controller deployment, we'll need to update those:
+</p>
+
+<p class="codetext">
+# Update controller passwords (if non-default are used)<br>
+ovmctl --update controller --name &lt;OS_CONTROLLER_NAME&gt; --auth_nova_password &lt;&gt; --auth_glance_password &lt;&gt; --auth_neutron_password &lt;&gt; --auth_cinder_password &lt;&gt; --db_nova_password &lt;&gt; --db_glance_password &lt;&gt; --db_neutron_password &lt;&gt; --db_cinder_password &lt;&gt;
+</p>
+
+<p>
+  Next we'll verify the configuration using the following command:
+</p>
+
+<p class="codetext">
+  ovmctl --show
+</p>
+
 <p>
 	Now that the OVM has been configured, we'll configure the OpenStack Controller to know about the Glance and Neutron endpoints.
 </p>
+
 <p>
-	First we will get the Keystone service ids for Glance and Neutron by running the following commands on the OpenStack Controller:
+  Log in to the OpenStack controller and enter the keystonerc_admin source:
 </p>
-<p class="codetext">source keystonerc_admin <br>
-	keystone service-list
-</p>
-<p>
-	The output should look similar to the following:
-</p>
+
 <p class="codetext">
-+----------------------------------+------------+-----------------+<br>
-|                id                |    name    |       type      |<br>
-+----------------------------------+------------+-----------------+<br>
-| e95f5c6a56dc4d93b016dbad0b72351e | ceilometer |     metering    |<br>
-| 09f82d2cacc64e6082755fe15f35dbcc |   cinder   |      volume     |<br>
-| f169a9e6a5744b4f8f88897a4bd2b16a |  cinderv2  |     volumev2    |<br>
+  # enter keystonerc_admin
+  source ./keystonerc_admin
+</p>
+
+<p>
+  First we will delete the existing endpoint for Glance that is pointing to the controller:
+</p>
+
+<p class="codetext">
+ # Find old Glance endpoint id (port 9292)
+ keystone endpoint-list
+ # Remove old keystone endpoint for Glance <br>
+ keystone endpoint-delete &lt;GLANCE_ENDPOINT_ID&gt;
+</p>
+
+<p>
+  Next we will create the new Glance endpoint that will point to the OVM:
+</p>
+
+<p class="codetext">
+  # Find Glance service id<br>
+  keystone service-list | grep glance<br>
+  # Will look similar to the following:<br>
 | 9e539e8dee264dd9a086677427434982 |   glance   |      image      |<br>
-| e0d6cc81400642e092c3290e82a3b607 |    heat    |  orchestration  |<br>
-| 9082586f93eb4ac3be59b880a163c2b8 |  keystone  |     identity    |<br>
-| f4c4266142c742a78b330f8bafe5e49e |  neutron   |     network     |<br>
-| df0cc41a9de2490a8ae403f4b026adab |    nova    |     compute     |<br>
-| 829d9667fd194102898e489503f6bbad |  nova_ec2  |       ec2       |<br>
-| b00d961b5b0c4ebbb9bdc742ff6570bf |   novav3   |    computev3    |<br>
-| 717c7602de9d44eba95e821a9a4aaf26 |   sahara   | data-processing |<br>
-| 23b80e6d3fd84c62943d3602e3f6cdc7 |   swift    |   object-store  |<br>
-| 6284a3da6d9243e98d3e923e46122109 |  swift_s3  |        s3       |<br>
-| f3f5eae89c1e4e57be222505637dfb36 |   trove    |     database    |<br>
-+----------------------------------+------------+-----------------+<br>
- </p>
+<br>
+  # Add Keystone endpoint for Glance <br>
+  keystone endpoint-create \ <br>
+  --service-id &lt;GLANCE_SERVICE_ID&gt; \ <br>
+  --publicurl http://&lt;OVM_IP&gt;:9292 \ <br>
+  --internalurl http://&lt;OVM_IP&gt;:9292 \ <br>
+  --region &lt;REGION_NAME&gt; \ <br>
+  --adminurl http://&lt;OVM_IP&gt;:9292
+</p>
 
 <p>
-	We will then create the two endpoints for Glance and Neutron using the services ids gathered previously:
-</p>
-<p class="codetext">
-	# Add Keystone endpoint for Glance <br>
-	keystone endpoint-create \ <br>
-	--service-id=&lt;GLANCE_SERVICE_ID&gt; \ <br>
-	--publicurl=http://&lt;OVM_IP&gt;:9292 \ <br>
-	--internalurl=http://&lt;OVM_IP&gt;:9292 \ <br>
-	--region=&lt;REGION_NAME&gt; \ <br>
-	--adminurl=http://&lt;OVM_IP&gt;:9292
+  Next we will delete the existing endpoint for Neutron that is pointing to the controller:
 </p>
 
 <p class="codetext">
-	# Add Keystone endpoint for Neutron <br>
-	keystone endpoint-create \ <br>
-	--service-id=&lt;NEUTRON_SERVICE_ID&gt; \ <br>
-	--publicurl=http://&lt;OVM_IP&gt;:9696 \ <br>
-	--internalurl=http://&lt;OVM_IP&gt;:9696 \ <br>
-	--region=&lt;REGION_NAME&gt; \ <br>
-	--adminurl=http://&lt;OVM_IP&gt;:9696
+# Find old Neutron endpoint id (port 9696)
+keystone endpoint-list
+# Remove old keystone endpoint for Neutron <br>
+keystone endpoint-delete &lt;NEUTRON_ENDPOINT_ID&gt;
 </p>
+
+<p>
+  Next we will create the new Glance endpoint that will point to the OVM:
+</p>
+
+<p class="codetext">
+  # Find Glance service id<br>
+  keystone service-list | grep glance<br>
+  # Will look similar to the following:<br>
+| f4c4266142c742a78b330f8bafe5e49e |  neutron   |     network     |<br>
+<br>
+# Add Keystone endpoint for Neutron <br>
+keystone endpoint-create \ <br>
+--service-id &lt;NEUTRON_SERVICE_ID&gt; \ <br>
+--publicurl http://&lt;OVM_IP&gt;:9696 \ <br>
+--internalurl http://&lt;OVM_IP&gt;:9696 \ <br>
+--region &lt;REGION_NAME&gt; \ <br>
+--adminurl http://&lt;OVM_IP&gt;:9696
+</p>
+
 <p>
 	After the endpoints have been created we will update the Nova and Cinder configuration files with new Acropolis OVM IP of Glance host.</p>
 <p>
@@ -2232,6 +2309,15 @@ The following values are used as defaults: <br>
   # ([hostname|ip]:port) (list value) <br>
   api_servers=&lt;OVM_IP&gt;:9292
 </p>
+
+<p>
+  Now we will disable nova-compute on the OpenStack controller (if not already):
+</p>
+<p class="codetext">
+systemctl disable openstack-nova-compute.service<br>
+systemctl stop openstack-nova-compute.service<br>
+service openstack-nova-compute stop<br>
+</p>
 <p>
 	Next we will edit Cinder.conf which is located at /etc/cinder/cinder.conf and edit the following items:
 </p>
@@ -2244,6 +2330,41 @@ The following values are used as defaults: <br>
   # ([hostname|ip]:port) (list value) <br>
   glance_api_servers=$glance_host:$glance_port <br>
 </p>
+<p>
+  We will also comment out lvm enabled backends as those will not be leveraged:
+</p>
+<p class="codetext">
+  # Comment out the following lines in cinder.conf<br>
+#enabled_backends=lvm<br>
+#[lvm]<br>
+#iscsi_helper=lioadm<br>
+#volume_group=cinder-volumes<br>
+#iscsi_ip_address=<br>
+#volume_driver=cinder.volume.drivers.lvm.LVMVolumeDriver<br>
+#volumes_dir=/var/lib/cinder/volumes<br>
+#iscsi_protocol=iscsi<br>
+#volume_backend_name=lvm<br>
+</p>
+<p>
+  Now we will disable cinder volume on the OpenStack controller (if not already):
+</p>
+<p class="codetext">
+  systemctl disable openstack-cinder-volume.service<br>
+  systemctl stop openstack-cinder-volume.service<br>
+  service openstack-cinder-volume stop<br>
+</p>
+<p>
+  Now we will disable glance-image on the OpenStack controller (if not already):
+</p>
+<p class="codetext">
+  systemctl disable openstack-glance-api.service <br>
+systemctl disable openstack-glance-registry.service<br>
+systemctl stop openstack-glance-api.service <br>
+systemctl stop openstack-glance-registry.service<br>
+service openstack-glance-api stop<br>
+service openstack-glance-registry stop<br>
+</p>
+
 <p>
 	After the files have been edited we will restart the Nova and Cinder services to take the new configuration settings.  The services can be restarted with the following commands below or by running the scripts which are available for download.
 </p>
@@ -2268,6 +2389,9 @@ The following values are used as defaults: <br>
 	# OR you can also use the script which can be downloaded as part of the helper tools:<br>
 	~/openstack/commands/cinder-restart
 </p>
+
+<!-- TODO - add iptables rules -->
+
 </section>
 
 <section data-type="sect2" id="troubleshooting-andamp-advanced-administration-yAIkhjswtx">
@@ -3620,13 +3744,13 @@ This should only be used for non-production scenarios and the cluster IPs should
 <section data-type="sect1" id="cloud-connect-yAI5T1Td">
 <h3>Cloud Connect</h3>
 
-<p>Building upon the native DR / replication capabilities of DSF, Cloud Connect extends this capability into cloud providers (currently Amazon Web Services, or AWS).&nbsp; NOTE: This feature is currently limited to just backup / replication.</p>
+<p>Building upon the native DR / replication capabilities of DSF, Cloud Connect extends this capability into cloud providers (currently Amazon Web Services, Microsoft Azure).&nbsp; NOTE: This feature is currently limited to just backup / replication.</p>
 
-<p>Very similar to creating a remote site to be used for native DR / replication, a “cloud remote site” is just created.&nbsp; When a new cloud remote site is created, Nutanix will automatically spin up an instance in EC2 (currently m1.xlarge) to be used as the endpoint.</p>
+<p>Very similar to creating a remote site to be used for native DR / replication, a “cloud remote site” is just created.&nbsp; When a new cloud remote site is created, Nutanix will automatically spin up a single node Nutanix cluster in EC2 (currently m1.xlarge) or Azure Virtual Machines (currently A4\ExtraLarge) to be used as the endpoint.</p>
 
-<p>The Amazon Machine Image (AMI) running in AWS is based upon the same NOS code-base leveraged for locally running clusters.&nbsp; This means that all of the native replication capabilities (e.g., global deduplication, delta based replications, etc.) can be leveraged.</p>
+<p>The cloud instance is based upon the same Acropolis code-base leveraged for locally running clusters.&nbsp; This means that all of the native replication capabilities (e.g., global deduplication, delta based replications, etc.) can be leveraged.</p>
 
-<p>In the case where multiple Nutanix clusters are leveraging Cloud Connect, they can either A) share the same AMI instance running in the region, or B) spin up a new instance.</p>
+<p>In the case where multiple Nutanix clusters are leveraging Cloud Connect, they can either A) share the same instance running in the region, or B) spin up a new instance.</p>
 
 <p>The following figure shows a logical representation of an AWS based “remote site” used for Cloud Connect:</p>
 
@@ -3634,7 +3758,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure 11-42. </span>Cloud Connect Region</figcaption>
 </figure>
 
-<p>Since an AWS based remote site is similar to any other Nutanix remote site, a cluster can replicate to multiple regions if higher availability is required (e.g., data availability in the case of a full region outage):</p>
+<p>Since a cloud based remote site is similar to any other Nutanix remote site, a cluster can replicate to multiple regions if higher availability is required (e.g., data availability in the case of a full region outage):</p>
 
 <figure id="id-Q4tgfVT5TX"><img alt="Cloud Connect - Multi-region" class="iimagesv2cloudconn_2png" src="imagesv2/cloudconn_2.png">
 <figcaption><span class="label">Figure 11-43. </span>Cloud Connect Multi-region</figcaption>
@@ -3642,9 +3766,9 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>The same replication / retention policies are leveraged for data replicated using Cloud Connect.&nbsp; As data / snapshots become stale, or expire, the Nutanix CVM in AWS will clean up data as necessary.</p>
 
-<p>If replication isn’t frequently occurring (e.g., daily or weekly), the platform can be configured to power up the AWS CVM(s) prior to a scheduled replication and down after a replication has completed.</p>
+<p>If replication isn’t frequently occurring (e.g., daily or weekly), the platform can be configured to power up the cloud instance(s) prior to a scheduled replication and down after a replication has completed.</p>
 
-<p>Data that is replicated to any AWS region can also be pulled down and restored to any existing, or newly created Nutanix cluster which has the AWS remote site(s) configured:</p>
+<p>Data that is replicated to any cloud region can also be pulled down and restored to any existing, or newly created Nutanix cluster which has the cloud remote site(s) configured:</p>
 
 <figure id="id-OQtXU1TjTJ"><img alt="Cloud Connect - Restore" class="iimagesv2cloudconn_3png" src="imagesv2/cloudconn_3.png">
 <figcaption><span class="label">Figure 11-44. </span>Cloud Connect - Restore</figcaption>
