@@ -3752,6 +3752,10 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>In the case where multiple Nutanix clusters are leveraging Cloud Connect, they can either A) share the same instance running in the region, or B) spin up a new instance.</p>
 
+<p>
+  Storage for cloud instances is done using a "cloud disk" which is a logical disk backed by S3 (AWS) or BlobStore (Azure).  Data is stored as the usual egroups which are files on the object stores.
+</p>
+
 <p>The following figure shows a logical representation of a “remote site” used for Cloud Connect:</p>
 
 <figure id="id-lNtnF1TATe"><img alt="Cloud Connect - Region" class="iimagesv2cloudconn_1png" src="imagesv2/cloudconn_1.png">
