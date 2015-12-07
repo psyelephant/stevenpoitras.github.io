@@ -2878,6 +2878,32 @@ storage, compute and virtualization platform.
 </ul>
 </section>
 
+<section data-type="sect1" id="scalable-metadata-4aI3tRTg">
+<h3>Scalable Metadata</h3>
+
+<p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/MlQczJhQI3U">LINK</a></p>
+
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//MlQczJhQI3U"></iframe></div>
+
+<p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.&nbsp; In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as “strictly consistent”), it has to be scalable, and it has to perform at massive scale.&nbsp; As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).&nbsp; A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.&nbsp; This ensures strict consistency for all data and metadata stored as part of the platform.</p>
+
+<p>The following figure shows an example of a metadata insert/update for a 4 node cluster:</p>
+
+<figure id="id-A0tOHyt8Tx"><img alt="Cassandra Ring Structure" class="iimagesv2metadata_1png" src="imagesv2/metadata_1.png">
+<figcaption><span class="label">Figure 11-7. </span>Cassandra Ring Structure</figcaption>
+</figure>
+
+<p>Performance at scale is also another important struct for DSF metadata.&nbsp; Contrary to traditional dual-controller or “master” models, each Nutanix node is responsible for a subset of the overall platform’s metadata.&nbsp; This eliminates the traditional bottlenecks by allowing metadata to be served and manipulated by all nodes in the cluster.&nbsp; A consistent hashing scheme is utilized to minimize the redistribution of keys during cluster size modifications (also known as&nbsp;“add/remove node”) When the cluster scales (e.g., from 4 to 8 nodes), the nodes are inserted throughout the ring between nodes for “block awareness” and reliability.</p>
+
+<p>The following figure shows an example of the metadata “ring” and how it scales:</p>
+
+<figure class="large" id="id-GRtofpt0T1"><img alt="Cassandra Scale Out" class="iimagesv2metadata_2png" src="imagesv2/metadata_2.png">
+<figcaption><span class="label">Figure 11-8. </span>Cassandra Scale Out</figcaption>
+</figure>
+
+<p>&nbsp;</p>
+</section>
+
 <section data-type="sect1" id="data-protection-J5I3F8Tw">
 <h3>Data Protection</h3>
 
@@ -2896,34 +2922,205 @@ storage, compute and virtualization platform.
 <p>The following figure shows an example of what this logically looks like:&nbsp;</p>
 
 <figure id="id-A0tbFVF8Tx"><img alt="DSF Data Protection" class="iimagesv2data_protectionpng fse fs" src="imagesv2/data_protection.png">
-<figcaption><span class="label">Figure 11-7. </span>DSF Data Protection</figcaption>
+<figcaption><span class="label">Figure 11-8. </span>DSF Data Protection</figcaption>
 </figure>
 </section>
 
-<section data-type="sect1" id="scalable-metadata-4aI3tRTg">
-<h3>Scalable Metadata</h3>
+<section data-type="sect1" id="availability-domains-WnIbC8TM">
+<h3>Availability Domains</h3>
 
-<p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/MlQczJhQI3U">LINK</a></p>
+<p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/LDaNY9AJDn8">LINK</a></p>
 
-<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//MlQczJhQI3U"></iframe></div>
+<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//LDaNY9AJDn8"></iframe></div>
 
-<p>Metadata is at the core of any intelligent system and is even more critical for any filesystem or storage array.&nbsp; In terms of DSF, there are a few key structs that are critical for its success: it has to be right 100% of the time (known as “strictly consistent”), it has to be scalable, and it has to perform at massive scale.&nbsp; As mentioned in the architecture section above, DSF utilizes a “ring-like” structure as a key-value store which stores essential metadata as well as other platform data (e.g., stats, etc.). In order to ensure metadata availability and redundancy a RF is utilized among an odd amount of nodes (e.g., 3, 5, etc.). Upon a metadata write or update, the row is written to a node in the ring and then replicated to n number of peers (where n is dependent on cluster size).&nbsp; A majority of nodes must agree before anything is committed, which is enforced using the Paxos algorithm.&nbsp; This ensures strict consistency for all data and metadata stored as part of the platform.</p>
+<p>Availability Domains (aka node/block/rack awareness) is a key struct for distributed systems to abide by for determining component and data placement.&nbsp; DSF is currently node and block aware, however this will increase to rack aware as cluster sizes grow.&nbsp; Nutanix refers to a “block” as the chassis which contains either one, two, or four server “nodes”. NOTE: A minimum of 3 blocks must be utilized for block awareness to be activated, otherwise node awareness will be defaulted to.&nbsp;</p>
 
-<p>The following figure shows an example of a metadata insert/update for a 4 node cluster:</p>
+<p>It is recommended to utilized uniformly populated blocks to ensure block awareness is enabled.&nbsp; Common scenarios and the awareness level utilized can be found at the bottom of this section.&nbsp; The 3-block requirement is due to ensure quorum. For example, a 3450 would be a block which holds 4 nodes.&nbsp; The reason for distributing roles or data across blocks is to ensure if a block fails or needs maintenance the system can continue to run without interruption.&nbsp; NOTE: Within a block, the redundant PSU and fans are the only shared components Awareness can be broken into a few key focus areas:</p>
 
-<figure id="id-A0tOHyt8Tx"><img alt="Cassandra Ring Structure" class="iimagesv2metadata_1png" src="imagesv2/metadata_1.png">
-<figcaption><span class="label">Figure 11-8. </span>Cassandra Ring Structure</figcaption>
+<ul>
+	<li>Data (The VM data)</li>
+	<li>Metadata (Cassandra)</li>
+	<li>Configuration Data (Zookeeper)</li>
+</ul>
+
+<h5>Data</h5>
+
+<p>With DSF, data replicas will be written to other blocks in the cluster to ensure that in the case of a block failure or planned downtime, the data remains available.&nbsp; This is true for both RF2 and RF3 scenarios, as well as in the case of a block failure. An easy comparison would be “node awareness”, where a replica would need to be replicated to another node which will provide protection in the case of a node failure.&nbsp; Block awareness further enhances this by providing data availability assurances in the case of block outages.</p>
+
+<p>The following figure shows how the replica placement would work in a 3-block deployment:</p>
+
+<figure id="id-lNtMiOCATe"><img alt="Block Aware Replica Placement" class="iimagesv2avail_dom_1png" src="imagesv2/avail_dom_1.png">
+<figcaption><span class="label">Figure 11-25. </span>Block Aware Replica Placement</figcaption>
 </figure>
 
-<p>Performance at scale is also another important struct for DSF metadata.&nbsp; Contrary to traditional dual-controller or “master” models, each Nutanix node is responsible for a subset of the overall platform’s metadata.&nbsp; This eliminates the traditional bottlenecks by allowing metadata to be served and manipulated by all nodes in the cluster.&nbsp; A consistent hashing scheme is utilized to minimize the redistribution of keys during cluster size modifications (also known as&nbsp;“add/remove node”) When the cluster scales (e.g., from 4 to 8 nodes), the nodes are inserted throughout the ring between nodes for “block awareness” and reliability.</p>
+<p>In the case of a block failure, block awareness will be maintained and the re-replicated blocks will be replicated to other blocks within the cluster:</p>
 
-<p>The following figure shows an example of the metadata “ring” and how it scales:</p>
-
-<figure class="large" id="id-GRtofpt0T1"><img alt="Cassandra Scale Out" class="iimagesv2metadata_2png" src="imagesv2/metadata_2.png">
-<figcaption><span class="label">Figure 11-9. </span>Cassandra Scale Out</figcaption>
+<figure id="id-Q4t4IaC5TX"><img alt="Block Failure Replica Placement" class="iimagesv2avail_dom_2png" src="imagesv2/avail_dom_2.png">
+<figcaption><span class="label">Figure 11-26. </span>Block Failure Replica Placement</figcaption>
 </figure>
 
-<p>&nbsp;</p>
+<h5>Awareness Conditions and Tolerance</h5>
+<p>Below we breakdown some common scenarios and the level of tolerance:</p>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th colspan="2">Simultaneous Failure Tolerance</th>
+  </tr>
+  <tr>
+    <th>Number of Blocks</th>
+    <th>Awareness Type</th>
+    <th>Cluster FT1</th>
+    <th>Cluster FT2</th>
+  </tr>
+  <tr>
+    <td>&lt;3</td>
+    <td>NODE</td>
+    <td>SINGLE NODE</td>
+    <td>DUAL NODE</td>
+  </tr>
+  <tr>
+    <td>3-5</td>
+    <td>NODE+BLOCK</td>
+    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
+    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
+  </tr>
+  <tr>
+    <td>5+</td>
+    <td>NODE+BLOCK</td>
+    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
+    <td>DUAL BLOCK <br/>(up to 8 nodes)</td>
+  </tr>
+</table>
+
+<p>
+  As of Acropolis base software version 4.5 and later block awareness is best effort and doesn't have strict requirements for enabling.  This was done to ensure clusters with skewed storage resources (e.g. storage heavy nodes) don't disable the feature.  With that stated, it is however still a best practice to have uniform blocks to minimize any storage skew.
+</p>
+
+<p>
+  Prior to 4.5 the following conditions must be met:
+</p>
+<ul>
+  <li>If SSD <strong>or</strong> HDD tier variance between blocks is &gt; max variance: <strong>NODE</strong> awareness</li>
+  <li>If SSD and HDD tier variance between blocks is &lt; max variance: <strong>BLOCK + NODE</strong> awareness</li>
+</ul>
+
+<p>Max tier variance is calculated as: 100 / (RF+1)</p>
+<ul>
+	<li>E.g., 33% for RF2 or 25% for RF3</li>
+</ul>
+
+<h5>Metadata</h5>
+
+<p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
+
+<p>The following figure shows an example of the Cassandra's ring for a 12-node cluster:</p>
+
+<figure id="id-n3tDuwC1TN"><img alt="12 Node Cassandra Ring" class="iimagesv2avail_dom_3png fse fs image" src="imagesv2/avail_dom_3.png" style="width: 50%; height: 50%">
+<figcaption><span class="label">Figure 11-27. </span>12 Node Cassandra Ring</figcaption>
+</figure>
+
+<p>Cassandra peer replication iterates through nodes in a clockwise manner throughout the ring.&nbsp; With block awareness, the peers are distributed among the blocks to ensure no two peers are on the same block.</p>
+
+<p>The following figure shows an example node layout translating the ring above into the block based layout:</p>
+
+<figure id="id-m2tmHdCoTN"><img alt="Cassandra Node Block Aware Placement" class="iimagesv2avail_dom_4png" src="imagesv2/avail_dom_4.png">
+<figcaption><span class="label">Figure 11-28. </span>Cassandra Node Block Aware Placement</figcaption>
+</figure>
+
+<p>With this block-aware nature, in the event of a block failure there will still be at least two copies of the data (with Metadata RF3 – In larger clusters RF5 can be leveraged).</p>
+
+<p>The following figure shows an example of all of the nodes replication topology to form the ring (yes – it’s a little busy):</p>
+
+<figure id="id-jRtRfmCeTa"><img alt="Full Cassandra Node Block Aware Placement" class="iimagesv2avail_dom_5png" src="imagesv2/avail_dom_5.png">
+<figcaption><span class="label">Figure 11-29. </span>Full Cassandra Node Block Aware Placement</figcaption>
+</figure>
+
+<div data-type="note" class="note" id="metadata-awareness-conditions-wDioinCwTQ"><h6>Note</h6>
+<h5>Metadata Awareness Conditions</h5>
+<p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
+
+<ul>
+	<li>FT1 (Data RF2 / Metadata RF3) will be block aware if:
+		<ul>
+			<li>
+				&gt; 3 blocks
+			</li>
+			<li>Let X be the number of nodes in the block with max nodes. Then, the remaining blocks should have at least 2X nodes.
+				<ul>
+					<li>
+						Example: 4 blocks with 2,3,4,2 nodes per block respectively.
+						<ul>
+							<li>
+								The max node block has 4 nodes which means the other 3 blocks should have 2x4 (8) nodes.  In this case it <strong>WOULD NOT</strong> be block aware as the remaining blocks only have 7 nodes.
+							</li>
+						</ul>
+					</li>
+					<br>
+					<li>
+						Example: 4 blocks with 3,3,4,3 nodes per block respectively.
+						<ul>
+							<li>
+								The max node block has 4 nodes which means the other 3 blocks should have 2x4==8 nodes.  In this case it <strong>WOULD</strong> be block aware as the remaining blocks have 9 nodes which is above our minimum.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>FT2 (Data RF3 / Metadata RF5) will be block aware if:
+		<ul>
+			<li>
+				&gt; 5 blocks
+			</li>
+			<li>Let X be the number of nodes in the block with max nodes. Then, the remaining blocks should have at least 4X nodes.
+				<ul>
+					<li>
+						Example: 6 blocks with 2,3,4,2,3,3 nodes per block respectively.
+						<ul>
+							<li>
+							The max node block has 4 nodes which means the other 3 blocks should have 4x4==16 nodes.  In this case it <strong>WOULD NOT</strong> be block aware as the remaining blocks only have 13 nodes.
+							</li>
+						</ul>
+						</li>
+					<br>
+					<li>
+						Example: 6 blocks with 2,4,4,4,4,4 nodes per block respectively.
+						<ul>
+							<li>
+								The max node block has 4 nodes which means the other 3 blocks should have 4x4==16 nodes.  In this case it <strong>WOULD</strong> be block aware as the remaining blocks have  18 nodes which is above our minimum.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<h5>Configuration Data</h5>
+
+<p>Nutanix leverages Zookeeper to store essential configuration data for the cluster.&nbsp; This role is also distributed in a block-aware manner to ensure availability in the case of a block failure.</p>
+
+<p>The following figure shows an example layout showing 3 Zookeeper nodes distributed in a block-aware manner:</p>
+
+<figure id="id-qMtEh2CyTQ"><img alt="Zookeeper Block Aware Placement" class="iimagesv2avail_dom_6png" src="imagesv2/avail_dom_6.png">
+<figcaption><span class="label">Figure 11-30. </span>Zookeeper Block Aware Placement</figcaption>
+</figure>
+
+<p>In the event of a block outage, meaning one of the Zookeeper nodes will be gone, the Zookeeper role would be transferred to another node in the cluster as shown below:</p>
+
+<figure id="id-EGt4soCoTo"><img alt="Zookeeper Placement Block Failure" class="iimagesv2avail_dom_7png" src="imagesv2/avail_dom_7.png">
+<figcaption><span class="label">Figure 11-31. </span>Zookeeper Placement Block Failure</figcaption>
+</figure>
+
+<p>When the block comes back online, the Zookeeper role would be transferred back to maintain block awareness.</p>
+
+<p>NOTE: Prior to 4.5, this migration was not automatic and must be done manually.</p>
+
 </section>
 
 <section data-type="sect1" id="data-path-resiliency-BNIWfkTZ">
@@ -3352,203 +3549,6 @@ storage, compute and virtualization platform.
 <figure class="large" id="id-MltQIBhpT1"><img alt="Disk Balancing - Storage Only Node" class="iimagesv2disk_balancing_3png" src="imagesv2/disk_balancing_3.png">
 <figcaption><span class="label">Figure 11-24. </span>Disk Balancing - Storage Only Node</figcaption>
 </figure>
-</section>
-
-<section data-type="sect1" id="availability-domains-WnIbC8TM">
-<h3>Availability Domains</h3>
-
-<p>For a visual explanation, you can watch the following video: <a href="https://youtu.be/LDaNY9AJDn8">LINK</a></p>
-
-<div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//LDaNY9AJDn8"></iframe></div>
-
-<p>Availability Domains (aka node/block/rack awareness) is a key struct for distributed systems to abide by for determining component and data placement.&nbsp; DSF is currently node and block aware, however this will increase to rack aware as cluster sizes grow.&nbsp; Nutanix refers to a “block” as the chassis which contains either one, two, or four server “nodes”. NOTE: A minimum of 3 blocks must be utilized for block awareness to be activated, otherwise node awareness will be defaulted to.&nbsp;</p>
-
-<p>It is recommended to utilized uniformly populated blocks to ensure block awareness is enabled.&nbsp; Common scenarios and the awareness level utilized can be found at the bottom of this section.&nbsp; The 3-block requirement is due to ensure quorum. For example, a 3450 would be a block which holds 4 nodes.&nbsp; The reason for distributing roles or data across blocks is to ensure if a block fails or needs maintenance the system can continue to run without interruption.&nbsp; NOTE: Within a block, the redundant PSU and fans are the only shared components Awareness can be broken into a few key focus areas:</p>
-
-<ul>
-	<li>Data (The VM data)</li>
-	<li>Metadata (Cassandra)</li>
-	<li>Configuration Data (Zookeeper)</li>
-</ul>
-
-<h5>Data</h5>
-
-<p>With DSF, data replicas will be written to other blocks in the cluster to ensure that in the case of a block failure or planned downtime, the data remains available.&nbsp; This is true for both RF2 and RF3 scenarios, as well as in the case of a block failure. An easy comparison would be “node awareness”, where a replica would need to be replicated to another node which will provide protection in the case of a node failure.&nbsp; Block awareness further enhances this by providing data availability assurances in the case of block outages.</p>
-
-<p>The following figure shows how the replica placement would work in a 3-block deployment:</p>
-
-<figure id="id-lNtMiOCATe"><img alt="Block Aware Replica Placement" class="iimagesv2avail_dom_1png" src="imagesv2/avail_dom_1.png">
-<figcaption><span class="label">Figure 11-25. </span>Block Aware Replica Placement</figcaption>
-</figure>
-
-<p>In the case of a block failure, block awareness will be maintained and the re-replicated blocks will be replicated to other blocks within the cluster:</p>
-
-<figure id="id-Q4t4IaC5TX"><img alt="Block Failure Replica Placement" class="iimagesv2avail_dom_2png" src="imagesv2/avail_dom_2.png">
-<figcaption><span class="label">Figure 11-26. </span>Block Failure Replica Placement</figcaption>
-</figure>
-
-<h5>Awareness Conditions and Tolerance</h5>
-<p>Below we breakdown some common scenarios and the level of tolerance:</p>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th colspan="2">Simultaneous Failure Tolerance</th>
-  </tr>
-  <tr>
-    <th>Number of Blocks</th>
-    <th>Awareness Type</th>
-    <th>Cluster FT1</th>
-    <th>Cluster FT2</th>
-  </tr>
-  <tr>
-    <td>&lt;3</td>
-    <td>NODE</td>
-    <td>SINGLE NODE</td>
-    <td>DUAL NODE</td>
-  </tr>
-  <tr>
-    <td>3-5</td>
-    <td>NODE+BLOCK</td>
-    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
-    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
-  </tr>
-  <tr>
-    <td>5+</td>
-    <td>NODE+BLOCK</td>
-    <td>SINGLE BLOCK <br/>(up to 4 nodes)</td>
-    <td>DUAL BLOCK <br/>(up to 8 nodes)</td>
-  </tr>
-</table>
-
-<p>
-  As of Acropolis base software version 4.5 and later block awareness is best effort and doesn't have strict requirements for enabling.  This was done to ensure clusters with skewed storage resources (e.g. storage heavy nodes) don't disable the feature.  With that stated, it is however still a best practice to have uniform blocks to minimize any storage skew.
-</p>
-
-<p>
-  Prior to 4.5 the following conditions must be met:
-</p>
-<ul>
-  <li>If SSD <strong>or</strong> HDD tier variance between blocks is &gt; max variance: <strong>NODE</strong> awareness</li>
-  <li>If SSD and HDD tier variance between blocks is &lt; max variance: <strong>BLOCK + NODE</strong> awareness</li>
-</ul>
-
-<p>Max tier variance is calculated as: 100 / (RF+1)</p>
-<ul>
-	<li>E.g., 33% for RF2 or 25% for RF3</li>
-</ul>
-
-<h5>Metadata</h5>
-
-<p>As mentioned in the Scalable Metadata section above, Nutanix leverages a heavily modified Cassandra platform to store metadata and other essential information.&nbsp; Cassandra leverages a ring-like structure and replicates to n number of peers within the ring to ensure data consistency and availability.</p>
-
-<p>The following figure shows an example of the Cassandra's ring for a 12-node cluster:</p>
-
-<figure id="id-n3tDuwC1TN"><img alt="12 Node Cassandra Ring" class="iimagesv2avail_dom_3png fse fs image" src="imagesv2/avail_dom_3.png" style="width: 50%; height: 50%">
-<figcaption><span class="label">Figure 11-27. </span>12 Node Cassandra Ring</figcaption>
-</figure>
-
-<p>Cassandra peer replication iterates through nodes in a clockwise manner throughout the ring.&nbsp; With block awareness, the peers are distributed among the blocks to ensure no two peers are on the same block.</p>
-
-<p>The following figure shows an example node layout translating the ring above into the block based layout:</p>
-
-<figure id="id-m2tmHdCoTN"><img alt="Cassandra Node Block Aware Placement" class="iimagesv2avail_dom_4png" src="imagesv2/avail_dom_4.png">
-<figcaption><span class="label">Figure 11-28. </span>Cassandra Node Block Aware Placement</figcaption>
-</figure>
-
-<p>With this block-aware nature, in the event of a block failure there will still be at least two copies of the data (with Metadata RF3 – In larger clusters RF5 can be leveraged).</p>
-
-<p>The following figure shows an example of all of the nodes replication topology to form the ring (yes – it’s a little busy):</p>
-
-<figure id="id-jRtRfmCeTa"><img alt="Full Cassandra Node Block Aware Placement" class="iimagesv2avail_dom_5png" src="imagesv2/avail_dom_5.png">
-<figcaption><span class="label">Figure 11-29. </span>Full Cassandra Node Block Aware Placement</figcaption>
-</figure>
-
-<div data-type="note" class="note" id="metadata-awareness-conditions-wDioinCwTQ"><h6>Note</h6>
-<h5>Metadata Awareness Conditions</h5>
-<p>Below we breakdown some common scenarios and what level of awareness will be utilized:</p>
-
-<ul>
-	<li>FT1 (Data RF2 / Metadata RF3) will be block aware if:
-		<ul>
-			<li>
-				&gt; 3 blocks
-			</li>
-			<li>Let X be the number of nodes in the block with max nodes. Then, the remaining blocks should have at least 2X nodes.
-				<ul>
-					<li>
-						Example: 4 blocks with 2,3,4,2 nodes per block respectively.
-						<ul>
-							<li>
-								The max node block has 4 nodes which means the other 3 blocks should have 2x4 (8) nodes.  In this case it <strong>WOULD NOT</strong> be block aware as the remaining blocks only have 7 nodes.
-							</li>
-						</ul>
-					</li>
-					<br>
-					<li>
-						Example: 4 blocks with 3,3,4,3 nodes per block respectively.
-						<ul>
-							<li>
-								The max node block has 4 nodes which means the other 3 blocks should have 2x4==8 nodes.  In this case it <strong>WOULD</strong> be block aware as the remaining blocks have 9 nodes which is above our minimum.
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-	<li>FT2 (Data RF3 / Metadata RF5) will be block aware if:
-		<ul>
-			<li>
-				&gt; 5 blocks
-			</li>
-			<li>Let X be the number of nodes in the block with max nodes. Then, the remaining blocks should have at least 4X nodes.
-				<ul>
-					<li>
-						Example: 6 blocks with 2,3,4,2,3,3 nodes per block respectively.
-						<ul>
-							<li>
-							The max node block has 4 nodes which means the other 3 blocks should have 4x4==16 nodes.  In this case it <strong>WOULD NOT</strong> be block aware as the remaining blocks only have 13 nodes.
-							</li>
-						</ul>
-						</li>
-					<br>
-					<li>
-						Example: 6 blocks with 2,4,4,4,4,4 nodes per block respectively.
-						<ul>
-							<li>
-								The max node block has 4 nodes which means the other 3 blocks should have 4x4==16 nodes.  In this case it <strong>WOULD</strong> be block aware as the remaining blocks have  18 nodes which is above our minimum.
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-</ul>
-</div>
-
-<h5>Configuration Data</h5>
-
-<p>Nutanix leverages Zookeeper to store essential configuration data for the cluster.&nbsp; This role is also distributed in a block-aware manner to ensure availability in the case of a block failure.</p>
-
-<p>The following figure shows an example layout showing 3 Zookeeper nodes distributed in a block-aware manner:</p>
-
-<figure id="id-qMtEh2CyTQ"><img alt="Zookeeper Block Aware Placement" class="iimagesv2avail_dom_6png" src="imagesv2/avail_dom_6.png">
-<figcaption><span class="label">Figure 11-30. </span>Zookeeper Block Aware Placement</figcaption>
-</figure>
-
-<p>In the event of a block outage, meaning one of the Zookeeper nodes will be gone, the Zookeeper role would be transferred to another node in the cluster as shown below:</p>
-
-<figure id="id-EGt4soCoTo"><img alt="Zookeeper Placement Block Failure" class="iimagesv2avail_dom_7png" src="imagesv2/avail_dom_7.png">
-<figcaption><span class="label">Figure 11-31. </span>Zookeeper Placement Block Failure</figcaption>
-</figure>
-
-<p>When the block comes back online, the Zookeeper role would be transferred back to maintain block awareness.</p>
-
-<p>NOTE: Prior to 4.5, this migration was not automatic and must be done manually.</p>
-
 </section>
 
 <section data-type="sect1" id="snapshots-and-clones-vlInsNTB">
