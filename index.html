@@ -2721,7 +2721,7 @@ storage, compute and virtualization platform.
 	<li>Nutanix Home (CVM core)</li>
 	<li>Cassandra (metadata storage)</li>
 	<li>OpLog (persistent write buffer)</li>
-	<li>Content Cache (SSD cache)</li>
+	<li>Unified Cache (SSD cache portion)</li>
 	<li>Extent Store (persistent storage)</li>
 </ul>
 
@@ -2733,7 +2733,7 @@ storage, compute and virtualization platform.
 
 <p>NOTE: The sizing for OpLog is done dynamically as of release 4.0.1 which will allow the extent store portion to grow dynamically.&nbsp; The values used are assuming a completely utilized OpLog.&nbsp; Graphics and proportions aren’t drawn to scale.&nbsp; When evaluating the Remaining GiB capacities, do so from the top down.&nbsp; For example, the Remaining GiB to be used for the OpLog calculation would be after Nutanix Home and Cassandra have been subtracted from the formatted SSD capacity.</p>
 
-<p>Most models ship with 1 or 2 SSDs, however the same construct applies for models shipping with more SSD devices. For example, if we apply this to an example 3060 or 6060 node which has 2 x 400GB SSDs, this would give us 100GiB of OpLog, 40GiB of Content Cache, and ~440GiB of Extent Store SSD capacity per node.</p>
+<p>Most models ship with 1 or 2 SSDs, however the same construct applies for models shipping with more SSD devices. For example, if we apply this to an example 3060 or 6060 node which has 2 x 400GB SSDs, this would give us 100GiB of OpLog, 40GiB of Unified Cache, and ~440GiB of Extent Store SSD capacity per node.</p>
 
 <h5>HDD Devices</h5>
 
@@ -2841,7 +2841,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Key Role: Persistent write buffer</li>
-	<li>Description: The OpLog is similar to a filesystem journal and is built to handle bursts of random writes, coalesce them, and then sequentially drain the data to the extent store.&nbsp; Upon a write, the OpLog is synchronously replicated to another n number of CVM’s OpLog before the write is acknowledged for data availability purposes.&nbsp; All CVM OpLogs partake in the replication and are dynamically chosen based upon load.&nbsp; The OpLog is stored on the SSD tier on the CVM to provide extremely fast write I/O performance, especially for random I/O workloads.&nbsp; For sequential workloads, the OpLog is bypassed and the writes go directly to the extent store.&nbsp; If data is currently sitting in the OpLog and has not been drained, all read requests will be directly fulfilled from the OpLog until they have been drained, where they would then be served by the extent store/content cache.&nbsp; For containers where fingerprinting (aka Dedupe) has been enabled, all write I/Os will be fingerprinted using a hashing scheme allowing them to be deduplicated based upon fingerprint in the content cache.</li>
+	<li>Description: The OpLog is similar to a filesystem journal and is built to handle bursts of random writes, coalesce them, and then sequentially drain the data to the extent store.&nbsp; Upon a write, the OpLog is synchronously replicated to another n number of CVM’s OpLog before the write is acknowledged for data availability purposes.&nbsp; All CVM OpLogs partake in the replication and are dynamically chosen based upon load.&nbsp; The OpLog is stored on the SSD tier on the CVM to provide extremely fast write I/O performance, especially for random I/O workloads.&nbsp; For sequential workloads, the OpLog is bypassed and the writes go directly to the extent store.&nbsp; If data is currently sitting in the OpLog and has not been drained, all read requests will be directly fulfilled from the OpLog until they have been drained, where they would then be served by the extent store/unified cache.&nbsp; For containers where fingerprinting (aka Dedupe) has been enabled, all write I/Os will be fingerprinted using a hashing scheme allowing them to be deduplicated based upon fingerprint in the unified cache.</li>
 </ul>
 
 <h5>Extent Store</h5>
@@ -2851,17 +2851,17 @@ storage, compute and virtualization platform.
 	<li>Description: The Extent Store is the persistent bulk storage of DSF and spans SSD and HDD and is extensible to facilitate additional devices/tiers.&nbsp; Data entering the extent store is either being A) drained from the OpLog or B) is sequential in nature and has bypassed the OpLog directly.&nbsp; Nutanix ILM will determine tier placement dynamically based upon I/O patterns and will move data between tiers.</li>
 </ul>
 
-<h5>Content Cache</h5>
+<h5>Unified Cache</h5>
 
 <ul>
 	<li>Key Role: Dynamic read cache</li>
-	<li>Description: The Content Cache is a deduplicated read cache which spans both the CVM’s memory and SSD.&nbsp; Upon a read request of data not in the cache (or based upon a particular fingerprint), the data will be placed into the single-touch pool of the Content Cache which completely sits in memory, where it will use LRU until it is evicted from the cache.&nbsp; Any subsequent read request will “move” (no data is actually moved, just cache metadata) the data into the memory portion of the multi-touch pool, which consists of both memory and SSD.&nbsp; From here there are two LRU cycles, one for the in-memory piece upon which eviction will move the data to the SSD section of the multi-touch pool where a new LRU counter is assigned.&nbsp; Any read request for data in the multi-touch pool will cause the data to go to the peak of the multi-touch pool where it will be given a new LRU counter.</li>
+	<li>Description: The Unified Cache is a deduplicated read cache which spans both the CVM’s memory and SSD.&nbsp; Upon a read request of data not in the cache (or based upon a particular fingerprint), the data will be placed into the single-touch pool of the Unified Cache which completely sits in memory, where it will use LRU until it is evicted from the cache.&nbsp; Any subsequent read request will “move” (no data is actually moved, just cache metadata) the data into the memory portion of the multi-touch pool, which consists of both memory and SSD.&nbsp; From here there are two LRU cycles, one for the in-memory piece upon which eviction will move the data to the SSD section of the multi-touch pool where a new LRU counter is assigned.&nbsp; Any read request for data in the multi-touch pool will cause the data to go to the peak of the multi-touch pool where it will be given a new LRU counter.</li>
 </ul>
 
-<p>The following figure shows a high-level overview of the Content Cache:</p>
+<p>The following figure shows a high-level overview of the Unified Cache:</p>
 
-<figure id="id-RBtnUjHQT1"><img alt="DSF Content Cache" class="iimagesv2content_cachepng" src="imagesv2/content_cache.png">
-<figcaption><span class="label">Figure 11-6. </span>DSF Content Cache</figcaption>
+<figure id="id-RBtnUjHQT1"><img alt="DSF Unified Cache" class="iimagesv2content_cachepng" src="imagesv2/content_cache.png">
+<figcaption><span class="label">Figure 11-6. </span>DSF Unified Cache</figcaption>
 </figure>
 
 <div data-type="note" class="note" id="cache-granularity-and-logic-21igh5H0T3"><h6>Note</h6>
@@ -2874,7 +2874,7 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Key Role: In-memory read cache</li>
-	<li>Description: The Extent Cache is an in-memory read cache that is completely in the CVM’s memory.&nbsp; This will store non-fingerprinted extents for containers where fingerprinting and deduplication are disabled.&nbsp; As of version 3.5, this is separate from the Content Cache, however these are merged in 4.5 with the unified cache.</li>
+	<li>Description: The Extent Cache is an in-memory read cache that is completely in the CVM’s memory.&nbsp; This will store non-fingerprinted extents for containers where fingerprinting and deduplication are disabled.&nbsp; As of version 3.5, this is separate from the Unified Cache, however these are merged in 4.5 with the unified cache.</li>
 </ul>
 </section>
 
@@ -3233,7 +3233,7 @@ storage, compute and virtualization platform.
 
 <div class="video-container"><iframe allowfullscreen frameborder="0" src="https://www.youtube.com/embed//C-rp13cDpNw"></iframe></div>
 
-<p>The Elastic Dedupe Engine is a software-based feature of DSF which allows for data deduplication in the capacity (HDD) and performance (SSD/Memory) tiers.&nbsp; Streams of data are fingerprinted during ingest using a SHA-1 hash at a 16K granularity.&nbsp; This fingerprint is only done on data ingest and is then stored persistently as part of the written block’s metadata.&nbsp; NOTE: Initially a 4K granularity was used for fingerprinting, however after testing 16K offered the best blend of deduplication with reduced metadata overhead.&nbsp; Deduplicated data is pulled into the content cache at a 4K granularity.</p>
+<p>The Elastic Dedupe Engine is a software-based feature of DSF which allows for data deduplication in the capacity (HDD) and performance (SSD/Memory) tiers.&nbsp; Streams of data are fingerprinted during ingest using a SHA-1 hash at a 16K granularity.&nbsp; This fingerprint is only done on data ingest and is then stored persistently as part of the written block’s metadata.&nbsp; NOTE: Initially a 4K granularity was used for fingerprinting, however after testing 16K offered the best blend of deduplication with reduced metadata overhead.&nbsp; Deduplicated data is pulled into the unified cache at a 4K granularity.</p>
 
 <p>Contrary to traditional approaches which utilize background scans requiring the data to be re-read, Nutanix performs the fingerprint inline on ingest.&nbsp; For duplicate data that can be deduplicated in the capacity tier, the data does not need to be scanned or re-read, essentially duplicate copies can be removed.</p>
 
@@ -3244,7 +3244,7 @@ storage, compute and virtualization platform.
 <div data-type="note" class="note" id="pro-tip-N8iNFMIYT8"><h6>Note</h6>
 <h5>Pro tip</h5>
 
-<p>Use performance tier deduplication on your base images (you can manually fingerprint them using vdisk_manipulator) to take advantage of the content cache.</p>
+<p>Use performance tier deduplication on your base images (you can manually fingerprint them using vdisk_manipulator) to take advantage of the unified cache.</p>
 
 <p>Use capacity tier deduplication for P2V / V2V,&nbsp;when using Hyper-V since ODX does a full data copy, or when doing cross-container clones (not usually recommended as a single container is preferred).</p>
 
@@ -3257,7 +3257,7 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 11-16. </span>Elastic Dedupe Engine - Scale</figcaption>
 </figure>
 
-<p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Content Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Content Cache and pool structure, please refer to the ‘Content Cache’ sub-section in the I/O path overview.</p>
+<p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Unified Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Unified Cache and pool structure, please refer to the 'Unified Cache' sub-section in the I/O path overview.</p>
 
 <div data-type="note" class="note" id="fingerprinted-vdisk-offsets-l9ijcWIATe"><h6>Note</h6>
 <h5>Fingerprinted vDisk Offsets</h5>
@@ -4925,12 +4925,12 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <figcaption><span class="label">Figure 14-2. </span>2009 Page - Stargate Overview - Queues</figcaption>
 </figure>
 
-<p>The second portion is the content cache details which shows information on cache sizes and hit rates.</p>
+<p>The second portion is the unified cache details which shows information on cache sizes and hit rates.</p>
 
-<p>The figure shows the content cache portion of the overview section:</p>
+<p>The figure shows the unified cache portion of the overview section:</p>
 
-<figure id="id-rQtAcNCJHDF9"><img alt="2009 Page - Stargate Overview - Content Cache" class="iimagesv22009pagesstargate_contentcache2png" src="imagesv2/2009Pages/stargate_contentCache2.png">
-<figcaption><span class="label">Figure 14-3. </span>2009 Page - Stargate Overview - Content Cache</figcaption>
+<figure id="id-rQtAcNCJHDF9"><img alt="2009 Page - Stargate Overview - Unified Cache" class="iimagesv22009pagesstargate_contentcache2png" src="imagesv2/2009Pages/stargate_contentCache2.png">
+<figcaption><span class="label">Figure 14-3. </span>2009 Page - Stargate Overview - Unified Cache</figcaption>
 </figure>
 
 <div data-type="note" class="note" id="pro-tip-vAiPIXC9HxF5"><h6>Note</h6>
