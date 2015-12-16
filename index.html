@@ -3879,15 +3879,15 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p># Create VG</p>
 
-<p>vg.create &lt;VG Name&gt;</p>
+<p class="codetext">vg.create &lt;VG Name&gt;</p>
 
 <p># Add disk(s) to VG</p>
 
-<p>Vg.disk_create &lt;VG Name&gt; container=&lt;CTR Name&gt; create_size=&lt;Disk size, e.g. 500G&gt;</p>
+<p class="codetext">Vg.disk_create &lt;VG Name&gt; container=&lt;CTR Name&gt; create_size=&lt;Disk size, e.g. 500G&gt;</p>
 
 <p># Attach initiator IQN to VG</p>
 
-<p>Vg.attach_external &lt;VG Name&gt; &lt;Initiator IQN&gt;</p>
+<p class="codetext">Vg.attach_external &lt;VG Name&gt; &lt;Initiator IQN&gt;</p>
 </div>
 
 <p>The following figure shows an example with a VM running on Nutanix, with its OS hosted on the normal Nutanix storage, mounting the volumes directly:</p>
