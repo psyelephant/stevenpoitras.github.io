@@ -2868,6 +2868,14 @@ storage, compute and virtualization platform.
 <h5>Cache Granularity and Logic</h5>
 
 <p>Data is brought into the cache at a 4K granularity and all caching is done real-time (e.g. no delay or batch process data to pull data into the cache).</p>
+
+<p>
+  Each CVM has its own local cache that it manages for the vDisk(s) it is hosting (e.g. VM(s) running on the same node).  When a vDisk is cloned (e.g. new clones, snapshots, etc.) each new vDisk has it's own block map and the orignial vDisk is marked as immutable.  This allows us to ensure that each CVM can have it's own cached copy of the base vDisk with cache coherency.
+</p>
+
+<p>
+  In the event of an overwrite, that will be re-directed to a new extent in the VM's own block map.  This ensures that there will not be any cache corruption.
+</p>
 </div>
 
 <h5>Extent Cache</h5>
