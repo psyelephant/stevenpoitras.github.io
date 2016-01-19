@@ -2733,6 +2733,10 @@ storage, compute and virtualization platform.
 
 <p>NOTE: The sizing for OpLog is done dynamically as of release 4.0.1 which will allow the extent store portion to grow dynamically.&nbsp; The values used are assuming a completely utilized OpLog.&nbsp; Graphics and proportions aren’t drawn to scale.&nbsp; When evaluating the Remaining GiB capacities, do so from the top down.&nbsp; For example, the Remaining GiB to be used for the OpLog calculation would be after Nutanix Home and Cassandra have been subtracted from the formatted SSD capacity.</p>
 
+<p>
+  Nutanix Home is mirrored across the first two SSDs to ensure availability.  Cassandra is on the first SSD by default, and if that SSD fails the CVM will be restarted and Cassandra storage will then be on the 2nd.
+</p>
+
 <p>Most models ship with 1 or 2 SSDs, however the same construct applies for models shipping with more SSD devices. For example, if we apply this to an example 3060 or 6060 node which has 2 x 400GB SSDs, this would give us 100GiB of OpLog, 40GiB of Unified Cache, and ~440GiB of Extent Store SSD capacity per node.</p>
 
 <h5>HDD Devices</h5>
