@@ -2861,7 +2861,11 @@ storage, compute and virtualization platform.
 <div data-type="note" class="note"><h6>Note</h6>
 <h5>Sequential Write Characterization</h5>
 
-<p>Write IO is deemed as sequential when there is more than 1.5MB of outstanding write IO to a vDisk (as of 4.6).  IOs meeting this will bypass the OpLog and go directly to the Extent Store since they are already large chunks of aligned data and don't benefit from coalescing.  This is controlled by the following gflag: vdisk_distributed_oplog_skip_min_outstanding_write_bytes.</p>
+<p>Write IO is deemed as sequential when there is more than 1.5MB of outstanding write IO to a vDisk (as of 4.6).  IOs meeting this will bypass the OpLog and go directly to the Extent Store since they are already large chunks of aligned data and won't benefit from coalescing.</p>
+
+<p>
+  This is controlled by the following Gflag: vdisk_distributed_oplog_skip_min_outstanding_write_bytes.
+</p>
 
 <p>
   All other IOs, including those which can be large (e.g. &gt;64K) will still be handled by the OpLog.
