@@ -2858,6 +2858,16 @@ storage, compute and virtualization platform.
 	<li>Description: The Extent Store is the persistent bulk storage of DSF and spans SSD and HDD and is extensible to facilitate additional devices/tiers.&nbsp; Data entering the extent store is either being A) drained from the OpLog or B) is sequential in nature and has bypassed the OpLog directly.&nbsp; Nutanix ILM will determine tier placement dynamically based upon I/O patterns and will move data between tiers.</li>
 </ul>
 
+<div data-type="note" class="note"><h6>Note</h6>
+<h5>Sequential Write Characterization</h5>
+
+<p>Write IO is deemed as sequential when there is more than 1.5MB of outstanding write IO to a vDisk (as of 4.6).  IOs meeting this will bypass the OpLog and go directly to the Extent Store since they are already large chunks of aligned data and don't benefit from coalescing.  This is controlled by the following gflag: vdisk_distributed_oplog_skip_min_outstanding_write_bytes.</p>
+
+<p>
+  All other IOs, including those which can be large (e.g. &gt;64K) will still be handled by the OpLog.
+</p>
+</div>
+
 <h5>Unified Cache</h5>
 
 <ul>
