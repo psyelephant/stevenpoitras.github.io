@@ -3734,7 +3734,7 @@ storage, compute and virtualization platform.
 <p>During a replication, the Cerebro Master will figure out which data needs to be replicated, and delegate the replication tasks to the Cerebro Slaves which will then tell Stargate which data to replicate and to where.</p>
 
 <p>
-  Replicated data is protected at multiple layers throughout the process.  Extent reads on the source are checksummed to ensure consistency for source data (similar to how any DSF read occurs) and the new extent(s) are  checksummed at the target (similar to any DSF write).  TCP provides consistency on the network layer.
+  Replicated data is protected at multiple layers throughout the process.  Extent reads on the source are checksummed to ensure consistency for source data (similar to how any DSF read occurs) and the new extent(s) are checksummed at the target (similar to any DSF write).  TCP provides consistency on the network layer.
 </p>
 
 <p>The following figure shows a representation of this architecture:</p>
