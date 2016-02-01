@@ -2848,8 +2848,23 @@ storage, compute and virtualization platform.
 
 <ul>
 	<li>Key Role: Persistent write buffer</li>
-	<li>Description: The OpLog is similar to a filesystem journal and is built to handle bursts of random writes, coalesce them, and then sequentially drain the data to the extent store.&nbsp; Upon a write, the OpLog is synchronously replicated to another n number of CVM’s OpLog before the write is acknowledged for data availability purposes.&nbsp; All CVM OpLogs partake in the replication and are dynamically chosen based upon load.&nbsp; The OpLog is stored on the SSD tier on the CVM to provide extremely fast write I/O performance, especially for random I/O workloads.&nbsp; For sequential workloads, the OpLog is bypassed and the writes go directly to the extent store.&nbsp; If data is currently sitting in the OpLog and has not been drained, all read requests will be directly fulfilled from the OpLog until they have been drained, where they would then be served by the extent store/unified cache.&nbsp; For containers where fingerprinting (aka Dedupe) has been enabled, all write I/Os will be fingerprinted using a hashing scheme allowing them to be deduplicated based upon fingerprint in the unified cache.</li>
+	<li>Description: The OpLog is similar to a filesystem journal and is built as a staging area to handle bursts of random writes, coalesce them, and then sequentially drain the data to the extent store.&nbsp; Upon a write, the OpLog is synchronously replicated to another n number of CVM’s OpLog before the write is acknowledged for data availability purposes.&nbsp; All CVM OpLogs partake in the replication and are dynamically chosen based upon load.&nbsp; The OpLog is stored on the SSD tier on the CVM to provide extremely fast write I/O performance, especially for random I/O workloads.&nbsp; For sequential workloads, the OpLog is bypassed and the writes go directly to the extent store.&nbsp; If data is currently sitting in the OpLog and has not been drained, all read requests will be directly fulfilled from the OpLog until they have been drained, where they would then be served by the extent store/unified cache.&nbsp; For containers where fingerprinting (aka Dedupe) has been enabled, all write I/Os will be fingerprinted using a hashing scheme allowing them to be deduplicated based upon fingerprint in the unified cache.</li>
 </ul>
+
+<div data-type="note" class="note"><h6>Note</h6>
+<h5>Per-vDisk OpLog Sizing</h5>
+
+<p>
+  The OpLog is a shared resource, however allocation is done on a per-vDisk basis to ensure each vDisk has an equal opportunity to leverage.  This is implemented through a per-vDisk OpLog limit (max amount of data per-vDisk in the OpLog).  VMs with multiple vDisk(s) will be able to leverage the per-vDisk limit times the number of disk(s).
+</p>
+
+<p>The per-vDisk OpLog limit is currently 6GB (as of 4.6), up from 2GB in prior versions.</p>
+
+<p>
+  This is controlled by the following Gflag: vdisk_distributed_oplog_max_dirty_MB.
+</p>
+
+</div>
 
 <h5>Extent Store</h5>
 
