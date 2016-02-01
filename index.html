@@ -5092,7 +5092,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <div data-type="note" class="note" id="pro-tip-xkiVsosqHzF5"><h6>Note</h6>
 <h5>Pro tip</h5>
 
-<p>Random or smaller I/Os (&lt;64K) will be written to the Oplog. &nbsp;Larger or sequential I/Os will bypass the Oplog and be directly written to the Extent Store (Estore).</p>
+<p>Random I/Os will be written to the Oplog, sequential I/Os will bypass the Oplog and be directly written to the Extent Store (Estore).</p>
 </div>
 
 <p>Another interesting data point is what data is being up-migrated from HDD to SSD via ILM. &nbsp;The 'Extent Group Up-Migration' table shows data that has been up-migrated in the last 300, 3,600 and 86,400 seconds.</p>
