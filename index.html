@@ -4033,7 +4033,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <h5>Thresholds for Data Migration</h5>
 
 <p>
-  Cache locality occurs in real time and will be determined based upon vDisk ownership.  When a vDisk / VM moves from one node to another the "ownership" of those vDisk(s) will transfer to the now local CVM.  Once the ownership has transferred the data can be cached locally in the Unified Cache.  In the interim the cache will be wherever the ownership is held (the now remote host).  Ownership transfer is a very quick operation and can take seconds or minutes.
+  Cache locality occurs in real time and will be determined based upon vDisk ownership.  When a vDisk / VM moves from one node to another the "ownership" of those vDisk(s) will transfer to the now local CVM.  Once the ownership has transferred the data can be cached locally in the Unified Cache.  In the interim the cache will be wherever the ownership is held (the now remote host).  The previously hosting Stargate will relinquish the vDisk token when it sees remote reads for 300+ seconds at which it will then be taken by the local Stargate.  Cache coherence is enforced as ownership is required to cache the vDisk data.
 </p>
 
 <p>Extent locality is a sampled operation and an extent group will be migrated when the following occurs:
