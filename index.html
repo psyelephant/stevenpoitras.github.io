@@ -4198,6 +4198,35 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figure id="id-89t5TmSAHZ"><img alt="Open vSwitch Network Overview" class="iimagesv2acrop_netpng" src="imagesv2/acrop_net.png">
 <figcaption><span class="label">Figure 13-3. </span>Open vSwitch Network Overview</figcaption>
 </figure>
+
+<h4>VM NIC Types</h4>
+<p>
+  AHV supports the following interface types:
+</p>
+<ul>
+  <li>
+    Access (default)
+  </li>
+  <li>
+    Trunk (4.6 and above)
+  </li>
+</ul>
+<p>
+  By default VM nics will be created as Access interfaces, however it is possible to expose a trunked interface.
+</p>
+
+<p>
+  A trunked interface can be added with the following command:
+</p>
+
+<p class="codetext">vm.nic_create &lt;VM_NAME&gt; vlan_mode=kTrunked trunked_networks=&lt;ALLOWED_VLANS&gt; network=&lt;NATIVE_VLAN&gt;</p>
+
+<p>
+  Example:
+</p>
+
+<p class="codetext">vm.nic_create fooVM vlan_mode=kTrunked trunked_networks=10,20,30 network=vlan.10</p>
+
 </section>
 
 <section data-type="sect1" id="how-it-works-4aIRHwHg">
@@ -5186,7 +5215,6 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <p>The table shows some of the high-level activities performed by each job:</p>
 
 <table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
-	<caption><span class="label">Table 0. </span>Curator Scan Tasks</caption>
 	<thead>
 		<tr>
 			<th scope="col"><strong>Activity</strong></th>
