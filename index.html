@@ -4116,6 +4116,82 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>Metrics and time series data is stored locally for 90 days in Prism Element.  For Prism Central and Insights, data can be stored indefinitely (assuming capacity is available).</p>
 </div>
 </section>
+
+<section data-type="sect1">
+<h3>File Services</h3>
+<p>The File Services feature allows users to leverage the Nutanix platform as a highly available filer.  This allows for a single namespace where users can store home directories and files.</p>
+
+<p>This feature is composed of a few high-level constructs:</p>
+
+<ul>
+  <li>
+    File Server
+    <ul>
+      <li>
+        High-level namespace.  Each file srever will have its own set of File Services VMs (FSVM) which are deployed
+      </li>
+    </ul>
+  </li>
+  <li>
+    Share
+    <ul>
+      <li>
+        Share exposed to users.  A file server can have multiple shares (e.g. departmental shares, etc.)
+      </li>
+    </ul>
+  </li>
+  <li>
+    Folder
+    <ul>
+      <li>
+        Folders for file storage.  Folders are sharded across FSVMs
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  The figure shows the high-level mapping of the constructs:
+</p>
+<figure><img alt="File Services Mapping" src="imagesv2/fs_1.png">
+<figcaption><span class="label">Figure. </span>File Services Mapping</figcaption>
+</figure>
+
+<p>
+  The file services feature follows the same methdology for distribution as the Nutanix platform to ensure availability and scale.  A minimum of 3 FSVMs will be deployed as part of the File Server deployment.
+</p>
+
+<p>
+  The figure shows a detailed view of the components:
+</p>
+<figure><img alt="File Services Detail" src="imagesv2/fs_2.png">
+<figcaption><span class="label">Figure. </span>File Services Detail</figcaption>
+</figure>
+
+<p>
+  As of 4.6 SMB2.1 is the only supported protocol for client communication with file services.
+</p>
+
+<p>
+  Each FSVM leverages the Acropolis Volumes API for its data storage which is accessed via in-guest iSCSI.  This allows any FSVM to connect to any iSCSI target in the event of a FSVM outage.
+</p>
+
+<p>
+  The figure shows a high-level overview of the FSVM storage:
+</p>
+<figure><img alt="FSVM Storage" src="imagesv2/fs_3.png">
+<figcaption><span class="label">Figure. </span>FSVM Storage</figcaption>
+</figure>
+
+<p>
+  To provide for path availability DM-MPIO is leverage within the FSVM:
+</p>
+<figure><img alt="FSVM MPIO" src="imagesv2/fs_4.png">
+<figcaption><span class="label">Figure. </span>FSVM MPIO</figcaption>
+</figure>
+
+
+</section>
 </section>
 
 <section data-type="chapter" id="application-mobility-fabric-coming-soon-3jIvS1">
@@ -4172,8 +4248,8 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>Communication between Acropolis and KVM occurs via Libvirt.&nbsp;</p>
 
-<div data-type="note" class="note" id="processor-generation-compatability-AmibF4u9Hx"><h6>Note</h6>
-<h5>Processor generation compatability</h5>
+<div data-type="note" class="note" id="processor-generation-compatibility-AmibF4u9Hx"><h6>Note</h6>
+<h5>Processor generation compatibility</h5>
 
 <p>Similar to VMware's Enhanced vMotion Capability (EVC) which allows VMs to move between different processor generations; Acropolis Hypervisor will determine the lowest processor generation in the cluster and constrain all QEMU domains to that level.  This allows mixing of processor generations within an AHV cluster and ensures the ability to live migrate between hosts.</p>
 </div>
