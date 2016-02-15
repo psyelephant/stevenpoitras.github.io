@@ -2251,7 +2251,7 @@ ovmctl --update controller --name &lt;OS_CONTROLLER_NAME&gt; --auth_nova_passwor
 </p>
 
 <p class="codetext">
-  # enter keystonerc_admin
+  # enter keystonerc_admin <br />
   source ./keystonerc_admin
 </p>
 
@@ -2260,7 +2260,7 @@ ovmctl --update controller --name &lt;OS_CONTROLLER_NAME&gt; --auth_nova_passwor
 </p>
 
 <p class="codetext">
- # Find old Glance endpoint id (port 9292)
+ # Find old Glance endpoint id (port 9292) <br>
  keystone endpoint-list
  # Remove old keystone endpoint for Glance <br>
  keystone endpoint-delete &lt;GLANCE_ENDPOINT_ID&gt;
@@ -2290,7 +2290,7 @@ ovmctl --update controller --name &lt;OS_CONTROLLER_NAME&gt; --auth_nova_passwor
 </p>
 
 <p class="codetext">
-# Find old Neutron endpoint id (port 9696)
+# Find old Neutron endpoint id (port 9696) <br />
 keystone endpoint-list
 # Remove old keystone endpoint for Neutron <br>
 keystone endpoint-delete &lt;NEUTRON_ENDPOINT_ID&gt;
@@ -4283,7 +4283,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h4>VM NIC Types</h4>
 <p>
-  AHV supports the following interface types:
+  AHV supports the following VM network interface types:
 </p>
 <ul>
   <li>
@@ -4294,7 +4294,7 @@ This should only be used for non-production scenarios and the cluster IPs should
   </li>
 </ul>
 <p>
-  By default VM nics will be created as Access interfaces, however it is possible to expose a trunked interface.
+  By default VM nics will be created as Access interfaces (similar to what you'd see with a VM nic on a port group), however it is possible to expose a trunked interface up to the VM's OS.
 </p>
 
 <p>
