@@ -4168,9 +4168,23 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure. </span>File Services Detail</figcaption>
 </figure>
 
+
+<div data-type="note" class="note"><h6>Note</h6>
+<h5>Supported Protocols</h5>
+
+<p>As of 4.6, SMB2.1 is the only supported protocol for client communication with file services.</p>
+</div>
+
 <p>
-  As of 4.6 SMB2.1 is the only supported protocol for client communication with file services.
+  The File Services VMs run as agent VMs on the platform and deployed in the background as part of the configuration process.
 </p>
+
+<p>
+  The figure shows a detailed view of FSVMs on the Acropolis platform:
+</p>
+<figure><img alt="File Services Detail" src="imagesv2/fs_2b.png">
+<figcaption><span class="label">Figure. </span>FSVM Deployment Arch</figcaption>
+</figure>
 
 <p>
   Each FSVM leverages the Acropolis Volumes API for its data storage which is accessed via in-guest iSCSI.  This allows any FSVM to connect to any iSCSI target in the event of a FSVM outage.
@@ -4184,7 +4198,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>
-  To provide for path availability DM-MPIO is leverage within the FSVM:
+  To provide for path availability DM-MPIO is leveraged within the FSVM:
 </p>
 <figure><img alt="FSVM MPIO" src="imagesv2/fs_4.png">
 <figcaption><span class="label">Figure. </span>FSVM MPIO</figcaption>
