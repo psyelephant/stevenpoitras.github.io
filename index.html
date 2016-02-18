@@ -4172,7 +4172,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <div data-type="note" class="note"><h6>Note</h6>
 <h5>Supported Protocols</h5>
 
-<p>As of 4.6, SMB2.1 is the only supported protocol for client communication with file services.</p>
+<p>As of 4.6, SMB (up to version 2.1) is the only supported protocol for client communication with file services.</p>
 </div>
 
 <p>
@@ -4198,11 +4198,22 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>
-  To provide for path availability DM-MPIO is leveraged within the FSVM:
+  To provide for path availability DM-MPIO is leveraged within the FSVM which will have the active path set to the local CVM by default:
 </p>
-<figure><img alt="FSVM MPIO" src="imagesv2/fs_4.png">
+<figure><img alt="FSVM MPIO" src="imagesv2/fs_4a.png">
 <figcaption><span class="label">Figure. </span>FSVM MPIO</figcaption>
 </figure>
+
+<p>
+  In the event where the local CVM becomes unavailable (e.g. active path down), DM-MPIO will activate one of the failover paths to a remote CVM which will then takeover IO.
+</p>
+<figure><img alt="FSVM MPIO Failover" src="imagesv2/fs_4b.png">
+<figcaption><span class="label">Figure. </span>FSVM MPIO Failover</figcaption>
+</figure>
+
+<p>
+  When the local CVM comes back and is healthy it will be marked as the active path to provide for local IO.
+</p>
 
 <p>
   In a normal operating environment each FSVM will be communicating with its own VG for data storage with passive connections to the others.  Each FSVM will have an IP which clients use to communiate with the FSVM as part of the DFS referral process.  Clients do not need to know each individual FSVM's IP as the DFS referral process will connect them to the correct IP hosting their folder(s).
@@ -4225,7 +4236,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>
-  When the failed FSVM comes back and is stable, it will re-take it's IP and VG.
+  When the failed FSVM comes back and is stable, it will re-take it's IP and VG and continue to serve client IO.
 </p>
 
 </section>
