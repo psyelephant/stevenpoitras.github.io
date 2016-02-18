@@ -3878,7 +3878,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </section>
 
 <section data-type="sect1" id="volumes-api-wrIRHzTv">
-<h3>Volumes API (Volume Groups)</h3>
+<h3>Volumes API</h3>
 
 <p>The Acropolis Volumes API exposes back-end DSF storage to external consumers (guest OS, physical hosts, containers, etc.) via iSCSI (today).</p>
 
@@ -4223,6 +4223,10 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figure><img alt="FSVM Failure Scenario" src="imagesv2/fs_6.png">
 <figcaption><span class="label">Figure. </span>FSVM Failure Scenario</figcaption>
 </figure>
+
+<p>
+  When the failed FSVM comes back and is stable, it will re-take it's IP and VG.
+</p>
 
 </section>
 </section>
