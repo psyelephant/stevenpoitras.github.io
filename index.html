@@ -4176,7 +4176,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </div>
 
 <p>
-  The File Services VMs run as agent VMs on the platform and deployed in the background as part of the configuration process.
+  The File Services VMs run as agent VMs on the platform and are transparently deployed as part of the configuration process.
 </p>
 
 <p>
@@ -4204,6 +4204,25 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure. </span>FSVM MPIO</figcaption>
 </figure>
 
+<p>
+  In a normal operating environment each FSVM will be communicating with its own VG for data storage with passive connections to the others.  Each FSVM will have an IP which clients use to communiate with the FSVM as part of the DFS referral process.  Clients do not need to know each individual FSVM's IP as the DFS referral process will connect them to the correct IP hosting their folder(s).
+</p>
+
+<figure><img alt="FSVM Normal Operation" src="imagesv2/fs_5.png">
+<figcaption><span class="label">Figure. </span>FSVM Normal Operation</figcaption>
+</figure>
+
+<p>
+  In the event of a FSVM "failure" (e.g. maintenance, power off, etc.) the VG and IP of the failed FSVM will be taken over by another FSVM to ensure client availability.
+</p>
+
+<p>
+  The figure shows the transfer of the failed FSVM's IP and VG:
+</p>
+
+<figure><img alt="FSVM Failure Scenario" src="imagesv2/fs_6.png">
+<figcaption><span class="label">Figure. </span>FSVM Failure Scenario</figcaption>
+</figure>
 
 </section>
 </section>
