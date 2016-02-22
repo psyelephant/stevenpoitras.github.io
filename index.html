@@ -4245,6 +4245,35 @@ This should only be used for non-production scenarios and the cluster IPs should
 </div>
 
 <p>
+  The File Services feature is fully integrated into Microsoft Active Directory (AD) and DNS.  This allows all of the secure and established authentication and authorization capabilities of AD to be leveraged.  All share permissions, user and group management is done using the traditional Microsoft MMC.
+</p>
+
+<p>
+  As part of the installation process the following AD / DNS objects will be created:
+</p>
+
+<ul>
+  <li>
+    AD Computer Account for File Server
+  </li>
+  <li>
+    AD Service Principal Name (SPN) for File Server and each FSVM
+  </li>
+  <li>
+    DNS entry for File Server pointing to all FSVM(s)
+  </li>
+  <li>
+    DNS entry for each FSVM
+  </li>
+</ul>
+
+<div data-type="note" class="note"><h6>Note</h6>
+<h5>AD Privaleges for File Server Creation</h5>
+
+<p>A user account with the domain admin or equivalent privaleges must be used to deploy the File Service feature as AD and DNS objects are created.</p>
+</div>
+
+<p>
   The File Services VMs run as agent VMs on the platform and are transparently deployed as part of the configuration process.
 </p>
 
