@@ -4116,6 +4116,75 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>Metrics and time series data is stored locally for 90 days in Prism Element.  For Prism Central and Insights, data can be stored indefinitely (assuming capacity is available).</p>
 </div>
 </section>
+<section data-type="sect1">
+<h3>Nutanix Guest Tools (NGT)</h3>
+<p>
+  Nutanix Guest Tools (NGT) is a software based in-guest agent framework which enables advanced VM management functionality through the Nutanix Platform.
+</p>
+
+<p>
+  This feature is composed of a few high-level components:
+</p>
+
+<ul>
+  <li>
+    Guest Tools Service
+    <ul>
+      <li>
+        Gateway between the Acropolis and Nutanix services and the Guest Agent.  Distirbuted across CVMs within the cluster with an elected NGT Master which runs on the current Prism Leader (hosting cluster vIP)
+      </li>
+    </ul>
+  </li>
+  <li>
+    Guest Agent Service
+    <ul>
+      <li>
+        Service deployed in the VM's OS as part of the NGT installation process.  Handles any local functions (e.g. VSS, Self-service Restore (SSR), etc.) and interacts with the Guest Tools Service.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  The figure shows the high-level mapping of the components:
+</p>
+<figure><img alt="Guest Tools Mapping" src="imagesv2/ngt_1.png">
+<figcaption><span class="label">Figure. </span>Guest Tools Mapping</figcaption>
+</figure>
+
+<p>
+  The Guest Tools Service is composed of two main roles:
+</p>
+
+<ul>
+  <li>
+    NGT Master
+  <ul>
+    <li>
+      Handles requests coming from NGT Proxy and interfaces with Acropolis components.  A single NGT Master is dynamically elected per cluster, in the event the current master fails a new one will be elected.  The service listens internally on port 2073.
+    </li>
+  </ul>
+  </li>
+  <li>
+    NGT Proxy
+  <ul>
+    <li>
+      Runs on every CVM and will forward requests to the NGT Master to perform the desired activity.  The current VM activing as the Prism Leader (hosting the VIP) will be the active CVM handling communication from the Guest Agent. Listens externally on port 2074.
+    </li>
+  </ul>
+  </li>
+</ul>
+
+<p>
+  The figure shows the high-level mapping of the roles:
+</p>
+<figure><img alt="Guest Tools Service" src="imagesv2/ngt_2.png">
+<figcaption><span class="label">Figure. </span>Guest Tools Service</figcaption>
+</figure>
+
+
+
+</section>
 
 <section data-type="sect1">
 <h3>File Services</h3>
@@ -4240,6 +4309,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 </section>
+<!--END of Acroplis DSF Section -->
 </section>
 
 <section data-type="chapter" id="application-mobility-fabric-coming-soon-3jIvS1">
