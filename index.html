@@ -4123,7 +4123,29 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <p>
-  This feature is composed of a few high-level components:
+  The NGT installer contains the following components:
+</p>
+
+<ul>
+  <li>
+    Guest Agent Service
+  </li>
+  <li>
+    Self-service Restore (SSR) aka File-level Restore(FLR) CLI
+  </li>
+  <li>
+    VM Mobility Drivers (VirtIO drivers for AHV)
+  </li>
+  <li>
+    VSS Agent and Hardware Provider for Windows VMs
+  </li>
+  <li>
+    App Consistent snapshot support for Linux VMs (via scripts to quiesce)
+  </li>
+</ul>
+
+<p>
+  This framework is composed of a few high-level components:
 </p>
 
 <ul>
@@ -4136,10 +4158,10 @@ This should only be used for non-production scenarios and the cluster IPs should
     </ul>
   </li>
   <li>
-    Guest Agent Service
+    Guest Agent
     <ul>
       <li>
-        Service deployed in the VM's OS as part of the NGT installation process.  Handles any local functions (e.g. VSS, Self-service Restore (SSR), etc.) and interacts with the Guest Tools Service.
+        Agent and associated services deployed in the VM's OS as part of the NGT installation process.  Handles any local functions (e.g. VSS, Self-service Restore (SSR), etc.) and interacts with the Guest Tools Service.
       </li>
     </ul>
   </li>
@@ -4152,6 +4174,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure. </span>Guest Tools Mapping</figcaption>
 </figure>
 
+<h5>Guest Tools Service</h5>
 <p>
   The Guest Tools Service is composed of two main roles:
 </p>
@@ -4182,7 +4205,67 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure. </span>Guest Tools Service</figcaption>
 </figure>
 
+<h5>Guest Agent</h5>
+<p>
+  The Guest Agent is composed of the following high-level components as mentioned previously:
+</p>
 
+<figure><img alt="Guest Agent" src="imagesv2/ngt_3.png">
+<figcaption><span class="label">Figure. </span>Guest Agent</figcaption>
+</figure>
+
+<p>The Guest Agent Service communicates with Guest Tools Service via the Nutanix Cluster IP using SSL.  For deployments where the Nutanix cluster components and UVMs are on a different network (hopefully all), ensure that the following are possible:</p>
+<ul>
+  <li>
+    Ensure routed communication from UVM network(s) to Cluster IP OR
+  </li>
+  OR
+  <li>
+    Create a firewall rule (and associated NAT) from UVM network(s) allowing communication with the Cluster IP on port 2074 (preferred)
+  </li>
+</ul>
+
+<p>
+  The Guest Tools Service acts as a Certificate Authority (CA) and is responsible for generating certificate pairs for each NGT enabled UVM.  This certificate is embedded in to the ISO which is configured for the UVM and used as part of the NGT deployment process.  These certificates are installed inside the UVM as part of the installation process.
+</p>
+
+<div data-type="note" class="note"><h6>Note</h6>
+<h5>Bulk NGT Deployment</h5>
+
+<p>Rather than installing NGT on each individual VM, it is possible to embed and deploy NGT in your base image.</p>
+
+<p>
+  Follow the following process to leverage NGT inside a base image:
+</p>
+<ol>
+  <li>
+    Install NGT on master VM and ensure communication
+  </li>
+  <li>
+    Clone VMs from master VM
+  </li>
+  <li>
+    Mount NGT ISO on each clone (required to get new certificate pair)
+    <ul>
+      <li>
+        Example: ncli ngt mount vm-id=&lt;CLONE_ID&gt;
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Automated way coming soon :)
+      </li>
+    </ul>
+  </li>
+  <li>
+    Power on clones
+  </li>
+</ol>
+
+<p>
+  When the cloned VM is booted it will detect the new NGT ISO and copy relevant configuration files and new certificates and will start communicating with the Guest Tools Service.
+</p>
+</div>
 
 </section>
 
@@ -4237,7 +4320,6 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure. </span>File Services Detail</figcaption>
 </figure>
 
-
 <div data-type="note" class="note"><h6>Note</h6>
 <h5>Supported Protocols</h5>
 
@@ -4245,7 +4327,19 @@ This should only be used for non-production scenarios and the cluster IPs should
 </div>
 
 <p>
-  The File Services feature is fully integrated into Microsoft Active Directory (AD) and DNS.  This allows all of the secure and established authentication and authorization capabilities of AD to be leveraged.  All share permissions, user and group management is done using the traditional Microsoft MMC.
+  The File Services VMs run as agent VMs on the platform and are transparently deployed as part of the configuration process.
+</p>
+
+<p>
+  The figure shows a detailed view of FSVMs on the Acropolis platform:
+</p>
+<figure><img alt="File Services Detail" src="imagesv2/fs_2b.png">
+<figcaption><span class="label">Figure. </span>FSVM Deployment Arch</figcaption>
+</figure>
+
+<h5>Authentication and Authorization</h5>
+<p>
+  The File Services feature is fully integrated into Microsoft Active Directory (AD) and DNS.  This allows all of the secure and established authentication and authorization capabilities of AD to be leveraged.  All share permissions, user and group management is done using the traditional Windows MMC for file management.
 </p>
 
 <p>
@@ -4273,16 +4367,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <p>A user account with the domain admin or equivalent privaleges must be used to deploy the File Service feature as AD and DNS objects are created.</p>
 </div>
 
-<p>
-  The File Services VMs run as agent VMs on the platform and are transparently deployed as part of the configuration process.
-</p>
-
-<p>
-  The figure shows a detailed view of FSVMs on the Acropolis platform:
-</p>
-<figure><img alt="File Services Detail" src="imagesv2/fs_2b.png">
-<figcaption><span class="label">Figure. </span>FSVM Deployment Arch</figcaption>
-</figure>
+<h5>High-Availability (HA)</h5>
 
 <p>
   Each FSVM leverages the Acropolis Volumes API for its data storage which is accessed via in-guest iSCSI.  This allows any FSVM to connect to any iSCSI target in the event of a FSVM outage.
