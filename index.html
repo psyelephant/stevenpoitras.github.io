@@ -4123,6 +4123,10 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <p>
+  The solution is composed of the NGT installer which is installed on the VMs and the Guest Tools Framework which is used for coordination between the agent and Nutanix platform.
+</p>
+
+<p>
   The NGT installer contains the following components:
 </p>
 
@@ -4214,6 +4218,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <figcaption><span class="label">Figure. </span>Guest Agent</figcaption>
 </figure>
 
+<h5>Communication and Security</h5>
 <p>The Guest Agent Service communicates with Guest Tools Service via the Nutanix Cluster IP using SSL.  For deployments where the Nutanix cluster components and UVMs are on a different network (hopefully all), ensure that the following are possible:</p>
 <ul>
   <li>
