@@ -4135,7 +4135,7 @@ This should only be used for non-production scenarios and the cluster IPs should
     Guest Agent Service
   </li>
   <li>
-    Self-service Restore (SSR) aka File-level Restore(FLR) CLI
+    Self-service Restore (SSR) aka File-level Restore (FLR) CLI
   </li>
   <li>
     VM Mobility Drivers (VirtIO drivers for AHV)
@@ -4211,12 +4211,14 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <h5>Guest Agent</h5>
 <p>
-  The Guest Agent is composed of the following high-level components as mentioned previously:
+  The Guest Agent is composed of the following high-level components as mentioned prior:
 </p>
 
 <figure><img alt="Guest Agent" src="imagesv2/ngt_3.png">
 <figcaption><span class="label">Figure. </span>Guest Agent</figcaption>
 </figure>
+
+
 
 <h5>Communication and Security</h5>
 <p>The Guest Agent Service communicates with Guest Tools Service via the Nutanix Cluster IP using SSL.  For deployments where the Nutanix cluster components and UVMs are on a different network (hopefully all), ensure that the following are possible:</p>
@@ -4232,6 +4234,76 @@ This should only be used for non-production scenarios and the cluster IPs should
 
 <p>
   The Guest Tools Service acts as a Certificate Authority (CA) and is responsible for generating certificate pairs for each NGT enabled UVM.  This certificate is embedded in to the ISO which is configured for the UVM and used as part of the NGT deployment process.  These certificates are installed inside the UVM as part of the installation process.
+</p>
+
+<h5>NGT Agent Installation</h5>
+<p>
+  NGT Agent installation can be performed via Prism or CLI/Scripts (ncli/REST/PowerShell).
+</p>
+
+<p>
+  To install NGT via Prism, navigate to the 'VM' page, select a VM to install NGT on and click 'Enable NGT':
+</p>
+<figure><img alt="Enable NGT for VM" src="imagesv2/Prism/ngt/ngt_deploy_1.png">
+<figcaption><span class="label">Figure. </span>Enable NGT for VM</figcaption>
+</figure>
+
+<p>
+  Click 'Yes' at the prompt to continue with NGT installation:
+</p>
+<figure><img alt="Enable NGT Prompt" src="imagesv2/Prism/ngt/ngt_deploy_2.png">
+<figcaption><span class="label">Figure. </span>Enable NGT Prompt</figcaption>
+</figure>
+
+<p>
+  The VM must have a CD-ROM as the generated installer containing the software and unique certificate will be mounted there as shown:
+</p>
+<figure><img alt="Enable NGT - CD-ROM" src="imagesv2/Prism/ngt/ngt_deploy_3a.png">
+<figcaption><span class="label">Figure. </span>Enable NGT - CD-ROM</figcaption>
+</figure>
+
+<p>
+  The NGT installer CD-ROM will be visible in the OS:
+</p>
+<figure><img alt="Enable NGT - CD-ROM in OS" src="imagesv2/Prism/ngt/ngt_deploy_3b.png">
+<figcaption><span class="label">Figure. </span>Enable NGT - CD-ROM in OS</figcaption>
+</figure>
+
+<p>
+  Double click on the CD to begin the installation process.
+</p>
+
+<p>
+  Follow the prompts and accept the licenses to complete the installation:
+</p>
+<figure><img alt="Enable NGT - Installer" src="imagesv2/Prism/ngt/ngt_deploy_4.png">
+<figcaption><span class="label">Figure. </span>Enable NGT - Installer</figcaption>
+</figure>
+
+<p>
+  As part of the installation process Python, PyWin and the Nutanix Mobility (cross-hypervisor compatability) drivers will also be installed.
+</p>
+
+<p>
+  After the installation has been completed, a reboot will be required.
+</p>
+
+<p>
+  After successfull installation and reboot, you will see the following items visible in 'Programs and Features':
+</p>
+<figure><img alt="Enable NGT - Installed Programs" src="imagesv2/Prism/ngt/ngt_deploy_5a.png">
+<figcaption><span class="label">Figure. </span>Enable NGT - Installed Programs</figcaption>
+</figure>
+
+<p>
+  Services for the NGT Agent and VSS Hardware Provider will also be running:
+</p>
+<figure><img alt="Enable NGT - Services" src="imagesv2/Prism/ngt/ngt_deploy_5b.png">
+<figcaption><span class="label">Figure. </span>Enable NGT - Services</figcaption>
+</figure>
+
+<p>
+  NGT is now installed and can be leveraged.
 </p>
 
 <div data-type="note" class="note"><h6>Note</h6>
@@ -4253,7 +4325,7 @@ This should only be used for non-production scenarios and the cluster IPs should
     Mount NGT ISO on each clone (required to get new certificate pair)
     <ul>
       <li>
-        Example: ncli ngt mount vm-id=&lt;CLONE_ID&gt;
+        Example: ncli ngt mount vm-id=&lt;CLONE_ID&gt; OR via Prism
       </li>
     </ul>
     <ul>
