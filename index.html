@@ -2645,7 +2645,7 @@ storage, compute and virtualization platform.
 <h5>Curator</h5>
 
 <ul>
-	<li>Key Role: Map reduce cluster management and cleanup</li>
+	<li>Key Role: MapReduce cluster management and cleanup</li>
 	<li>Description: Curator is responsible for managing and distributing tasks throughout the cluster, including disk balancing, proactive scrubbing, and many more items.&nbsp; Curator runs on every node and is controlled by an elected Curator Master who is responsible for the task and job delegation.&nbsp; There are two scan types for Curator, a full scan which occurs around every 6 hours and a partial scan which occurs every hour.</li>
 </ul>
 
@@ -3504,7 +3504,7 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 11-16. </span>Elastic Dedupe Engine - Scale</figcaption>
 </figure>
 
-<p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF Map Reduce framework (Curator). For data that is being read, the data will be pulled into the DSF Unified Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Unified Cache and pool structure, please refer to the 'Unified Cache' sub-section in the I/O path overview.</p>
+<p>Fingerprinting is done during data ingest of data with an I/O size of 64K or greater.&nbsp; Intel acceleration is leveraged for the SHA-1 computation which accounts for very minimal CPU overhead.&nbsp; In cases where fingerprinting is not done during ingest (e.g., smaller I/O sizes), fingerprinting can be done as a background process. The Elastic Deduplication Engine spans both the capacity disk tier (HDD), but also the performance tier (SSD/Memory).&nbsp; As duplicate data is determined, based upon multiple copies of the same fingerprints, a background process will remove the duplicate data using the DSF MapReduce framework (Curator). For data that is being read, the data will be pulled into the DSF Unified Cache which is a multi-tier/pool cache.&nbsp; Any subsequent requests for data having the same fingerprint will be pulled directly from the cache.&nbsp; To learn more about the Unified Cache and pool structure, please refer to the 'Unified Cache' sub-section in the I/O path overview.</p>
 
 <div data-type="note" class="note" id="fingerprinted-vdisk-offsets-l9ijcWIATe"><h6>Note</h6>
 <h5>Fingerprinted vDisk Offsets</h5>
