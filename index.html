@@ -5814,21 +5814,19 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <h5>ESXi cluster upgrade</h5>
 
- <p class="codedescription">Description: Perform an automated upgrade of ESXi hosts using the CLI
+ <p class="codedescription">Description: Perform an automated upgrade of ESXi hosts using the CLI and custom offline bundle
 <br>
-# Upload upgrade offline bundle to a Nutanix NFS container
+# Upload upgrade offline bundle to a Nutanix CVM
 <br>
 # Log in to Nutanix CVM
 <br>
 # Perform upgrade</p>
 
-<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i "esxcli software vib install -d /vmfs/volumes/&lt;Datastore Name&gt;/&lt;Offline bundle name&gt;";done</p>
+<p class="codetext">cluster --md5sum=&lt;bundle_checksum&gt; --bundle=&lt;/path/to/offline_bundle&gt; host_upgrade</p>
 
 <p># Example</p>
 
-<p class="codetext">for i in `hostips`;do echo $i &amp;&amp; ssh root@$i "esxcli software vib install -d /vmfs/volumes/NTNX-upgrade/update-from-esxi5.1-5.1_update01.zip";done</p>
-
-<p>Performing a rolling reboot of ESXi hosts: For PowerCLI on automated hosts reboots</p>
+<p class="codetext">cluster --md5sum=bff0b5558ad226ad395f6a4dc2b28597 --bundle=/tmp/VMware-ESXi-5.5.0-1331820-depot.zip host_upgrade</p>
 
 <h5>Restart ESXi host services</h5>
 
