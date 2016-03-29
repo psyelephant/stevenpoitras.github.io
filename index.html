@@ -2020,7 +2020,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 
 <h5>Cinder</h5>
 <p>
-	Cinder is OpenStack's volume component for exposing iSCSI targets.  Cinder leverages the Acropolis Volumes API in the Nutanix solution.  These volumes are attached to the instance(s) directly as block devies (as compared to in-guest).
+	Cinder is OpenStack's volume component for exposing iSCSI targets.  Cinder leverages the Acropolis Volumes API in the Nutanix solution.  These volumes are attached to the instance(s) directly as block devices (as compared to in-guest).
 </p>
 
 <p>
@@ -2246,7 +2246,7 @@ vm.on &lt;VM_NAME&gt;
 
 <p class="codetext">
   # Register OpenStack Driver service <br>
-	ovmctl --add ovm --name &lt;OVM_NAME&gt; --ip &lt;OVM_IP&gt;
+	ovmctl --add ovm --name &lt;OVM_NAME&gt; --ip &lt;OVM_IP&gt; --netmask &lt;NET_MASK&gt; --gateway &lt;DEFAULT_GW&gt; --domain &lt;DOMAIN&gt; --nameserver &lt;DNS&gt;
 </p>
 
 <p class="codetext">
