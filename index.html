@@ -111,7 +111,9 @@
 
 <figure class="small" id="id-wntQsz">
 <img alt="Dheeraj Pandey" class="iimagesv2dheeraj_pandeyjpg" src="imagesv2/Dheeraj_Pandey.jpg" style="width:60%; max-width:218px; horizontal-align:middle">
-<figcaption><span class="label">Figure 1-1. </span>Dheeraj Pandey, CEO, Nutanix</figcaption>
+<figcaption><span class="label">Figure 1-1. </span>
+<p class="sign">Dheeraj Pandey, CEO, Nutanix</p>
+</figcaption>
 </figure>
 
 <blockquote>
@@ -152,7 +154,9 @@
 
 <figure id="id-ZptOIk"><img alt="Steven Poitras" src="imagesv2/poitras_pic.jpg" style="width:80%; max-width:500px; horizontal-align:middle">
 
-<figcaption><span class="label">Figure 1-3. </span>Steven Poitras, Principal Solutions Architect, Nutanix</figcaption>
+<figcaption><span class="label">Figure 1-3. </span>
+<p class="sign">Steven Poitras, Principal Solutions Architect, Nutanix</p>
+</figcaption>
 </figure>
 
 <blockquote>
@@ -333,7 +337,7 @@
     Service and SLA focus
     <ul>
       <li>
-        Contractual gaurantees around uptime / availability / performance
+        Contractual guarantees around uptime / availability / performance
       </li>
     </ul>
   </li>
@@ -371,7 +375,7 @@
         Development and deployment platform
       </li>
       <li>
-        Examples: Amazon Elastic Beanstalk / Relational Database Servies (RDS), Google App Engine, etc.
+        Examples: Amazon Elastic Beanstalk / Relational Database Services (RDS), Google App Engine, etc.
       </li>
     </ul>
   </li>
@@ -390,7 +394,7 @@
 
 <h5>Shift in IT focus</h5>
 <p>
-  Cloud poses an interesting dilema for IT.  On one hand they wnt to
+  Cloud poses an interesting dilemma for IT. TO-DO
 </p>
 
 </section>
@@ -762,7 +766,7 @@ one-click management and interface for datacenter operations.</p>
 </p>
 
 <p>
-	In the meantime feel free to check out this great post on our design methodology and iterations by our Product Design Lead, Jeremy Sallee (who also desgned this) - <a href="http://salleedesign.com/stuff/sdwip/blog/nutanix-case-study/">http://salleedesign.com/stuff/sdwip/blog/nutanix-case-study/</a>
+	In the meantime feel free to check out this great post on our design methodology and iterations by our Product Design Lead, Jeremy Sallee (who also designed this) - <a href="http://salleedesign.com/stuff/sdwip/blog/nutanix-case-study/">http://salleedesign.com/stuff/sdwip/blog/nutanix-case-study/</a>
 </p>
 
 <p>
@@ -1145,7 +1149,7 @@ one-click management and interface for datacenter operations.</p>
 </figure>
 
 <p>
-	You can also being the cluster expansion process from any page by clicking on the gear icon:
+	You can also begin the cluster expansion process from any page by clicking on the gear icon:
 </p>
 
 <figure id="id-DktrfgSnHr"><img alt="Gear Menu - Expand Cluster" src="imagesv2/Prism/addnode/expand_2b.png">
@@ -1226,7 +1230,7 @@ one-click management and interface for datacenter operations.</p>
 <section data-type="chapter" id="apis-and-interfaces-PgIAF1">
 <h2>APIs and Interfaces</h2>
 
-<p>Core to any dynamic or “software-defined” environment, Nutanix provides a vast array of interfaces allowing for simple programability and interfacing. Here are the main interfaces:</p>
+<p>Core to any dynamic or “software-defined” environment, Nutanix provides a vast array of interfaces allowing for simple programmability and interfacing. Here are the main interfaces:</p>
 
 <ul>
 	<li>REST API</li>
@@ -1588,7 +1592,7 @@ one-click management and interface for datacenter operations.</p>
 <p class="codetext">ncli vdisk edit name=&lt;VDISK NAME&gt; fingerprint-on-write=&lt;true/false&gt; on-disk-dedup=&lt;true/false&gt;</p>
 </section>
 
-<section data-type="sect1" id="powershell-cmdlets-mkIgIjFr">
+<section data-type="sect1" id="PowerShell-cmdlets-mkIgIjFr">
 <h3>PowerShell CMDlets</h3>
 
 <p>The below will cover the Nutanix PowerShell CMDlets, how to use them and some general background on Windows PowerShell.</p>
@@ -2041,7 +2045,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 	The Image Repo is the repository storing available images published by Glance.  These can be located within the Nutanix environment or by an external source.  When the images are hosted on the Nutanix platform, they will be published to the OpenStack controller via Glance on the OVM.  In cases where the Image Repo exists only on an external source, Glance will be hosted by the OpenStack Controller and the Image Cache will be leveraged on the Acropolis Cluster(s).
 </p>
 <p>
-	 Glance is enabled on a per-cluster basis and will always exist with the Image Repo.  When Glance is enabled on multiple clusters the Image Repo will span those clusters and images created via the OpenStack Portal will be propogated to all clusters running Glance.  Those clusters not hosting Glance will cache the images locally using the Image Cache.
+	 Glance is enabled on a per-cluster basis and will always exist with the Image Repo.  When Glance is enabled on multiple clusters the Image Repo will span those clusters and images created via the OpenStack Portal will be propagated to all clusters running Glance.  Those clusters not hosting Glance will cache the images locally using the Image Cache.
 </p>
 
 <div data-type="note" class="note" id="pro-tip-oZibumIWs2tJ"><h6>Note</h6>
@@ -2051,7 +2055,7 @@ You can view the Nova services using the OpenStack portal under 'Admin'-&gt;'Sys
 </div>
 
 <p>
-	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Acropolis Cluster(s).  In this case the Image Cache will be leveraged on the target Acropolis Cluster(s) to cache the image locally for any subsequent provisioning requsts for the image.
+	When external sources host the Image Repo / Glance, Nova will be responsible for handling data movement from the external source to the target Acropolis Cluster(s).  In this case the Image Cache will be leveraged on the target Acropolis Cluster(s) to cache the image locally for any subsequent provisioning requests for the image.
 </p>
 
 <h5>Neutron</h5>
@@ -2550,7 +2554,7 @@ service openstack-glance-registry stop<br>
 <div data-type="note" class="note" id="pro-tip-l9ioTesBhEsBtZ"><h6>Note</h6>
 <h5>Pro tip</h5>
 
-<p>Check NTP if a service is seen as state 'down' in OpenStack Manager (Admin UI or CLI) eventhough the service is running in the OVM.  Many services have a requirement for time to be in sync between the OpenStack Controller and Acropolis OVM.</p>
+<p>Check NTP if a service is seen as state 'down' in OpenStack Manager (Admin UI or CLI) even though the service is running in the OVM.  Many services have a requirement for time to be in sync between the OpenStack Controller and Acropolis OVM.</p>
 </div>
 
 </section>
@@ -2589,11 +2593,11 @@ service openstack-glance-registry stop<br>
 
 <p class="codetext">nova show &lt;INSTANCE_NAME&gt;</p>
 
-<p>List Nova hypersivor hosts</p>
+<p>List Nova hypervisor hosts</p>
 
 <p class="codetext">nova hypervisor-list</p>
 
-<p>Show hyprevisor host details</p>
+<p>Show hypervisor host details</p>
 
 <p class="codetext">nova hypervisor-show &lt;HOST_ID&gt;</p>
 
@@ -2997,7 +3001,7 @@ storage, compute and virtualization platform.
 <p>Data is brought into the cache at a 4K granularity and all caching is done real-time (e.g. no delay or batch process data to pull data into the cache).</p>
 
 <p>
-  Each CVM has its own local cache that it manages for the vDisk(s) it is hosting (e.g. VM(s) running on the same node).  When a vDisk is cloned (e.g. new clones, snapshots, etc.) each new vDisk has it's own block map and the orignial vDisk is marked as immutable.  This allows us to ensure that each CVM can have it's own cached copy of the base vDisk with cache coherency.
+  Each CVM has its own local cache that it manages for the vDisk(s) it is hosting (e.g. VM(s) running on the same node).  When a vDisk is cloned (e.g. new clones, snapshots, etc.) each new vDisk has its own block map and the original vDisk is marked as immutable.  This allows us to ensure that each CVM can have it's own cached copy of the base vDisk with cache coherency.
 </p>
 
 <p>
@@ -3829,7 +3833,7 @@ storage, compute and virtualization platform.
 <figcaption><span class="label">Figure 11-37. </span>DR Construct Mapping</figcaption>
 </figure>
 
-<p>It’s important to mention that a full container can be protected for simplicity; however the platform provides the ability to protect down to the granularity of a single VM and/or file level.</p>
+<p>It’s important to mention that a full container can be protected for simplicity.  However, the platform provides the ability to protect down to the granularity of a single VM and/or file level.</p>
 
 <h5>Replication Lifecycle</h5>
 
@@ -4242,7 +4246,7 @@ This should only be used for non-production scenarios and the cluster IPs should
     Guest Tools Service
     <ul>
       <li>
-        Gateway between the Acropolis and Nutanix services and the Guest Agent.  Distirbuted across CVMs within the cluster with an elected NGT Master which runs on the current Prism Leader (hosting cluster vIP)
+        Gateway between the Acropolis and Nutanix services and the Guest Agent.  Distributed across CVMs within the cluster with an elected NGT Master which runs on the current Prism Leader (hosting cluster vIP)
       </li>
     </ul>
   </li>
@@ -4273,7 +4277,7 @@ This should only be used for non-production scenarios and the cluster IPs should
     NGT Master
   <ul>
     <li>
-      Handles requests coming from NGT Proxy and interfaces with Acropolis components.  A single NGT Master is dynamically elected per cluster, in the event the current master fails a new one will be elected.  The service listens internally on port 2073.
+      Handles requests coming from NGT Proxy and interfaces with Acropolis components.  A single NGT Master is dynamically elected per cluster; in the event the current master fails a new one will be elected.  The service listens internally on port 2073.
     </li>
   </ul>
   </li>
@@ -4366,7 +4370,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>
-  As part of the installation process Python, PyWin and the Nutanix Mobility (cross-hypervisor compatability) drivers will also be installed.
+  As part of the installation process Python, PyWin and the Nutanix Mobility (cross-hypervisor compatibility) drivers will also be installed.
 </p>
 
 <p>
@@ -4374,7 +4378,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <p>
-  After successfull installation and reboot, you will see the following items visible in 'Programs and Features':
+  After successful installation and reboot, you will see the following items visible in 'Programs and Features':
 </p>
 <figure><img alt="Enable NGT - Installed Programs" src="imagesv2/Prism/ngt/ngt_deploy_5a.png">
 <figcaption><span class="label">Figure. </span>Enable NGT - Installed Programs</figcaption>
@@ -4472,7 +4476,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>
-  The file services feature follows the same methdology for distribution as the Nutanix platform to ensure availability and scale.  A minimum of 3 FSVMs will be deployed as part of the File Server deployment.
+  The file services feature follows the same methodology for distribution as the Nutanix platform to ensure availability and scale.  A minimum of 3 FSVMs will be deployed as part of the File Server deployment.
 </p>
 
 <p>
@@ -4524,9 +4528,9 @@ This should only be used for non-production scenarios and the cluster IPs should
 </ul>
 
 <div data-type="note" class="note"><h6>Note</h6>
-<h5>AD Privaleges for File Server Creation</h5>
+<h5>AD Privileges for File Server Creation</h5>
 
-<p>A user account with the domain admin or equivalent privaleges must be used to deploy the File Service feature as AD and DNS objects are created.</p>
+<p>A user account with the domain admin or equivalent privileges must be used to deploy the File Service feature as AD and DNS objects are created.</p>
 </div>
 
 <h5>High-Availability (HA)</h5>
@@ -4561,7 +4565,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <p>
-  In a normal operating environment each FSVM will be communicating with its own VG for data storage with passive connections to the others.  Each FSVM will have an IP which clients use to communiate with the FSVM as part of the DFS referral process.  Clients do not need to know each individual FSVM's IP as the DFS referral process will connect them to the correct IP hosting their folder(s).
+  In a normal operating environment each FSVM will be communicating with its own VG for data storage with passive connections to the others.  Each FSVM will have an IP which clients use to communicate with the FSVM as part of the DFS referral process.  Clients do not need to know each individual FSVM's IP as the DFS referral process will connect them to the correct IP hosting their folder(s).
 </p>
 
 <figure><img alt="FSVM Normal Operation" src="imagesv2/fs_5.png">
@@ -4581,7 +4585,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </figure>
 
 <p>
-  When the failed FSVM comes back and is stable, it will re-take it's IP and VG and continue to serve client IO.
+  When the failed FSVM comes back and is stable, it will re-take its IP and VG and continue to serve client IO.
 </p>
 
 </section>
@@ -4759,7 +4763,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 </p>
 
 <p>
-	The Acropolis Master tracks host health by monitoring it's connections to the libvirt on all cluster hosts:
+	The Acropolis Master tracks host health by monitoring its connections to the libvirt on all cluster hosts:
 </p>
 
 <figure id="id-DktlTvTnHrHZ"><img alt="HA - Host Monitoring" src="imagesv2/ha_hostmonitoring.png">
@@ -5194,7 +5198,7 @@ Cat /var/log/iscsi_redirector</p>
 
 <h5>2030 Page</h5>
 
-<p>This is the main Acropolis page and shows details about the environment hosts, any currently running tasks and networking details..</p>
+<p>This is the main Acropolis page and shows details about the environment hosts, any currently running tasks and networking details.</p>
 
 <h5>2030/sched Page</h5>
 
@@ -5568,7 +5572,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <figcaption><span class="label">Figure 14-6. </span>2009 Page - Hosted vDisks</figcaption>
 </figure>
 
-<p>This will bring you to the vdisk_stats page which will give you the detailed vDisk stats. &nbsp;NOTE: Theses values are real-time and can be updated by refreshing the page.</p>
+<p>This will bring you to the vdisk_stats page which will give you the detailed vDisk stats. &nbsp;NOTE: These values are real-time and can be updated by refreshing the page.</p>
 
 <p>The first key area is the 'Ops and Randomness' section which will show a breakdown of whether the I/O patterns are random or sequential in nature.</p>
 
@@ -5816,7 +5820,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <p>Each ESXi host has a local vSwitch which is used for intra-host communication between the Nutanix CVM and host.  For external communication and VMs a standard vSwitch (default) or dvSwitch is leveraged.</p>
 
 <p>
-  The local vSwitch (vSwitchNutanix) is for local communication between the Nutanix CVM and ESXi host.  The  host has a vmkernel interface  on this vSwitch (vmk1 - 192.168.5.1) and the CVM has a interface bound to a port group on this internal switch (svm-iscsi-pg - 192.168.5.2).  This is the primary storage communication path.
+  The local vSwitch (vSwitchNutanix) is for local communication between the Nutanix CVM and ESXi host.  The  host has a vmkernel interface  on this vSwitch (vmk1 - 192.168.5.1) and the CVM has an interface bound to a port group on this internal switch (svm-iscsi-pg - 192.168.5.2).  This is the primary storage communication path.
 </p>
 
 <p>The external vSwitch can be a standard vSwitch or a dvSwitch.  This will host the external interfaces for the ESXi host and CVM as well as the port groups leveraged by VMs on the host.  The external vmkernel interface is leveraged for host management, vMotion, etc.  The external CVM interface is used for communication to other Nutanix CVMs.  As many port groups can be created as required assuming the VLANs are enabled on the trunk.</p>
@@ -6055,7 +6059,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 <section data-type="sect1" id="array-offloads-odx-PgIysQu2">
 <h3>Array Offloads – ODX</h3>
 
-<p>The Nutanix platform supports the Microsoft Offloaded Data Transfers (ODX), which allow the hypervisor to offload certain tasks to the array.&nbsp; This is much more efficient as the hypervisor doesn’t need to be the 'man in the middle'. Nutanix currently supports the ODX primitives for SMB, which include full copy and zeroing operations.&nbsp; However, contrary to VAAI which has a 'fast file' clone operation (using writable snapshots), the ODX primitives do not have an equivalent and perform a full copy.&nbsp; Given this, it is more efficient to rely on the native DSF clones which can currently be invoked via nCLI, REST, or Powershell CMDlets. Currently ODX IS invoked for the following operations:</p>
+<p>The Nutanix platform supports the Microsoft Offloaded Data Transfers (ODX), which allow the hypervisor to offload certain tasks to the array.&nbsp; This is much more efficient as the hypervisor doesn’t need to be the 'man in the middle'. Nutanix currently supports the ODX primitives for SMB, which include full copy and zeroing operations.&nbsp; However, contrary to VAAI which has a 'fast file' clone operation (using writable snapshots), the ODX primitives do not have an equivalent and perform a full copy.&nbsp; Given this, it is more efficient to rely on the native DSF clones which can currently be invoked via nCLI, REST, or PowerShell CMDlets. Currently ODX IS invoked for the following operations:</p>
 
 <ul>
 	<li>In VM or VM to VM file copy on DSF SMB share</li>
@@ -6090,7 +6094,7 @@ echo "source ~/ncc/ncc_completion.bash" &gt;&gt; ~/.bashrc</p>
 
 <h5>Execute command on multiple remote hosts</h5>
 
-<p class="codedescription">Description: Execute a powershell on one or many remote hosts</p>
+<p class="codedescription">Description: Execute a PowerShell on one or many remote hosts</p>
 
 <p class="codetext">$targetServers = "Host1","Host2","Etc"
 <br>
@@ -6124,7 +6128,7 @@ Get-VM | Where {$_.Name -match $vmPrefix} | Get-VMNetworkAdapter | Set-VMNetwork
 
 <h5>Power-On VMs matching a certain prefix</h5>
 
-<p class="codedescription">Description: Power-On VMs matchin a certain prefix</p>
+<p class="codedescription">Description: Power-On VMs matching a certain prefix</p>
 
 <p class="codetext">$vmPrefix = "myVMs"
 <br>
@@ -6132,7 +6136,7 @@ Get-VM | Where {$_.Name -match $vmPrefix -and $_.StatusString -eq "Stopped"} | S
 
 <h5>Shutdown VMs matching a certain prefix</h5>
 
-<p class="codedescription">Description: Shutdown VMs matchin a certain prefix</p>
+<p class="codedescription">Description: Shutdown VMs matching a certain prefix</p>
 
 <p class="codetext">$vmPrefix = "myVMs"
 <br>
@@ -6140,7 +6144,7 @@ Get-VM | Where {$_.Name -match $vmPrefix -and $_.StatusString -eq "Running"}} | 
 
 <h5>Stop VMs matching a certain prefix</h5>
 
-<p class="codedescription">Description: Stop VMs matchin a certain prefix</p>
+<p class="codedescription">Description: Stop VMs matching a certain prefix</p>
 
 <p class="codetext">$vmPrefix = "myVMs"
 <br>
