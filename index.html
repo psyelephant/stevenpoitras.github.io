@@ -4200,7 +4200,7 @@ This should only be used for non-production scenarios and the cluster IPs should
 <ul>
 	<li>Key Role: Metrics reported by the Disk Device(s)</li>
 	<li>Description: Disk level metrics are pulled directly from the physical disk devices (via the CVM) and represent what the back-end is seeing.&nbsp; This includes data hitting the OpLog or Extent Store where an I/O is performed on the disk.&nbsp; This data can be viewed for one of more disk(s), the disk(s) for a particular node, or the aggregate disks in the cluster.&nbsp; In common cases, it is expected that the disk ops should match the number of incoming writes as well as reads not served from the memory portion of the cache.&nbsp; Any reads being served by the memory portion of the cache will not be counted here as the op is not hitting the disk device.</li>
-	<li>When to use: When looking to see how many ops are served from cache or hitting the disksm</li>
+	<li>When to use: When looking to see how many ops are served from cache or hitting the disks.</li>
 </ul>
 
 <div data-type="note" class="note" id="metric-and-stat-retention-yGiRUBioTz"><h6>Note</h6>
